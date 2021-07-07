@@ -1,0 +1,15 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: install snap services [main]
+  become: yes
+  snap:
+    name: "{{ item.name }}"
+    classic: "{{ item.classic | bool }}"
+    # beta: "{{ item.beta | bool }}"
+  loop: "{{ install_client_snap|flatten(levels=1) }}"
+  when: (install_client_snap is defined) and (item.install is defined and item.install | bool)
+  tags:
+    - install_client
+    - snap

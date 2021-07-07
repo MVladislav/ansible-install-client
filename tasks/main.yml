@@ -1,0 +1,60 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+# SETUP USERS
+- name: setup users
+  include: setup_users.yml
+
+# ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY APT
+- name: install apt services
+  include: install_apt.yml
+
+# ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY DPKG
+- name: install dpkg services
+  include: install_dpkg.yml
+
+# ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY SNAP
+- name: install snap services
+  include: install_snap.yml
+
+# ------------------------------------------------------------------------------
+# INSTALL EXTRAS PER USER
+- name: install fonts (per user)
+  include: install_per_user_fonts.yml
+  loop: "{{ clients | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: install_client_config.fonts is defined and install_client_config.fonts | bool
+
+- name: install code extras (per user)
+  include: install_per_user_code_extra.yml
+  loop: "{{ clients | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: install_client_config.vs_code_ext is defined and install_client_config.vs_code_ext | bool
+
+- name: install thunderbird theme and profile (per user)
+  include: install_per_user_thunderbird_profile.yml
+  loop: "{{ clients | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: install_client_config.thunderbird_theme is defined and install_client_config.thunderbird_theme | bool
+
+# ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - MANUAL
+- name: install firefox_dev service (with shortcut per user)
+  include: install_firefox_dev.yml
+  when: install_client_config.firefox_dev is defined and install_client_config.firefox_dev | bool
+
+# ------------------------------------------------------------------------------
+# GNOME SETUP (FAVORITES)
+- name: setup gnome (per user)
+  include: gui_gnome.yml
+  loop: "{{ clients | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: install_client_config.gnome_gui_setup is defined and install_client_config.gnome_gui_setup | bool

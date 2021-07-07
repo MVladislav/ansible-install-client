@@ -1,0 +1,37 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: "create thunderbird profile (for user: {{ outer_item.name }})"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  shell: "export DISPLAY=:0.0 && thunderbird -CreateProfile {{ outer_item.name }}"
+  ignore_errors: yes
+
+- name: "find thunderbird create profile *.{{ outer_item.name }} (for user: {{ outer_item.name }})"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  find:
+    paths: "{{ install_client_thunderbird_theme.path }}"
+    file_type: directory
+    patterns: "*.{{ outer_item.name }}"
+  register: search_thunderbird_profile
+  when: install_client_thunderbird_theme is defined and install_client_thunderbird_theme.path is defined
+
+- name: "clone thunderbird theme (for user: {{ outer_item.name }})"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  git:
+    repo: "{{ install_client_thunderbird_theme.repo }}"
+    dest: "{{ install_client_thunderbird_theme.path }}/{{ search_thunderbird_profile.files.0.path | basename }}/chrome"
+    update: no
+  when: search_thunderbird_profile.matched == 1 and (install_client_thunderbird_theme is defined and install_client_thunderbird_theme.repo is defined and install_client_thunderbird_theme.path is defined)
+
+- name: "copy userChrome.css template (for user: {{ outer_item.name }})"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  template:
+    src: userChrome.css.j2
+    dest: "{{ install_client_thunderbird_theme.path }}/{{ search_thunderbird_profile.files.0.path | basename }}/chrome/userChrome.css"
+    mode: "0660"
+  when: search_thunderbird_profile.matched == 1 and (install_client_thunderbird_theme is defined and install_client_thunderbird_theme.path is defined)

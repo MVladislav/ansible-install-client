@@ -1,0 +1,174 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: "gnome gui theme git clone per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.git:
+    repo: "{{ item.url }}"
+    dest: "{{ item.path }}/{{ item.name }}"
+    force: yes
+    update: no
+  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.theme is defined and install_client_gdm_gui_setup.theme.git is defined) and (install_client_gdm_gui_setup.theme.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui theme execute install per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.shell: "{{ item.path }}/{{ item.name }}/{{ item.file }} {{ item.extra }}"
+  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.theme is defined and install_client_gdm_gui_setup.theme.git is defined) and (install_client_gdm_gui_setup.theme.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+- name: install apt services [main]
+  become: yes
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: yes # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.extensions.apt|flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.apt is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui let gnome-shell restart"
+  become: yes
+  ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
+  ignore_errors: yes
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.command is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui activate extensions per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.shell: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item }}"
+  loop: "{{ install_client_gdm_gui_setup.extensions.activate | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.command is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+- name: "gnome gui overlay setup per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  command: '{{ install_client_gdm_gui_setup.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
+  loop: "{{ install_client_gdm_gui_setup.configs | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.command is defined and install_client_gdm_gui_setup.configs is defined)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+- name: "gnome gui keybinding per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  command: '{{ install_client_gdm_gui_setup.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
+  loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.keybindings is defined) and (install_client_gdm_gui_setup.command is defined and install_client_gdm_gui_setup.keybindings.configs is defined) and (install_client_gdm_gui_setup.keybindings.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+#
+# https://www.youtube.com/watch?v=qC0mnGprbeM&t=111s
+#
+# mkdir -p ${HOME}/gnome-design
+# cd ${HOME}/gnome-design
+# mkdir -p fonts && cd fonts
+# wget https://fonts.google.com/download?family=Roboto -O roboto.zip
+# wget https://fonts.google.com/download?family=Roboto%20Mono -O roboto_mono.zip
+# unzip -o roboto.zip && unzip -o roboto_mono.zip
+# rm roboto.zip && rm roboto_mono.zip
+# sudo mkdir -p /usr/share/fonts/truetype/ownfonts
+# sudo mv *.ttf /usr/share/fonts/truetype/ownfonts
+# cd ${HOME}/gnome-design
+# rm fonts -rf
+#
+# sudo apt install -y gettext gtk2-engines-murrine sassc conky jq curl git gnome-shell-extensions
+#
+# git clone https://github.com/home-sweet-gnome/dash-to-panel.git
+# cd dash-to-panel && make install
+# cd ${HOME}/gnome-design
+#
+# git clone https://github.com/micheleg/dash-to-dock.git
+# cd dash-to-dock && make install
+# cd ${HOME}/gnome-design
+#
+# git clone https://gitlab.com/arcmenu/ArcMenu.git
+# cd ArcMenu && make install
+# cd ${HOME}/gnome-design
+#
+# git clone https://github.com/emasab/shelltile.git
+# cd shelltile && install
+# cd ${HOME}/gnome-design
+#
+# killall -SIGQUIT gnome-shell
+# gnome-extensions enable dash-to-panel@jderose9.github.com
+# gnome-extensions enable dash-to-dock@micxgx.gmail.com
+# gnome-extensions enable arcmenu@arcmenu.com
+# gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+# gnome-extensions enable material-shell@papyelgringo
+#
+# git clone https://github.com/vinceliuice/Orchis-theme.git
+# cd Orchis-theme
+# chmod u+x install.sh && ./install.sh -t all
+# cd ${HOME}/gnome-design
+#
+# git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
+# cd Tela-circle-icon-theme
+# chmod u+x install.sh && ./install.sh -a
+# cd ${HOME}/gnome-design
+#
+# git clone https://github.com/vinceliuice/Vimix-cursors.git
+# cd Vimix-cursors
+# chmod u+x install.sh && ./install.sh
+# cd ${HOME}/gnome-design
+#
+# gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
+# gsettings set org.gnome.desktop.interface document-font-name 'Roboto 10'
+# gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
+#
+# gsettings set org.gnome.shell.extensions.dash-to-dock dock-position "BOTTOM"
+# gsettings set org.gnome.shell.extensions.dash-to-dock extend-height "false"
+# gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity "0.10000000000000001"
+# gsettings set org.gnome.shell.extensions.dash-to-dock background-color "#ffffff"
+# gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items "false"
+# gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "32"
+# gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed "false"
+# gsettings set org.gnome.shell.extensions.dash-to-dock click-action "previews"
+# gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink "true"
+# gsettings set org.gnome.shell.extensions.dash-to-dock running-indicator-style "DOTS"
+# gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode "DEFAULT"
+# gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button "false"
+# gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts "false"
+# gsettings set org.gnome.shell.extensions.dash-to-dock show-trash "false"
+#
+# gsettings set org.gnome.desktop.interface show-battery-percentage "true"
+#
+# gsettings set org.gnome.desktop.interface gtk-theme 'Orchis'
+# gsettings set org.gnome.desktop.interface cursor-theme 'Vimix-cursors'
+# gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-blue'
+# gsettings set org.gnome.shell.extensions.user-theme name "Orchis-dark"
+# gsettings set org.gnome.desktop.wm.preferences theme "Orchis"
+#
+# cp ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/stylesheet.css ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/stylesheet-00.css
+#
+# cp -r conky $HOME/.conky
+# cp $HOME/.conky/start_conky.sh.desktop $HOME/.config/autostart

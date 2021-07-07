@@ -1,0 +1,13 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: install a .deb package from the internet [main]
+  become: yes
+  apt:
+    deb: "{{ item.url }}"
+  loop: "{{ install_client_dpkg|flatten(levels=1) }}"
+  when: (install_client_dpkg is defined) and (item.install is defined and item.install | bool)
+  tags:
+    - install_client
+    - dpkg
