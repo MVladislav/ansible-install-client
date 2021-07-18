@@ -139,104 +139,104 @@ install_client_gdm_gui_setup:
       # --- UNIQUE LIST ---
       - source: org.gnome.settings-daemon.plugins.media-keys
         key: custom-keybindings
-        value: >
+        value: >-
           ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
   configs:
     - source: org.gnome.desktop.interface
       key: font-name
-      value: >
+      value: >-
         Roboto 10
     - source: org.gnome.desktop.interface
       key: document-font-name
-      value: >
+      value: >-
         Roboto 10
     - source: org.gnome.desktop.interface
       key: monospace-font-name
-      value: >
+      value: >-
         Roboto Mono 10
     - source: org.gnome.desktop.interface
       key: show-battery-percentage
-      value: >
+      value: >-
         true
     - source: org.gnome.shell.extensions.dash-to-dock
       key: dock-position
-      value: >
+      value: >-
         BOTTOM
     - source: org.gnome.shell.extensions.dash-to-dock
       key: extend-height
-      value: >
+      value: >-
         false
     - source: org.gnome.shell.extensions.dash-to-dock
       key: background-opacity
-      value: >
+      value: >-
         0.10000000000000001
     - source: org.gnome.shell.extensions.dash-to-dock
       key: background-color
-      value: >
+      value: >-
         #ffffff
     - source: org.gnome.shell.extensions.dash-to-dock
       key: unity-backlit-items
-      value: >
+      value: >-
         false
     - source: org.gnome.shell.extensions.dash-to-dock
       key: dash-max-icon-size
-      value: >
+      value: >-
         32
     - source: org.gnome.shell.extensions.dash-to-dock
       key: dock-fixed
-      value: >
+      value: >-
         true
     - source: org.gnome.shell.extensions.dash-to-dock
       key: click-action
-      value: >
+      value: >-
         previews
     - source: org.gnome.shell.extensions.dash-to-dock
       key: custom-theme-shrink
-      value: >
+      value: >-
         false
     - source: org.gnome.shell.extensions.dash-to-dock
       key: running-indicator-style
-      value: >
+      value: >-
         DOTS
     - source: org.gnome.shell.extensions.dash-to-dock
       key: transparency-mode
-      value: >
+      value: >-
         DYNAMIC
     - source: org.gnome.shell.extensions.dash-to-dock
       key: show-show-apps-button
-      value: >
+      value: >-
         true
     - source: org.gnome.shell.extensions.dash-to-dock
       key: show-mounts
-      value: >
+      value: >-
         false
     - source: org.gnome.shell.extensions.dash-to-dock
       key: show-trash
-      value: >
+      value: >-
         false
     - source: org.gnome.shell
       key: favorite-apps
-      value: >
+      value: >-
         ['firefox.desktop','firefoxDeveloperEdition.desktop','google-chrome.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
     - source: org.gnome.desktop.interface
       key: gtk-theme
-      value: >
+      value: >-
         Orchis
     - source: org.gnome.desktop.interface
       key: cursor-theme
-      value: >
+      value: >-
         Vimix-cursors
     - source: org.gnome.desktop.interface
       key: icon-theme
-      value: >
+      value: >-
         Tela-circle-blue
     - source: org.gnome.shell.extensions.user-theme
       key: name
-      value: >
+      value: >-
         Orchis-dark
     - source: org.gnome.desktop.wm.preferences
       key: theme
-      value: >
+      value: >-
         Orchis
 
 # ------------------------------------------------------------------------------
