@@ -310,6 +310,10 @@ install_client_apt:
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: texmaker
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
+  - name: latexmk
+    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
+  - name: biber
+    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   # --------------------------------
   # https://github.com/Wandmalfarbe/pandoc-latex-template
   - name: pandoc
