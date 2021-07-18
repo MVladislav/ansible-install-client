@@ -22,6 +22,7 @@ install_client_config:
   apt_libreoffice_impress: no
   apt_libreoffice_writer: no
   apt_libreoffice_calc: no
+  apt_peek: no
   apt_wireshark: no
   apt_wireshark_dev: no
   apt_vpn: no

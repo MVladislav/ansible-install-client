@@ -25,6 +25,7 @@ install_client_config:
   apt_libreoffice_impress: no
   apt_libreoffice_writer: no
   apt_libreoffice_calc: no
+  apt_peek: no
   apt_wireshark: no
   apt_wireshark_dev: no
   apt_vpn: no
@@ -283,6 +284,9 @@ install_client_apt:
     install: "{{ install_client_config.apt_libreoffice_writer | default('no') | bool }}"
   - name: libreoffice-calc
     install: "{{ install_client_config.apt_libreoffice_calc | default('no') | bool }}"
+  # --------------------------------
+  - name: peek
+    install: "{{ install_client_config.apt_peek | default('no') | bool }}"
   # --------------------------------
   - name: laptop-mode-tools
     install: no
