@@ -32,6 +32,7 @@ install_client_config:
   apt_gnome_boxes: no
   apt_latex: no
   apt_apt_pandoc: no
+  apt_virtualbox_guest: no
   dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
@@ -357,6 +358,9 @@ install_client_apt:
     install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
   - name: texlive-xetex
     install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
+  # --------------------------------
+  - name: virtualbox-guest-additions-iso
+    install: "{{ install_client_config.apt_virtualbox_guest | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DPKG
