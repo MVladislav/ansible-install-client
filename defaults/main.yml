@@ -6,9 +6,9 @@ install_client_service_name: default-client
 
 install_client_links_to_check_update:
   chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  virtualbox: https://download.virtualbox.org/virtualbox/6.1.18/virtualbox-6.1_6.1.18-142142~Ubuntu~eoan_amd64.deb
-  mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.21.2_amd64.deb
-  veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.10-amd64.deb
+  virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
+  mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
+  veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-21.04-amd64.deb
   getferdi: https://github.com/getferdi/ferdi/releases/download/v5.5.0/ferdi_5.5.0_amd64.deb
 
 # ------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ install_client_config:
   apt_vpn: no
   apt_gnome_boxes: no
   apt_latex: no
-  apt_apt_pandoc: no
+  apt_pandoc: no
   apt_virtualbox_guest: no
   dpkg_virtualbox: no
   dpkg_mongodb: no
