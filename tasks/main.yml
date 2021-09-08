@@ -45,6 +45,12 @@
   when: install_client_config.thunderbird_theme is defined and install_client_config.thunderbird_theme | bool
 
 # ------------------------------------------------------------------------------
+# JAVA PACKAGES
+- name: install java packages
+  include: install_java.yml
+  when: install_client_config.java is defined and install_client_config.java | bool
+
+# ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - MANUAL
 - name: install firefox_dev service (with shortcut per user)
   include: install_firefox_dev.yml
