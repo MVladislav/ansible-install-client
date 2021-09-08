@@ -17,8 +17,8 @@
 - name: "install vs-code extensions (for user: {{ outer_item.name }})"
   become: yes
   become_user: "{{ outer_item.name }}"
-  command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
-  # command: "code --install-extension {{ item }}"
+  # command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
+  command: "code --install-extension {{ item }}"
   loop: "{{ install_client_vs_code_ext|flatten(levels=1) }}"
   when: install_client_vs_code_ext is defined and (is_code_exist.rc is defined and is_code_exist.rc == 0)
   ignore_errors: yes
