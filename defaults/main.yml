@@ -89,6 +89,8 @@ install_client_fonts:
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
+  dependency:
+    - libsass1
   theme:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
     git:
@@ -245,6 +247,9 @@ install_client_gdm_gui_setup:
 # APT
 # install_client_config.apt_...
 install_client_apt:
+  - name: libsass1
+    install: "{{ install_client_config.gnome_gui_setup | default('no') | bool }}"
+  # --------------------------------
   - name: dirmngr
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: curl
