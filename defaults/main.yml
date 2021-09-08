@@ -489,6 +489,7 @@ install_client_flatpak:
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
+  - analytic-signal.preview-pdf
   - austin.code-gnu-global
   - benjaminkott.typo3-typoscript
   - bierner.markdown-emoji
@@ -499,7 +500,6 @@ install_client_vs_code_ext:
   - DavidAnson.vscode-markdownlint
   - dbaeumer.jshint
   - dbaeumer.vscode-eslint
-  - donjayamanne.githistory
   - DotJoshJohnson.xml
   - eamodio.gitlens
   - enkia.tokyo-night
@@ -530,6 +530,7 @@ install_client_vs_code_ext:
   - ms-python.python
   - ms-python.vscode-pylance
   - ms-toolsai.jupyter
+  - ms-toolsai.jupyter-keymap
   - ms-vscode-remote.remote-containers
   - ms-vscode-remote.remote-ssh
   - ms-vscode-remote.remote-ssh-edit
@@ -548,13 +549,13 @@ install_client_vs_code_ext:
   - ritwickdey.live-sass
   - ritwickdey.LiveServer
   - RobbOwen.synthwave-vscode
+  - scala-lang.scala
   - SimonSiefke.svg-preview
   - snyk-security.vscode-vuln-cost
   - Sophisticode.php-formatter
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-german
   - timonwong.shellcheck
-  - tomoki1207.pdf
   - VisualStudioExptTeam.vscodeintellicode
   - vscode-icons-team.vscode-icons
   - wayou.vscode-todo-highlight
@@ -582,7 +583,7 @@ install_client_manuall:
 # ------------------------------------------------------------------------------
 # JAVA
 # install_client_config.java
-install_server_java:
+install_client_java:
   apt:
     - openjdk-8-jdk
     - openjdk-11-jdk
@@ -590,7 +591,7 @@ install_server_java:
     - ant
   os_env:
     - variable: JAVA_HOME
-      path: /usr/lib/jvm/java-8-openjdk-amd64
+      path: /usr/lib/jvm/java-11-openjdk-amd64
 
 # ------------------------------------------------------------------------------
 # STEAM

@@ -2,7 +2,7 @@
   "powermode.enabled": true,
   "powermode.presets": "flames", // flames|fireworks|exploding-rift|magic|particles|simple-rift|,
   "search.followSymlinks": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 2,
   "window.title": "${activeEditorLong}",
   "workbench.colorTheme": "Material Theme Ocean",
   // "workbench.colorTheme": "Material Theme Ocean",
@@ -80,6 +80,7 @@
   // "editor.autoClosingQuotes": "always",
   // "editor.autoSurround": "quotes",
   "editor.autoClosingBrackets": "beforeWhitespace",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "debug.toolBarLocation": "docked", // docked | floating
   "diffEditor.ignoreTrimWhitespace": true,
   "notebook.diff.enablePreview": true,
@@ -102,12 +103,19 @@
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "git.detectSubmodules": false,
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.views.repositories.location": "scm",
-  "gitlens.views.fileHistory.location": "scm",
-  "gitlens.views.lineHistory.location": "scm",
-  "gitlens.views.compare.location": "scm",
-  "gitlens.views.search.location": "scm",
+  "gitlens.currentLine.pullRequests.enabled": true,
+  "gitlens.currentLine.scrollable": true,
+  "gitlens.codeLens.scopes": ["document", "containers", "blocks"],
+  "gitlens.statusBar.reduceFlicker": true,
+  "gitlens.views.commits.showBranchComparison": "working",
+  "gitlens.views.repositories.includeWorkingTree": false,
+  "gitlens.views.contributors.showAllBranches": false,
+  "gitlens.defaultTimeFormat": "hh:mm",
+  "gitlens.advanced.repositorySearchDepth": 3,
+  "gitlens.blame.heatmap.location": "left",
+  "gitlens.blame.heatmap.enabled": true,
   "prettier.printWidth": 160,
   "beautify.ignore": "",
   "beautify.language": {
@@ -164,7 +172,6 @@
     "**/*.md"
   ],
   "todo-tree.highlights.enabled": false,
-  "todo-tree.tree.showScanModeButton": false,
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]"],
   "color-highlight.markerType": "dot-before",
@@ -233,10 +240,6 @@
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "C_Cpp.updateChannel": "Insiders",
-  // "C_Cpp.clang_format_path": "/usr/bin/clang-format", // sudo apt install clang-format
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 0, UseTab: Never, IndentWidth: 2, TabWidth: 2 }",
-  "C_Cpp.default.cppStandard": "c++14",
-  "C_Cpp.default.cStandard": "c11",
   "C_Cpp.formatting": "Default",
   "[csharp]": {
     "editor.defaultFormatter": "Leopotam.csharpfixformat"
@@ -246,9 +249,11 @@
     "editor.tabSize": 4
   },
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": ["--max-line-length", "160", "--experimental"],
+  // "python.formatting.provider": "black",
+  "python.formatting.autopep8Args": ["--max-line-length", "160"],
   "python.formatting.blackArgs": ["--line-length", "160"],
   "python.languageServer": "Pylance",
+  "go.toolsManagement.autoUpdate": true,
   "[javascript]": {
     "editor.defaultFormatter": "HookyQR.beautify"
   },
@@ -257,7 +262,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.tsdk": "workflowenginegui\\node_modules\\typescript\\lib",
+  // "typescript.tsdk": "workflowenginegui\\node_modules\\typescript\\lib",
   "typescript.suggest.paths": false,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
@@ -306,12 +311,16 @@
   "xmlTools.splitXmlnsOnFormat": false,
   "xmlTools.removeCommentsOnMinify": true,
   "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.trimTrailingWhitespace": false
   },
   "markdown.preview.scrollEditorWithPreview": true,
   "markdown.preview.scrollPreviewWithEditor": true,
   "markdown.styles": ["./github.css"],
-  "markdown-pdf.styles": ["markdown-pdf.css", "./markdown-pdf.css"],
+  "markdown-pdf.styles": [
+    "markdown-pdf.css",
+    "./markdown-pdf.css",
+  ],
   "markdown-pdf.orientation": "portrait",
   "markdown-pdf.format": "A4",
   "markdown-pdf.quality": 100,
@@ -352,12 +361,12 @@
       "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-pdf", "-outdir=%OUTDIR%", "%DOC%"],
       "env": {}
     },
-    {
-      "name": "pdflatex",
-      "command": "pdflatex",
-      "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"],
-      "env": {}
-    },
+    // {
+    //   "name": "pdflatex",
+    //   "command": "pdflatex",
+    //   "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"],
+    //   "env": {}
+    // },
     {
       "name": "bibtex",
       "command": "bibtex",
@@ -367,18 +376,18 @@
   ],
   "latex-workshop.latex.recipe.default": "first",
   "latex-workshop.latex.recipes": [
-    {
-      "name": "latexmk 🔃",
-      "tools": ["latexmk"]
-    },
+    // {
+    //   "name": "latexmk 🔃",
+    //   "tools": ["latexmk"]
+    // },
     {
       "name": "xelatex -> biber -> xelatex*2",
       "tools": ["xelatex", "biber", "xelatex", "xelatex"]
-    },
-    {
-      "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
-      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
     }
+    // {
+    //   "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+    //   "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    // }
   ],
   "latex-workshop.view.pdf.viewer": "tab",
   "cSpell.language": "en,en-EN,de,de-DE,en-US",
@@ -393,8 +402,10 @@
     "cybercrime",
     "drawed",
     "footprinting",
+    "gitlens",
     "kubernetes",
     "logstash",
+    "rgba",
     "syslog",
     "systemctl",
     "unpatched",
@@ -524,6 +535,16 @@
     "Log"
   ],
   "files.associations": {
+    // "**/defaults/**/*": "ansible",
+    // "**/tasks/**/*.yml": "ansible",
+    // "**/handler/*.yml": "ansible",
+    // "**/*_vars/**/*.yml": "ansible",
+    // "**/roles/**/*.yml": "ansible",
+    // "**/playbooks/**/*.yml": "ansible",
+    // "**/*ansible*/**/*.yml": "ansible",
+    // "**/vars/**/*.yml": "ansible",
+    // "**/inventory/*/*": "ansible",
+    "*.ts": "typescript",
     "optional": "c",
     "istream": "c",
     "ostream": "c",
@@ -558,5 +579,9 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
-  }
+  },
+  "redhat.telemetry.enabled": false,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "python.analysis.completeFunctionParens": true
 }
