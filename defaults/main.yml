@@ -270,6 +270,8 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: ffmpeg
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libavcodec-extra
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libvpx-dev
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libinput-tools
