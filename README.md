@@ -28,7 +28,9 @@ install_client_config:
   apt_vpn: no
   apt_gnome_boxes: no
   apt_latex: no
-  apt_apt_pandoc: no
+  apt_pandoc: no
+  apt_virtualbox_guest: no
+  apt_virt_viewer: no
   dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
