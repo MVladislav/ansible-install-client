@@ -33,6 +33,7 @@ install_client_config:
   apt_latex: no
   apt_pandoc: no
   apt_virtualbox_guest: no
+  apt_virt_viewer: no
   dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
@@ -370,6 +371,8 @@ install_client_apt:
   # --------------------------------
   - name: virtualbox-guest-additions-iso
     install: "{{ install_client_config.apt_virtualbox_guest | default('no') | bool }}"
+  - name: virt-viewer
+    install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DPKG
