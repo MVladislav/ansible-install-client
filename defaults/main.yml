@@ -119,8 +119,16 @@ install_client_gdm_gui_setup:
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
         name: gse-sound-output-device-chooser
-        src: gse-sound-output-device-chooser/sound-output-device-chooser@kgshank.net
-        dest: ~/.local/share/gnome-shell/extensions/
+        target: install
+      - repo: https://github.com/aunetx/blur-my-shell.git
+        name: blur-my-shell
+        target: install
+      - repo: https://github.com/axxapy/gnome-ui-tune.git
+        name: gnome-ui-tune
+        target: schemas
+      - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
+        name: gnome-shell-system-monitor-applet
+        target: install
     activate:
       # - desktop-icons@csoriano
       - caffeine@patapon.info

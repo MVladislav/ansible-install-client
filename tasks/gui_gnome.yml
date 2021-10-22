@@ -2,6 +2,7 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
+# THEME
 - name: "gnome gui theme git clone per user: {{ outer_item.name }}"
   become: yes
   become_user: "{{ outer_item.name }}"
@@ -29,6 +30,7 @@
     - gnome
 
 # ------------------------------------------------------------------------------
+# APT extensions
 - name: install apt services [main]
   become: yes
   apt:
@@ -42,6 +44,36 @@
     - ubuntu
     - gnome
 
+- name: "gnome extensions git clone per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "/tmp/{{ item.name }}"
+    force: yes
+    update: no
+  loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.git is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome extensions install per user: {{ outer_item.name }}"
+  become: yes
+  become_user: "{{ outer_item.name }}"
+  community.general.make:
+    chdir: "/tmp/{{ item.name }}"
+    target: "{{ item.target }}"
+  loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.git is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# RESTART
 - name: "gnome gui let gnome-shell restart"
   become: yes
   ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
@@ -52,6 +84,8 @@
     - ubuntu
     - gnome
 
+# ------------------------------------------------------------------------------
+# ACTIVATE extensions
 - name: "gnome gui activate extensions per user: {{ outer_item.name }}"
   become: yes
   become_user: "{{ outer_item.name }}"
@@ -64,6 +98,7 @@
     - gnome
 
 # ------------------------------------------------------------------------------
+# SETUP OVERLAY
 - name: "gnome gui overlay setup per user: {{ outer_item.name }}"
   become: yes
   become_user: "{{ outer_item.name }}"
@@ -76,6 +111,7 @@
     - gnome
 
 # ------------------------------------------------------------------------------
+# SETUP KEYBINDS
 - name: "gnome gui keybinding per user: {{ outer_item.name }}"
   become: yes
   become_user: "{{ outer_item.name }}"
