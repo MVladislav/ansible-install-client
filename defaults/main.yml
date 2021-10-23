@@ -288,7 +288,7 @@ install_client_apt:
   - name: pulseaudio-module-bluetooth
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
-  - name: gnome-tweak-tool
+  - name: gnome-tweaks
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: gnome-shell-extensions
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
