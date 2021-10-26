@@ -302,6 +302,14 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: pulseaudio-module-bluetooth
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libasound2-plugins-extra
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: paprefs
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: pavumeter
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: pulseaudio-dlna
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
   - name: gnome-tweaks
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
