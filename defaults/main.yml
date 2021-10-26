@@ -92,6 +92,13 @@ install_client_fonts:
 install_client_gdm_gui_setup:
   dependency:
     - libsass1
+    - gettext
+    - gir1.2-gtop-2.0
+    - gir1.2-nm-1.0
+    - gir1.2-clutter-1.0
+    - gnome-system-monitor
+    # - nvidia-smi
+    - lm-sensors
   theme:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
     git:
@@ -100,6 +107,11 @@ install_client_gdm_gui_setup:
         path: /tmp
         file: install.sh
         extra: "-n Orchis"
+      - url: https://github.com/vinceliuice/vimix-gtk-themes.git
+        name: vimix-gtk-themes
+        path: /tmp
+        file: install.sh
+        extra: "-c dark"
       - url: https://github.com/vinceliuice/Tela-circle-icon-theme.git
         name: Tela-circle-icon-theme
         path: /tmp
@@ -128,6 +140,9 @@ install_client_gdm_gui_setup:
         target: schemas
       - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
         name: gnome-shell-system-monitor-applet
+        target: install
+      - repo: https://github.com/micheleg/dash-to-dock.git
+        name: dash-to-dock
         target: install
     activate:
       # - desktop-icons@csoriano
