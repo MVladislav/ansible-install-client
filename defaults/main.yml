@@ -99,6 +99,7 @@ install_client_gdm_gui_setup:
     - gnome-system-monitor
     # - nvidia-smi
     - lm-sensors
+    # - bluez
   theme:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
     git:
@@ -127,6 +128,7 @@ install_client_gdm_gui_setup:
     command: gnome-extensions enable
     apt:
       - gnome-shell-extension-caffeine
+      # - gnome-shell-pomodoro
       # - gnome-shell-extension-desktop-icons
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
@@ -143,6 +145,9 @@ install_client_gdm_gui_setup:
         target: install
       - repo: https://github.com/micheleg/dash-to-dock.git
         name: dash-to-dock
+        target: install
+      - repo: https://github.com/phocean/TopIcons-plus.git
+        name: TopIcons-plus
         target: install
     activate:
       # - desktop-icons@csoriano
@@ -467,7 +472,7 @@ install_client_snap:
     install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
   - name: 1password
     classic: no
-    beta: yes
+    beta: no
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
   - name: okular
     classic: no
