@@ -1,8 +1,9 @@
 {
   "powermode.enabled": true,
   "powermode.presets": "flames", // flames|fireworks|exploding-rift|magic|particles|simple-rift|,
+  "powermode.enableStatusBarComboCounter": false,
+  "powermode.enableStatusBarComboTimer": false,
   "search.followSymlinks": false,
-  "window.zoomLevel": 2,
   "window.title": "${activeEditorLong}",
   "workbench.colorTheme": "Material Theme Ocean",
   // "workbench.colorTheme": "Material Theme Ocean",
@@ -21,7 +22,8 @@
     "*.hex": "hexEditor.hexedit",
     "*.ini": "default",
     "*.rom": "hexEditor.hexedit",
-    "*.ipynb": "jupyter.notebook.ipynb"
+    "*.ipynb": "jupyter.notebook.ipynb",
+    "*.pdf": "latex-workshop-pdf-hook"
   },
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "compact", // "normal" | "shrink" | "compact"
@@ -80,6 +82,8 @@
   // "editor.autoClosingQuotes": "always",
   // "editor.autoSurround": "quotes",
   "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.guides.bracketPairs": true,
+  // "editor.language.colorizedBracketPairs": [],
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "debug.toolBarLocation": "docked", // docked | floating
   "diffEditor.ignoreTrimWhitespace": true,
@@ -248,6 +252,7 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
+  "python.pythonPath": "/usr/bin/python3",
   "python.formatting.provider": "autopep8",
   // "python.formatting.provider": "black",
   "python.formatting.autopep8Args": ["--max-line-length", "160"],
@@ -264,6 +269,9 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   // "typescript.tsdk": "workflowenginegui\\node_modules\\typescript\\lib",
   "typescript.suggest.paths": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
@@ -310,6 +318,9 @@
   },
   "xmlTools.splitXmlnsOnFormat": false,
   "xmlTools.removeCommentsOnMinify": true,
+  "[sql]": {},
+  "sql-formatter.uppercase": true,
+  "sql-formatter.linesBetweenQueries": 10,
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.trimTrailingWhitespace": false
@@ -317,10 +328,7 @@
   "markdown.preview.scrollEditorWithPreview": true,
   "markdown.preview.scrollPreviewWithEditor": true,
   "markdown.styles": ["./github.css"],
-  "markdown-pdf.styles": [
-    "markdown-pdf.css",
-    "./markdown-pdf.css",
-  ],
+  "markdown-pdf.styles": ["markdown-pdf.css", "./markdown-pdf.css"],
   "markdown-pdf.orientation": "portrait",
   "markdown-pdf.format": "A4",
   "markdown-pdf.quality": 100,
@@ -338,11 +346,13 @@
   // "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='title'></span> </div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \">  </div>",
   "markdown-pdf.footerTemplate": "<div></div>",
   // "markdown-pdf.footerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> MVladislav <span class='date'></span> </div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"><span class='pageNumber'></span> / <span class='totalPages'></span></div>",
+  // https://github.com/DavidAnson/markdownlint/blob/v0.24.0/doc/Rules.md
   "markdownlint.config": {
-    "MD031": false,
-    "MD033": false,
-    "MD024": false,
-    "MD026": false
+    "MD031": false, // Fenced code blocks should be surrounded by blank lines
+    "MD033": false, // Inline HTML
+    "MD024": false, // Multiple headings with the same content
+    "MD026": false, // Trailing punctuation in heading
+    "MD036": false // Emphasis used instead of a heading
   },
   "latex-workshop.latex.tools": [
     {
@@ -391,52 +401,50 @@
   ],
   "latex-workshop.view.pdf.viewer": "tab",
   "cSpell.language": "en,en-EN,de,de-DE,en-US",
+  "cSpell.caseSensitive": true,
   "cSpell.maxDuplicateProblems": 20,
   "cSpell.maxNumberOfProblems": 500,
   "cSpell.words": [
     "Ansible",
+    "cybercrime",
+    "drawed",
+    "DSGVO",
+    "footprinting",
+    "gitlens",
+    "gobuster",
+    "gospider",
     "Kibana",
+    "kubernetes",
+    "logstash",
+    "masscan",
+    "massdns",
+    "nmap",
+    "rgba",
     "SIEM",
     "Smarthome",
     "Sophos",
-    "cybercrime",
-    "drawed",
-    "footprinting",
-    "gitlens",
-    "kubernetes",
-    "logstash",
-    "rgba",
+    "sqlmap",
     "syslog",
     "systemctl",
     "unpatched",
-    "zigbee",
-    "gitlens",
-    "rgba",
-    "DSGVO",
-    "sqlmap",
-    "gobuster",
-    "masscan",
-    "massdns",
-    "gospider",
     "wayback",
-    "nmap"
+    "zigbee"
   ],
   "cSpell.enableFiletypes": [
     "ansible",
     "asciidoc",
     "azcli",
     "bat",
-    "bibtex",
     "bibtex-style",
+    "bibtex",
     "c",
     "clojure",
     "code-runner-output",
     "coffeescript",
-    "cpp",
     "cpp_embedded_latex",
+    "cpp",
     "csharp",
     "css",
-    "csv",
     "csv (caret)",
     "csv (colon)",
     "csv (dot)",
@@ -447,6 +455,7 @@
     "csv (semicolon)",
     "csv (tilde)",
     "csv (whitespace)",
+    "csv",
     "diff",
     "dockercompose",
     "dockerfile",
@@ -478,9 +487,10 @@
     "juliamarkdown",
     "jupyter",
     "jvmoptions",
-    "latex",
     "latex-expl3",
+    "latex",
     "less",
+    "Log",
     "log",
     "lua",
     "makefile",
@@ -524,15 +534,14 @@
     "typescriptreact",
     "typoscript",
     "vb",
-    "vue",
     "vue-html",
     "vue-postcss",
+    "vue",
     "xml",
     "xquery",
     "xsl",
     "yaml",
-    "yml",
-    "Log"
+    "yml"
   ],
   "files.associations": {
     // "**/defaults/**/*": "ansible",
@@ -583,5 +592,13 @@
   "redhat.telemetry.enabled": false,
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
-  "python.analysis.completeFunctionParens": true
+  "telemetry.telemetryLevel": "off",
+  "python.analysis.completeFunctionParens": false,
+  "snyk.token": "11735856-b65a-4f86-a843-1a08304308dc",
+  "snyk.yesWelcomeNotification": false,
+  "snyk.advanced.advancedMode": true,
+  "snyk.yesTelemetry": false,
+  "snyk.yesCrashReport": false,
+  "snyk.features.codeQuality": false,
+  "snyk.features.codeSecurity": false
 }
