@@ -50,6 +50,7 @@ install_client_config:
   snap_okular: no
   snap_code: no
   snap_android_studio: no
+  snap_UBports: no
   snap_insomnia: no
   snap_postman: no
   snap_dbeaver_ce: no
