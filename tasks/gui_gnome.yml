@@ -9,8 +9,10 @@
   ansible.builtin.git:
     repo: "{{ item.url }}"
     dest: "{{ item.path }}/{{ item.name }}"
+    version: "{{ item.branch }}"
     force: yes
     update: no
+    recursive: yes
   loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.theme is defined and install_client_gdm_gui_setup.theme.git is defined) and (install_client_gdm_gui_setup.theme.install | bool)
   tags:
@@ -23,7 +25,7 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: "{{ item.path }}/{{ item.name }}/{{ item.file }} {{ item.extra }}"
   loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
-  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.theme is defined and install_client_gdm_gui_setup.theme.git is defined) and (install_client_gdm_gui_setup.theme.install | bool)
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.theme is defined and install_client_gdm_gui_setup.theme.git is defined) and (install_client_gdm_gui_setup.theme.install | bool) and (item.file is defined)
   tags:
     - install_client
     - ubuntu
@@ -52,6 +54,7 @@
     dest: "/tmp/{{ item.name }}"
     force: yes
     update: no
+    recursive: yes
   loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.git is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
   tags:

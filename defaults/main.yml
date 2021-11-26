@@ -105,25 +105,33 @@ install_client_gdm_gui_setup:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
     git:
       - url: https://github.com/vinceliuice/Orchis-theme.git
+        branch: master
         name: Orchis-theme
         path: /tmp
         file: install.sh
         extra: "-n Orchis"
       - url: https://github.com/vinceliuice/vimix-gtk-themes.git
+        branch: master
         name: vimix-gtk-themes
         path: /tmp
         file: install.sh
         extra: "-c dark"
       - url: https://github.com/vinceliuice/Tela-circle-icon-theme.git
+        branch: master
         name: Tela-circle-icon-theme
         path: /tmp
         file: install.sh
         extra: "-c blue"
       - url: https://github.com/vinceliuice/Vimix-cursors.git
+        branch: master
         name: Vimix-cursors
         path: /tmp
         file: install.sh
         extra: ""
+      - url: https://github.com/EliverLara/Juno.git
+        branch: ocean
+        name: Juno
+        path: ~/.themes/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
     command: gnome-extensions enable
@@ -168,7 +176,7 @@ install_client_gdm_gui_setup:
         value: "/snap/bin/flameshot gui"
       - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
         key: binding
-        value: "<Shift><Ctrl>s"
+        value: "<Shift><Super>s"
       # --- ADD <next here> [TODO: add unique name-path in list below] ---
       # --- UNIQUE LIST ---
       - source: org.gnome.settings-daemon.plugins.media-keys
@@ -255,7 +263,7 @@ install_client_gdm_gui_setup:
     - source: org.gnome.desktop.interface
       key: gtk-theme
       value: >-
-        Orchis
+        Juno
     - source: org.gnome.desktop.interface
       key: cursor-theme
       value: >-
@@ -263,15 +271,17 @@ install_client_gdm_gui_setup:
     - source: org.gnome.desktop.interface
       key: icon-theme
       value: >-
-        Tela-circle-blue
+        Tela-circle-blue-dark
     - source: org.gnome.shell.extensions.user-theme
       key: name
       value: >-
-        Orchis-dark
+        Juno
     - source: org.gnome.desktop.wm.preferences
       key: theme
       value: >-
-        Orchis
+        Juno
+
+# gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
 # ------------------------------------------------------------------------------
 # APT
