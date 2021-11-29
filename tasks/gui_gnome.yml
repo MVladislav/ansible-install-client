@@ -65,7 +65,7 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.git:
     repo: "{{ item.repo }}"
-    dest: "/tmp/{{ item.name }}"
+    dest: "/tmp/{{ outer_item.name }}/{{ item.name }}"
     force: yes
     update: no
     recursive: yes
@@ -80,7 +80,7 @@
   become: yes
   become_user: "{{ outer_item.name }}"
   community.general.make:
-    chdir: "/tmp/{{ item.name }}"
+    chdir: "/tmp/{{ outer_item.name }}/{{ item.name }}"
     target: "{{ item.target }}"
   loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.git is defined) and (install_client_gdm_gui_setup.extensions.install | bool)

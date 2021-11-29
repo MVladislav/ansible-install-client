@@ -112,25 +112,25 @@ install_client_gdm_gui_setup:
       - url: https://github.com/vinceliuice/Orchis-theme.git
         branch: master
         name: Orchis-theme
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: "-n Orchis"
       - url: https://github.com/vinceliuice/vimix-gtk-themes.git
         branch: master
         name: vimix-gtk-themes
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: "-c dark"
       - url: https://github.com/vinceliuice/Tela-circle-icon-theme.git
         branch: master
         name: Tela-circle-icon-theme
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: "-c blue"
       - url: https://github.com/vinceliuice/Vimix-cursors.git
         branch: master
         name: Vimix-cursors
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: ""
       - url: https://github.com/EliverLara/Juno.git
