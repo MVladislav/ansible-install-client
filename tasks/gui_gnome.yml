@@ -2,6 +2,20 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
+- name: install dependencies [main]
+  become: yes
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: yes # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.dependency|flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.dependency is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
 # THEME
 - name: "gnome gui theme git clone per user: {{ outer_item.name }}"
   become: yes
