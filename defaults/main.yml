@@ -10,6 +10,10 @@ install_client_links_to_check_update:
   mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-21.04-amd64.deb
   getferdi: https://github.com/getferdi/ferdi/releases/download/v5.5.0/ferdi_5.5.0_amd64.deb
+  firefox_dev: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=de
+install_client_links_to_git:
+  thunderbird_theme: https://github.com/spymastermatt/thunderbird-monterail.git
+  # also check "install_client_fonts" and "install_client_gdm_gui_setup"
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -130,7 +134,7 @@ install_client_gdm_gui_setup:
         extra: ""
       - url: https://github.com/EliverLara/Juno.git
         branch: ocean
-        name: Juno
+        name: Juno-dark
         path: ~/.themes/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
@@ -259,11 +263,11 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell
       key: favorite-apps
       value: >-
-        ['firefox.desktop','firefoxDeveloperEdition.desktop','google-chrome.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
+        ['firefox_firefox.desktop','firefox.desktop','google-chrome.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
     - source: org.gnome.desktop.interface
       key: gtk-theme
       value: >-
-        Juno
+        Juno-dark
     - source: org.gnome.desktop.interface
       key: cursor-theme
       value: >-
@@ -275,11 +279,11 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell.extensions.user-theme
       key: name
       value: >-
-        Juno
+        Juno-dark
     - source: org.gnome.desktop.wm.preferences
       key: theme
       value: >-
-        Juno
+        Juno-dark
 
 # gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
@@ -625,14 +629,14 @@ install_client_vs_code_ext:
 # install_client_config.thunderbird_theme
 install_client_thunderbird_theme:
   path: ~/.thunderbird
-  repo: https://github.com/spymastermatt/thunderbird-monterail.git
+  repo: "{{ install_client_links_to_git.thunderbird_theme }}"
 
 # ------------------------------------------------------------------------------
 # FIREFOX MANUAL INSTALL
 # install_client_config.firefox_dev
 install_client_manuall:
   firefox_dev:
-    url: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=de
+    url: "{{ install_client_links_to_check_update.firefox_dev }}"
     base_dir: /opt
     name: firefoxDeveloperEdition
 
