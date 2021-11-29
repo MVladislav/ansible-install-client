@@ -34,8 +34,8 @@ install_client_config:
   dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
-  dpkg_google_chrome: no
   dpkg_getferdi: no
+  snap_chromium: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
   snap_zoom_client: no

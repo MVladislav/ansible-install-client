@@ -5,7 +5,7 @@
 install_client_service_name: default-client
 
 install_client_links_to_check_update:
-  chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  # chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
   mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-21.04-amd64.deb
@@ -41,8 +41,9 @@ install_client_config:
   dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
-  dpkg_google_chrome: no
+  # dpkg_google_chrome: no
   dpkg_getferdi: no
+  snap_chromium: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
   snap_zoom_client: no
@@ -263,7 +264,7 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell
       key: favorite-apps
       value: >-
-        ['firefox_firefox.desktop','firefox.desktop','google-chrome.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
+        ['firefox_firefox.desktop','firefox.desktop','google-chrome.desktop','chromium_chromium.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
     - source: org.gnome.desktop.interface
       key: gtk-theme
       value: >-
@@ -429,8 +430,8 @@ install_client_apt:
 # DPKG
 # install_client_config.dpkg_...
 install_client_dpkg:
-  - url: "{{ install_client_links_to_check_update.chrome }}"
-    install: "{{ install_client_config.dpkg_google_chrome | default('no') | bool }}"
+  # - url: "{{ install_client_links_to_check_update.chrome }}"
+  #   install: "{{ install_client_config.dpkg_google_chrome | default('no') | bool }}"
   # - url: https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/Clockify_Setup.deb
   - url: "{{ install_client_links_to_check_update.virtualbox }}"
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
