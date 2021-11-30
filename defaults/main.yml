@@ -64,6 +64,8 @@ install_client_config:
   snap_dbeaver_ce: no
   snap_beekeeper_studio: no
   snap_microk8s: no
+  snap_rpi_imager: no
+  snap_multipass: no
   snap_zaproxy: no
   snap_cornyjokes: no
   # flatpak: no # base(empty)|dev(empty)
@@ -134,9 +136,13 @@ install_client_gdm_gui_setup:
         file: install.sh
         extra: ""
       - url: https://github.com/EliverLara/Juno.git
-        branch: ocean
+        branch: ocean # palenight | ocean | mirage |
         name: Juno-dark
         path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
+        branch: ocean-standard-buttons
+        name: Juno-icons
+        path: ~/.local/share/icons/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
     command: gnome-extensions enable
@@ -528,6 +534,14 @@ install_client_snap:
     classic: yes
     beta: no
     install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
+  - name: rpi-imager
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
+  - name: multipass
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
   - name: zaproxy
     classic: yes
     beta: no

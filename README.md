@@ -56,6 +56,8 @@ install_client_config:
   snap_dbeaver_ce: no
   snap_beekeeper_studio: no
   snap_microk8s: no
+  snap_rpi_imager: no
+  snap_multipass: no
   snap_zaproxy: no
   snap_cornyjokes: no
   # flatpak: no # base(empty)|dev(empty)
