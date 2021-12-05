@@ -31,10 +31,10 @@ install_client_config:
   apt_pandoc: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
-  dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
   dpkg_getferdi: no
+  distribution_key_virtualbox: no
   snap_chromium: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
