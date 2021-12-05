@@ -38,11 +38,12 @@ install_client_config:
   apt_pandoc: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
-  dpkg_virtualbox: no
+  # dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
   # dpkg_google_chrome: no
   dpkg_getferdi: no
+  distribution_key_virtualbox: no
   snap_chromium: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
@@ -439,14 +440,27 @@ install_client_dpkg:
   # - url: "{{ install_client_links_to_check_update.chrome }}"
   #   install: "{{ install_client_config.dpkg_google_chrome | default('no') | bool }}"
   # - url: https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/Clockify_Setup.deb
-  - url: "{{ install_client_links_to_check_update.virtualbox }}"
-    install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
+  # - url: "{{ install_client_links_to_check_update.virtualbox }}"
+  #   install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.mongodb }}"
     install: "{{ install_client_config.dpkg_mongodb | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.getferdi }}"
     install: "{{ install_client_config.dpkg_getferdi | default('no') | bool }}"
+
+# ------------------------------------------------------------------------------
+# DISTRIBUTION KEY
+# install_client_config.distribution_key_...
+install_client_distribution_key:
+  - install: "{{ install_client_config.distribution_key_virtualbox | default('no') | bool }}"
+    asc:
+      - https://www.virtualbox.org/download/oracle_vbox_2016.asc
+      - https://www.virtualbox.org/download/oracle_vbox.asc
+    repo: https://download.virtualbox.org/virtualbox/debian
+    version: contrib
+    apt:
+      - virtualbox-6.1
 
 # ------------------------------------------------------------------------------
 # SNAP

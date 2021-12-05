@@ -1,0 +1,54 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: add apt signing key
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+    state: present
+  loop: "{{ outer_item.asc | flatten(levels=1) }}"
+  when: (outer_item.install is defined and outer_item.install | bool)
+  tags:
+    - install_client
+    - distribution_key
+
+# ------------------------------------------------------------------------------
+- name: get OS distribution
+  command: lsb_release -sc
+  register: os_distribution
+  when: (outer_item.install is defined and outer_item.install | bool)
+  tags:
+    - install_client
+    - distribution_key
+
+- name: get OS architecture
+  shell: dpkg --print-architecture
+  register: os_architecture
+  when: (outer_item.install is defined and outer_item.install | bool)
+  tags:
+    - install_client
+    - distribution_key
+
+- name: add repository into sources list
+  become: yes
+  apt_repository:
+    repo: "deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ os_distribution.stdout }} {{ outer_item.version }}"
+    state: present
+  when: (outer_item.install is defined and outer_item.install | bool)
+  tags:
+    - install_client
+    - distribution_key
+
+# ------------------------------------------------------------------------------
+- name: install apt services
+  become: yes
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: yes # apt-get instead of aptitude
+  loop: "{{ outer_item.apt|flatten(levels=1) }}"
+  when: (outer_item.install is defined and outer_item.install | bool)
+  tags:
+    - install_client
+    - distribution_key

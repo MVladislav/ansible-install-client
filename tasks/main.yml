@@ -17,6 +17,15 @@
   include: install_dpkg.yml
 
 # ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY DISTRIBUTION KEY
+- name: install distribution services
+  include: install_extra_distribution_key.yml
+  loop: "{{ install_client_distribution_key | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: install_client_distribution_key is defined and (outer_item.install is defined and outer_item.install | bool)
+
+# ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY SNAP
 - name: install snap services
   include: install_snap.yml
