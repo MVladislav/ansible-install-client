@@ -483,6 +483,10 @@ install_client_snap:
     classic: no
     beta: no
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
+  - name: chromium
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
   - name: inkscape
     classic: no
     beta: no
