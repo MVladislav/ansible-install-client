@@ -49,6 +49,7 @@
     state: present
     force_apt_get: yes # apt-get instead of aptitude
   loop: "{{ outer_item.apt|flatten(levels=1) }}"
+  ignore_errors: yes
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
     - install_client
