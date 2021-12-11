@@ -141,6 +141,14 @@ install_client_gdm_gui_setup:
         name: Juno-dark
         path: ~/.themes/
       - url: https://github.com/EliverLara/Juno.git
+        branch: palenight # palenight | ocean | mirage |
+        name: Juno-light
+        path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
+        branch: mirage # palenight | ocean | mirage |
+        name: Juno
+        path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
         branch: ocean-standard-buttons
         name: Juno-icons
         path: ~/.local/share/icons/
