@@ -109,6 +109,8 @@ install_client_gdm_gui_setup:
     # - nvidia-smi
     - lm-sensors
     # - bluez
+    - libcanberra-gtk-module
+    - libcanberra-gtk3-module
   theme:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
     git:
