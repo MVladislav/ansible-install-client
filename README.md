@@ -29,6 +29,7 @@ install_client_config:
   apt_gnome_boxes: no
   apt_latex: no
   apt_pandoc: no
+  apt_qemu_guest_agent: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
   dpkg_mongodb: no
