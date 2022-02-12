@@ -36,6 +36,7 @@ install_client_config:
   apt_gnome_boxes: no
   apt_latex: no
   apt_pandoc: no
+  apt_qemu_guest_agent: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
   # dpkg_virtualbox: no
@@ -438,6 +439,8 @@ install_client_apt:
   - name: texlive-xetex
     install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
   # --------------------------------
+  - name: qemu-guest-agent
+    install: "{{ install_client_config.apt_qemu_guest_agent | default('no') | bool }}"
   - name: virtualbox-guest-additions-iso
     install: "{{ install_client_config.apt_virtualbox_guest | default('no') | bool }}"
   - name: virt-viewer
