@@ -18,10 +18,6 @@ install_client_config:
   gnome_gui_setup_extensions: no
   gnome_gui_setup_keybinding: no
   apt_base: no
-  apt_thunderbird: no
-  apt_libreoffice_impress: no
-  apt_libreoffice_writer: no
-  apt_libreoffice_calc: no
   apt_peek: no
   apt_wireshark: no
   apt_wireshark_dev: no
@@ -31,11 +27,16 @@ install_client_config:
   apt_pandoc: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
+  # dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
+  # dpkg_google_chrome: no
   dpkg_getferdi: no
   distribution_key_virtualbox: no
   snap_chromium: no
+  snap_thunderbird: no
+  snap_libreoffice: no
+  snap_onlyoffice_desktopeditors: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
   snap_zoom_client: no
@@ -62,7 +63,6 @@ install_client_config:
   snap_cornyjokes: no
   # flatpak: no # base(empty)|dev(empty)
   vs_code_ext: no
-  thunderbird_theme: no
   firefox_dev: no
   java: no
   steam: no

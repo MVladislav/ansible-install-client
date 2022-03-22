@@ -11,9 +11,9 @@ install_client_links_to_check_update:
   veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-21.04-amd64.deb
   getferdi: https://github.com/getferdi/ferdi/releases/download/v5.5.0/ferdi_5.5.0_amd64.deb
   firefox_dev: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=de
-install_client_links_to_git:
-  thunderbird_theme: https://github.com/spymastermatt/thunderbird-monterail.git
-  # also check "install_client_fonts" and "install_client_gdm_gui_setup"
+# install_client_links_to_git:
+#   thunderbird_theme: https://github.com/spymastermatt/thunderbird-monterail.git
+# also check "install_client_fonts" and "install_client_gdm_gui_setup"
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -25,10 +25,6 @@ install_client_config:
   gnome_gui_setup_extensions: no
   gnome_gui_setup_keybinding: no
   apt_base: no
-  apt_thunderbird: no
-  apt_libreoffice_impress: no
-  apt_libreoffice_writer: no
-  apt_libreoffice_calc: no
   apt_peek: no
   apt_wireshark: no
   apt_wireshark_dev: no
@@ -45,6 +41,9 @@ install_client_config:
   dpkg_getferdi: no
   distribution_key_virtualbox: no
   snap_chromium: no
+  snap_thunderbird: no
+  snap_libreoffice: no
+  snap_onlyoffice_desktopeditors: no
   snap_signal_desktop: no
   snap_telegram_desktop: no
   snap_zoom_client: no
@@ -71,7 +70,6 @@ install_client_config:
   snap_cornyjokes: no
   # flatpak: no # base(empty)|dev(empty)
   vs_code_ext: no
-  thunderbird_theme: no
   firefox_dev: no
   java: no
   steam: no
@@ -281,7 +279,7 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell
       key: favorite-apps
       value: >-
-        ['firefox_firefox.desktop','firefox.desktop','google-chrome.desktop','chromium_chromium.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
+        ['firefox_firefox.desktop','chromium_chromium.desktop','thunderbird_thunderbird.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','libreoffice_writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','org.keepassxc.KeePassXC.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','spotify_spotify.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
     - source: org.gnome.desktop.interface
       key: gtk-theme
       value: >-
@@ -355,15 +353,6 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: chrome-gnome-shell
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  # --------------------------------
-  - name: thunderbird
-    install: "{{ install_client_config.apt_thunderbird | default('no') | bool }}"
-  - name: libreoffice-impress
-    install: "{{ install_client_config.apt_libreoffice_impress | default('no') | bool }}"
-  - name: libreoffice-writer
-    install: "{{ install_client_config.apt_libreoffice_writer | default('no') | bool }}"
-  - name: libreoffice-calc
-    install: "{{ install_client_config.apt_libreoffice_calc | default('no') | bool }}"
   # --------------------------------
   - name: peek
     install: "{{ install_client_config.apt_peek | default('no') | bool }}"
@@ -497,6 +486,18 @@ install_client_snap:
     classic: no
     beta: no
     install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
+  - name: thunderbird
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
+  - name: libreoffice
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
+  - name: onlyoffice-desktopeditors
+    classic: no
+    beta: no
+    install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
   - name: inkscape
     classic: no
     beta: no
@@ -667,13 +668,6 @@ install_client_vs_code_ext:
   - xabikos.JavaScriptSnippets
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
-
-# THEMES ------------------------------------------------------------------------------
-# THUNDERBIRD THEME
-# install_client_config.thunderbird_theme
-install_client_thunderbird_theme:
-  path: ~/.thunderbird
-  repo: "{{ install_client_links_to_git.thunderbird_theme }}"
 
 # ------------------------------------------------------------------------------
 # FIREFOX MANUAL INSTALL
