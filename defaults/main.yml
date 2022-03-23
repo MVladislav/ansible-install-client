@@ -98,6 +98,7 @@ install_client_fonts:
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
   dependency:
+    - dbus-x11
     - libsass1
     - gettext
     - gir1.2-gtop-2.0
