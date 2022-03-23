@@ -106,6 +106,7 @@
 - name: "gnome gui activate extensions per user: {{ outer_item.name }}"
   become: yes
   become_user: "{{ outer_item.name }}"
+  ignore_errors: yes
   ansible.builtin.shell: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item }}"
   loop: "{{ install_client_gdm_gui_setup.extensions.activate | flatten(levels=1) }}"
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.command is defined) and (install_client_gdm_gui_setup.extensions.install | bool)

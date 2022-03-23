@@ -156,9 +156,9 @@ install_client_gdm_gui_setup:
     install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
     command: gnome-extensions enable
     apt:
+      # - gnome-shell-extensions
       - gnome-shell-extension-caffeine
       # - gnome-shell-pomodoro
-      # - gnome-shell-extension-desktop-icons
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
         name: gse-sound-output-device-chooser
@@ -172,17 +172,20 @@ install_client_gdm_gui_setup:
       - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
         name: gnome-shell-system-monitor-applet
         target: install
-      - repo: https://github.com/micheleg/dash-to-dock.git
-        name: dash-to-dock
-        target: install
-      - repo: https://github.com/phocean/TopIcons-plus.git
-        name: TopIcons-plus
-        target: install
+      # - repo: https://github.com/micheleg/dash-to-dock.git
+      #   name: dash-to-dock
+      #   target: install
+      # - repo: https://github.com/phocean/TopIcons-plus.git
+      #   name: TopIcons-plus
+      #   target: install
     activate:
-      # - desktop-icons@csoriano
       - caffeine@patapon.info
-      - drive-menu@gnome-shell-extensions.gcampax.github.com
-      - user-theme@gnome-shell-extensions.gcampax.github.com
+      - sound-output-device-chooser@kgshank.net
+      - system-monitor@paradoxxx.zero.gmail.com
+      - blur-my-shell@aunetx
+      # - TopIcons@phocean.net
+      # - drive-menu@gnome-shell-extensions.gcampax.github.com
+      # - user-theme@gnome-shell-extensions.gcampax.github.com
   command: dbus-launch --exit-with-session gsettings set
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
@@ -227,7 +230,7 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell.extensions.dash-to-dock
       key: extend-height
       value: >-
-        false
+        true
     - source: org.gnome.shell.extensions.dash-to-dock
       key: background-opacity
       value: >-
@@ -251,11 +254,11 @@ install_client_gdm_gui_setup:
     - source: org.gnome.shell.extensions.dash-to-dock
       key: click-action
       value: >-
-        previews
+        focus-or-previews
     - source: org.gnome.shell.extensions.dash-to-dock
       key: custom-theme-shrink
       value: >-
-        false
+        true
     - source: org.gnome.shell.extensions.dash-to-dock
       key: running-indicator-style
       value: >-
@@ -283,23 +286,23 @@ install_client_gdm_gui_setup:
     - source: org.gnome.desktop.interface
       key: gtk-theme
       value: >-
-        Juno-dark
+        Yaru-prussiangreen-dark
     - source: org.gnome.desktop.interface
       key: cursor-theme
       value: >-
-        Vimix-cursors
+        Yaru
     - source: org.gnome.desktop.interface
       key: icon-theme
       value: >-
-        Tela-circle-blue-dark
+        Yaru-prussiangreen
     - source: org.gnome.shell.extensions.user-theme
       key: name
       value: >-
-        Juno-dark
+        Yaru-prussiangreen-dark
     - source: org.gnome.desktop.wm.preferences
       key: theme
       value: >-
-        Juno-dark
+        Yaru-prussiangreen-dark
 
 # gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
