@@ -156,8 +156,9 @@ install_client_gdm_gui_setup:
     install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
     command: gnome-extensions enable
     apt:
+      []
       # - gnome-shell-extensions
-      - gnome-shell-extension-caffeine
+      # - gnome-shell-extension-caffeine
       # - gnome-shell-pomodoro
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
@@ -172,6 +173,9 @@ install_client_gdm_gui_setup:
       - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
         name: gnome-shell-system-monitor-applet
         target: install
+      - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
+        name: gnome-shell-extension-caffeine
+        target: all
       # - repo: https://github.com/micheleg/dash-to-dock.git
       #   name: dash-to-dock
       #   target: install
