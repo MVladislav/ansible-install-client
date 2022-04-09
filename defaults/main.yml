@@ -459,11 +459,13 @@ install_client_dpkg:
 # install_client_config.distribution_key_...
 install_client_distribution_key:
   - install: "{{ install_client_config.distribution_key_virtualbox | default('no') | bool }}"
-    asc_gpg:
-      - url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
-        name: oracle_vbox_2016.asc
-      - url: https://www.virtualbox.org/download/oracle_vbox.asc
-        name: oracle_vbox.asc
+    gpg:
+      - id: "B9F8 D658 297A F3EF C18D  5CDF A2F6 83C5 2980 AECF"
+        url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+        name: oracle_vbox_2016.gpg
+      - id: "7B0F AB3A 13B9 0743 5925  D9C9 5442 2A4B 98AB 5139"
+        url: https://www.virtualbox.org/download/oracle_vbox.asc
+        name: oracle_vbox.gpg
     repo: https://download.virtualbox.org/virtualbox/debian
     distribution: focal
     version: contrib

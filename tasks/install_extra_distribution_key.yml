@@ -2,13 +2,15 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: add apt signing key
+- name: add apt signing key (trusted.gpg.d) (curl command for now)
   become: true
-  apt_key:
-    url: "{{ item.url }}"
-    keyring: /etc/apt/trusted.gpg.d/"{{ item.name }}"
-    # state: present
-  loop: "{{ outer_item.asc_gpg | flatten(levels=1) }}"
+  # apt_key:
+  #   id: "{{ item.id }}"
+  #   url: "{{ item.url }}"
+  #   keyring: "/etc/apt/trusted.gpg.d/{{ item.name }}"
+  #   state: present
+  command: curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
+  loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
     - install_client
