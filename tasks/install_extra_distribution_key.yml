@@ -9,7 +9,7 @@
   #   url: "{{ item.url }}"
   #   keyring: "/etc/apt/trusted.gpg.d/{{ item.name }}"
   #   state: present
-  command: curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
+  shell: curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
