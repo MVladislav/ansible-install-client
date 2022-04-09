@@ -463,7 +463,7 @@ install_client_distribution_key:
       - https://www.virtualbox.org/download/oracle_vbox_2016.asc
       - https://www.virtualbox.org/download/oracle_vbox.asc
     repo: https://download.virtualbox.org/virtualbox/debian
-    distribution: bionic
+    distribution: focal
     version: contrib
     apt:
       - virtualbox-6.1
