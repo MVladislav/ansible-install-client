@@ -241,6 +241,18 @@ install_client_gdm_gui_setup:
       value: >-
         0.10000000000000001
     - source: org.gnome.shell.extensions.dash-to-dock
+      key: customize-alphas
+      value: >-
+        true
+    - source: org.gnome.shell.extensions.dash-to-dock
+      key: min-alpha
+      value: >-
+        0
+    - source: org.gnome.shell.extensions.dash-to-dock
+      key: max-alpha
+      value: >-
+        0
+    - source: org.gnome.shell.extensions.dash-to-dock
       key: background-color
       value: >-
         #ffffff
