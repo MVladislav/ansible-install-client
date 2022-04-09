@@ -5,9 +5,10 @@
 - name: add apt signing key
   become: true
   apt_key:
-    url: "{{ item }}"
+    url: "{{ item.url }}"
+    keyring: /etc/apt/trusted.gpg.d/"{{ item.name }}"
     state: present
-  loop: "{{ outer_item.asc | flatten(levels=1) }}"
+  loop: "{{ outer_item.asc_gpg | flatten(levels=1) }}"
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
     - install_client
