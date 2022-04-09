@@ -3,20 +3,20 @@
 
 # ------------------------------------------------------------------------------
 - name: create directory for firefox-dev
-  become: yes
+  become: true
   file:
     path: "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}"
     state: directory
     mode: "2775"
 
 - name: check if firefox-dev folder exist
-  become: yes
+  become: true
   stat:
     path: "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}"
   register: firefox_dev_dir_exists
 
 - name: "download und extract firefox-dev"
-  become: yes
+  become: true
   unarchive:
     src: "{{ manuall.firefox_dev.url }}"
     dest: "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}"
@@ -26,18 +26,18 @@
   when: firefox_dev_dir_exists.stat.exists and firefox_dev_dir_exists.stat.isdir
 
 - name: set specific chmod for files
-  become: yes
+  become: true
   command: find "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}" -type f -exec chmod 0755 {} \;
   when: firefox_dev_dir_exists.stat.exists and firefox_dev_dir_exists.stat.isdir
 
 - name: set specific chmod for directory
-  become: yes
+  become: true
   command: find "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}" -type d -exec chmod 2755 {} \;
   when: firefox_dev_dir_exists.stat.exists and firefox_dev_dir_exists.stat.isdir
 
 # ------------------------------------------------------------------------------
 - name: "check if firefox-dev folder exist (for: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   stat:
     path: "{{ manuall.firefox_dev.base_dir }}/{{ manuall.firefox_dev.name }}"
@@ -47,7 +47,7 @@
     loop_var: outer_item
 
 - name: "copy template for firefox-dev desktop shortcut (for: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   template:
     src: firefoxDeveloperEdition.desktop.j2

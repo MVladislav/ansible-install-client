@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: gnome gui install dependencies
-  become: yes
+  become: true
   apt:
     pkg: "{{ item }}"
     state: present
@@ -18,7 +18,7 @@
 # ------------------------------------------------------------------------------
 # THEME
 - name: "gnome gui theme git clone per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.git:
     repo: "{{ item.url }}"
@@ -35,7 +35,7 @@
     - gnome
 
 - name: "gnome gui theme execute install per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: "{{ item.path }}/{{ item.name }}/{{ item.file }} {{ item.extra }}"
   loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
@@ -48,7 +48,7 @@
 # ------------------------------------------------------------------------------
 # APT extensions
 - name: install apt services [main]
-  become: yes
+  become: true
   apt:
     pkg: "{{ item }}"
     state: present
@@ -61,7 +61,7 @@
     - gnome
 
 - name: "gnome extensions git clone per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.git:
     repo: "{{ item.repo }}"
@@ -77,7 +77,7 @@
     - gnome
 
 - name: "gnome extensions install per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   community.general.make:
     chdir: "/tmp/{{ outer_item.name }}/{{ item.name }}"
@@ -92,7 +92,7 @@
 # ------------------------------------------------------------------------------
 # RESTART
 - name: "gnome gui let gnome-shell restart"
-  become: yes
+  become: true
   ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
   ignore_errors: yes
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.command is defined) and (install_client_gdm_gui_setup.extensions.install | bool)
@@ -104,7 +104,7 @@
 # ------------------------------------------------------------------------------
 # ACTIVATE extensions
 - name: "gnome gui activate extensions per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ignore_errors: yes
   ansible.builtin.shell: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item }}"
@@ -118,7 +118,7 @@
 # ------------------------------------------------------------------------------
 # SETUP OVERLAY
 - name: "gnome gui overlay setup per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   command: '{{ install_client_gdm_gui_setup.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.configs | flatten(levels=1) }}"
@@ -131,7 +131,7 @@
 # ------------------------------------------------------------------------------
 # SETUP KEYBINDS
 - name: "gnome gui keybinding per user: {{ outer_item.name }}"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   command: '{{ install_client_gdm_gui_setup.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
@@ -144,7 +144,7 @@
 # ------------------------------------------------------------------------------
 # RESTART
 - name: "gnome gui let gnome-shell restart"
-  become: yes
+  become: true
   ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
   ignore_errors: yes
   when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.extensions is defined and install_client_gdm_gui_setup.extensions.command is defined) and (install_client_gdm_gui_setup.extensions.install | bool)

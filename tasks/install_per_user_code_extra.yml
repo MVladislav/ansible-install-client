@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "check if vs code is installed (for user: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   shell: command -v code >/dev/null 2>&1
   register: is_code_exist
@@ -15,7 +15,7 @@
 # ------------------------------------------------------------------------------
 # `$code --list-extensions | xargs -L 1 echo code --install-extension`
 - name: "install vs-code extensions (for user: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   # command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
   command: "code --install-extension {{ item }}"
@@ -28,7 +28,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "copy template for vs-code settings.json (for user: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   template:
     src: vs-settings.json.j2
@@ -40,7 +40,7 @@
     - vs_code
 
 - name: "copy template for vs-code keybindings.json (for user: {{ outer_item.name }})"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   template:
     src: vs-keybindings.json.j2

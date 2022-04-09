@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: install apt services [main]
-  become: yes
+  become: true
   apt:
     pkg: "{{ item.name }}"
     state: present

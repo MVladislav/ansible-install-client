@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: add apt signing key
-  become: yes
+  become: true
   apt_key:
     url: "{{ item }}"
     state: present
@@ -31,7 +31,7 @@
     - distribution_key
 
 - name: add repository into sources list
-  become: yes
+  become: true
   apt_repository:
     repo: "deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ outer_item.distribution|default(os_distribution.stdout) }} {{ outer_item.version }}"
     state: present
@@ -43,7 +43,7 @@
 
 # ------------------------------------------------------------------------------
 - name: install apt services
-  become: yes
+  become: true
   apt:
     pkg: "{{ item }}"
     state: present

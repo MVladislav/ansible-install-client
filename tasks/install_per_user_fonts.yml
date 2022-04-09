@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "create a directory for fonts"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.file:
     path: "{{ install_client_fonts.path }}"
@@ -15,7 +15,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "download and unarchive fonts"
-  become: yes
+  become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.unarchive:
     src: "{{ item }}"

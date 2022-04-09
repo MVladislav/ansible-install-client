@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: install a .deb package from the internet [main]
-  become: yes
+  become: true
   apt:
     deb: "{{ item.url }}"
   loop: "{{ install_client_dpkg|flatten(levels=1) }}"
