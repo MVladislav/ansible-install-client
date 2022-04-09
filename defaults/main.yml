@@ -300,10 +300,10 @@ install_client_gdm_gui_setup:
       key: icon-theme
       value: >-
         Yaru-prussiangreen
-    - source: org.gnome.shell.extensions.user-theme
-      key: name
-      value: >-
-        Yaru-prussiangreen-dark
+    # - source: org.gnome.shell.extensions.user-theme
+    #   key: name
+    #   value: >-
+    #     Yaru-prussiangreen-dark
     - source: org.gnome.desktop.wm.preferences
       key: theme
       value: >-
