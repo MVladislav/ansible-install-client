@@ -7,7 +7,7 @@
   apt_key:
     url: "{{ item.url }}"
     keyring: /etc/apt/trusted.gpg.d/"{{ item.name }}"
-    state: present
+    # state: present
   loop: "{{ outer_item.asc_gpg | flatten(levels=1) }}"
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
