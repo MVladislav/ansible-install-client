@@ -4,26 +4,24 @@
 # ------------------------------------------------------------------------------
 install_client_service_name: default-client
 
+# also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
-  # chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   # virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
   mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
-  getferdi: https://github.com/getferdi/ferdi/releases/download/v5.5.0/ferdi_5.5.0_amd64.deb
-  firefox_dev: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=de
-# install_client_links_to_git:
-#   thunderbird_theme: https://github.com/spymastermatt/thunderbird-monterail.git
-# also check "install_client_fonts" and "install_client_gdm_gui_setup"
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
 install_client_config:
+  # GENERAL -------------------------------
   dev: no
   fonts: no
-  gnome_gui_setup: no
+  # GNOME ---------------------------------
+  gnome_gui_setup: no # general of gnome setup should be triggered, below specific what
   gnome_gui_setup_theme: no
   gnome_gui_setup_extensions: no
   gnome_gui_setup_keybinding: no
+  # APT -----------------------------------
   apt_base: no
   apt_peek: no
   apt_wireshark: no
@@ -34,12 +32,13 @@ install_client_config:
   apt_pandoc: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
+  # DPKG ----------------------------------
   # dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
-  # dpkg_google_chrome: no
-  dpkg_getferdi: no
+  # DIST KEY ------------------------------
   distribution_key_virtualbox: no
+  # SNAP ----------------------------------
   snap_chromium: no
   snap_thunderbird: no
   snap_libreoffice: no
@@ -68,9 +67,45 @@ install_client_config:
   snap_multipass: no
   snap_zaproxy: no
   snap_cornyjokes: no
-  # flatpak: no # base(empty)|dev(empty)
+  # FLATPAK -------------------------------
+  flatpak_firefox: no
+  flatpak_chromium: no
+  flatpak_thunderbird: no
+  flatpak_flameshot: no
+  flatpak_onlyoffice: no
+  flatpak_1password: no
+  flatpak_keepassxc: no
+  flatpak_signal: no
+  flatpak_telegram: no
+  flatpak_threemaqt: no
+  flatpak_zoom: no
+  flatpak_teams: no
+  flatpak_discord: no
+  flatpak_spotify: no
+  flatpak_ferdi: no
+  flatpak_vlc: no
+  flatpak_inkscape: no
+  flatpak_drawio: no
+  flatpak_gimp: no
+  flatpak_studio: no
+  flatpak_blender: no
+  flatpak_code: no
+  flatpak_sublimetext: no
+  flatpak_arduinoide: no
+  flatpak_fritzing: no
+  flatpak_insomnia: no
+  flatpak_postman: no
+  flatpak_dbeavercommunity: no
+  flatpak_filezilla: no
+  flatpak_jdownloader: no
+  flatpak_wireshark: no
+  flatpak_ghidra: no
+  flatpak_zaproxy: no
+  flatpak_steam: no
+  flatpak_ausweisapp2: no
+  flatpak_betaflightconfigurator: no
+  # OTHER --------------------------------
   vs_code_ext: no
-  firefox_dev: no
   java: no
   steam: no
 
@@ -86,6 +121,8 @@ clients: []
 #   password: "..."
 #   updateOrCreate: yes
 
+# ------------------------------------------------------------------------------
+# FONTS
 install_client_fonts:
   path: ~/.local/share/fonts/
   url:
@@ -454,17 +491,12 @@ install_client_apt:
 # DPKG
 # install_client_config.dpkg_...
 install_client_dpkg:
-  # - url: "{{ install_client_links_to_check_update.chrome }}"
-  #   install: "{{ install_client_config.dpkg_google_chrome | default('no') | bool }}"
-  # - url: https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/Clockify_Setup.deb
   # - url: "{{ install_client_links_to_check_update.virtualbox }}"
   #   install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.mongodb }}"
     install: "{{ install_client_config.dpkg_mongodb | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
-  - url: "{{ install_client_links_to_check_update.getferdi }}"
-    install: "{{ install_client_config.dpkg_getferdi | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DISTRIBUTION KEY
@@ -489,127 +521,204 @@ install_client_distribution_key:
 # install_client_config.snap_...
 install_client_snap:
   - name: signal-desktop
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: telegram-desktop
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: zoom-client
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_zoom_client | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: spotify
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: chromium
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: thunderbird
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: libreoffice
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: onlyoffice-desktopeditors
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: inkscape
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: drawio
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_drawio | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: gimp
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: vlc
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: obs-studio
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_obs_studio | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: flameshot
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: 1password
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
-  - name: okular
     classic: no
     beta: no
+  - name: okular
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
+    classic: no
+    beta: no
   # dev
   - name: code
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_code | default('no') | bool }}"
-  - name: android-studio
     classic: yes
     beta: no
+  - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
+    classic: yes
+    beta: no
   - name: ubports-installer
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: insomnia
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: postman
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_postman | default('no') | bool }}"
+    classic: no
+    beta: no
   - name: dbeaver-ce
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
-  - name: beekeeper-studio
     classic: no
     beta: no
+  - name: beekeeper-studio
     install: "{{ install_client_config.snap_beekeeper_studio | default('no') | bool }}"
+    classic: no
+    beta: no
   # other
   - name: microk8s
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
-  - name: rpi-imager
-    classic: no
-    beta: no
-    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
-  - name: multipass
-    classic: no
-    beta: no
-    install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
-  - name: zaproxy
     classic: yes
     beta: no
+  - name: rpi-imager
+    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
+    classic: no
+    beta: no
+  - name: multipass
+    install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
+    classic: no
+    beta: no
+  - name: zaproxy
     install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
+    classic: yes
+    beta: no
   # other
   - name: cornyjokes
+    install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
     classic: no
     beta: no
-    install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # FLATPAK
 # install_client_config.flatpak_...
 install_client_flatpak:
-  base: []
-  dev: []
+  # HELPER
+  - name: org.mozilla.firefox
+    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
+  - name: org.chromium.Chromium
+    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
+  - name: org.mozilla.Thunderbird
+    install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
+  - name: org.flameshot.Flameshot
+    install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
+  - name: org.onlyoffice.desktopeditors
+    install: "{{ install_client_config.flatpak_onlyoffice | default('no') | bool }}"
+  - name: none
+    url: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
+    install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
+  - name: org.keepassxc.KeePassXC
+    install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
+  # SOCIAL
+  - name: org.signal.Signal
+    install: "{{ install_client_config.flatpak_signal | default('no') | bool }}"
+  - name: org.telegram.desktop
+    install: "{{ install_client_config.flatpak_telegram | default('no') | bool }}"
+  - name: io.bit3.ThreemaQT
+    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
+  - name: us.zoom.Zoom
+    install: "{{ install_client_config.flatpak_zoom | default('no') | bool }}"
+  - name: com.microsoft.Teams
+    install: "{{ install_client_config.flatpak_teams | default('no') | bool }}"
+  - name: com.discordapp.Discord
+    install: "{{ install_client_config.flatpak_discord | default('no') | bool }}"
+  - name: com.spotify.Client
+    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
+  - name: com.getferdi.Ferdi
+    install: "{{ install_client_config.flatpak_ferdi | default('no') | bool }}"
+  - name: org.videolan.VLC
+    install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
+  # DESIGN
+  - name: org.inkscape.Inkscape
+    install: "{{ install_client_config.flatpak_inkscape | default('no') | bool }}"
+  - name: com.jgraph.drawio.desktop
+    install: "{{ install_client_config.flatpak_drawio | default('no') | bool }}"
+  - name: org.gimp.GIMP
+    install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
+  - name: com.obsproject.Studio
+    install: "{{ install_client_config.flatpak_studio | default('no') | bool }}"
+  - name: org.blender.Blender
+    install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
+  # DEV
+  - name: com.visualstudio.code
+    install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
+  - name: com.sublimetext.three
+    install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
+  - name: cc.arduino.arduinoide
+    install: "{{ install_client_config.flatpak_arduinoide | default('no') | bool }}"
+  - name: org.fritzing.Fritzing
+    install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
+  - name: rest.insomnia.Insomnia
+    install: "{{ install_client_config.flatpak_insomnia | default('no') | bool }}"
+  - name: com.getpostman.Postman
+    install: "{{ install_client_config.flatpak_postman | default('no') | bool }}"
+  - name: io.dbeaver.DBeaverCommunity
+    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
+  - name: org.filezillaproject.Filezilla
+    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
+  - name: org.jdownloader.JDownloader
+    install: "{{ install_client_config.flatpak_jdownloader | default('no') | bool }}"
+  # SEC
+  - name: org.wireshark.Wireshark
+    install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
+  - name: org.ghidra_sre.Ghidra
+    install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
+  - name: org.zaproxy.ZAP
+    install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
+  # OTHER
+  - name: com.valvesoftware.Steam
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: de.bund.ausweisapp.ausweisapp2
+    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
+  - name: io.github.betaflight.BetaflightConfigurator
+    install: "{{ install_client_config.flatpak_betaflightconfigurator | default('no') | bool }}"
 
 # VS-CODE ------------------------------------------------------------------------------
 # EXTENSIONS
@@ -690,15 +799,6 @@ install_client_vs_code_ext:
   - xabikos.JavaScriptSnippets
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
-
-# ------------------------------------------------------------------------------
-# FIREFOX MANUAL INSTALL
-# install_client_config.firefox_dev
-install_client_manuall:
-  firefox_dev:
-    url: "{{ install_client_links_to_check_update.firefox_dev }}"
-    base_dir: /opt
-    name: firefoxDeveloperEdition
 
 # ------------------------------------------------------------------------------
 # JAVA
