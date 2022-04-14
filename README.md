@@ -11,12 +11,15 @@ _Any pre-requisites that may not be covered by Ansible itself or the role should
 ```yml
 install_client_service_name: default-client
 install_client_config:
+  # GENERAL -------------------------------
   dev: no
   fonts: no
+  # GNOME ---------------------------------
   gnome_gui_setup: no
   gnome_gui_setup_theme: no
   gnome_gui_setup_extensions: no
   gnome_gui_setup_keybinding: no
+  # APT -----------------------------------
   apt_base: no
   apt_peek: no
   apt_wireshark: no
@@ -27,12 +30,13 @@ install_client_config:
   apt_pandoc: no
   apt_virtualbox_guest: no
   apt_virt_viewer: no
+  # DPKG ----------------------------------
   # dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
-  # dpkg_google_chrome: no
-  dpkg_getferdi: no
+  # DIST KEY ------------------------------
   distribution_key_virtualbox: no
+  # SNAP ----------------------------------
   snap_chromium: no
   snap_thunderbird: no
   snap_libreoffice: no
@@ -61,9 +65,45 @@ install_client_config:
   snap_multipass: no
   snap_zaproxy: no
   snap_cornyjokes: no
-  # flatpak: no # base(empty)|dev(empty)
+  # FLATPAK -------------------------------
+  flatpak_firefox: no
+  flatpak_chromium: no
+  flatpak_thunderbird: no
+  flatpak_flameshot: no
+  flatpak_onlyoffice: no
+  flatpak_1password: no
+  flatpak_keepassxc: no
+  flatpak_signal: no
+  flatpak_telegram: no
+  flatpak_threemaqt: no
+  flatpak_zoom: no
+  flatpak_teams: no
+  flatpak_discord: no
+  flatpak_spotify: no
+  flatpak_ferdi: no
+  flatpak_vlc: no
+  flatpak_inkscape: no
+  flatpak_drawio: no
+  flatpak_gimp: no
+  flatpak_studio: no
+  flatpak_blender: no
+  flatpak_code: no
+  flatpak_sublimetext: no
+  flatpak_arduinoide: no
+  flatpak_fritzing: no
+  flatpak_insomnia: no
+  flatpak_postman: no
+  flatpak_dbeavercommunity: no
+  flatpak_filezilla: no
+  flatpak_jdownloader: no
+  flatpak_wireshark: no
+  flatpak_ghidra: no
+  flatpak_zaproxy: no
+  flatpak_steam: no
+  flatpak_ausweisapp2: no
+  flatpak_betaflightconfigurator: no
+  # OTHER --------------------------------
   vs_code_ext: no
-  firefox_dev: no
   java: no
   steam: no
 clients:
