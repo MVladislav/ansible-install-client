@@ -15,12 +15,17 @@ install_client_config:
   dev: no
   fonts: no
   # GNOME ---------------------------------
-  gnome_gui_setup: no
+  gnome_gui_setup: no # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
   gnome_gui_setup_theme: no
+  gnome_gui_setup_dependencies: no
   gnome_gui_setup_extensions: no
   gnome_gui_setup_keybinding: no
+  gnome_gui_setup_overlay: no
   # APT -----------------------------------
   apt_base: no
+  apt_base2: no
+  apt_snap: no
+  apt_flatpak: no
   apt_peek: no
   apt_wireshark: no
   apt_wireshark_dev: no
