@@ -2,6 +2,17 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
+# CHECK IF SERVICE INSTALLED
+- name: snap - check if service installed
+  become: true
+  shell: command -v snap >/dev/null 2>&1
+  register: is_snap_exist
+  ignore_errors: yes
+  tags:
+    - install_client
+    - snap
+
+# ------------------------------------------------------------------------------
 - name: install snap services [main]
   become: true
   snap:
@@ -9,7 +20,7 @@
     classic: "{{ item.classic | bool }}"
     # beta: "{{ item.beta | bool }}"
   loop: "{{ install_client_snap|flatten(levels=1) }}"
-  when: (install_client_snap is defined) and (item.install is defined and item.install | bool)
+  when: (install_client_snap is defined) and (item.install is defined and item.install | bool) and (is_snap_exist.rc is defined and is_snap_exist.rc == 0)
   tags:
     - install_client
     - snap
