@@ -155,7 +155,7 @@ install_client_gdm_gui_setup:
     - libcanberra-gtk-module
     - libcanberra-gtk3-module
   theme:
-    install: "{{ install_client_config.gnome_gui_setup_theme | bool }}"
+    install: "{{ install_client_config.gnome_gui_setup_theme | default('no') | bool }}"
     git:
       - url: https://github.com/vinceliuice/Orchis-theme.git
         branch: master
@@ -198,7 +198,7 @@ install_client_gdm_gui_setup:
         name: Juno-icons
         path: ~/.local/share/icons/
   extensions:
-    install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
+    install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
     command: gnome-extensions enable
     apt:
       []
@@ -236,7 +236,7 @@ install_client_gdm_gui_setup:
       # - drive-menu@gnome-shell-extensions.gcampax.github.com
       # - user-theme@gnome-shell-extensions.gcampax.github.com
   keybindings:
-    install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
+    install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-launch --exit-with-session gsettings set
     configs:
       # --- ADD Flameshot ---
@@ -256,7 +256,7 @@ install_client_gdm_gui_setup:
         value: >-
           ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
   overlay:
-    setup: "{{ install_client_config.gnome_gui_setup_overlay | bool }}"
+    setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
     command: dbus-launch --exit-with-session gsettings set
     configs:
       - source: org.gnome.desktop.interface
