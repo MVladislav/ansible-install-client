@@ -512,7 +512,7 @@ install_client_apt:
 # DPKG
 # install_client_config.dpkg_...
 install_client_dpkg:
-  - url: "{{ install_client_links_to_check_update.virtualbox }}"
+  - url: "{{ install_client_links_to_check_update.virtualbox | default('no') | bool }}"
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.mongodb }}"
     install: "{{ install_client_config.dpkg_mongodb | default('no') | bool }}"
