@@ -9,7 +9,7 @@
     pkg: flatpak
     state: present
     force_apt_get: yes # apt-get instead of aptitude
-  when: (install_client_flatpak is defined)
+  when: (install_client_config is defined and install_client_config.apt_flatpak is defined and install_client_config.apt_flatpak | bool) and (install_client_flatpak is defined)
   tags:
     - install_client
     - flatpak
@@ -23,7 +23,7 @@
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     # method: user
-  when: (install_client_flatpak is defined)
+  when: (install_client_config is defined and install_client_config.apt_flatpak is defined and install_client_config.apt_flatpak | bool) and (install_client_flatpak is defined)
   tags:
     - install_client
     - flatpak
