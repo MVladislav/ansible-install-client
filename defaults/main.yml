@@ -6,7 +6,7 @@ install_client_service_name: default-client
 
 # also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
-  # virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
+  virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
   mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
 
