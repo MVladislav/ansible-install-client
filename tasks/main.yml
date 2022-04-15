@@ -4,22 +4,22 @@
 # # ------------------------------------------------------------------------------
 # # SETUP USERS
 # - name: setup users
-#   include: setup_users.yml
+#   include_tasks: setup_users.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY APT
 - name: install apt services
-  include: install_apt.yml
+  include_tasks: install_apt.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DPKG
 - name: install dpkg services
-  include: install_dpkg.yml
+  include_tasks: install_dpkg.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DISTRIBUTION KEY
 - name: install distribution services
-  include: install_extra_distribution_key.yml
+  include_tasks: install_extra_distribution_key.yml
   loop: "{{ install_client_distribution_key | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
@@ -28,30 +28,30 @@
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY SNAP
 - name: install snap services
-  include: install_snap.yml
+  include_tasks: install_snap.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY FLATPAK
 - name: install flatpak services
-  include: install_flatpak.yml
+  include_tasks: install_flatpak.yml
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES
 - name: install java packages
-  include: install_java.yml
+  include_tasks: install_java.yml
   when: install_client_config.java is defined and install_client_config.java | bool
 
 # ------------------------------------------------------------------------------
 # INSTALL EXTRAS PER USER
 - name: install fonts (per user)
-  include: install_per_user_fonts.yml
+  include_tasks: install_per_user_fonts.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
   when: install_client_config.fonts is defined and install_client_config.fonts | bool
 
 - name: install code extras (per user)
-  include: install_per_user_code_extra.yml
+  include_tasks: install_per_user_code_extra.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
@@ -60,7 +60,7 @@
 # ------------------------------------------------------------------------------
 # GNOME SETUP (FAVORITES)
 - name: setup gnome (per user)
-  include: setup_gnome.yml
+  include_tasks: setup_gnome.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
