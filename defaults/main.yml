@@ -140,8 +140,9 @@ install_client_fonts:
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
-  dependency:
+  dependency2:
     - dbus-x11
+  dependency:
     - libsass1
     - sassc
     - gettext

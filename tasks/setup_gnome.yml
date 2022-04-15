@@ -116,13 +116,27 @@
     - gnome
 
 # ------------------------------------------------------------------------------
+- name: gnome gui - install dependencies2
+  become: true
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: yes # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.dependency2|flatten(levels=1) }}"
+  when: (install_client_gdm_gui_setup is defined) and (install_client_gdm_gui_setup.dependency2 is defined) and ((install_client_gdm_gui_setup.overlay is defined and install_client_gdm_gui_setup.overlay.setup is defined and install_client_gdm_gui_setup.overlay.setup | bool) or (install_client_gdm_gui_setup.keybindings is defined and install_client_gdm_gui_setup.keybindings.install is defined and install_client_gdm_gui_setup.keybindings.install | bool) )
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
 # SETUP OVERLAY
 - name: "gnome gui - setup overlay per user: {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   command: '{{ install_client_gdm_gui_setup.overlay.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
-  when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.overlay is defined) and (install_client_gdm_gui_setup.overlay.command is defined and install_client_gdm_gui_setup.overlay.configs is defined) and (install_client_gdm_gui_setup.overlay.setup | bool)
+  when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.overlay is defined) and (install_client_gdm_gui_setup.overlay.command is defined and install_client_gdm_gui_setup.overlay.configs is defined) and (install_client_gdm_gui_setup.overlay.setup is defined and install_client_gdm_gui_setup.overlay.setup | bool)
   tags:
     - install_client
     - ubuntu
@@ -135,7 +149,7 @@
   become_user: "{{ outer_item.name }}"
   command: '{{ install_client_gdm_gui_setup.keybindings.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
-  when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.keybindings is defined) and (install_client_gdm_gui_setup.keybindings.command is defined and install_client_gdm_gui_setup.keybindings.configs is defined) and (install_client_gdm_gui_setup.keybindings.install | bool)
+  when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.keybindings is defined) and (install_client_gdm_gui_setup.keybindings.command is defined and install_client_gdm_gui_setup.keybindings.configs is defined) and (install_client_gdm_gui_setup.keybindings.install is defined and install_client_gdm_gui_setup.keybindings.install | bool)
   tags:
     - install_client
     - ubuntu
