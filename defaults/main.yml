@@ -39,7 +39,7 @@ install_client_config:
   apt_virt_viewer: no
   apt_lutris: no
   # DPKG ----------------------------------
-  # dpkg_virtualbox: no
+  dpkg_virtualbox: no
   dpkg_mongodb: no
   dpkg_veracrypt: no
   # DIST KEY ------------------------------
