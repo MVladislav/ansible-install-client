@@ -121,7 +121,7 @@
   become: true
   become_user: "{{ outer_item.name }}"
   command: '{{ install_client_gdm_gui_setup.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
-  loop: "{{ install_client_gdm_gui_setup.configs | flatten(levels=1) }}"
+  loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
   when: (install_client_gdm_gui_setup is defined and install_client_gdm_gui_setup.overlay is defined) and (install_client_gdm_gui_setup.overlay.command is defined and install_client_gdm_gui_setup.overlay.configs is defined) and (install_client_gdm_gui_setup.overlay.setup | bool)
   tags:
     - install_client
