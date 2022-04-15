@@ -381,6 +381,8 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: git
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: git-flow
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: vim
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
@@ -389,6 +391,8 @@ install_client_apt:
   - name: unrar
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: zip
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: p7zip-full
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: xz-utils
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
