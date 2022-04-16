@@ -350,7 +350,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.interface
         key: gtk-theme
         value: >-
-          Yaru-prussiangreen-dark
+          Yaru-dark
       - source: org.gnome.desktop.interface
         key: cursor-theme
         value: >-
@@ -367,6 +367,10 @@ install_client_gdm_gui_setup:
         key: theme
         value: >-
           Yaru-prussiangreen-dark
+      - source: org.gnome.Terminal.Legacy.Settings
+        key: theme-variant
+        value: >-
+          dark
 
 # gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
