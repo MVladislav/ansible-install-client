@@ -212,38 +212,40 @@ install_client_gdm_gui_setup:
       # - gnome-shell-pomodoro
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
+        branch: master
         name: gse-sound-output-device-chooser
         target: install
-        version: HEAD
       - repo: https://github.com/aunetx/blur-my-shell.git
+        branch: master
         name: blur-my-shell
         target: install
-        version: HEAD
       - repo: https://github.com/axxapy/gnome-ui-tune.git
+        branch: master
         name: gnome-ui-tune
         target: schemas
-        version: HEAD
       - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
+        branch: master
         name: gnome-shell-system-monitor-applet
         target: install
-        version: HEAD
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
+        branch: master
         name: gnome-shell-extension-caffeine
         target: all
-        version: HEAD
       - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
+        branch: master
         name: dash-to-panel
         target: install
-        version: HEAD
       - repo: https://github.com/Schneegans/Burn-My-Windows.git
+        branch: master
         name: Burn-My-Windows
         target: install
-        version: HEAD
       # - repo: https://github.com/micheleg/dash-to-dock.git
+      #   branch: master
       #   name: dash-to-dock
       #   target: install
       #   version: HEAD
       # - repo: https://github.com/phocean/TopIcons-plus.git
+      #   branch: master
       #   name: TopIcons-plus
       #   target: install
       #   version: HEAD

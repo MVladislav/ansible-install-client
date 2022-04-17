@@ -84,10 +84,10 @@
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "/tmp/{{ outer_item.name }}/{{ item.name }}"
+    version: "{{ item.branch }}"
     force: true
     update: false
     recursive: true
-    version: "{{ item.version }}"
   loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
   when: >
     (install_client_gdm_gui_setup is defined)
