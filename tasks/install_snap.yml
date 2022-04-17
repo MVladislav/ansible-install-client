@@ -5,9 +5,12 @@
 # CHECK IF SERVICE INSTALLED
 - name: snap - check if service installed
   become: true
-  shell: command -v snap >/dev/null 2>&1
+  ansible.builtin.shell: set -o pipefail && command -v snap >/dev/null 2>&1
+  args:
+    executable: /bin/bash
   register: is_snap_exist
-  ignore_errors: yes
+  changed_when: is_snap_exist.rc != 0
+  # ignore_errors: true
   tags:
     - install_client
     - snap

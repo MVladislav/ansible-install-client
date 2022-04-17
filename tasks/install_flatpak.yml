@@ -5,11 +5,15 @@
 # FLATPAK IT SELF
 - name: flatpak - install it self
   become: true
-  apt:
+  ansible.builtin.apt:
     pkg: flatpak
     state: present
-    force_apt_get: yes # apt-get instead of aptitude
-  when: (install_client_config is defined and install_client_config.apt_flatpak is defined and install_client_config.apt_flatpak | bool) and (install_client_flatpak is defined)
+    force_apt_get: true # apt-get instead of aptitude
+  when: >
+    (install_client_config is defined
+    and install_client_config.apt_flatpak is defined
+    and install_client_config.apt_flatpak | bool)
+    and (install_client_flatpak is defined)
   tags:
     - install_client
     - flatpak
@@ -23,7 +27,11 @@
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     # method: user
-  when: (install_client_config is defined and install_client_config.apt_flatpak is defined and install_client_config.apt_flatpak | bool) and (install_client_flatpak is defined)
+  when: >
+    (install_client_config is defined
+    and install_client_config.apt_flatpak is defined
+    and install_client_config.apt_flatpak | bool)
+    and (install_client_flatpak is defined)
   tags:
     - install_client
     - flatpak
@@ -32,9 +40,12 @@
 # CHECK IF SERVICE INSTALLED
 - name: flatpak - check if service installed
   become: true
-  shell: command -v flatpak >/dev/null 2>&1
+  ansible.builtin.shell: set -o pipefail && command -v flatpak >/dev/null 2>&1
+  args:
+    executable: /bin/bash
   register: is_flatpak_exist
-  ignore_errors: yes
+  changed_when: is_flatpak_exist.rc != 0
+  # ignore_errors: true
   tags:
     - install_client
     - flatpak
@@ -48,7 +59,12 @@
     remote: "{{ item.remote | default('flathub') }}"
     # method: user
   loop: "{{ install_client_flatpak|flatten(levels=1) }}"
-  when: (install_client_flatpak is defined) and (item.install is defined and item.install | bool) and (is_flatpak_exist.rc is defined and is_flatpak_exist.rc == 0)
+  when: >
+    (install_client_flatpak is defined)
+    and (item.install is defined
+    and item.install | bool)
+    and (is_flatpak_exist.rc is defined
+    and is_flatpak_exist.rc == 0)
   tags:
     - install_client
     - flatpak

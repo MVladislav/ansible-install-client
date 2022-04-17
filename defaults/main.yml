@@ -14,105 +14,105 @@ install_client_links_to_check_update:
 # WHAT TO INSTALL
 install_client_config:
   # GENERAL -------------------------------
-  dev: no
-  fonts: no
+  dev: false
+  fonts: false
   # GNOME ---------------------------------
-  gnome_gui_setup: no # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-  gnome_gui_setup_theme: no
-  gnome_gui_setup_dependencies: no
-  gnome_gui_setup_extensions: no
-  gnome_gui_setup_keybinding: no
-  gnome_gui_setup_overlay: no
+  gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
+  gnome_gui_setup_theme: false
+  gnome_gui_setup_dependencies: false
+  gnome_gui_setup_extensions: false
+  gnome_gui_setup_keybinding: false
+  gnome_gui_setup_overlay: false
   # APT -----------------------------------
-  apt_base: no
-  apt_base2: no
-  apt_snap: no
-  apt_flatpak: no
-  apt_peek: no
-  apt_wireshark: no
-  apt_wireshark_dev: no
-  apt_vpn: no
-  apt_gnome_boxes: no
-  apt_latex: no
-  apt_pandoc: no
-  apt_virt_viewer: no
-  apt_lutris: no
+  apt_base: false
+  apt_base2: false
+  apt_snap: false
+  apt_flatpak: false
+  apt_peek: false
+  apt_wireshark: false
+  apt_wireshark_dev: false
+  apt_vpn: false
+  apt_gnome_boxes: false
+  apt_latex: false
+  apt_pandoc: false
+  apt_virt_viewer: false
+  apt_lutris: false
   # DPKG ----------------------------------
-  dpkg_virtualbox: no
-  dpkg_mongodb: no
-  dpkg_veracrypt: no
+  dpkg_virtualbox: false
+  dpkg_mongodb: false
+  dpkg_veracrypt: false
   # DIST KEY ------------------------------
-  distribution_key_virtualbox: no
+  distribution_key_virtualbox: false
   # SNAP ----------------------------------
-  snap_chromium: no
-  snap_thunderbird: no
-  snap_libreoffice: no
-  snap_onlyoffice_desktopeditors: no
-  snap_signal_desktop: no
-  snap_telegram_desktop: no
-  snap_zoom_client: no
-  snap_spotify: no
-  snap_inkscape: no
-  snap_drawio: no
-  snap_gimp: no
-  snap_vlc: no
-  snap_obs_studio: no
-  snap_flameshot: no
-  snap_1password: no
-  snap_okular: no
-  snap_code: no
-  snap_android_studio: no
-  snap_UBports: no
-  snap_insomnia: no
-  snap_postman: no
-  snap_dbeaver_ce: no
-  snap_beekeeper_studio: no
-  snap_microk8s: no
-  snap_rpi_imager: no
-  snap_multipass: no
-  snap_zaproxy: no
-  snap_cornyjokes: no
+  snap_chromium: false
+  snap_thunderbird: false
+  snap_libreoffice: false
+  snap_onlyoffice_desktopeditors: false
+  snap_signal_desktop: false
+  snap_telegram_desktop: false
+  snap_zoom_client: false
+  snap_spotify: false
+  snap_inkscape: false
+  snap_drawio: false
+  snap_gimp: false
+  snap_vlc: false
+  snap_obs_studio: false
+  snap_flameshot: false
+  snap_1password: false
+  snap_okular: false
+  snap_code: false
+  snap_android_studio: false
+  snap_UBports: false
+  snap_insomnia: false
+  snap_postman: false
+  snap_dbeaver_ce: false
+  snap_beekeeper_studio: false
+  snap_microk8s: false
+  snap_rpi_imager: false
+  snap_multipass: false
+  snap_zaproxy: false
+  snap_cornyjokes: false
   # FLATPAK -------------------------------
-  flatpak_firefox: no
-  flatpak_chromium: no
-  flatpak_thunderbird: no
-  flatpak_flameshot: no
-  flatpak_onlyoffice: no
-  flatpak_1password: no
-  flatpak_keepassxc: no
-  flatpak_signal: no
-  flatpak_telegram: no
-  flatpak_threemaqt: no
-  flatpak_zoom: no
-  flatpak_teams: no
-  flatpak_discord: no
-  flatpak_spotify: no
-  flatpak_ferdi: no
-  flatpak_vlc: no
-  flatpak_inkscape: no
-  flatpak_drawio: no
-  flatpak_gimp: no
-  flatpak_studio: no
-  flatpak_blender: no
-  flatpak_code: no
-  flatpak_sublimetext: no
-  flatpak_arduinoide: no
-  flatpak_fritzing: no
-  flatpak_insomnia: no
-  flatpak_postman: no
-  flatpak_dbeavercommunity: no
-  flatpak_filezilla: no
-  flatpak_jdownloader: no
-  flatpak_wireshark: no
-  flatpak_ghidra: no
-  flatpak_zaproxy: no
-  flatpak_steam: no
-  flatpak_ausweisapp2: no
-  flatpak_betaflightconfigurator: no
+  flatpak_firefox: false
+  flatpak_chromium: false
+  flatpak_thunderbird: false
+  flatpak_flameshot: false
+  flatpak_onlyoffice: false
+  flatpak_1password: false
+  flatpak_keepassxc: false
+  flatpak_signal: false
+  flatpak_telegram: false
+  flatpak_threemaqt: false
+  flatpak_zoom: false
+  flatpak_teams: false
+  flatpak_discord: false
+  flatpak_spotify: false
+  flatpak_ferdi: false
+  flatpak_vlc: false
+  flatpak_inkscape: false
+  flatpak_drawio: false
+  flatpak_gimp: false
+  flatpak_studio: false
+  flatpak_blender: false
+  flatpak_code: false
+  flatpak_sublimetext: false
+  flatpak_arduinoide: false
+  flatpak_fritzing: false
+  flatpak_insomnia: false
+  flatpak_postman: false
+  flatpak_dbeavercommunity: false
+  flatpak_filezilla: false
+  flatpak_jdownloader: false
+  flatpak_wireshark: false
+  flatpak_ghidra: false
+  flatpak_zaproxy: false
+  flatpak_steam: false
+  flatpak_ausweisapp2: false
+  flatpak_betaflightconfigurator: false
   # OTHER --------------------------------
-  vs_code_ext: no
-  java: no
-  steam: no
+  vs_code_ext: false
+  java: false
+  steam: false
 
 # ------------------------------------------------------------------------------
 # CLIENTS for adding specific packages (ex. ...)
@@ -121,10 +121,10 @@ clients: []
 # - name: "{{ ansible_user }}"
 #   shell: /bin/bash
 #   group: adm,cdrom,sudo
-#   createhome: yes
-#   isDev: yes
+#   createhome: true
+#   isDev: true
 #   password: "..."
-#   updateOrCreate: yes
+#   updateOrCreate: true
 
 # ------------------------------------------------------------------------------
 # FONTS
@@ -213,27 +213,35 @@ install_client_gdm_gui_setup:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
         name: gse-sound-output-device-chooser
         target: install
+        version: HEAD
       - repo: https://github.com/aunetx/blur-my-shell.git
         name: blur-my-shell
         target: install
+        version: HEAD
       - repo: https://github.com/axxapy/gnome-ui-tune.git
         name: gnome-ui-tune
         target: schemas
+        version: HEAD
       - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
         name: gnome-shell-system-monitor-applet
         target: install
+        version: HEAD
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
         name: gnome-shell-extension-caffeine
         target: all
+        version: HEAD
       - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
         name: dash-to-panel
         target: install
+        version: HEAD
       # - repo: https://github.com/micheleg/dash-to-dock.git
       #   name: dash-to-dock
       #   target: install
+      #   version: HEAD
       # - repo: https://github.com/phocean/TopIcons-plus.git
       #   name: TopIcons-plus
       #   target: install
+      #   version: HEAD
     activate:
       - caffeine@patapon.info
       - sound-output-device-chooser@kgshank.net
@@ -442,11 +450,11 @@ install_client_apt:
     install: "{{ install_client_config.apt_peek | default('no') | bool }}"
   # --------------------------------
   # - name: laptop-mode-tools
-  #   install: no
+  #   install: false
   # - name: wine
-  #   install: no
+  #   install: false
   # - name: winetricks
-  #   install: no
+  #   install: false
   # --------------------------------
   - name: wireshark
     install: "{{ install_client_config.apt_wireshark | default('no') | bool }}"
@@ -479,7 +487,7 @@ install_client_apt:
     install: "{{ install_client_config.apt_gnome_boxes | default('no') | bool }}"
   # --------------------------------
   - name: texlive-science
-    install: no
+    install: false
   - name: texlive-full
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: texlive-lang-german
@@ -552,119 +560,119 @@ install_client_distribution_key:
 install_client_snap:
   - name: signal-desktop
     install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: telegram-desktop
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: zoom-client
     install: "{{ install_client_config.snap_zoom_client | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: spotify
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: chromium
     install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: thunderbird
     install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: libreoffice
     install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: onlyoffice-desktopeditors
     install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: inkscape
     install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: drawio
     install: "{{ install_client_config.snap_drawio | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: gimp
     install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: vlc
     install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: obs-studio
     install: "{{ install_client_config.snap_obs_studio | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: flameshot
     install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: 1password
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: okular
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   # dev
   - name: code
     install: "{{ install_client_config.snap_code | default('no') | bool }}"
-    classic: yes
-    beta: no
+    classic: true
+    beta: false
   - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
-    classic: yes
-    beta: no
+    classic: true
+    beta: false
   - name: ubports-installer
     install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: insomnia
     install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: postman
     install: "{{ install_client_config.snap_postman | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: dbeaver-ce
     install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: beekeeper-studio
     install: "{{ install_client_config.snap_beekeeper_studio | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   # other
   - name: microk8s
     install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
-    classic: yes
-    beta: no
+    classic: true
+    beta: false
   - name: rpi-imager
     install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: multipass
     install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
   - name: zaproxy
     install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
-    classic: yes
-    beta: no
+    classic: true
+    beta: false
   # other
   - name: cornyjokes
     install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
-    classic: no
-    beta: no
+    classic: false
+    beta: false
 
 # ------------------------------------------------------------------------------
 # FLATPAK

@@ -4,12 +4,9 @@
 # ------------------------------------------------------------------------------
 - name: add apt signing key (trusted.gpg.d) (curl command for now)
   become: true
-  # apt_key:
-  #   id: "{{ item.id }}"
-  #   url: "{{ item.url }}"
-  #   keyring: "/etc/apt/trusted.gpg.d/{{ item.name }}"
-  #   state: present
-  shell: curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
+  ansible.builtin.shell: set -o pipefail && curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
+  args:
+    executable: /bin/bash
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
@@ -18,7 +15,7 @@
 
 # ------------------------------------------------------------------------------
 - name: get OS distribution
-  command: lsb_release -sc
+  ansible.builtin.command: lsb_release -sc
   register: os_distribution
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
@@ -26,7 +23,7 @@
     - distribution_key
 
 - name: get OS architecture
-  shell: dpkg --print-architecture
+  ansible.builtin.command: dpkg --print-architecture
   register: os_architecture
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
@@ -35,10 +32,10 @@
 
 - name: add repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ outer_item.distribution|default(os_distribution.stdout) }} {{ outer_item.version }}"
     state: present
-  ignore_errors: yes
+  # ignore_errors: yes
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
     - install_client
@@ -47,12 +44,12 @@
 # ------------------------------------------------------------------------------
 - name: install apt services
   become: true
-  apt:
+  ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-    force_apt_get: yes # apt-get instead of aptitude
+    force_apt_get: true # apt-get instead of aptitude
   loop: "{{ outer_item.apt|flatten(levels=1) }}"
-  ignore_errors: yes
+  # ignore_errors: yes
   when: (outer_item.install is defined and outer_item.install | bool)
   tags:
     - install_client

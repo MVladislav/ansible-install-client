@@ -5,9 +5,12 @@
 - name: "check if vs code is installed (for user: {{ outer_item.name }})"
   become: true
   become_user: "{{ outer_item.name }}"
-  shell: command -v code >/dev/null 2>&1
+  ansible.builtin.shell: set -o pipefail && command -v code >/dev/null 2>&1
+  args:
+    executable: /bin/bash
   register: is_code_exist
-  ignore_errors: yes
+  changed_when: is_code_exist.rc != 0
+  # ignore_errors: true
   tags:
     - install_client
     - vs_code
@@ -18,10 +21,10 @@
   become: true
   become_user: "{{ outer_item.name }}"
   # command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
-  command: "code --install-extension {{ item }}"
+  ansible.builtin.command: "code --install-extension {{ item }}"
   loop: "{{ install_client_vs_code_ext|flatten(levels=1) }}"
   when: install_client_vs_code_ext is defined and (is_code_exist.rc is defined and is_code_exist.rc == 0)
-  ignore_errors: yes
+  # ignore_errors: true
   tags:
     - install_client
     - vs_code
@@ -30,7 +33,7 @@
 - name: "copy template for vs-code settings.json (for user: {{ outer_item.name }})"
   become: true
   become_user: "{{ outer_item.name }}"
-  template:
+  ansible.builtin.template:
     src: vs-settings.json.j2
     dest: "~/.config/Code/User/settings.json"
     mode: "0664"
@@ -42,7 +45,7 @@
 - name: "copy template for vs-code keybindings.json (for user: {{ outer_item.name }})"
   become: true
   become_user: "{{ outer_item.name }}"
-  template:
+  ansible.builtin.template:
     src: vs-keybindings.json.j2
     dest: "~/.config/Code/User/keybindings.json"
     mode: "0664"

@@ -20,7 +20,7 @@
   ansible.builtin.unarchive:
     src: "{{ item }}"
     dest: "{{ install_client_fonts.path }}"
-    remote_src: yes
+    remote_src: true
   loop: "{{ install_client_fonts.url | flatten(levels=1) }}"
   tags:
     - install_client
