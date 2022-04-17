@@ -52,6 +52,7 @@ install_client_config:
   snap_inkscape: no
   snap_drawio: no
   snap_gimp: no
+  snap_darktable: false
   snap_vlc: no
   snap_obs_studio: no
   snap_flameshot: no

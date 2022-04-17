@@ -55,6 +55,7 @@ install_client_config:
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
+  snap_darktable: false
   snap_vlc: false
   snap_obs_studio: false
   snap_flameshot: false
@@ -604,6 +605,10 @@ install_client_snap:
     beta: false
   - name: gimp
     install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: darktable
+    install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
     classic: false
     beta: false
   - name: vlc
