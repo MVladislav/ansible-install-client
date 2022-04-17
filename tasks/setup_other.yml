@@ -1,0 +1,26 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: "setup other - disable audio auto switch in pulseaudio"
+  become: true
+  ansible.builtin.replace:
+    path: /etc/pulse/default.pa
+    regexp: "load-module module-switch-on-port-available"
+    replace: "# load-module module-switch-on-port-available"
+  tags:
+    - install_client
+    - other
+    - audio
+    - pulseaudio
+
+- name: "setup other - restart pulseaudio"
+  become: true
+  ansible.builtin.command: "pulseaudio -k"
+  register: restart_pulseaudio
+  changed_when: restart_pulseaudio.rc != 0
+  tags:
+    - install_client
+    - other
+    - audio
+    - pulseaudio

@@ -65,3 +65,8 @@
   loop_control:
     loop_var: outer_item
   when: install_client_config.gnome_gui_setup is defined and install_client_config.gnome_gui_setup | bool
+
+# ------------------------------------------------------------------------------
+# OTHER SETUPS
+- name: setup other settings
+  include_tasks: setup_other.yml
