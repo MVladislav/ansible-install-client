@@ -140,15 +140,19 @@ install_client_fonts:
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
   dependency2:
+    # for gsettings in terminal run
     - dbus-x11
-  dependency:
-    - libsass1
-    - sassc
+    # https://github.com/home-sweet-gnome/dash-to-panel.git
     - gettext
+    # https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
     - gir1.2-gtop-2.0
     - gir1.2-nm-1.0
     - gir1.2-clutter-1.0
     - gnome-system-monitor
+  dependency:
+    - libsass1
+    - sassc
+    - gettext
     # - nvidia-smi
     - lm-sensors
     # - bluez
@@ -221,6 +225,9 @@ install_client_gdm_gui_setup:
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
         name: gnome-shell-extension-caffeine
         target: all
+      - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
+        name: dash-to-panel
+        target: install
       # - repo: https://github.com/micheleg/dash-to-dock.git
       #   name: dash-to-dock
       #   target: install
