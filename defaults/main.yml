@@ -234,6 +234,10 @@ install_client_gdm_gui_setup:
         name: dash-to-panel
         target: install
         version: HEAD
+      - repo: https://github.com/Schneegans/Burn-My-Windows.git
+        name: Burn-My-Windows
+        target: install
+        version: HEAD
       # - repo: https://github.com/micheleg/dash-to-dock.git
       #   name: dash-to-dock
       #   target: install
