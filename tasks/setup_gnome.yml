@@ -139,10 +139,25 @@
 
 # ------------------------------------------------------------------------------
 # RESTART
-- name: "gnome gui - let gnome-shell restart [killall]"
+# - name: "gnome gui - let gnome-shell restart [killall]"
+#   become: true
+#   ansible.builtin.command: "killall -SIGQUIT gnome-shell && sleep 10"
+#   # ignore_errors: true
+#   when: >
+#     (install_client_gdm_gui_setup is defined)
+#     and (install_client_gdm_gui_setup.extensions is defined
+#     and install_client_gdm_gui_setup.extensions.command is defined)
+#     and (install_client_gdm_gui_setup.extensions.install | bool)
+#   tags:
+#     - install_client
+#     - ubuntu
+#     - gnome
+
+- name: "gnome gui - restart gdm3 for gui refresh"
   become: true
-  ansible.builtin.command: "killall -SIGQUIT gnome-shell && sleep 10"
-  # ignore_errors: true
+  ansible.builtin.service:
+    name: gdm3
+    state: restarted
   when: >
     (install_client_gdm_gui_setup is defined)
     and (install_client_gdm_gui_setup.extensions is defined
@@ -211,10 +226,25 @@
 
 # ------------------------------------------------------------------------------
 # RESTART
-- name: "gnome gui -  let gnome-shell restart [killall]"
+# - name: "gnome gui -  let gnome-shell restart [killall]"
+#   become: true
+#   ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
+#   # ignore_errors: true
+#   when: >
+#     (install_client_gdm_gui_setup is defined)
+#     and (install_client_gdm_gui_setup.overlay is defined
+#     and install_client_gdm_gui_setup.overlay.configs is defined)
+#     and (install_client_gdm_gui_setup.overlay.setup | bool)
+#   tags:
+#     - install_client
+#     - ubuntu
+#     - gnome
+
+- name: "gnome gui - restart gdm3 for gui refresh"
   become: true
-  ansible.builtin.shell: "killall -SIGQUIT gnome-shell && sleep 10"
-  # ignore_errors: true
+  ansible.builtin.service:
+    name: gdm3
+    state: restarted
   when: >
     (install_client_gdm_gui_setup is defined)
     and (install_client_gdm_gui_setup.overlay is defined
