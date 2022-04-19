@@ -19,34 +19,6 @@
     - flatpak
 
 # ------------------------------------------------------------------------------
-# REMOTE ADD
-- name: flatpak - add remote flathub
-  become: true
-  community.general.flatpak_remote:
-    name: "{{ item.name }}"
-    state: present
-    flatpakrepo_url: "{{ item.url }}"
-    method: "{{ item.method }}"
-  loop:
-    - name: flathub
-      install: true
-      url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      method: system
-    - name: flathub-beta
-      install: true
-      url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-      method: system
-  when: >
-    (item.install is defined and item.install | bool)
-    and (install_client_config is defined
-    and install_client_config.apt_flatpak is defined
-    and install_client_config.apt_flatpak | bool)
-    and (install_client_flatpak is defined)
-  tags:
-    - install_client
-    - flatpak
-
-# ------------------------------------------------------------------------------
 # CHECK IF SERVICE INSTALLED
 - name: flatpak - check if service installed
   become: true
@@ -56,19 +28,48 @@
     executable: /bin/bash
   register: is_flatpak_exist
   changed_when: is_flatpak_exist.rc != 0
-  # ignore_errors: true
+  tags:
+    - install_client
+    - flatpak
+
+# ------------------------------------------------------------------------------
+# REMOTE ADD
+- name: flatpak - add remote flathub
+  become: true
+  become_user: "{{ outer_item.name }}"
+  community.general.flatpak_remote:
+    name: "{{ item.name }}"
+    state: present
+    flatpakrepo_url: "{{ item.url }}"
+    method: "{{ item.method }}"
+  loop:
+    - name: flathub
+      install: true
+      url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      method: user
+    - name: flathub-beta
+      install: true
+      url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+      method: user
+  register: is_flatpak_remote_added
+  when: >
+    (item.install is defined and item.install | bool)
+    and (install_client_flatpak is defined)
+    and (is_flatpak_exist.rc is defined
+    and is_flatpak_exist.rc == 0)
   tags:
     - install_client
     - flatpak
 
 # ------------------------------------------------------------------------------
 # INSTALL
-- name: flatpak - install services
+- name: "flatpak - install services [{{ outer_item.name }}]"
   become: true
   become_user: "{{ outer_item.name }}"
   community.general.flatpak:
     name: "{{ item.name }}"
     remote: "{{ item.remote | default('flathub') }}"
+    state: present
     method: user
   loop: "{{ install_client_flatpak|flatten(levels=1) }}"
   when: >
