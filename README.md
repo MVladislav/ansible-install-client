@@ -110,7 +110,6 @@ install_client_config:
   # OTHER --------------------------------
   vs_code_ext: no
   java: no
-  steam: no
 clients:
   - name: "{{ ansible_user }}"
     dev: yes

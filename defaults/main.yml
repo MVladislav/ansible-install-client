@@ -74,6 +74,8 @@ install_client_config:
   snap_zaproxy: false
   snap_cornyjokes: false
   # FLATPAK -------------------------------
+  flatpak_users:
+    - "{{ ansible_user }}"
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
@@ -113,7 +115,6 @@ install_client_config:
   # OTHER --------------------------------
   vs_code_ext: false
   java: false
-  steam: false
 
 # ------------------------------------------------------------------------------
 # CLIENTS for adding specific packages (ex. ...)
@@ -896,30 +897,3 @@ install_client_java:
   os_env:
     - variable: JAVA_HOME
       path: "/usr/lib/jvm/java-{{ install_client_java_version }}-openjdk-amd64"
-
-# ------------------------------------------------------------------------------
-# STEAM
-# install_client_config.steam
-install_client_steam:
-  dependency:
-    - nvidia-settings
-    - libnvidia-gl-440:i386
-    - libxtst6:i836
-    - libxtst6:i386
-    - libXtst6:i386
-    - libxtst6:i386
-    - libxtst6
-    - libxrandr2:i386
-    - libxrender1:i386
-    - libglib2.0-0:i386
-    - libpulse0:i386
-    - libva2:i386
-    - libvdpau1:i386
-    - libbz2-1.0:i386
-    - libgdk-pixbuf2.0-0:i386
-    - libva-x11-2:i386
-    - libgtk2.0-0:i386
-    - gdebi-core
-    - libgl1-mesa-glx:i386
-  apt:
-    - steam

@@ -23,12 +23,22 @@
 - name: flatpak - add remote flathub
   become: true
   community.general.flatpak_remote:
-    name: flathub
+    name: "{{ item.name }}"
     state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    # method: user
+    flatpakrepo_url: "{{ item.url }}"
+    method: "{{ item.method }}"
+  loop:
+    - name: flathub
+      install: true
+      url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      method: system
+    - name: flathub-beta
+      install: true
+      url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+      method: system
   when: >
-    (install_client_config is defined
+    (item.install is defined and item.install | bool)
+    and (install_client_config is defined
     and install_client_config.apt_flatpak is defined
     and install_client_config.apt_flatpak | bool)
     and (install_client_flatpak is defined)
@@ -40,6 +50,7 @@
 # CHECK IF SERVICE INSTALLED
 - name: flatpak - check if service installed
   become: true
+  become_user: "{{ outer_item }}"
   ansible.builtin.shell: set -o pipefail && command -v flatpak >/dev/null 2>&1
   args:
     executable: /bin/bash
@@ -54,10 +65,11 @@
 # INSTALL
 - name: flatpak - install services
   become: true
+  become_user: "{{ outer_item }}"
   community.general.flatpak:
     name: "{{ item.name }}"
     remote: "{{ item.remote | default('flathub') }}"
-    # method: user
+    method: user
   loop: "{{ install_client_flatpak|flatten(levels=1) }}"
   when: >
     (install_client_flatpak is defined)

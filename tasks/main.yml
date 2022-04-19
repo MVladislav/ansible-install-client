@@ -32,8 +32,12 @@
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY FLATPAK
-- name: install flatpak services
+- name: install flatpak services per user
   include_tasks: install_flatpak.yml
+  loop: "{{ flatpak_users | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when: flatpak_users is defined
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES
