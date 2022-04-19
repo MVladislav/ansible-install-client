@@ -50,7 +50,7 @@
 # CHECK IF SERVICE INSTALLED
 - name: flatpak - check if service installed
   become: true
-  become_user: "{{ outer_item }}"
+  become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: set -o pipefail && command -v flatpak >/dev/null 2>&1
   args:
     executable: /bin/bash
@@ -65,7 +65,7 @@
 # INSTALL
 - name: flatpak - install services
   become: true
-  become_user: "{{ outer_item }}"
+  become_user: "{{ outer_item.name }}"
   community.general.flatpak:
     name: "{{ item.name }}"
     remote: "{{ item.remote | default('flathub') }}"
