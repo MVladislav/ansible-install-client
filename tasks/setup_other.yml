@@ -19,8 +19,8 @@
   become: true
   ansible.builtin.replace:
     path: /etc/pulse/default.pa
-    regexp: "load-module module-switch-on-connect "
-    replace: "# load-module module-switch-on-connect "
+    regexp: "load-module module-switch-on-connect"
+    replace: "# load-module module-switch-on-connect"
   register: change_pulseaudio
   tags:
     - install_client
@@ -48,8 +48,8 @@
   become: true
   ansible.builtin.replace:
     path: /var/lib/NetworkManager/NetworkManager-intern.conf
-    regexp: ".set.enabled=true"
-    replace: "# .set.enabled=false"
+    regexp: '\.set\.enabled=true'
+    replace: "#.set.enabled=false"
   register: change_connectivity_checking
   tags:
     - install_client
