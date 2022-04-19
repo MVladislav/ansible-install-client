@@ -37,7 +37,7 @@
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: flatpak_users is defined
+  when: clients is defined and install_client_flatpak is defined
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES
