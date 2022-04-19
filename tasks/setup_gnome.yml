@@ -21,6 +21,27 @@
     - gnome
 
 # ------------------------------------------------------------------------------
+- name: gnome gui - install dependencies2
+  become: true
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: true # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.dependency2|flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.dependency2 is defined)
+    and ((install_client_gdm_gui_setup.overlay is defined
+    and install_client_gdm_gui_setup.overlay.setup is defined
+    and install_client_gdm_gui_setup.overlay.setup | bool) or (install_client_gdm_gui_setup.keybindings is defined
+    and install_client_gdm_gui_setup.keybindings.install is defined
+    and install_client_gdm_gui_setup.keybindings.install | bool) )
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
 # THEME
 - name: "gnome gui - theme git clone per user: {{ outer_item.name }}"
   become: true
@@ -145,27 +166,6 @@
     and (install_client_gdm_gui_setup.extensions is defined
     and install_client_gdm_gui_setup.extensions.command is defined)
     and (install_client_gdm_gui_setup.extensions.install | bool)
-  tags:
-    - install_client
-    - ubuntu
-    - gnome
-
-# ------------------------------------------------------------------------------
-- name: gnome gui - install dependencies2
-  become: true
-  ansible.builtin.apt:
-    pkg: "{{ item }}"
-    state: present
-    force_apt_get: true # apt-get instead of aptitude
-  loop: "{{ install_client_gdm_gui_setup.dependency2|flatten(levels=1) }}"
-  when: >
-    (install_client_gdm_gui_setup is defined)
-    and (install_client_gdm_gui_setup.dependency2 is defined)
-    and ((install_client_gdm_gui_setup.overlay is defined
-    and install_client_gdm_gui_setup.overlay.setup is defined
-    and install_client_gdm_gui_setup.overlay.setup | bool) or (install_client_gdm_gui_setup.keybindings is defined
-    and install_client_gdm_gui_setup.keybindings.install is defined
-    and install_client_gdm_gui_setup.keybindings.install | bool) )
   tags:
     - install_client
     - ubuntu
