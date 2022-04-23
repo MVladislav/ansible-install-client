@@ -32,14 +32,14 @@
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY FLATPAK
-- name: install flatpak services (per user)
+- name: install flatpak services
   include_tasks: install_flatpak.yml
-  loop: "{{ clients | flatten(levels=1) }}"
-  loop_control:
-    loop_var: outer_item
-  when: >
-    clients is defined and install_client_flatpak is defined
-    and (outer_item.setup is not defined or outer_item.setup | bool)
+  # loop: "{{ clients | flatten(levels=1) }}"
+  # loop_control:
+  #   loop_var: outer_item
+  # when: >
+  #   clients is defined and install_client_flatpak is defined
+  #   and (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES

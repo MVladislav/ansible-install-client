@@ -257,7 +257,7 @@ install_client_gdm_gui_setup:
     activate:
       - caffeine@patapon.info
       - sound-output-device-chooser@kgshank.net
-      - system-monitor@paradoxxx.zero.gmail.com
+      # - system-monitor@paradoxxx.zero.gmail.com
       - blur-my-shell@aunetx
       # - TopIcons@phocean.net
       # - drive-menu@gnome-shell-extensions.gcampax.github.com
