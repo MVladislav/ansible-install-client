@@ -79,6 +79,7 @@ install_client_config:
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
+  flatpak_extension_manager: false
   flatpak_flameshot: false
   flatpak_onlyoffice: false
   flatpak_1password: false
@@ -703,6 +704,9 @@ install_client_flatpak:
   - name: org.mozilla.Thunderbird
     remote: flathub
     install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
+  - name: flathub com.mattjakeman.ExtensionManager
+    remote: flathub
+    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
   - name: org.flameshot.Flameshot
     remote: flathub
     install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"

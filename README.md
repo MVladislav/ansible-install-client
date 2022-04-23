@@ -74,6 +74,7 @@ install_client_config:
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
+  flatpak_extension_manager: false
   flatpak_flameshot: false
   flatpak_onlyoffice: false
   flatpak_1password: false
