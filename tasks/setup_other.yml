@@ -6,7 +6,7 @@
   become: true
   ansible.builtin.replace:
     path: /etc/pulse/default.pa
-    regexp: "load-module module-switch-on-port-available"
+    regexp: "^load-module module-switch-on-port-available"
     replace: "# load-module module-switch-on-port-available"
   register: change_pulseaudio
   tags:
@@ -19,7 +19,7 @@
   become: true
   ansible.builtin.replace:
     path: /etc/pulse/default.pa
-    regexp: "load-module module-switch-on-connect"
+    regexp: "^load-module module-switch-on-connect"
     replace: "# load-module module-switch-on-connect"
   register: change_pulseaudio
   tags:
@@ -31,8 +31,9 @@
 - name: "setup other - restart pulseaudio"
   become: true
   ansible.builtin.command: "pulseaudio -k"
-  # register: restart_pulseaudio
-  # changed_when: restart_pulseaudio.rc != 0
+  register: restart_pulseaudio
+  changed_when: restart_pulseaudio.rc != 0
+  failed_when: restart_pulseaudio.rc == 2
   when: >
     change_pulseaudio is defined
     and change_pulseaudio.changed is defined
@@ -46,10 +47,26 @@
 # ------------------------------------------------------------------------------
 - name: "setup other - change Connectivity Checking to off"
   become: true
-  ansible.builtin.replace:
+  ansible.builtin.lineinfile:
     path: /var/lib/NetworkManager/NetworkManager-intern.conf
-    regexp: '\.set\.enabled=true'
-    replace: "#.set.enabled=false"
+    regexp: '^\[connectivity\]'
+    line: "[connectivity]"
+    insertbefore: '^\.set\.enabled='
+    state: present
+  register: change_connectivity_checking
+  tags:
+    - install_client
+    - other
+    - connectivity_checking
+
+- name: "setup other - change Connectivity Checking to off"
+  become: true
+  ansible.builtin.lineinfile:
+    path: /var/lib/NetworkManager/NetworkManager-intern.conf
+    regexp: '^\.set\.enabled='
+    line: ".set.enabled=false"
+    insertafter: '^\[connectivity\]'
+    state: present
   register: change_connectivity_checking
   tags:
     - install_client

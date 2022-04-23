@@ -152,6 +152,8 @@ install_client_gdm_gui_setup:
     - gir1.2-nm-1.0
     - gir1.2-clutter-1.0
     - gnome-system-monitor
+    # https://github.com/Schneegans/Burn-My-Windows.git
+    - libglib2.0-dev
   dependency:
     - libsass1
     - sassc

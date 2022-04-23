@@ -28,6 +28,7 @@
     executable: /bin/bash
   register: is_flatpak_exist
   changed_when: is_flatpak_exist.rc != 0
+  failed_when: is_flatpak_exist.rc == 2
   tags:
     - install_client
     - flatpak
