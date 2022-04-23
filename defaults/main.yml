@@ -704,7 +704,7 @@ install_client_flatpak:
   - name: org.mozilla.Thunderbird
     remote: flathub
     install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
-  - name: flathub com.mattjakeman.ExtensionManager
+  - name: com.mattjakeman.ExtensionManager
     remote: flathub
     install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
   - name: org.flameshot.Flameshot
