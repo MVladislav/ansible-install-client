@@ -209,7 +209,7 @@ install_client_gdm_gui_setup:
         path: ~/.local/share/icons/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
-    command: gnome-extensions enable
+    command: dbus-launch --exit-with-session gnome-extensions enable
     apt:
       []
       # - gnome-shell-extensions
