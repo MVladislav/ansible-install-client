@@ -32,12 +32,14 @@
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY FLATPAK
-- name: install flatpak services per user
+- name: install flatpak services (per user)
   include_tasks: install_flatpak.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: clients is defined and install_client_flatpak is defined
+  when: >
+    clients is defined and install_client_flatpak is defined
+    and (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES
@@ -52,14 +54,18 @@
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: install_client_config.fonts is defined and install_client_config.fonts | bool
+  when: >
+    install_client_config.fonts is defined and install_client_config.fonts | bool
+    and (outer_item.setup is not defined or outer_item.setup | bool)
 
 - name: install code extras (per user)
   include_tasks: install_per_user_code_extra.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: install_client_config.vs_code_ext is defined and install_client_config.vs_code_ext | bool
+  when: >
+    install_client_config.vs_code_ext is defined and install_client_config.vs_code_ext | bool
+    and (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # GNOME SETUP (FAVORITES)
@@ -68,7 +74,9 @@
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: install_client_config.gnome_gui_setup is defined and install_client_config.gnome_gui_setup | bool
+  when: >
+    install_client_config.gnome_gui_setup is defined and install_client_config.gnome_gui_setup | bool
+    and (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # OTHER SETUPS
