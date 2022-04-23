@@ -2,7 +2,7 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "create a directory for fonts"
+- name: "fonts - create a directory for fonts [{{ outer_item.name }}]"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.file:
@@ -14,7 +14,7 @@
     - fonts
 
 # ------------------------------------------------------------------------------
-- name: "download and unarchive fonts"
+- name: "fonts - download and unarchive fonts [{{ outer_item.name }}]"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.unarchive:
