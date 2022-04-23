@@ -1,15 +1,15 @@
----
-# tasks file for install_client
+# ---
+# # tasks file for install_client
 
-# ------------------------------------------------------------------------------
-#- name: delete user accounts
-#  become: true
-#  user:
-#    name: "{{ item.name }}"
-#    state: absent
-#    remove: yes
-#    force: yes
-#  loop: "{{ clients |flatten(levels=1) }}"
+# # ------------------------------------------------------------------------------
+# - name: delete user accounts
+#   become: true
+#   user:
+#     name: "{{ item.name }}"
+#     state: absent
+#     remove: yes
+#     force: yes
+#   loop: "{{ clients |flatten(levels=1) }}"
 
 # # ------------------------------------------------------------------------------
 # - name: update user accounts
