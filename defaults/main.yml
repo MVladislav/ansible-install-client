@@ -803,22 +803,29 @@ install_client_flatpak:
   - name: org.zaproxy.ZAP
     remote: flathub
     install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
-  # OTHER
+  # GAME
   - name: com.valvesoftware.Steam
     remote: flathub
     install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
   - name: net.lutris.Lutris//beta
     remote: flathub-beta
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
-  - name: org.gnome.Platform.Compat.i386
+  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+    remote: flathub
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: net.davidotek.pupgui2
     remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
-  - name: org.freedesktop.Platform.GL32.default
+  - name: org.gnome.Platform.Compat.i386/x86_64/42
+    remote: flathub
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: org.freedesktop.Platform.GL32.default/x86_64/21.08
     remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.freedesktop.Platform.GL.default
     remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  # OTHER
   - name: de.bund.ausweisapp.ausweisapp2
     remote: flathub
     install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
