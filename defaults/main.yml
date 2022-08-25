@@ -489,6 +489,10 @@ install_client_apt:
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: openconnect
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+  - name: python3-pyqt5 # for openconnect-sso
+    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+  - name: python3-pyqt5.qtwebengine # for openconnect-sso
+    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: network-manager-openconnect
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: network-manager-openconnect-gnome
