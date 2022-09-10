@@ -160,6 +160,7 @@ install_client_gdm_gui_setup:
     # https://github.com/Schneegans/Burn-My-Windows.git
     - libglib2.0-dev
   dependency:
+    - make
     - libsass1
     - sassc
     - gettext
