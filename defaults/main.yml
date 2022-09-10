@@ -146,6 +146,8 @@ install_client_fonts:
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
   dependency2:
+    # to build packages
+    - make
     # config extensions
     - gnome-shell-extension-prefs
     # for gsettings in terminal run
@@ -160,7 +162,6 @@ install_client_gdm_gui_setup:
     # https://github.com/Schneegans/Burn-My-Windows.git
     - libglib2.0-dev
   dependency:
-    - make
     - libsass1
     - sassc
     - gettext
