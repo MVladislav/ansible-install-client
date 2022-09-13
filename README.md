@@ -45,6 +45,7 @@ install_client_config:
   snap_thunderbird: false
   snap_libreoffice: false
   snap_onlyoffice_desktopeditors: false
+  snap_yubioath_desktop: false
   snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false

@@ -50,6 +50,7 @@ install_client_config:
   snap_thunderbird: false
   snap_libreoffice: false
   snap_onlyoffice_desktopeditors: false
+  snap_yubioath_desktop: false
   snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false
@@ -422,6 +423,10 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: vim
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libpam-u2f
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libfido2-dev
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
   - name: rar
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
@@ -580,6 +585,10 @@ install_client_distribution_key:
 # SNAP
 # install_client_config.snap_...
 install_client_snap:
+  - name: yubioath-desktop
+    install: "{{ install_client_config.snap_yubioath_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: signal-desktop
     install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
     classic: false
