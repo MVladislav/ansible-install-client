@@ -1,8 +1,9 @@
 {
   "powermode.enabled": true,
   "powermode.presets": "flames", // flames|fireworks|exploding-rift|magic|particles|simple-rift|,
+  "powermode.enableStatusBarComboCounter": false,
+  "powermode.enableStatusBarComboTimer": false,
   "search.followSymlinks": false,
-  "window.zoomLevel": 0,
   "window.title": "${activeEditorLong}",
   "workbench.colorTheme": "Material Theme Ocean",
   // "workbench.colorTheme": "Material Theme Ocean",
@@ -21,7 +22,8 @@
     "*.hex": "hexEditor.hexedit",
     "*.ini": "default",
     "*.rom": "hexEditor.hexedit",
-    "*.ipynb": "jupyter.notebook.ipynb"
+    "*.ipynb": "jupyter.notebook.ipynb",
+    "*.pdf": "latex-workshop-pdf-hook"
   },
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "compact", // "normal" | "shrink" | "compact"
@@ -80,6 +82,9 @@
   // "editor.autoClosingQuotes": "always",
   // "editor.autoSurround": "quotes",
   "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.guides.bracketPairs": true,
+  // "editor.language.colorizedBracketPairs": [],
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "debug.toolBarLocation": "docked", // docked | floating
   "diffEditor.ignoreTrimWhitespace": true,
   "notebook.diff.enablePreview": true,
@@ -102,12 +107,19 @@
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "git.detectSubmodules": false,
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.views.repositories.location": "scm",
-  "gitlens.views.fileHistory.location": "scm",
-  "gitlens.views.lineHistory.location": "scm",
-  "gitlens.views.compare.location": "scm",
-  "gitlens.views.search.location": "scm",
+  "gitlens.currentLine.pullRequests.enabled": true,
+  "gitlens.currentLine.scrollable": true,
+  "gitlens.codeLens.scopes": ["document", "containers", "blocks"],
+  "gitlens.statusBar.reduceFlicker": true,
+  "gitlens.views.commits.showBranchComparison": "working",
+  "gitlens.views.repositories.includeWorkingTree": false,
+  "gitlens.views.contributors.showAllBranches": false,
+  "gitlens.defaultTimeFormat": "hh:mm",
+  "gitlens.advanced.repositorySearchDepth": 3,
+  "gitlens.blame.heatmap.location": "left",
+  "gitlens.blame.heatmap.enabled": true,
   "prettier.printWidth": 160,
   "beautify.ignore": "",
   "beautify.language": {
@@ -164,7 +176,6 @@
     "**/*.md"
   ],
   "todo-tree.highlights.enabled": false,
-  "todo-tree.tree.showScanModeButton": false,
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]"],
   "color-highlight.markerType": "dot-before",
@@ -233,10 +244,6 @@
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "C_Cpp.updateChannel": "Insiders",
-  // "C_Cpp.clang_format_path": "/usr/bin/clang-format", // sudo apt install clang-format
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 0, UseTab: Never, IndentWidth: 2, TabWidth: 2 }",
-  "C_Cpp.default.cppStandard": "c++14",
-  "C_Cpp.default.cStandard": "c11",
   "C_Cpp.formatting": "Default",
   "[csharp]": {
     "editor.defaultFormatter": "Leopotam.csharpfixformat"
@@ -245,10 +252,13 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
+  "python.pythonPath": "/usr/bin/python3",
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": ["--max-line-length", "160", "--experimental"],
+  // "python.formatting.provider": "black",
+  "python.formatting.autopep8Args": ["--max-line-length", "160"],
   "python.formatting.blackArgs": ["--line-length", "160"],
   "python.languageServer": "Pylance",
+  "go.toolsManagement.autoUpdate": true,
   "[javascript]": {
     "editor.defaultFormatter": "HookyQR.beautify"
   },
@@ -257,8 +267,11 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.tsdk": "workflowenginegui\\node_modules\\typescript\\lib",
+  // "typescript.tsdk": "workflowenginegui\\node_modules\\typescript\\lib",
   "typescript.suggest.paths": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
@@ -305,7 +318,11 @@
   },
   "xmlTools.splitXmlnsOnFormat": false,
   "xmlTools.removeCommentsOnMinify": true,
+  "[sql]": {},
+  "sql-formatter.uppercase": true,
+  "sql-formatter.linesBetweenQueries": 10,
   "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.trimTrailingWhitespace": false
   },
   "markdown.preview.scrollEditorWithPreview": true,
@@ -329,11 +346,13 @@
   // "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='title'></span> </div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \">  </div>",
   "markdown-pdf.footerTemplate": "<div></div>",
   // "markdown-pdf.footerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> MVladislav <span class='date'></span> </div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"><span class='pageNumber'></span> / <span class='totalPages'></span></div>",
+  // https://github.com/DavidAnson/markdownlint/blob/v0.24.0/doc/Rules.md
   "markdownlint.config": {
-    "MD031": false,
-    "MD033": false,
-    "MD024": false,
-    "MD026": false
+    "MD031": false, // Fenced code blocks should be surrounded by blank lines
+    "MD033": false, // Inline HTML
+    "MD024": false, // Multiple headings with the same content
+    "MD026": false, // Trailing punctuation in heading
+    "MD036": false // Emphasis used instead of a heading
   },
   "latex-workshop.latex.tools": [
     {
@@ -352,12 +371,12 @@
       "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-pdf", "-outdir=%OUTDIR%", "%DOC%"],
       "env": {}
     },
-    {
-      "name": "pdflatex",
-      "command": "pdflatex",
-      "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"],
-      "env": {}
-    },
+    // {
+    //   "name": "pdflatex",
+    //   "command": "pdflatex",
+    //   "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"],
+    //   "env": {}
+    // },
     {
       "name": "bibtex",
       "command": "bibtex",
@@ -367,65 +386,65 @@
   ],
   "latex-workshop.latex.recipe.default": "first",
   "latex-workshop.latex.recipes": [
-    {
-      "name": "latexmk 🔃",
-      "tools": ["latexmk"]
-    },
+    // {
+    //   "name": "latexmk 🔃",
+    //   "tools": ["latexmk"]
+    // },
     {
       "name": "xelatex -> biber -> xelatex*2",
       "tools": ["xelatex", "biber", "xelatex", "xelatex"]
-    },
-    {
-      "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
-      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
     }
+    // {
+    //   "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+    //   "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    // }
   ],
   "latex-workshop.view.pdf.viewer": "tab",
   "cSpell.language": "en,en-EN,de,de-DE,en-US",
+  "cSpell.caseSensitive": true,
   "cSpell.maxDuplicateProblems": 20,
   "cSpell.maxNumberOfProblems": 500,
   "cSpell.words": [
     "Ansible",
+    "cybercrime",
+    "drawed",
+    "DSGVO",
+    "footprinting",
+    "gitlens",
+    "gobuster",
+    "gospider",
     "Kibana",
+    "kubernetes",
+    "logstash",
+    "masscan",
+    "massdns",
+    "nmap",
+    "rgba",
     "SIEM",
     "Smarthome",
     "Sophos",
-    "cybercrime",
-    "drawed",
-    "footprinting",
-    "kubernetes",
-    "logstash",
+    "sqlmap",
     "syslog",
     "systemctl",
     "unpatched",
-    "zigbee",
-    "gitlens",
-    "rgba",
-    "DSGVO",
-    "sqlmap",
-    "gobuster",
-    "masscan",
-    "massdns",
-    "gospider",
     "wayback",
-    "nmap"
+    "zigbee"
   ],
   "cSpell.enableFiletypes": [
     "ansible",
     "asciidoc",
     "azcli",
     "bat",
-    "bibtex",
     "bibtex-style",
+    "bibtex",
     "c",
     "clojure",
     "code-runner-output",
     "coffeescript",
-    "cpp",
     "cpp_embedded_latex",
+    "cpp",
     "csharp",
     "css",
-    "csv",
     "csv (caret)",
     "csv (colon)",
     "csv (dot)",
@@ -436,6 +455,7 @@
     "csv (semicolon)",
     "csv (tilde)",
     "csv (whitespace)",
+    "csv",
     "diff",
     "dockercompose",
     "dockerfile",
@@ -467,9 +487,10 @@
     "juliamarkdown",
     "jupyter",
     "jvmoptions",
-    "latex",
     "latex-expl3",
+    "latex",
     "less",
+    "Log",
     "log",
     "lua",
     "makefile",
@@ -513,17 +534,26 @@
     "typescriptreact",
     "typoscript",
     "vb",
-    "vue",
     "vue-html",
     "vue-postcss",
+    "vue",
     "xml",
     "xquery",
     "xsl",
     "yaml",
-    "yml",
-    "Log"
+    "yml"
   ],
   "files.associations": {
+    // "**/defaults/**/*": "ansible",
+    // "**/tasks/**/*.yml": "ansible",
+    // "**/handler/*.yml": "ansible",
+    // "**/*_vars/**/*.yml": "ansible",
+    // "**/roles/**/*.yml": "ansible",
+    // "**/playbooks/**/*.yml": "ansible",
+    // "**/*ansible*/**/*.yml": "ansible",
+    // "**/vars/**/*.yml": "ansible",
+    // "**/inventory/*/*": "ansible",
+    "*.ts": "typescript",
     "optional": "c",
     "istream": "c",
     "ostream": "c",
@@ -558,5 +588,17 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
-  }
+  },
+  "redhat.telemetry.enabled": false,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "telemetry.telemetryLevel": "off",
+  "python.analysis.completeFunctionParens": false,
+  "snyk.token": "11735856-b65a-4f86-a843-1a08304308dc",
+  "snyk.yesWelcomeNotification": false,
+  "snyk.advanced.advancedMode": true,
+  "snyk.yesTelemetry": false,
+  "snyk.yesCrashReport": false,
+  "snyk.features.codeQuality": false,
+  "snyk.features.codeSecurity": false
 }

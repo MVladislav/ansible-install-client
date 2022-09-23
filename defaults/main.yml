@@ -4,67 +4,122 @@
 # ------------------------------------------------------------------------------
 install_client_service_name: default-client
 
+# also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
-  chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  virtualbox: https://download.virtualbox.org/virtualbox/6.1.18/virtualbox-6.1_6.1.18-142142~Ubuntu~eoan_amd64.deb
-  mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.21.2_amd64.deb
-  veracrypt: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.10-amd64.deb
-  getferdi: https://github.com/getferdi/ferdi/releases/download/v5.5.0/ferdi_5.5.0_amd64.deb
+  virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
+  mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
+  veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
 install_client_config:
-  dev: no
-  fonts: no
-  gnome_gui_setup: no
-  gnome_gui_setup_theme: no
-  gnome_gui_setup_extensions: no
-  gnome_gui_setup_keybinding: no
-  apt_base: no
-  apt_thunderbird: no
-  apt_libreoffice_impress: no
-  apt_libreoffice_writer: no
-  apt_libreoffice_calc: no
-  apt_peek: no
-  apt_wireshark: no
-  apt_wireshark_dev: no
-  apt_vpn: no
-  apt_gnome_boxes: no
-  apt_latex: no
-  apt_apt_pandoc: no
-  apt_virtualbox_guest: no
-  dpkg_virtualbox: no
-  dpkg_mongodb: no
-  dpkg_veracrypt: no
-  dpkg_google_chrome: no
-  dpkg_getferdi: no
-  snap_signal_desktop: no
-  snap_telegram_desktop: no
-  snap_zoom_client: no
-  snap_spotify: no
-  snap_inkscape: no
-  snap_drawio: no
-  snap_gimp: no
-  snap_vlc: no
-  snap_obs_studio: no
-  snap_flameshot: no
-  snap_1password: no
-  snap_okular: no
-  snap_code: no
-  snap_android_studio: no
-  snap_insomnia: no
-  snap_postman: no
-  snap_dbeaver_ce: no
-  snap_beekeeper_studio: no
-  snap_microk8s: no
-  snap_zaproxy: no
-  snap_cornyjokes: no
-  # flatpak: no # base(empty)|dev(empty)
-  vs_code_ext: no
-  thunderbird_theme: no
-  firefox_dev: no
-  java: no
-  steam: no
+  # GENERAL -------------------------------
+  dev: false
+  fonts: false
+  # GNOME ---------------------------------
+  gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
+  gnome_gui_setup_theme: false
+  gnome_gui_setup_dependencies: false
+  gnome_gui_setup_extensions: false
+  gnome_gui_setup_keybinding: false
+  gnome_gui_setup_overlay: false
+  # cleanup_remove_snap: false
+  # cleanup_remove_flatpak: false
+  # APT -----------------------------------
+  apt_base: false
+  apt_base2: false
+  apt_snap: false
+  apt_flatpak: false
+  apt_peek: false
+  apt_wireshark: false
+  apt_wireshark_dev: false
+  apt_vpn: false
+  apt_gnome_boxes: false
+  apt_latex: false
+  apt_pandoc: false
+  apt_virt_viewer: false
+  apt_lutris: false
+  # DPKG ----------------------------------
+  dpkg_virtualbox: false
+  dpkg_mongodb: false
+  dpkg_veracrypt: false
+  # DIST KEY ------------------------------
+  distribution_key_virtualbox: false
+  # SNAP ----------------------------------
+  snap_chromium: false
+  snap_thunderbird: false
+  snap_libreoffice: false
+  snap_onlyoffice_desktopeditors: false
+  snap_yubioath_desktop: false
+  snap_signal_desktop: false
+  snap_telegram_desktop: false
+  snap_zoom_client: false
+  snap_spotify: false
+  snap_inkscape: false
+  snap_drawio: false
+  snap_gimp: false
+  snap_darktable: false
+  snap_vlc: false
+  snap_obs_studio: false
+  snap_flameshot: false
+  snap_1password: false
+  snap_okular: false
+  snap_code: false
+  snap_android_studio: false
+  snap_UBports: false
+  snap_insomnia: false
+  snap_postman: false
+  snap_dbeaver_ce: false
+  snap_beekeeper_studio: false
+  snap_microk8s: false
+  snap_rpi_imager: false
+  snap_multipass: false
+  snap_maas: false
+  snap_zaproxy: false
+  snap_cornyjokes: false
+  snap_steam: false
+  # FLATPAK -------------------------------
+  flatpak_firefox: false
+  flatpak_chromium: false
+  flatpak_thunderbird: false
+  flatpak_extension_manager: false
+  flatpak_flameshot: false
+  flatpak_onlyoffice: false
+  flatpak_1password: false
+  flatpak_keepassxc: false
+  flatpak_signal: false
+  flatpak_telegram: false
+  flatpak_threemaqt: false
+  flatpak_zoom: false
+  flatpak_teams: false
+  flatpak_discord: false
+  flatpak_spotify: false
+  flatpak_ferdi: false
+  flatpak_vlc: false
+  flatpak_inkscape: false
+  flatpak_drawio: false
+  flatpak_gimp: false
+  flatpak_studio: false
+  flatpak_blender: false
+  flatpak_code: false
+  flatpak_sublimetext: false
+  flatpak_arduinoide: false
+  flatpak_fritzing: false
+  flatpak_insomnia: false
+  flatpak_postman: false
+  flatpak_dbeavercommunity: false
+  flatpak_filezilla: false
+  flatpak_jdownloader: false
+  flatpak_wireshark: false
+  flatpak_ghidra: false
+  flatpak_zaproxy: false
+  flatpak_steam: false
+  flatpak_lutris: false
+  flatpak_ausweisapp2: false
+  flatpak_betaflightconfigurator: false
+  # OTHER --------------------------------
+  vs_code_ext: false
+  java: false
 
 # ------------------------------------------------------------------------------
 # CLIENTS for adding specific packages (ex. ...)
@@ -73,11 +128,13 @@ clients: []
 # - name: "{{ ansible_user }}"
 #   shell: /bin/bash
 #   group: adm,cdrom,sudo
-#   createhome: yes
-#   isDev: yes
+#   createhome: true
+#   isDev: true
 #   password: "..."
-#   updateOrCreate: yes
+#   updateOrCreate: true
 
+# ------------------------------------------------------------------------------
+# FONTS
 install_client_fonts:
   path: ~/.local/share/fonts/
   url:
@@ -89,43 +146,132 @@ install_client_fonts:
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
+  dependency2:
+    # to build packages
+    - make
+    # config extensions
+    - gnome-shell-extension-prefs
+    # for gsettings in terminal run
+    - dbus-x11
+    # https://github.com/home-sweet-gnome/dash-to-panel.git
+    - gettext
+    # https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
+    - gir1.2-gtop-2.0
+    - gir1.2-nm-1.0
+    - gir1.2-clutter-1.0
+    - gnome-system-monitor
+    # https://github.com/Schneegans/Burn-My-Windows.git
+    - libglib2.0-dev
+  dependency:
+    - libsass1
+    - sassc
+    - gettext
+    # - nvidia-smi
+    - lm-sensors
+    # - bluez
+    - libcanberra-gtk-module
+    - libcanberra-gtk3-module
   theme:
-    install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
+    install: "{{ install_client_config.gnome_gui_setup_theme | default('no') | bool }}"
     git:
       - url: https://github.com/vinceliuice/Orchis-theme.git
+        branch: master
         name: Orchis-theme
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: "-n Orchis"
+      - url: https://github.com/vinceliuice/vimix-gtk-themes.git
+        branch: master
+        name: vimix-gtk-themes
+        path: /tmp/$USER
+        file: install.sh
+        extra: "-c dark"
       - url: https://github.com/vinceliuice/Tela-circle-icon-theme.git
+        branch: master
         name: Tela-circle-icon-theme
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: "-c blue"
       - url: https://github.com/vinceliuice/Vimix-cursors.git
+        branch: master
         name: Vimix-cursors
-        path: /tmp
+        path: /tmp/$USER
         file: install.sh
         extra: ""
+      - url: https://github.com/EliverLara/Juno.git
+        branch: ocean # palenight | ocean | mirage |
+        name: Juno-dark
+        path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
+        branch: palenight # palenight | ocean | mirage |
+        name: Juno-light
+        path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
+        branch: mirage # palenight | ocean | mirage |
+        name: Juno
+        path: ~/.themes/
+      - url: https://github.com/EliverLara/Juno.git
+        branch: ocean-standard-buttons
+        name: Juno-icons
+        path: ~/.local/share/icons/
   extensions:
-    install: "{{ install_client_config.gnome_gui_setup_extensions | bool }}"
-    command: gnome-extensions enable
+    install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
+    command: dbus-launch --exit-with-session gnome-extensions enable
     apt:
-      - gnome-shell-extension-caffeine
-      # - gnome-shell-extension-desktop-icons
+      []
+      # - gnome-shell-extensions
+      # - gnome-shell-extension-caffeine
+      # - gnome-shell-pomodoro
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
+        branch: master
         name: gse-sound-output-device-chooser
-        src: gse-sound-output-device-chooser/sound-output-device-chooser@kgshank.net
-        dest: ~/.local/share/gnome-shell/extensions/
+        target: install
+      - repo: https://github.com/aunetx/blur-my-shell.git
+        branch: master
+        name: blur-my-shell
+        target: install
+      - repo: https://github.com/axxapy/gnome-ui-tune.git
+        branch: master
+        name: gnome-ui-tune
+        target: schemas
+      - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
+        branch: master
+        name: gnome-shell-system-monitor-applet
+        target: install
+      - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
+        branch: master
+        name: gnome-shell-extension-caffeine
+        target: all
+      - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
+        branch: master
+        name: dash-to-panel
+        target: install
+      - repo: https://github.com/Schneegans/Burn-My-Windows.git
+        branch: main
+        name: Burn-My-Windows
+        target: install
+      # - repo: https://github.com/micheleg/dash-to-dock.git
+      #   branch: master
+      #   name: dash-to-dock
+      #   target: install
+      #   version: HEAD
+      # - repo: https://github.com/phocean/TopIcons-plus.git
+      #   branch: master
+      #   name: TopIcons-plus
+      #   target: install
+      #   version: HEAD
     activate:
-      # - desktop-icons@csoriano
       - caffeine@patapon.info
-      - drive-menu@gnome-shell-extensions.gcampax.github.com
-      - user-theme@gnome-shell-extensions.gcampax.github.com
-  command: dbus-launch --exit-with-session gsettings set
+      - sound-output-device-chooser@kgshank.net
+      # - system-monitor@paradoxxx.zero.gmail.com
+      - blur-my-shell@aunetx
+      # - TopIcons@phocean.net
+      # - drive-menu@gnome-shell-extensions.gcampax.github.com
+      # - user-theme@gnome-shell-extensions.gcampax.github.com
   keybindings:
-    install: "{{ install_client_config.gnome_gui_setup_keybinding | bool }}"
+    install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
+    command: dbus-launch --exit-with-session gsettings set
     configs:
       # --- ADD Flameshot ---
       - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
@@ -136,165 +282,202 @@ install_client_gdm_gui_setup:
         value: "/snap/bin/flameshot gui"
       - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
         key: binding
-        value: "<Shift><Ctrl>s"
+        value: "<Shift><Super>s"
       # --- ADD <next here> [TODO: add unique name-path in list below] ---
       # --- UNIQUE LIST ---
       - source: org.gnome.settings-daemon.plugins.media-keys
         key: custom-keybindings
         value: >-
           ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
-  configs:
-    - source: org.gnome.desktop.interface
-      key: font-name
-      value: >-
-        Roboto 10
-    - source: org.gnome.desktop.interface
-      key: document-font-name
-      value: >-
-        Roboto 10
-    - source: org.gnome.desktop.interface
-      key: monospace-font-name
-      value: >-
-        Roboto Mono 10
-    - source: org.gnome.desktop.interface
-      key: show-battery-percentage
-      value: >-
-        true
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: dock-position
-      value: >-
-        BOTTOM
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: extend-height
-      value: >-
-        false
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: background-opacity
-      value: >-
-        0.10000000000000001
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: background-color
-      value: >-
-        #ffffff
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: unity-backlit-items
-      value: >-
-        false
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: dash-max-icon-size
-      value: >-
-        32
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: dock-fixed
-      value: >-
-        true
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: click-action
-      value: >-
-        previews
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: custom-theme-shrink
-      value: >-
-        false
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: running-indicator-style
-      value: >-
-        DOTS
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: transparency-mode
-      value: >-
-        DYNAMIC
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: show-show-apps-button
-      value: >-
-        true
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: show-mounts
-      value: >-
-        false
-    - source: org.gnome.shell.extensions.dash-to-dock
-      key: show-trash
-      value: >-
-        false
-    - source: org.gnome.shell
-      key: favorite-apps
-      value: >-
-        ['firefox.desktop','firefoxDeveloperEdition.desktop','google-chrome.desktop','thunderbird.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','teams.desktop','slack.desktop','libreoffice-writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','clockify.desktop','org.keepassxc.KeePassXC.desktop','spotify_spotify.desktop','ferdi.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','install4j_jut5v6-BurpSuiteCommunity.desktop','zaproxy_zaproxy.desktop', 'install4j_165jh5m-zap.sh.desktop', 'powershell_powershell.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
-    - source: org.gnome.desktop.interface
-      key: gtk-theme
-      value: >-
-        Orchis
-    - source: org.gnome.desktop.interface
-      key: cursor-theme
-      value: >-
-        Vimix-cursors
-    - source: org.gnome.desktop.interface
-      key: icon-theme
-      value: >-
-        Tela-circle-blue
-    - source: org.gnome.shell.extensions.user-theme
-      key: name
-      value: >-
-        Orchis-dark
-    - source: org.gnome.desktop.wm.preferences
-      key: theme
-      value: >-
-        Orchis
+  overlay:
+    setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
+    command: dbus-launch --exit-with-session gsettings set
+    configs:
+      - source: org.gnome.desktop.interface
+        key: font-name
+        value: >-
+          Roboto 10
+      - source: org.gnome.desktop.interface
+        key: document-font-name
+        value: >-
+          Roboto 10
+      - source: org.gnome.desktop.interface
+        key: monospace-font-name
+        value: >-
+          Roboto Mono 10
+      - source: org.gnome.desktop.interface
+        key: show-battery-percentage
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: dock-position
+        value: >-
+          BOTTOM
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: extend-height
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: background-opacity
+        value: >-
+          0.10000000000000001
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: customize-alphas
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: min-alpha
+        value: >-
+          0
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: max-alpha
+        value: >-
+          0
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: background-color
+        value: >-
+          #ffffff
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: unity-backlit-items
+        value: >-
+          false
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: dash-max-icon-size
+        value: >-
+          32
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: dock-fixed
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: click-action
+        value: >-
+          focus-or-previews
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: custom-theme-shrink
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: running-indicator-style
+        value: >-
+          DOTS
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: transparency-mode
+        value: >-
+          DYNAMIC
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: show-show-apps-button
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: show-mounts
+        value: >-
+          false
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: show-trash
+        value: >-
+          false
+      - source: org.gnome.shell
+        key: favorite-apps
+        value: >-
+          ['firefox_firefox.desktop','chromium_chromium.desktop','thunderbird_thunderbird.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','libreoffice_writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','org.keepassxc.KeePassXC.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','spotify_spotify.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
+      - source: org.gnome.desktop.interface
+        key: gtk-theme
+        value: >-
+          Yaru-dark
+      - source: org.gnome.desktop.interface
+        key: cursor-theme
+        value: >-
+          Yaru
+      - source: org.gnome.desktop.interface
+        key: icon-theme
+        value: >-
+          Yaru-prussiangreen
+      # - source: org.gnome.shell.extensions.user-theme
+      #   key: name
+      #   value: >-
+      #     Yaru-prussiangreen-dark
+      - source: org.gnome.desktop.wm.preferences
+        key: theme
+        value: >-
+          Yaru-prussiangreen-dark
+      - source: org.gnome.Terminal.Legacy.Settings
+        key: theme-variant
+        value: >-
+          dark
+
+# gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
 # ------------------------------------------------------------------------------
 # APT
 # install_client_config.apt_...
 install_client_apt:
+  # --------------------------------
   - name: dirmngr
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: curl
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: git
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: git-flow
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: vim
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libpam-u2f
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libfido2-dev
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  # --------------------------------
   - name: rar
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: unrar
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: zip
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: p7zip-full
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: xz-utils
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  # --------------------------------
   - name: ffmpeg
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: libavcodec-extra
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libvpx-dev
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  - name: libinput-tools
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  - name: pulseaudio-module-bluetooth
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
-  - name: gnome-tweak-tool
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  - name: gnome-shell-extensions
+  - name: gnome-tweaks
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: chrome-gnome-shell
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
-  - name: thunderbird
-    install: "{{ install_client_config.apt_thunderbird | default('no') | bool }}"
-  - name: libreoffice-impress
-    install: "{{ install_client_config.apt_libreoffice_impress | default('no') | bool }}"
-  - name: libreoffice-writer
-    install: "{{ install_client_config.apt_libreoffice_writer | default('no') | bool }}"
-  - name: libreoffice-calc
-    install: "{{ install_client_config.apt_libreoffice_calc | default('no') | bool }}"
+  - name: libinput-tools
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  - name: pulseaudio-module-bluetooth
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  - name: libasound2-plugins-extra
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  - name: paprefs
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  - name: pavumeter
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  - name: pulseaudio-dlna
+    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+  # --------------------------------
+  - name: snap
+    install: "{{ install_client_config.apt_snap | default('no') | bool }}"
+  - name: flatpak
+    install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
   # --------------------------------
   - name: peek
     install: "{{ install_client_config.apt_peek | default('no') | bool }}"
   # --------------------------------
-  - name: laptop-mode-tools
-    install: no
-  - name: wine
-    install: no
-  - name: winetricks
-    install: no
+  # - name: laptop-mode-tools
+  #   install: false
+  # - name: wine
+  #   install: false
+  # - name: winetricks
+  #   install: false
   # --------------------------------
   - name: wireshark
     install: "{{ install_client_config.apt_wireshark | default('no') | bool }}"
@@ -313,6 +496,10 @@ install_client_apt:
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: openconnect
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+  - name: python3-pyqt5 # for openconnect-sso
+    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+  - name: python3-pyqt5.qtwebengine # for openconnect-sso
+    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: network-manager-openconnect
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: network-manager-openconnect-gnome
@@ -327,7 +514,7 @@ install_client_apt:
     install: "{{ install_client_config.apt_gnome_boxes | default('no') | bool }}"
   # --------------------------------
   - name: texlive-science
-    install: no
+    install: false
   - name: texlive-full
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: texlive-lang-german
@@ -359,129 +546,325 @@ install_client_apt:
   - name: texlive-xetex
     install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
   # --------------------------------
-  - name: virtualbox-guest-additions-iso
-    install: "{{ install_client_config.apt_virtualbox_guest | default('no') | bool }}"
+  - name: virt-viewer
+    install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
+  # --------------------------------
+  - name: lutris
+    install: "{{ install_client_config.apt_lutris | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DPKG
 # install_client_config.dpkg_...
 install_client_dpkg:
-  - url: "{{ install_client_links_to_check_update.chrome }}"
-    install: "{{ install_client_config.dpkg_google_chrome | default('no') | bool }}"
-  # - url: https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/Clockify_Setup.deb
-  - url: "{{ install_client_links_to_check_update.virtualbox }}"
+  - url: "{{ install_client_links_to_check_update.virtualbox | default('no') | bool }}"
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.mongodb }}"
     install: "{{ install_client_config.dpkg_mongodb | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
-  - url: "{{ install_client_links_to_check_update.getferdi }}"
-    install: "{{ install_client_config.dpkg_getferdi | default('no') | bool }}"
+
+# ------------------------------------------------------------------------------
+# DISTRIBUTION KEY
+# install_client_config.distribution_key_...
+install_client_distribution_key:
+  - install: "{{ install_client_config.distribution_key_virtualbox | default('no') | bool }}"
+    gpg:
+      - id: "B9F8 D658 297A F3EF C18D  5CDF A2F6 83C5 2980 AECF"
+        url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+        name: oracle_vbox_2016.gpg
+      - id: "7B0F AB3A 13B9 0743 5925  D9C9 5442 2A4B 98AB 5139"
+        url: https://www.virtualbox.org/download/oracle_vbox.asc
+        name: oracle_vbox.gpg
+    repo: https://download.virtualbox.org/virtualbox/debian
+    distribution: focal
+    version: contrib
+    apt:
+      - virtualbox-6.1
 
 # ------------------------------------------------------------------------------
 # SNAP
 # install_client_config.snap_...
 install_client_snap:
+  - name: yubioath-desktop
+    install: "{{ install_client_config.snap_yubioath_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: signal-desktop
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: telegram-desktop
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: zoom-client
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_zoom_client | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: spotify
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: chromium
+    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: thunderbird
+    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: libreoffice
+    install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: onlyoffice-desktopeditors
+    install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: inkscape
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: drawio
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_drawio | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: gimp
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: darktable
+    install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: vlc
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: obs-studio
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_obs_studio | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: flameshot
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: 1password
-    classic: no
-    beta: yes
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: okular
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
+    classic: false
+    beta: false
   # dev
   - name: code
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_code | default('no') | bool }}"
+    classic: true
+    beta: false
   - name: android-studio
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
+    classic: true
+    beta: false
+  - name: ubports-installer
+    install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: insomnia
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: postman
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_postman | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: dbeaver-ce
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: beekeeper-studio
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_beekeeper_studio | default('no') | bool }}"
+    classic: false
+    beta: false
   # other
   - name: microk8s
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
+    classic: true
+    beta: false
+  - name: rpi-imager
+    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: multipass
+    install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: maas
+    install: "{{ install_client_config.snap_maas | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: zaproxy
-    classic: yes
-    beta: no
     install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
+    classic: true
+    beta: false
   # other
   - name: cornyjokes
-    classic: no
-    beta: no
     install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
+    classic: false
+    beta: false
+  # game
+  - name: steam
+    install: "{{ install_client_config.snap_steam | default('no') | bool }}"
+    classic: false
+    beta: true
 
 # ------------------------------------------------------------------------------
 # FLATPAK
 # install_client_config.flatpak_...
 install_client_flatpak:
-  base: []
-  dev: []
+  # HELPER
+  - name: org.mozilla.firefox
+    remote: flathub
+    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
+  - name: org.chromium.Chromium
+    remote: flathub
+    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
+  - name: org.mozilla.Thunderbird
+    remote: flathub
+    install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
+  - name: com.mattjakeman.ExtensionManager
+    remote: flathub
+    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
+  - name: org.flameshot.Flameshot
+    remote: flathub
+    install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
+  - name: org.onlyoffice.desktopeditors
+    remote: flathub
+    install: "{{ install_client_config.flatpak_onlyoffice | default('no') | bool }}"
+  - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
+    remote: TODO
+    install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
+  - name: org.keepassxc.KeePassXC
+    remote: flathub
+    install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
+  # SOCIAL
+  - name: org.signal.Signal
+    remote: flathub
+    install: "{{ install_client_config.flatpak_signal | default('no') | bool }}"
+  - name: org.telegram.desktop
+    remote: flathub
+    install: "{{ install_client_config.flatpak_telegram | default('no') | bool }}"
+  - name: io.bit3.ThreemaQT
+    remote: flathub
+    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
+  - name: us.zoom.Zoom
+    remote: flathub
+    install: "{{ install_client_config.flatpak_zoom | default('no') | bool }}"
+  - name: com.microsoft.Teams
+    remote: flathub
+    install: "{{ install_client_config.flatpak_teams | default('no') | bool }}"
+  - name: com.discordapp.Discord
+    remote: flathub
+    install: "{{ install_client_config.flatpak_discord | default('no') | bool }}"
+  - name: com.spotify.Client
+    remote: flathub
+    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
+  - name: com.getferdi.Ferdi
+    remote: flathub
+    install: "{{ install_client_config.flatpak_ferdi | default('no') | bool }}"
+  - name: org.videolan.VLC
+    remote: flathub
+    install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
+  # DESIGN
+  - name: org.inkscape.Inkscape
+    remote: flathub
+    install: "{{ install_client_config.flatpak_inkscape | default('no') | bool }}"
+  - name: com.jgraph.drawio.desktop
+    remote: flathub
+    install: "{{ install_client_config.flatpak_drawio | default('no') | bool }}"
+  - name: org.gimp.GIMP
+    remote: flathub
+    install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
+  - name: com.obsproject.Studio
+    remote: flathub
+    install: "{{ install_client_config.flatpak_studio | default('no') | bool }}"
+  - name: org.blender.Blender
+    remote: flathub
+    install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
+  # DEV
+  - name: com.visualstudio.code
+    remote: flathub
+    install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
+  - name: com.sublimetext.three
+    remote: flathub
+    install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
+  - name: cc.arduino.arduinoide
+    remote: flathub
+    install: "{{ install_client_config.flatpak_arduinoide | default('no') | bool }}"
+  - name: org.fritzing.Fritzing
+    remote: flathub
+    install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
+  - name: rest.insomnia.Insomnia
+    remote: flathub
+    install: "{{ install_client_config.flatpak_insomnia | default('no') | bool }}"
+  - name: com.getpostman.Postman
+    remote: flathub
+    install: "{{ install_client_config.flatpak_postman | default('no') | bool }}"
+  - name: io.dbeaver.DBeaverCommunity
+    remote: flathub
+    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
+  - name: org.filezillaproject.Filezilla
+    remote: flathub
+    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
+  - name: org.jdownloader.JDownloader
+    remote: flathub
+    install: "{{ install_client_config.flatpak_jdownloader | default('no') | bool }}"
+  # SEC
+  - name: org.wireshark.Wireshark
+    remote: flathub
+    install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
+  - name: org.ghidra_sre.Ghidra
+    remote: flathub
+    install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
+  - name: org.zaproxy.ZAP
+    remote: flathub
+    install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
+  # GAME
+  - name: com.valvesoftware.Steam
+    remote: flathub
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: net.lutris.Lutris//beta
+    remote: flathub-beta
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+    remote: flathub
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: net.davidotek.pupgui2
+    remote: flathub
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: org.gnome.Platform.Compat.i386/x86_64/42
+    remote: flathub
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: org.freedesktop.Platform.GL32.default/x86_64/21.08
+    remote: flathub
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: org.freedesktop.Platform.GL.default
+    remote: flathub
+    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  # OTHER
+  - name: de.bund.ausweisapp.ausweisapp2
+    remote: flathub
+    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
+  - name: io.github.betaflight.BetaflightConfigurator
+    remote: flathub
+    install: "{{ install_client_config.flatpak_betaflightconfigurator | default('no') | bool }}"
 
 # VS-CODE ------------------------------------------------------------------------------
 # EXTENSIONS
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
+  - analytic-signal.preview-pdf
   - austin.code-gnu-global
   - benjaminkott.typo3-typoscript
   - bierner.markdown-emoji
@@ -492,7 +875,6 @@ install_client_vs_code_ext:
   - DavidAnson.vscode-markdownlint
   - dbaeumer.jshint
   - dbaeumer.vscode-eslint
-  - donjayamanne.githistory
   - DotJoshJohnson.xml
   - eamodio.gitlens
   - enkia.tokyo-night
@@ -523,6 +905,7 @@ install_client_vs_code_ext:
   - ms-python.python
   - ms-python.vscode-pylance
   - ms-toolsai.jupyter
+  - ms-toolsai.jupyter-keymap
   - ms-vscode-remote.remote-containers
   - ms-vscode-remote.remote-ssh
   - ms-vscode-remote.remote-ssh-edit
@@ -541,13 +924,13 @@ install_client_vs_code_ext:
   - ritwickdey.live-sass
   - ritwickdey.LiveServer
   - RobbOwen.synthwave-vscode
+  - scala-lang.scala
   - SimonSiefke.svg-preview
   - snyk-security.vscode-vuln-cost
   - Sophisticode.php-formatter
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-german
   - timonwong.shellcheck
-  - tomoki1207.pdf
   - VisualStudioExptTeam.vscodeintellicode
   - vscode-icons-team.vscode-icons
   - wayou.vscode-todo-highlight
@@ -556,77 +939,15 @@ install_client_vs_code_ext:
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
 
-# THEMES ------------------------------------------------------------------------------
-# THUNDERBIRD THEME
-# install_client_config.thunderbird_theme
-install_client_thunderbird_theme:
-  path: ~/.thunderbird
-  repo: https://github.com/spymastermatt/thunderbird-monterail.git
-
-# ------------------------------------------------------------------------------
-# FIREFOX MANUAL INSTALL
-# install_client_config.firefox_dev
-install_client_manuall:
-  firefox_dev:
-    url: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=de
-    base_dir: /opt
-    name: firefoxDeveloperEdition
-
 # ------------------------------------------------------------------------------
 # JAVA
 # install_client_config.java
-install_server_java:
+install_client_java_version: 11
+install_client_java:
   apt:
-    - openjdk-8-jdk
-    - openjdk-11-jdk
+    - "openjdk-{{ install_client_java_version }}-jdk"
   dev:
     - ant
   os_env:
     - variable: JAVA_HOME
-      path: /usr/lib/jvm/java-8-openjdk-amd64
-
-# ------------------------------------------------------------------------------
-# STEAM
-# install_client_config.steam
-install_client_steam:
-  dependency:
-    - nvidia-settings
-    - libnvidia-gl-440:i386
-    - libxtst6:i836
-    - libxtst6:i386
-    - libXtst6:i386
-    - libxtst6:i386
-    - libxtst6
-    - libxrandr2:i386
-    - libxrender1:i386
-    - libglib2.0-0:i386
-    - libpulse0:i386
-    - libva2:i386
-    - libvdpau1:i386
-    - libbz2-1.0:i386
-    - libgdk-pixbuf2.0-0:i386
-    - libva-x11-2:i386
-    - libgtk2.0-0:i386
-    - gdebi-core
-    - libgl1-mesa-glx:i386
-  apt:
-    - steam
-# sudo add-apt-repository multiverse
-# sudo apt update
-# sudo apt install steam
-
-# sudo dpkg --add-architecture i386
-# sudo apt update
-# sudo apt install wget gdebi-core libgl1-mesa-glx:i386
-# wget -O /tmp/steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
-# sudo gdebi ~/steam.deb
-## sudo apt install /tmp/steam.deb
-
-# sudo apt-get purge steam
-# sudo apt-get purge steam-launcher
-# rm ~/.local/share/Steam -rf
-# rm ~/.steampath
-# rm ~/.steampid
-# rm ~/.steam -rf
-
-# https://github.com/ti-mo/ansible-lanparty
+      path: "/usr/lib/jvm/java-{{ install_client_java_version }}-openjdk-amd64"

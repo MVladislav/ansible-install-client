@@ -11,60 +11,112 @@ _Any pre-requisites that may not be covered by Ansible itself or the role should
 ```yml
 install_client_service_name: default-client
 install_client_config:
-  dev: no
-  fonts: no
-  gnome_gui_setup: no
-  gnome_gui_setup_theme: no
-  gnome_gui_setup_extensions: no
-  gnome_gui_setup_keybinding: no
-  apt_base: no
-  apt_thunderbird: no
-  apt_libreoffice_impress: no
-  apt_libreoffice_writer: no
-  apt_libreoffice_calc: no
-  apt_peek: no
-  apt_wireshark: no
-  apt_wireshark_dev: no
-  apt_vpn: no
-  apt_gnome_boxes: no
-  apt_latex: no
-  apt_apt_pandoc: no
-  dpkg_virtualbox: no
-  dpkg_mongodb: no
-  dpkg_veracrypt: no
-  dpkg_google_chrome: no
-  dpkg_getferdi: no
-  snap_signal_desktop: no
-  snap_telegram_desktop: no
-  snap_zoom_client: no
-  snap_spotify: no
-  snap_inkscape: no
-  snap_drawio: no
-  snap_gimp: no
-  snap_vlc: no
-  snap_obs_studio: no
-  snap_flameshot: no
-  snap_1password: no
-  snap_okular: no
-  snap_code: no
-  snap_android_studio: no
-  snap_insomnia: no
-  snap_postman: no
-  snap_dbeaver_ce: no
-  snap_beekeeper_studio: no
-  snap_microk8s: no
-  snap_zaproxy: no
-  snap_cornyjokes: no
-  # flatpak: no # base(empty)|dev(empty)
-  vs_code_ext: no
-  thunderbird_theme: no
-  firefox_dev: no
-  java: no
-  steam: no
+  # GENERAL -------------------------------
+  dev: false
+  fonts: false
+  # GNOME ---------------------------------
+  gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
+  gnome_gui_setup_theme: false
+  gnome_gui_setup_dependencies: false
+  gnome_gui_setup_extensions: false
+  gnome_gui_setup_keybinding: false
+  gnome_gui_setup_overlay: false
+  # APT -----------------------------------
+  apt_base: false
+  apt_base2: false
+  apt_snap: false
+  apt_flatpak: false
+  apt_peek: false
+  apt_wireshark: false
+  apt_wireshark_dev: false
+  apt_vpn: false
+  apt_gnome_boxes: false
+  apt_latex: false
+  apt_pandoc: false
+  apt_virt_viewer: false
+  # DPKG ----------------------------------
+  # dpkg_virtualbox: false
+  dpkg_mongodb: false
+  dpkg_veracrypt: false
+  # DIST KEY ------------------------------
+  distribution_key_virtualbox: false
+  # SNAP ----------------------------------
+  snap_chromium: false
+  snap_thunderbird: false
+  snap_libreoffice: false
+  snap_onlyoffice_desktopeditors: false
+  snap_yubioath_desktop: false
+  snap_signal_desktop: false
+  snap_telegram_desktop: false
+  snap_zoom_client: false
+  snap_spotify: false
+  snap_inkscape: false
+  snap_drawio: false
+  snap_gimp: false
+  snap_darktable: false
+  snap_vlc: false
+  snap_obs_studio: false
+  snap_flameshot: false
+  snap_1password: false
+  snap_okular: false
+  snap_code: false
+  snap_android_studio: false
+  snap_UBports: false
+  snap_insomnia: false
+  snap_postman: false
+  snap_dbeaver_ce: false
+  snap_beekeeper_studio: false
+  snap_microk8s: false
+  snap_rpi_imager: false
+  snap_multipass: false
+  snap_zaproxy: false
+  snap_cornyjokes: false
+  # FLATPAK -------------------------------
+  flatpak_firefox: false
+  flatpak_chromium: false
+  flatpak_thunderbird: false
+  flatpak_extension_manager: false
+  flatpak_flameshot: false
+  flatpak_onlyoffice: false
+  flatpak_1password: false
+  flatpak_keepassxc: false
+  flatpak_signal: false
+  flatpak_telegram: false
+  flatpak_threemaqt: false
+  flatpak_zoom: false
+  flatpak_teams: false
+  flatpak_discord: false
+  flatpak_spotify: false
+  flatpak_ferdi: false
+  flatpak_vlc: false
+  flatpak_inkscape: false
+  flatpak_drawio: false
+  flatpak_gimp: false
+  flatpak_studio: false
+  flatpak_blender: false
+  flatpak_code: false
+  flatpak_sublimetext: false
+  flatpak_arduinoide: false
+  flatpak_fritzing: false
+  flatpak_insomnia: false
+  flatpak_postman: false
+  flatpak_dbeavercommunity: false
+  flatpak_filezilla: false
+  flatpak_jdownloader: false
+  flatpak_wireshark: false
+  flatpak_ghidra: false
+  flatpak_zaproxy: false
+  flatpak_steam: false
+  flatpak_lutris: false
+  flatpak_ausweisapp2: false
+  flatpak_betaflightconfigurator: false
+  # OTHER --------------------------------
+  vs_code_ext: false
+  java: false
 clients:
   - name: "{{ ansible_user }}"
     dev: yes
-    updateOrCreate: no
+    updateOrCreate: false
 ```
 
 ## Dependencies
@@ -84,7 +136,7 @@ Including an example of how to use your role (for instance, with variables passe
       clients:
         - name: "{{ ansible_user }}"
           dev: yes
-          updateOrCreate: no
+          updateOrCreate: false
 ```
 
 ## License

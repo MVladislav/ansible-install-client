@@ -1,0 +1,89 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: "setup other - disable audio auto switch in pulseaudio"
+  become: true
+  ansible.builtin.replace:
+    path: /etc/pulse/default.pa
+    regexp: "^load-module module-switch-on-port-available"
+    replace: "# load-module module-switch-on-port-available"
+  register: change_pulseaudio
+  tags:
+    - install_client
+    - other
+    - audio
+    - pulseaudio
+
+- name: "setup other - disable audio auto switch in pulseaudio"
+  become: true
+  ansible.builtin.replace:
+    path: /etc/pulse/default.pa
+    regexp: "^load-module module-switch-on-connect"
+    replace: "# load-module module-switch-on-connect"
+  register: change_pulseaudio
+  tags:
+    - install_client
+    - other
+    - audio
+    - pulseaudio
+
+- name: "setup other - restart pulseaudio"
+  become: true
+  ansible.builtin.command: "pulseaudio -k"
+  register: restart_pulseaudio
+  changed_when: restart_pulseaudio.rc != 0
+  failed_when: restart_pulseaudio.rc == 2
+  when: >
+    change_pulseaudio is defined
+    and change_pulseaudio.changed is defined
+    and change_pulseaudio.changed | bool
+  tags:
+    - install_client
+    - other
+    - audio
+    - pulseaudio
+
+# ------------------------------------------------------------------------------
+- name: "setup other - change Connectivity Checking to off"
+  become: true
+  ansible.builtin.lineinfile:
+    path: /var/lib/NetworkManager/NetworkManager-intern.conf
+    regexp: '^\[connectivity\]'
+    line: "[connectivity]"
+    insertbefore: '^\.set\.enabled='
+    state: present
+  register: change_connectivity_checking
+  tags:
+    - install_client
+    - other
+    - connectivity_checking
+
+- name: "setup other - change Connectivity Checking to off"
+  become: true
+  ansible.builtin.lineinfile:
+    path: /var/lib/NetworkManager/NetworkManager-intern.conf
+    regexp: '^\.set\.enabled='
+    line: ".set.enabled=false"
+    insertafter: '^\[connectivity\]'
+    state: present
+  register: change_connectivity_checking
+  tags:
+    - install_client
+    - other
+    - connectivity_checking
+
+- name: "setup other - restart NetworkManager for changed Connectivity Checking"
+  become: true
+  ansible.builtin.service:
+    name: NetworkManager
+    state: restarted
+    enabled: true
+  when: >
+    change_connectivity_checking is defined
+    and change_connectivity_checking.changed is defined
+    and change_connectivity_checking.changed | bool
+  tags:
+    - install_client
+    - other
+    - connectivity_checking

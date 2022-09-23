@@ -1,0 +1,224 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+- name: gnome gui - install dependencies
+  become: true
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: true # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.dependency|flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.dependency is defined)
+    and (install_client_config is defined
+    and install_client_config.gnome_gui_setup_dependencies is defined
+    and install_client_config.gnome_gui_setup_dependencies | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+- name: gnome gui - install dependencies2
+  become: true
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: true # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.dependency2|flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.dependency2 is defined)
+    and ((install_client_gdm_gui_setup.overlay is defined
+    and install_client_gdm_gui_setup.overlay.setup is defined
+    and install_client_gdm_gui_setup.overlay.setup | bool) or (install_client_gdm_gui_setup.keybindings is defined
+    and install_client_gdm_gui_setup.keybindings.install is defined
+    and install_client_gdm_gui_setup.keybindings.install | bool) )
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# THEME
+- name: "gnome gui - theme git clone [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.git:
+    repo: "{{ item.url }}"
+    dest: "{{ item.path }}/{{ item.name }}"
+    version: "{{ item.branch }}"
+    force: true
+    update: false
+    recursive: true
+  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.theme is defined
+    and install_client_gdm_gui_setup.theme.git is defined)
+    and (install_client_gdm_gui_setup.theme.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui - theme execute install [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: "{{ item.path }}/{{ item.name }}/{{ item.file }} {{ item.extra }}"
+  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.theme is defined
+    and install_client_gdm_gui_setup.theme.git is defined)
+    and (install_client_gdm_gui_setup.theme.install | bool)
+    and (item.file is defined)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# APT extensions
+- name: gnome gui - install extensions by apt services
+  become: true
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+    force_apt_get: true # apt-get instead of aptitude
+  loop: "{{ install_client_gdm_gui_setup.extensions.apt|flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.extensions is defined
+    and install_client_gdm_gui_setup.extensions.apt is defined)
+    and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui - clone extensions by git [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "/tmp/{{ outer_item.name }}/{{ item.name }}"
+    version: "{{ item.branch }}"
+    force: true
+    update: false
+    recursive: true
+  loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.extensions is defined
+    and install_client_gdm_gui_setup.extensions.git is defined)
+    and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui - install extensions from git clones [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  community.general.make:
+    chdir: "/tmp/{{ outer_item.name }}/{{ item.name }}"
+    target: "{{ item.target }}"
+  loop: "{{ install_client_gdm_gui_setup.extensions.git | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.extensions is defined
+    and install_client_gdm_gui_setup.extensions.git is defined)
+    and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "gnome gui - restart gdm3 for gui refresh"
+  become: true
+  ansible.builtin.service:
+    name: gdm3
+    state: restarted
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.extensions is defined
+    and install_client_gdm_gui_setup.extensions.command is defined)
+    and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# ACTIVATE extensions
+- name: "gnome gui - activate extensions [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item }}"
+  # ignore_errors: true
+  loop: "{{ install_client_gdm_gui_setup.extensions.activate | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.extensions is defined
+    and install_client_gdm_gui_setup.extensions.command is defined)
+    and (install_client_gdm_gui_setup.extensions.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# SETUP OVERLAY
+- name: "gnome gui - setup overlay [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: '{{ install_client_gdm_gui_setup.overlay.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
+  loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined
+    and install_client_gdm_gui_setup.overlay is defined)
+    and (install_client_gdm_gui_setup.overlay.command is defined
+    and install_client_gdm_gui_setup.overlay.configs is defined)
+    and (install_client_gdm_gui_setup.overlay.setup is defined
+    and install_client_gdm_gui_setup.overlay.setup | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome
+
+# ------------------------------------------------------------------------------
+# SETUP KEYBINDS
+- name: "gnome gui - setup keybinding [{{ outer_item.name }}]"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: '{{ install_client_gdm_gui_setup.keybindings.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
+  loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
+  when: >
+    (install_client_gdm_gui_setup is defined
+    and install_client_gdm_gui_setup.keybindings is defined)
+    and (install_client_gdm_gui_setup.keybindings.command is defined
+    and install_client_gdm_gui_setup.keybindings.configs is defined)
+    and (install_client_gdm_gui_setup.keybindings.install is defined
+    and install_client_gdm_gui_setup.keybindings.install | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnomeW
+
+- name: "gnome gui - restart gdm3 for gui refresh"
+  become: true
+  ansible.builtin.service:
+    name: gdm3
+    state: restarted
+  when: >
+    (install_client_gdm_gui_setup is defined)
+    and (install_client_gdm_gui_setup.overlay is defined
+    and install_client_gdm_gui_setup.overlay.configs is defined)
+    and (install_client_gdm_gui_setup.overlay.setup | bool)
+  tags:
+    - install_client
+    - ubuntu
+    - gnome

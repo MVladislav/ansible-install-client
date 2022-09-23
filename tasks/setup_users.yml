@@ -1,30 +1,30 @@
----
-# tasks file for install_client
+# ---
+# # tasks file for install_client
 
-# ------------------------------------------------------------------------------
-#- name: delete user accounts
-#  become: yes
-#  user:
-#    name: "{{ item.name }}"
-#    state: absent
-#    remove: yes
-#    force: yes
-#  loop: "{{ clients |flatten(levels=1) }}"
+# # ------------------------------------------------------------------------------
+# - name: delete user accounts
+#   become: true
+#   user:
+#     name: "{{ item.name }}"
+#     state: absent
+#     remove: yes
+#     force: yes
+#   loop: "{{ clients |flatten(levels=1) }}"
 
-# ------------------------------------------------------------------------------
-- name: update user accounts
-  become: yes
-  user:
-    name: "{{ item.name }}"
-    state: present
-    # shell: "{{ item.shell | default('/bin/bash')}}"
-    groups: "{{ item.group | default('adm, cdrom, sudo') }}"
-    createhome: "{{ item.createhome | default('yes') | bool }}"
-    # sudo apt install whois && mkpasswd --method=sha-512
-    password: "{{ item.password }}"
-    #update_password: on_create
-  loop: "{{ clients | flatten(levels=1) }}"
-  when: item.updateOrCreate is defined and item.updateOrCreate | bool
-  tags:
-    - install_client
-    - user_setup
+# # ------------------------------------------------------------------------------
+# - name: update user accounts
+#   become: true
+#   user:
+#     name: "{{ item.name }}"
+#     state: present
+#     # shell: "{{ item.shell | default('/bin/bash')}}"
+#     groups: "{{ item.group | default('adm, cdrom, sudo') }}"
+#     createhome: "{{ item.createhome | default('yes') | bool }}"
+#     # sudo apt install whois && mkpasswd --method=sha-512
+#     password: "{{ item.password }}"
+#     #update_password: on_create
+#   loop: "{{ clients | flatten(levels=1) }}"
+#   when: item.updateOrCreate is defined and item.updateOrCreate | bool
+#   tags:
+#     - install_client
+#     - user_setup
