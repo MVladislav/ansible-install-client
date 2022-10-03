@@ -59,6 +59,8 @@ install_client_config:
   snap_drawio: false
   snap_gimp: false
   snap_darktable: false
+  snap_pixelfx: false
+  snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
   snap_flameshot: false
@@ -99,6 +101,7 @@ install_client_config:
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
+  flatpak_krita: false
   flatpak_studio: false
   flatpak_blender: false
   flatpak_code: false
@@ -637,6 +640,14 @@ install_client_snap:
     install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
     classic: false
     beta: false
+  - name: pixelfx
+    install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: lunacy
+    install: "{{ install_client_config.snap_lunacy | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: vlc
     install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
     classic: false
@@ -785,6 +796,9 @@ install_client_flatpak:
   - name: org.gimp.GIMP
     remote: flathub
     install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
+  - name: org.kde.krita
+    remote: flathub
+    install: "{{ install_client_config.flatpak_krita | default('no') | bool }}"
   - name: com.obsproject.Studio
     remote: flathub
     install: "{{ install_client_config.flatpak_studio | default('no') | bool }}"
