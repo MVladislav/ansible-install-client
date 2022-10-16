@@ -61,6 +61,7 @@ install_client_config:
   snap_okular: false
   snap_yubioath_desktop: false
   snap_code: false
+  snap_remmina: false
   snap_android_studio: false
   snap_UBports: false
   snap_insomnia: false
@@ -103,6 +104,7 @@ install_client_config:
   flatpak_blender: false
   flatpak_peek: false
   flatpak_code: false
+  flatpak_remmina: false
   flatpak_sublimetext: false
   flatpak_arduinoide: false
   flatpak_fritzing: false

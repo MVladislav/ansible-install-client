@@ -62,6 +62,7 @@ install_client_config:
   snap_okular: false
   snap_yubioath_desktop: false
   snap_code: false
+  snap_remmina: false
   snap_android_studio: false
   snap_UBports: false
   snap_insomnia: false
@@ -104,6 +105,7 @@ install_client_config:
   flatpak_blender: false
   flatpak_peek: false
   flatpak_code: false
+  flatpak_remmina: false
   flatpak_sublimetext: false
   flatpak_arduinoide: false
   flatpak_fritzing: false
@@ -649,6 +651,10 @@ install_client_snap:
     install: "{{ install_client_config.snap_code | default('no') | bool }}"
     classic: true
     beta: false
+  - name: remmina
+    install: "{{ install_client_config.snap_remmina | default('no') | bool }}"
+    classic: true
+    beta: false
   - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
     classic: true
@@ -801,6 +807,9 @@ install_client_flatpak:
   - name: com.visualstudio.code
     remote: flathub
     install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
+  - name: org.remmina.Remmina
+    remote: flathub
+    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
   - name: com.sublimetext.three
     remote: flathub
     install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
