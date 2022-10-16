@@ -8,6 +8,7 @@ install_client_service_name: default-client
 install_client_links_to_check_update:
   virtualbox: https://download.virtualbox.org/virtualbox/7.0.0/virtualbox-7.0_7.0.0-153978~Ubuntu~jammy_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
+  parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -37,6 +38,7 @@ install_client_config:
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
+  dpkg_parsec: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
   # SNAP ----------------------------------
@@ -525,6 +527,8 @@ install_client_dpkg:
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
+  - url: "{{ install_client_links_to_check_update.parsec }}"
+    install: "{{ install_client_config.dpkg_parsec | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DISTRIBUTION KEY
