@@ -9,6 +9,9 @@
     regexp: "^load-module module-switch-on-port-available"
     replace: "# load-module module-switch-on-port-available"
   register: change_pulseaudio
+  when: >
+    install_client_other_pulseaudio is defined
+    and install_client_other_pulseaudio | bool
   tags:
     - install_client
     - other
