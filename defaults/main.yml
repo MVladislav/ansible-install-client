@@ -106,6 +106,9 @@ install_client_config:
   flatpak_studio: false
   flatpak_blender: false
   flatpak_peek: false
+  flatpak_video_trimmer: false
+  flatpak_tube_converter: false
+  flatpak_girens: false
   flatpak_code: false
   flatpak_remmina: false
   flatpak_sublimetext: false
@@ -807,6 +810,15 @@ install_client_flatpak:
   - name: com.uploadedlobster.peek
     remote: flathub
     install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
+  - name: org.gnome.gitlab.YaLTeR.VideoTrimmer
+    remote: flathub
+    install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
+  - name: org.nickvision.tubeconverter
+    remote: flathub
+    install: "{{ install_client_config.flatpak_tube_converter | default('no') | bool }}"
+  - name: nl.g4d.Girens
+    remote: flathub
+    install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
   # DEV
   - name: com.visualstudio.code
     remote: flathub
