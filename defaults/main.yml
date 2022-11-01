@@ -82,6 +82,7 @@ install_client_config:
   snap_cornyjokes: false
   snap_steam: false
   # FLATPAK -------------------------------
+  flatpak_flatseal: false
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
@@ -90,6 +91,7 @@ install_client_config:
   flatpak_onlyoffice: false
   flatpak_1password: false
   flatpak_keepassxc: false
+  flatpak_easy_effects: false
   flatpak_signal: false
   flatpak_telegram: false
   flatpak_threemaqt: false
@@ -453,6 +455,8 @@ install_client_apt:
     install: "{{ install_client_config.apt_snap | default('no') | bool }}"
   - name: flatpak
     install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
+  - name: gnome-software-plugin-flatpak
+    install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
   # --------------------------------
   # - name: laptop-mode-tools
   #   install: false
@@ -736,6 +740,9 @@ install_client_snap:
 # install_client_config.flatpak_...
 install_client_flatpak:
   # HELPER
+  - name: com.github.tchx84.Flatseal
+    remote: flathub
+    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
   - name: org.mozilla.firefox
     remote: flathub
     install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
@@ -760,6 +767,10 @@ install_client_flatpak:
   - name: org.keepassxc.KeePassXC
     remote: flathub
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
+  - name: com.github.wwmm.easyeffects
+    # https://github.com/JackHack96/EasyEffects-Presets
+    remote: flathub
+    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
   # SOCIAL
   - name: org.signal.Signal
     remote: flathub
