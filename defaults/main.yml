@@ -563,7 +563,7 @@ install_client_app_image:
   - install: "{{ install_client_config.app_image_logseq | default('no') | bool }}"
     app_image: https://github.com/logseq/logseq/releases/download/0.8.8/Logseq-linux-x64-0.8.8.AppImage
     png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
-    name: LogSeq
+    name: Logseq
   - install: "{{ install_client_config.app_image_upscayl | default('no') | bool }}"
     app_image: https://github.com/upscayl/upscayl/releases/download/v1.5.5/Upscayl-1.5.5.AppImage
     png: https://github.com/upscayl/upscayl/raw/6a27ff37a4a8af52f48403fa31f710b51fd12549/main/build/icon.png
