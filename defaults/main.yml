@@ -6,9 +6,9 @@ install_client_service_name: default-client
 
 # also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
-  virtualbox: https://download.virtualbox.org/virtualbox/6.1.26/virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
-  mongodb: https://downloads.mongodb.com/compass/mongodb-compass_1.28.4_amd64.deb
+  virtualbox: https://download.virtualbox.org/virtualbox/7.0.0/virtualbox-7.0_7.0.0-153978~Ubuntu~jammy_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
+  parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -27,58 +27,62 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
-  apt_base2: false
+  apt_base_sound_pulseaudio: false
   apt_snap: false
   apt_flatpak: false
-  apt_peek: false
-  apt_wireshark: false
-  apt_wireshark_dev: false
   apt_vpn: false
   apt_gnome_boxes: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
-  apt_lutris: false
   # DPKG ----------------------------------
   dpkg_virtualbox: false
-  dpkg_mongodb: false
   dpkg_veracrypt: false
+  dpkg_parsec: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
   # SNAP ----------------------------------
+  snap_firefox: false
   snap_chromium: false
   snap_thunderbird: false
-  snap_libreoffice: false
-  snap_onlyoffice_desktopeditors: false
-  snap_yubioath_desktop: false
-  snap_signal_desktop: false
+  # snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false
   snap_spotify: false
+  snap_libreoffice: false
+  snap_onlyoffice_desktopeditors: false
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
   snap_darktable: false
+  snap_pixelfx: false
+  snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
   snap_flameshot: false
   snap_1password: false
   snap_okular: false
+  snap_yubioath_desktop: false
   snap_code: false
+  snap_remmina: false
   snap_android_studio: false
   snap_UBports: false
   snap_insomnia: false
   snap_postman: false
   snap_dbeaver_ce: false
   snap_beekeeper_studio: false
+  snap_mqtt_explorer: false
+  snap_zaproxy: false
+  snap_nmap: false
+  snap_john_the_ripper: false
   snap_microk8s: false
   snap_rpi_imager: false
   snap_multipass: false
   snap_maas: false
-  snap_zaproxy: false
   snap_cornyjokes: false
   snap_steam: false
   # FLATPAK -------------------------------
+  flatpak_flatseal: false
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
@@ -87,6 +91,7 @@ install_client_config:
   flatpak_onlyoffice: false
   flatpak_1password: false
   flatpak_keepassxc: false
+  flatpak_easy_effects: false
   flatpak_signal: false
   flatpak_telegram: false
   flatpak_threemaqt: false
@@ -99,15 +104,22 @@ install_client_config:
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
+  flatpak_krita: false
   flatpak_studio: false
   flatpak_blender: false
+  flatpak_peek: false
+  flatpak_video_trimmer: false
+  flatpak_tube_converter: false
+  flatpak_girens: false
   flatpak_code: false
+  flatpak_remmina: false
   flatpak_sublimetext: false
   flatpak_arduinoide: false
   flatpak_fritzing: false
   flatpak_insomnia: false
   flatpak_postman: false
   flatpak_dbeavercommunity: false
+  flatpak_mongodb_compass: false
   flatpak_filezilla: false
   flatpak_jdownloader: false
   flatpak_wireshark: false
@@ -217,11 +229,7 @@ install_client_gdm_gui_setup:
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
     command: dbus-launch --exit-with-session gnome-extensions enable
-    apt:
-      []
-      # - gnome-shell-extensions
-      # - gnome-shell-extension-caffeine
-      # - gnome-shell-pomodoro
+    apt: []
     git:
       - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
         branch: master
@@ -231,14 +239,10 @@ install_client_gdm_gui_setup:
         branch: master
         name: blur-my-shell
         target: install
-      - repo: https://github.com/axxapy/gnome-ui-tune.git
-        branch: master
-        name: gnome-ui-tune
-        target: schemas
-      - repo: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
-        branch: master
-        name: gnome-shell-system-monitor-applet
-        target: install
+      # - repo: https://github.com/axxapy/gnome-ui-tune.git
+      #   branch: master
+      #   name: gnome-ui-tune
+      #   target: schemas
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
         branch: master
         name: gnome-shell-extension-caffeine
@@ -251,23 +255,12 @@ install_client_gdm_gui_setup:
         branch: main
         name: Burn-My-Windows
         target: install
-      # - repo: https://github.com/micheleg/dash-to-dock.git
-      #   branch: master
-      #   name: dash-to-dock
-      #   target: install
-      #   version: HEAD
-      # - repo: https://github.com/phocean/TopIcons-plus.git
-      #   branch: master
-      #   name: TopIcons-plus
-      #   target: install
-      #   version: HEAD
     activate:
       - caffeine@patapon.info
       - sound-output-device-chooser@kgshank.net
-      # - system-monitor@paradoxxx.zero.gmail.com
       - blur-my-shell@aunetx
-      # - TopIcons@phocean.net
-      # - drive-menu@gnome-shell-extensions.gcampax.github.com
+      # - burn-my-windows@schneegans.github.com
+      # - dash-to-panel@jderose9.github.com
       # - user-theme@gnome-shell-extensions.gcampax.github.com
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
@@ -380,33 +373,27 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop','chromium_chromium.desktop','thunderbird_thunderbird.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','libreoffice_writer.desktop','libreoffice-calc.desktop','libreoffice-impress.desktop','org.keepassxc.KeePassXC.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','spotify_spotify.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','blender.desktop','code_code.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','wireshark.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
-      - source: org.gnome.desktop.interface
-        key: gtk-theme
-        value: >-
-          Yaru-dark
-      - source: org.gnome.desktop.interface
-        key: cursor-theme
-        value: >-
-          Yaru
-      - source: org.gnome.desktop.interface
-        key: icon-theme
-        value: >-
-          Yaru-prussiangreen
-      # - source: org.gnome.shell.extensions.user-theme
-      #   key: name
+          ['firefox_firefox.desktop','chromium_chromium.desktop','1password_1password.desktop','org.keepassxc.KeePassXC.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','org.signal.Signal.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','spotify_spotify.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','darktable_darktable.desktop','Upscayl.desktop','com.uploadedlobster.peek.desktop','blender.desktop','code_code.desktop','LogSeq.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','org.wireshark.Wireshark.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
+      # - source: org.gnome.desktop.interface
+      #   key: gtk-theme
+      #   value: >-
+      #     Yaru-dark
+      # - source: org.gnome.desktop.interface
+      #   key: cursor-theme
+      #   value: >-
+      #     Yaru
+      # - source: org.gnome.desktop.interface
+      #   key: icon-theme
+      #   value: >-
+      #     Yaru-prussiangreen
+      # - source: org.gnome.desktop.wm.preferences
+      #   key: theme
       #   value: >-
       #     Yaru-prussiangreen-dark
-      - source: org.gnome.desktop.wm.preferences
-        key: theme
-        value: >-
-          Yaru-prussiangreen-dark
-      - source: org.gnome.Terminal.Legacy.Settings
-        key: theme-variant
-        value: >-
-          dark
-
-# gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+      # - source: org.gnome.Terminal.Legacy.Settings
+      #   key: theme-variant
+      #   value: >-
+      #     dark
 
 # ------------------------------------------------------------------------------
 # APT
@@ -452,37 +439,27 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
   - name: libinput-tools
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   - name: pulseaudio-module-bluetooth
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   - name: libasound2-plugins-extra
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   - name: paprefs
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   - name: pavumeter
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   - name: pulseaudio-dlna
-    install: "{{ install_client_config.apt_base2 | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   # --------------------------------
   - name: snap
     install: "{{ install_client_config.apt_snap | default('no') | bool }}"
   - name: flatpak
     install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
-  # --------------------------------
-  - name: peek
-    install: "{{ install_client_config.apt_peek | default('no') | bool }}"
+  - name: gnome-software-plugin-flatpak
+    install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
   # --------------------------------
   # - name: laptop-mode-tools
   #   install: false
-  # - name: wine
-  #   install: false
-  # - name: winetricks
-  #   install: false
-  # --------------------------------
-  - name: wireshark
-    install: "{{ install_client_config.apt_wireshark | default('no') | bool }}"
-  - name: wireshark-dev
-    install: "{{ install_client_config.apt_wireshark_dev | default('no') | bool }}"
   # --------------------------------
   - name: resolvconf
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
@@ -548,9 +525,6 @@ install_client_apt:
   # --------------------------------
   - name: virt-viewer
     install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
-  # --------------------------------
-  - name: lutris
-    install: "{{ install_client_config.apt_lutris | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DPKG
@@ -558,10 +532,10 @@ install_client_apt:
 install_client_dpkg:
   - url: "{{ install_client_links_to_check_update.virtualbox | default('no') | bool }}"
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
-  - url: "{{ install_client_links_to_check_update.mongodb }}"
-    install: "{{ install_client_config.dpkg_mongodb | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
+  - url: "{{ install_client_links_to_check_update.parsec }}"
+    install: "{{ install_client_config.dpkg_parsec | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DISTRIBUTION KEY
@@ -582,17 +556,39 @@ install_client_distribution_key:
       - virtualbox-6.1
 
 # ------------------------------------------------------------------------------
+# APP IMAGE
+# install_client_config.app_image_...
+# TODO: write process for install, current not working
+install_client_app_image:
+  - install: "{{ install_client_config.app_image_logseq | default('no') | bool }}"
+    app_image: https://github.com/logseq/logseq/releases/download/0.8.8/Logseq-linux-x64-0.8.8.AppImage
+    png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
+    name: Logseq
+  - install: "{{ install_client_config.app_image_upscayl | default('no') | bool }}"
+    app_image: https://github.com/upscayl/upscayl/releases/download/v1.5.5/Upscayl-1.5.5.AppImage
+    png: https://github.com/upscayl/upscayl/raw/6a27ff37a4a8af52f48403fa31f710b51fd12549/main/build/icon.png
+    name: Upscayl
+
+# ------------------------------------------------------------------------------
 # SNAP
 # install_client_config.snap_...
 install_client_snap:
-  - name: yubioath-desktop
-    install: "{{ install_client_config.snap_yubioath_desktop | default('no') | bool }}"
+  - name: firefox
+    install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
     classic: false
     beta: false
-  - name: signal-desktop
-    install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
+  - name: chromium
+    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
     classic: false
     beta: false
+  - name: thunderbird
+    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
+    classic: false
+    beta: false
+  # - name: signal-desktop
+  #   install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
+  #   classic: false
+  #   beta: false
   - name: telegram-desktop
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
     classic: false
@@ -603,14 +599,6 @@ install_client_snap:
     beta: false
   - name: spotify
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: chromium
-    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: thunderbird
-    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
     classic: false
     beta: false
   - name: libreoffice
@@ -637,6 +625,14 @@ install_client_snap:
     install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
     classic: false
     beta: false
+  - name: pixelfx
+    install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: lunacy
+    install: "{{ install_client_config.snap_lunacy | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: vlc
     install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
     classic: false
@@ -657,9 +653,17 @@ install_client_snap:
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
     classic: false
     beta: false
+  - name: yubioath-desktop
+    install: "{{ install_client_config.snap_yubioath_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   # dev
   - name: code
     install: "{{ install_client_config.snap_code | default('no') | bool }}"
+    classic: true
+    beta: false
+  - name: remmina
+    install: "{{ install_client_config.snap_remmina | default('no') | bool }}"
     classic: true
     beta: false
   - name: android-studio
@@ -686,6 +690,23 @@ install_client_snap:
     install: "{{ install_client_config.snap_beekeeper_studio | default('no') | bool }}"
     classic: false
     beta: false
+  - name: mqtt-explorer
+    install: "{{ install_client_config.snap_mqtt_explorer | default('no') | bool }}"
+    classic: false
+    beta: false
+  # sec
+  - name: zaproxy
+    install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
+    classic: true
+    beta: false
+  - name: nmap
+    install: "{{ install_client_config.snap_nmap | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: john-the-ripper
+    install: "{{ install_client_config.snap_john_the_ripper | default('no') | bool }}"
+    classic: false
+    beta: false
   # other
   - name: microk8s
     install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
@@ -703,10 +724,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_maas | default('no') | bool }}"
     classic: false
     beta: false
-  - name: zaproxy
-    install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
-    classic: true
-    beta: false
   # other
   - name: cornyjokes
     install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
@@ -723,6 +740,9 @@ install_client_snap:
 # install_client_config.flatpak_...
 install_client_flatpak:
   # HELPER
+  - name: com.github.tchx84.Flatseal
+    remote: flathub
+    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
   - name: org.mozilla.firefox
     remote: flathub
     install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
@@ -747,6 +767,10 @@ install_client_flatpak:
   - name: org.keepassxc.KeePassXC
     remote: flathub
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
+  - name: com.github.wwmm.easyeffects
+    # https://github.com/JackHack96/EasyEffects-Presets
+    remote: flathub
+    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
   # SOCIAL
   - name: org.signal.Signal
     remote: flathub
@@ -785,16 +809,34 @@ install_client_flatpak:
   - name: org.gimp.GIMP
     remote: flathub
     install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
+  - name: org.kde.krita
+    remote: flathub
+    install: "{{ install_client_config.flatpak_krita | default('no') | bool }}"
   - name: com.obsproject.Studio
     remote: flathub
     install: "{{ install_client_config.flatpak_studio | default('no') | bool }}"
   - name: org.blender.Blender
     remote: flathub
     install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
+  - name: com.uploadedlobster.peek
+    remote: flathub
+    install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
+  - name: org.gnome.gitlab.YaLTeR.VideoTrimmer
+    remote: flathub
+    install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
+  - name: org.nickvision.tubeconverter
+    remote: flathub
+    install: "{{ install_client_config.flatpak_tube_converter | default('no') | bool }}"
+  - name: nl.g4d.Girens
+    remote: flathub
+    install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
   # DEV
   - name: com.visualstudio.code
     remote: flathub
     install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
+  - name: org.remmina.Remmina
+    remote: flathub
+    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
   - name: com.sublimetext.three
     remote: flathub
     install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
@@ -813,6 +855,9 @@ install_client_flatpak:
   - name: io.dbeaver.DBeaverCommunity
     remote: flathub
     install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
+  - name: com.mongodb.Compass
+    remote: flathub
+    install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
   - name: org.filezillaproject.Filezilla
     remote: flathub
     install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
@@ -864,35 +909,34 @@ install_client_flatpak:
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
+  - adpyke.vscode-sql-formatter
   - analytic-signal.preview-pdf
-  - austin.code-gnu-global
   - benjaminkott.typo3-typoscript
+  - bibhasdn.unique-lines
   - bierner.markdown-emoji
+  - bierner.markdown-mermaid
   - christian-kohler.npm-intellisense
   - christian-kohler.path-intellisense
-  - CoenraadS.bracket-pair-colorizer
   - crazywolf.smali
   - DavidAnson.vscode-markdownlint
   - dbaeumer.jshint
   - dbaeumer.vscode-eslint
   - DotJoshJohnson.xml
+  - DougFinke.vscode-pandoc
   - eamodio.gitlens
-  - enkia.tokyo-night
-  - Equinusocio.vsc-community-material-theme
-  - Equinusocio.vsc-material-theme
-  - equinusocio.vsc-material-theme-icons
   - esbenp.prettier-vscode
   - febley.typo3-fluid-snippets
-  - firefox-devtools.vscode-firefox-debug
+  - formulahendry.auto-rename-tag
   - formulahendry.code-runner
   - foxundermoon.shell-format
   - geeksharp.openssl-configuration-file
   - GitHub.github-vscode-theme
+  - GitHub.remotehub
+  - glenn2223.live-sass
   - golang.go
-  - GrapeCity.gc-excelviewer
   - Gruntfuggly.todo-tree
   - GuidoTapia2.unicode-math-vscode
-  - HookyQR.beautify
+  - hashicorp.terraform
   - HookyQR.minify
   - hoovercj.vscode-power-mode
   - James-Yu.latex-workshop
@@ -902,16 +946,15 @@ install_client_vs_code_ext:
   - mhutchie.git-graph
   - mikestead.dotenv
   - ms-azuretools.vscode-docker
+  - ms-kubernetes-tools.vscode-kubernetes-tools
   - ms-python.python
   - ms-python.vscode-pylance
-  - ms-toolsai.jupyter
-  - ms-toolsai.jupyter-keymap
   - ms-vscode-remote.remote-containers
   - ms-vscode-remote.remote-ssh
   - ms-vscode-remote.remote-ssh-edit
   - ms-vscode.cpptools
   - ms-vscode.hexeditor
-  - ms-vscode.vscode-typescript-tslint-plugin
+  - ms-vscode.remote-repositories
   - ms-vscode.wordcount
   - mushan.vscode-paste-image
   - naumovs.color-highlight
@@ -920,19 +963,25 @@ install_client_vs_code_ext:
   - pranaygp.vscode-css-peek
   - quicktype.quicktype
   - ralffreit.typo3snippets
+  - rangav.vscode-thunder-client
+  - RapidAPI.vscode-rapidapi-client
+  - redhat.ansible
+  - redhat.java
+  - redhat.vscode-xml
   - redhat.vscode-yaml
-  - ritwickdey.live-sass
   - ritwickdey.LiveServer
   - RobbOwen.synthwave-vscode
   - scala-lang.scala
+  - secsamdev.grok
+  - silofy.hackthebox
   - SimonSiefke.svg-preview
-  - snyk-security.vscode-vuln-cost
-  - Sophisticode.php-formatter
+  - snyk-security.snyk-vulnerability-scanner
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-german
+  - tamasfe.even-better-toml
   - timonwong.shellcheck
+  - VisualStudioExptTeam.intellicode-api-usage-examples
   - VisualStudioExptTeam.vscodeintellicode
-  - vscode-icons-team.vscode-icons
   - wayou.vscode-todo-highlight
   - wholroyd.jinja
   - xabikos.JavaScriptSnippets

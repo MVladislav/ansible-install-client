@@ -9,6 +9,7 @@
     regexp: "^load-module module-switch-on-port-available"
     replace: "# load-module module-switch-on-port-available"
   register: change_pulseaudio
+  when: install_client_config.apt_base_sound_pulseaudio | default('no') | bool
   tags:
     - install_client
     - other
@@ -22,6 +23,7 @@
     regexp: "^load-module module-switch-on-connect"
     replace: "# load-module module-switch-on-connect"
   register: change_pulseaudio
+  when: install_client_config.apt_base_sound_pulseaudio | default('no') | bool
   tags:
     - install_client
     - other
@@ -35,7 +37,8 @@
   changed_when: restart_pulseaudio.rc != 0
   failed_when: restart_pulseaudio.rc == 2
   when: >
-    change_pulseaudio is defined
+    install_client_config.apt_base_sound_pulseaudio | default('no') | bool
+    and change_pulseaudio is defined
     and change_pulseaudio.changed is defined
     and change_pulseaudio.changed | bool
   tags:

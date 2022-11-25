@@ -21,56 +21,64 @@ install_client_config:
   gnome_gui_setup_extensions: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
+  # cleanup_remove_snap: false
+  # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
   apt_base2: false
   apt_snap: false
   apt_flatpak: false
-  apt_peek: false
-  apt_wireshark: false
-  apt_wireshark_dev: false
   apt_vpn: false
   apt_gnome_boxes: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
   # DPKG ----------------------------------
-  # dpkg_virtualbox: false
-  dpkg_mongodb: false
+  dpkg_virtualbox: false
   dpkg_veracrypt: false
+  dpkg_parsec: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
   # SNAP ----------------------------------
+  snap_firefox: false
   snap_chromium: false
   snap_thunderbird: false
-  snap_libreoffice: false
-  snap_onlyoffice_desktopeditors: false
-  snap_yubioath_desktop: false
   snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false
   snap_spotify: false
+  snap_libreoffice: false
+  snap_onlyoffice_desktopeditors: false
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
   snap_darktable: false
+  snap_pixelfx: false
+  snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
   snap_flameshot: false
   snap_1password: false
   snap_okular: false
+  snap_yubioath_desktop: false
   snap_code: false
+  snap_remmina: false
   snap_android_studio: false
   snap_UBports: false
   snap_insomnia: false
   snap_postman: false
   snap_dbeaver_ce: false
   snap_beekeeper_studio: false
+  snap_mqtt_explorer: false
+  snap_zaproxy: false
+  snap_nmap: false
+  snap_john_the_ripper: false
   snap_microk8s: false
   snap_rpi_imager: false
   snap_multipass: false
-  snap_zaproxy: false
+  snap_maas: false
   snap_cornyjokes: false
+  snap_steam: false
   # FLATPAK -------------------------------
   flatpak_firefox: false
   flatpak_chromium: false
@@ -92,15 +100,19 @@ install_client_config:
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
+  flatpak_krita: false
   flatpak_studio: false
   flatpak_blender: false
+  flatpak_peek: false
   flatpak_code: false
+  flatpak_remmina: false
   flatpak_sublimetext: false
   flatpak_arduinoide: false
   flatpak_fritzing: false
   flatpak_insomnia: false
   flatpak_postman: false
   flatpak_dbeavercommunity: false
+  flatpak_mongodb_compass: false
   flatpak_filezilla: false
   flatpak_jdownloader: false
   flatpak_wireshark: false
