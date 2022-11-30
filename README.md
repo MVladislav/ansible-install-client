@@ -1,6 +1,8 @@
 # Role Name
 
-_A brief description of the role goes here._
+**install client**
+
+[![Ansible Lint](https://github.com/MVladislav/ansible-install-client/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/MVladislav/ansible-install-client/actions/workflows/ansible-lint.yml)
 
 ## Requirements
 
