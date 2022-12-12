@@ -39,6 +39,7 @@ install_client_config:
   dpkg_virtualbox: false
   dpkg_veracrypt: false
   dpkg_parsec: false
+  dpkg_brim: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
   # SNAP ----------------------------------
