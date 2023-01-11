@@ -416,6 +416,8 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libfido2-dev
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: ubuntu-restricted-extras
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
   - name: rar
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
