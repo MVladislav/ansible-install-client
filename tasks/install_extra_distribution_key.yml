@@ -2,55 +2,66 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: add apt signing key (trusted.gpg.d) (curl command for now)
+- name: "CLIENT | dist-apt | add apt signing key (trusted.gpg.d) (curl command for now)"
   become: true
   ansible.builtin.shell: set -o pipefail && curl -sL "{{ item.url }}" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/{{ item.name }} >/dev/null
   args:
     executable: /bin/bash
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
-  when: (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - outer_item.install is defined
+    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key
 
 # ------------------------------------------------------------------------------
-- name: get OS distribution
+- name: "CLIENT | dist-apt | get OS distribution"
   ansible.builtin.command: lsb_release -sc
   register: os_distribution
-  when: (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - outer_item.install is defined
+    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key
 
-- name: get OS architecture
+- name: "CLIENT | dist-apt | get OS architecture"
   ansible.builtin.command: dpkg --print-architecture
   register: os_architecture
-  when: (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - outer_item.install is defined
+    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key
 
-- name: add repository into sources list
+- name: "CLIENT | dist-apt | add repository into sources list"
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ outer_item.distribution|default(os_distribution.stdout) }} {{ outer_item.version }}"
+    repo: >
+      deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ outer_item.distribution | default(os_distribution.stdout) }} {{ outer_item.version }}
     state: present
   # ignore_errors: yes
-  when: (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - outer_item.install is defined
+    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key
 
 # ------------------------------------------------------------------------------
-- name: install apt services
+- name: "CLIENT | dist-apt | install apt services"
   become: true
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
     force_apt_get: true # apt-get instead of aptitude
-  loop: "{{ outer_item.apt|flatten(levels=1) }}"
+  loop: "{{ outer_item.apt | flatten(levels=1) }}"
   # ignore_errors: yes
-  when: (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - outer_item.install is defined
+    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key

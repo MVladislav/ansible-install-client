@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 # CHECK IF SERVICE INSTALLED
-- name: snap - check if service installed
+- name: "CLIENT | snap | check if service installed"
   become: true
   ansible.builtin.shell: set -o pipefail && command -v snap >/dev/null 2>&1
   args:
@@ -16,14 +16,19 @@
     - snap
 
 # ------------------------------------------------------------------------------
-- name: install snap services [main]
+- name: "CLIENT | snap | install snap services"
   become: true
-  snap:
+  community.general.snap:
     name: "{{ item.name }}"
     classic: "{{ item.classic | bool }}"
     # beta: "{{ item.beta | bool }}"
-  loop: "{{ install_client_snap|flatten(levels=1) }}"
-  when: (install_client_snap is defined) and (item.install is defined and item.install | bool) and (is_snap_exist.rc is defined and is_snap_exist.rc == 0)
+  loop: "{{ install_client_snap | flatten(levels=1) }}"
+  when:
+    - install_client_snap is defined
+    - item.install is defined
+    - item.install | bool
+    - is_snap_exist.rc is defined
+    - is_snap_exist.rc == 0
   tags:
     - install_client
     - snap

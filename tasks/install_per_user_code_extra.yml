@@ -2,7 +2,7 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "vscode - check if vs code is installed [{{ outer_item.name }}]"
+- name: "CLIENT | vscode | check if vs code is installed - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: set -o pipefail && command -v code >/dev/null 2>&1
@@ -17,12 +17,12 @@
 
 # ------------------------------------------------------------------------------
 # `$code --list-extensions | xargs -L 1 echo code --install-extension`
-- name: "vscode - install vs-code extensions [{{ outer_item.name }}]"
+- name: "CLIENT | vscode | install vs-code extensions - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   # command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
   ansible.builtin.command: "code --install-extension {{ item }}"
-  loop: "{{ install_client_vs_code_ext|flatten(levels=1) }}"
+  loop: "{{ install_client_vs_code_ext | flatten(levels=1) }}"
   when: install_client_vs_code_ext is defined and (is_code_exist.rc is defined and is_code_exist.rc == 0)
   # ignore_errors: true
   tags:
@@ -30,7 +30,7 @@
     - vs_code
 
 # ------------------------------------------------------------------------------
-- name: "vscode - copy template for vs-code settings.json [{{ outer_item.name }}]"
+- name: "CLIENT | vscode | copy template for vs-code settings.json - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
@@ -42,7 +42,7 @@
     - install_client
     - vs_code
 
-- name: "vscode - copy template for vs-code keybindings.json [{{ outer_item.name }}]"
+- name: "CLIENT | vscode | copy template for vs-code keybindings.json - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:

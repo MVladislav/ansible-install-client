@@ -3,37 +3,40 @@
 
 # # ------------------------------------------------------------------------------
 # # SETUP USERS
-# - name: setup users
-#   include_tasks: setup_users.yml
+# - name: "CLIENT | users | setup users"
+#   ansible.builtin.include_tasks: setup_users.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY APT
-- name: install apt services
-  include_tasks: install_apt.yml
+- name: "CLIENT | apt | install apt services"
+  ansible.builtin.include_tasks: install_apt.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DPKG
-- name: install dpkg services
-  include_tasks: install_dpkg.yml
+- name: "CLIENT | dpkg | install dpkg services"
+  ansible.builtin.include_tasks: install_dpkg.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DISTRIBUTION KEY
-- name: install distribution services
-  include_tasks: install_extra_distribution_key.yml
+- name: "CLIENT | dist_apt | install distribution services"
+  ansible.builtin.include_tasks: install_extra_distribution_key.yml
   loop: "{{ install_client_distribution_key | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: install_client_distribution_key is defined and (outer_item.install is defined and outer_item.install | bool)
+  when:
+    - install_client_distribution_key is defined
+    - outer_item.install is defined
+    - outer_item.install | bool
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY SNAP
-- name: install snap services
-  include_tasks: install_snap.yml
+- name: "CLIENT | snap | install snap services"
+  ansible.builtin.include_tasks: install_snap.yml
 
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY FLATPAK
-- name: install flatpak services
-  include_tasks: install_flatpak.yml
+- name: "CLIENT | flatpak | install flatpak services"
+  ansible.builtin.include_tasks: install_flatpak.yml
   # loop: "{{ clients | flatten(levels=1) }}"
   # loop_control:
   #   loop_var: outer_item
@@ -43,42 +46,47 @@
 
 # ------------------------------------------------------------------------------
 # JAVA PACKAGES
-- name: install java packages
-  include_tasks: install_java.yml
-  when: install_client_config.java is defined and install_client_config.java | bool
+- name: "CLIENT | java | install java packages"
+  ansible.builtin.include_tasks: install_java.yml
+  when:
+    - install_client_config.java is defined
+    - install_client_config.java | bool
 
 # ------------------------------------------------------------------------------
 # INSTALL EXTRAS PER USER
-- name: install fonts (per user)
-  include_tasks: install_per_user_fonts.yml
+- name: "CLIENT | user - fonts | install fonts (per user)"
+  ansible.builtin.include_tasks: install_per_user_fonts.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: >
-    install_client_config.fonts is defined and install_client_config.fonts | bool
-    and (outer_item.setup is not defined or outer_item.setup | bool)
+  when:
+    - install_client_config.fonts is defined
+    - install_client_config.fonts | bool
+    - (outer_item.setup is not defined or outer_item.setup | bool)
 
-- name: install code extras (per user)
-  include_tasks: install_per_user_code_extra.yml
+- name: "CLIENT | user - vscode | install code extras (per user)"
+  ansible.builtin.include_tasks: install_per_user_code_extra.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: >
-    install_client_config.vs_code_ext is defined and install_client_config.vs_code_ext | bool
-    and (outer_item.setup is not defined or outer_item.setup | bool)
+  when:
+    - install_client_config.vs_code_ext is defined
+    - install_client_config.vs_code_ext | bool
+    - (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # GNOME SETUP (FAVORITES)
-- name: setup gnome (per user)
-  include_tasks: setup_gnome.yml
+- name: "CLIENT | user - gnome | setup gnome (per user)"
+  ansible.builtin.include_tasks: setup_gnome.yml
   loop: "{{ clients | flatten(levels=1) }}"
   loop_control:
     loop_var: outer_item
-  when: >
-    install_client_config.gnome_gui_setup is defined and install_client_config.gnome_gui_setup | bool
-    and (outer_item.setup is not defined or outer_item.setup | bool)
+  when:
+    - install_client_config.gnome_gui_setup is defined
+    - install_client_config.gnome_gui_setup | bool
+    - (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # OTHER SETUPS
-- name: setup other settings
-  include_tasks: setup_other.yml
+- name: "CLIENT | other | setup other settings"
+  ansible.builtin.include_tasks: setup_other.yml

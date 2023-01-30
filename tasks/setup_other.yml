@@ -2,7 +2,7 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "setup other - disable audio auto switch in pulseaudio"
+- name: "CLIENT | setup other | disable audio auto switch in pulseaudio"
   become: true
   ansible.builtin.replace:
     path: /etc/pulse/default.pa
@@ -16,7 +16,7 @@
     - audio
     - pulseaudio
 
-- name: "setup other - disable audio auto switch in pulseaudio"
+- name: "CLIENT | setup other | disable audio auto switch in pulseaudio"
   become: true
   ansible.builtin.replace:
     path: /etc/pulse/default.pa
@@ -30,17 +30,17 @@
     - audio
     - pulseaudio
 
-- name: "setup other - restart pulseaudio"
+- name: "CLIENT | setup other | restart pulseaudio"
   become: true
   ansible.builtin.command: "pulseaudio -k"
   register: restart_pulseaudio
   changed_when: restart_pulseaudio.rc != 0
   failed_when: restart_pulseaudio.rc == 2
-  when: >
-    install_client_config.apt_base_sound_pulseaudio | default('no') | bool
-    and change_pulseaudio is defined
-    and change_pulseaudio.changed is defined
-    and change_pulseaudio.changed | bool
+  when:
+    - install_client_config.apt_base_sound_pulseaudio | default('no') | bool
+    - change_pulseaudio is defined
+    - change_pulseaudio.changed is defined
+    - change_pulseaudio.changed | bool
   tags:
     - install_client
     - other
@@ -48,7 +48,7 @@
     - pulseaudio
 
 # ------------------------------------------------------------------------------
-- name: "setup other - change Connectivity Checking to off"
+- name: "CLIENT | setup other | change Connectivity Checking to off"
   become: true
   ansible.builtin.lineinfile:
     path: /var/lib/NetworkManager/NetworkManager-intern.conf
@@ -62,7 +62,7 @@
     - other
     - connectivity_checking
 
-- name: "setup other - change Connectivity Checking to off"
+- name: "CLIENT | setup other | change Connectivity Checking to off"
   become: true
   ansible.builtin.lineinfile:
     path: /var/lib/NetworkManager/NetworkManager-intern.conf
@@ -76,7 +76,7 @@
     - other
     - connectivity_checking
 
-- name: "setup other - restart NetworkManager for changed Connectivity Checking"
+- name: "CLIENT | setup other | restart NetworkManager for changed Connectivity Checking"
   become: true
   ansible.builtin.service:
     name: NetworkManager

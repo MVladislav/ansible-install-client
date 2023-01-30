@@ -2,7 +2,7 @@
 # tasks file for ./roles/install_client
 
 # ------------------------------------------------------------------------------
-- name: install java packages [apt]
+- name: "CLIENT | java | install java packages [apt]"
   become: true
   ansible.builtin.apt:
     pkg: "{{ install_client_java.apt }}"
@@ -14,7 +14,7 @@
     - install_java
 
 # ------------------------------------------------------------------------------
-- name: install java packages [apt]
+- name: "CLIENT | java | install java packages [apt]"
   become: true
   ansible.builtin.apt:
     pkg: "{{ install_client_java.apt }}"
@@ -27,7 +27,7 @@
 
 # ------------------------------------------------------------------------------
 
-- name: set java env variables
+- name: "CLIENT | java | set java env variables"
   become: true
   ansible.builtin.lineinfile:
     dest: "/etc/environment"
