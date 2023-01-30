@@ -1,0 +1,40 @@
+---
+name: Ansible Molecule Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Molecule Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: molecule_demo
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install molecule[docker] yamllint ansible-lint
+
+      - name: Test with molecule
+        run: molecule test
+        env:
+          PY_COLOR: "1"
+          ANSIBLE_FORCE_COLOR: "1"
