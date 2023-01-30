@@ -23,12 +23,10 @@
 - name: "CLIENT | flatpak | check if service installed"
   become: true
   # become_user: "{{ outer_item.name }}"
-  ansible.builtin.shell: set -o pipefail && command -v flatpak >/dev/null 2>&1
-  args:
-    executable: /bin/bash
+  ansible.builtin.command: which flatpak
   register: is_flatpak_exist
-  changed_when: is_flatpak_exist.rc != 0
-  failed_when: is_flatpak_exist.rc == 2
+  changed_when: is_flatpak_exist.rc not in [0, 1]
+  failed_when: is_flatpak_exist.rc not in [0, 1]
   tags:
     - install_client
     - flatpak

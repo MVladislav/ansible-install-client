@@ -48,6 +48,11 @@
     - pulseaudio
 
 # ------------------------------------------------------------------------------
+- name: "CLIENT | setup other | change Connectivity Checking to off - check if file exists"
+  ansible.builtin.stat:
+    path: /var/lib/NetworkManager/NetworkManager-intern.conf
+  register: file_stat_network_manager_intern_conf
+
 - name: "CLIENT | setup other | change Connectivity Checking to off"
   become: true
   ansible.builtin.lineinfile:
@@ -56,7 +61,12 @@
     line: "[connectivity]"
     insertbefore: '^\.set\.enabled='
     state: present
-  register: change_connectivity_checking
+  register: change_connectivity_checking_01
+  when:
+    - file_stat_network_manager_intern_conf is defined
+    - file_stat_network_manager_intern_conf.stat is defined
+    - file_stat_network_manager_intern_conf.stat.exists is defined
+    - file_stat_network_manager_intern_conf.stat.exists
   tags:
     - install_client
     - other
@@ -70,7 +80,12 @@
     line: ".set.enabled=false"
     insertafter: '^\[connectivity\]'
     state: present
-  register: change_connectivity_checking
+  register: change_connectivity_checking_02
+  when:
+    - file_stat_network_manager_intern_conf is defined
+    - file_stat_network_manager_intern_conf.stat is defined
+    - file_stat_network_manager_intern_conf.stat.exists is defined
+    - file_stat_network_manager_intern_conf.stat.exists
   tags:
     - install_client
     - other
@@ -83,9 +98,16 @@
     state: restarted
     enabled: true
   when: >
-    change_connectivity_checking is defined
-    and change_connectivity_checking.changed is defined
-    and change_connectivity_checking.changed | bool
+    (
+      change_connectivity_checking_01 is defined
+      and change_connectivity_checking_01.changed is defined
+      and change_connectivity_checking_01.changed | bool
+    ) or
+    (
+      change_connectivity_checking_02 is defined
+      and change_connectivity_checking_02.changed is defined
+      and change_connectivity_checking_02.changed | bool
+    )
   tags:
     - install_client
     - other
