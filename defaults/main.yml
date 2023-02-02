@@ -6,9 +6,10 @@ install_client_service_name: default-client
 
 # also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
-  virtualbox: https://download.virtualbox.org/virtualbox/7.0.0/virtualbox-7.0_7.0.0-153978~Ubuntu~jammy_amd64.deb
-  veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-21.10-amd64.deb
+  virtualbox: https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb
+  veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-22.04-amd64.deb
   parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
+  # curl -s https://api.github.com/repos/brimdata/brim/releases/latest | grep "http.*\.deb" | cut -d : -f 2,3 | tr -d \"
   brim: https://github.com/brimdata/brim/releases/download/v0.31.0/Brim-0.31.0.deb
   portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
 
@@ -136,18 +137,14 @@ install_client_config:
   # OTHER --------------------------------
   vs_code_ext: false
   java: false
+  java_ant: false
 
 # ------------------------------------------------------------------------------
-# CLIENTS for adding specific packages (ex. ...)
+# CLIENTS for adding specific packages to clients (ex. ...)
 clients: []
 # - name: "{{ ansible_user }}"
-# - name: "{{ ansible_user }}"
-#   shell: /bin/bash
-#   group: adm,cdrom,sudo
-#   createhome: true
-#   isDev: true
-#   password: "..."
-#   updateOrCreate: true
+# - name: "root"
+#   setup: false
 
 # ------------------------------------------------------------------------------
 # FONTS
@@ -1006,9 +1003,10 @@ install_client_vs_code_ext:
 install_client_java_version: 11
 install_client_java:
   apt:
-    - "openjdk-{{ install_client_java_version }}-jdk"
-  dev:
-    - ant
+    - name: "openjdk-{{ install_client_java_version }}-jdk"
+      install: "{{ install_client_config.java | default('no') | bool }}"
+    - name: ant
+      install: "{{ install_client_config.java_ant | default('no') | bool }}"
   os_env:
     - variable: JAVA_HOME
       path: "/usr/lib/jvm/java-{{ install_client_java_version }}-openjdk-amd64"

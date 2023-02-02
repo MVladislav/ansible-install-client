@@ -13,6 +13,11 @@ _Any pre-requisites that may not be covered by Ansible itself or the role should
 
 ```yml
 install_client_service_name: default-client
+clients:
+  - name: "{{ ansible_user }}"
+    dev: yes
+    updateOrCreate: false
+    setup: true # if client should be setup with additional tools and gui (default true)
 install_client_config:
   # GENERAL -------------------------------
   dev: false
@@ -130,10 +135,7 @@ install_client_config:
   # OTHER --------------------------------
   vs_code_ext: false
   java: false
-clients:
-  - name: "{{ ansible_user }}"
-    dev: yes
-    updateOrCreate: false
+  java_ant: false
 ```
 
 ## Dependencies
