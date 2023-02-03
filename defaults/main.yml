@@ -2,8 +2,6 @@
 # defaults file for ./roles/install_client
 
 # ------------------------------------------------------------------------------
-install_client_service_name: default-client
-
 # also check "install_client_fonts" and "install_client_gdm_gui_setup"
 install_client_links_to_check_update:
   virtualbox: https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb

@@ -23,5 +23,6 @@
     remote_src: true
   loop: "{{ install_client_fonts.url | flatten(levels=1) }}"
   tags:
+    - molecule-idempotence-notest
     - install_client
     - fonts

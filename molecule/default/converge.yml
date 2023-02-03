@@ -13,7 +13,6 @@
         updateOrCreate: false
         setup: true # if client should be setup with additional tools and gui (default true)
     # --- in playbook ---
-    install_client_service_name: "{{ service_name }}"
     # if you install java, by default as version is set 11, change below if you need
     # version is as input for openjdk java version
     install_client_java_version: 11

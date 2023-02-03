@@ -12,7 +12,6 @@ _Any pre-requisites that may not be covered by Ansible itself or the role should
 ## Role Variables
 
 ```yml
-install_client_service_name: default-client
 clients:
   - name: "{{ ansible_user }}"
     dev: yes
@@ -156,7 +155,6 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: clients
   roles:
     - role: install_client
-      install_client_service_name: "{{ service_name }}"
       install_client_config: []
       clients:
         - name: "{{ ansible_user }}"
