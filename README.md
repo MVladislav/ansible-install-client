@@ -27,6 +27,12 @@ install_client_config:
   gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
+  gnome_gui_setup_extensions_git_caffeine: false
+  gnome_gui_setup_extensions_git_sound: false
+  gnome_gui_setup_extensions_git_blur_shell: false
+  gnome_gui_setup_extensions_git_burn_window: false
+  gnome_gui_setup_extensions_git_dash_to_panel: false
+  gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
   # cleanup_remove_snap: false

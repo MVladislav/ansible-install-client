@@ -24,6 +24,12 @@ install_client_config:
   gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
+  gnome_gui_setup_extensions_git_caffeine: false
+  gnome_gui_setup_extensions_git_sound: false
+  gnome_gui_setup_extensions_git_blur_shell: false
+  gnome_gui_setup_extensions_git_burn_window: false
+  gnome_gui_setup_extensions_git_dash_to_panel: false
+  gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
   # cleanup_remove_snap: false
@@ -232,37 +238,49 @@ install_client_gdm_gui_setup:
     command: dbus-launch --exit-with-session gnome-extensions enable
     apt: []
     git:
-      - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
-        branch: master
-        name: gse-sound-output-device-chooser
-        target: install
-      - repo: https://github.com/aunetx/blur-my-shell.git
-        branch: master
-        name: blur-my-shell
-        target: install
-      # - repo: https://github.com/axxapy/gnome-ui-tune.git
-      #   branch: master
-      #   name: gnome-ui-tune
-      #   target: schemas
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
         branch: master
         name: gnome-shell-extension-caffeine
         target: all
-      - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
+      - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
         branch: master
-        name: dash-to-panel
+        name: gse-sound-output-device-chooser
         target: install
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_sound | default('no') | bool }}"
+      - repo: https://github.com/aunetx/blur-my-shell.git
+        branch: master
+        name: blur-my-shell
+        target: install
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_blur_shell | default('no') | bool }}"
       - repo: https://github.com/Schneegans/Burn-My-Windows.git
         branch: main
         name: Burn-My-Windows
         target: install
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_burn_window | default('no') | bool }}"
+      - repo: https://github.com/home-sweet-gnome/dash-to-panel.git
+        branch: master
+        name: dash-to-panel
+        target: install
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
+      - repo: https://github.com/axxapy/gnome-ui-tune.git
+        branch: master
+        name: gnome-ui-tune
+        target: schemas
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
     activate:
-      - caffeine@patapon.info
-      - sound-output-device-chooser@kgshank.net
-      - blur-my-shell@aunetx
-      # - burn-my-windows@schneegans.github.com
-      # - dash-to-panel@jderose9.github.com
-      # - user-theme@gnome-shell-extensions.gcampax.github.com
+      - name: caffeine@patapon.info
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
+      - name: sound-output-device-chooser@kgshank.net
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_sound | default('no') | bool }}"
+      - name: blur-my-shell@aunetx
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_blur_shell | default('no') | bool }}"
+      # - name: burn-my-windows@schneegans.github.com
+      #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_burn_window | default('no') | bool }}"
+      # - name: dash-to-panel@jderose9.github.com
+      #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
+      # - name: user-theme@gnome-shell-extensions.gcampax.github.com
+      #   install: false
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-launch --exit-with-session gsettings set

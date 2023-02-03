@@ -26,6 +26,12 @@
       # gnome_gui_setup_theme: false
       # gnome_gui_setup_dependencies: false
       gnome_gui_setup_extensions: true
+      # gnome_gui_setup_extensions_git_caffeine: false
+      # gnome_gui_setup_extensions_git_sound: false
+      gnome_gui_setup_extensions_git_blur_shell: true
+      gnome_gui_setup_extensions_git_burn_window: true
+      gnome_gui_setup_extensions_git_dash_to_panel: true
+      # gnome_gui_setup_extensions_git_ui_tune: false
       # gnome_gui_setup_keybinding: false
       gnome_gui_setup_overlay: true
       # cleanup_remove_snap: false
@@ -49,15 +55,15 @@
       # DIST KEY ------------------------------
       # distribution_key_virtualbox: false
       # SNAP ----------------------------------
-      snap_firefox: true
-      snap_chromium: true
-      snap_thunderbird: true
+      # snap_firefox: false
+      # snap_chromium: false
+      # snap_thunderbird: false
       # snap_signal_desktop: false
       # snap_telegram_desktop: false
       # snap_zoom_client: false
       # snap_spotify: false
       # snap_libreoffice: false
-      snap_onlyoffice_desktopeditors: true
+      # snap_onlyoffice_desktopeditors: false
       # snap_inkscape: false
       # snap_drawio: false
       # snap_gimp: false
@@ -84,7 +90,7 @@
       # snap_john_the_ripper: false
       # snap_microk8s: false
       # snap_rpi_imager: false
-      snap_multipass: true
+      # snap_multipass: false
       # snap_maas: false
       # snap_cornyjokes: false
       # snap_steam: false
@@ -138,5 +144,5 @@
       # flatpak_betaflightconfigurator: false
       # OTHER --------------------------------
       # vs_code_ext: false
-      java: true
-      java_ant: false
+      # java: false
+      # java_ant: false

@@ -98,12 +98,15 @@
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.extensions is defined
     - install_client_gdm_gui_setup.extensions.apt is defined
+    - install_client_gdm_gui_setup.extensions.install is defined
     - install_client_gdm_gui_setup.extensions.install | bool
   tags:
     - install_client
     - ubuntu
     - gnome
 
+# ------------------------------------------------------------------------------
+# GIT extensions
 - name: "CLIENT | gnome gui | clone extensions by git - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
@@ -119,7 +122,10 @@
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.extensions is defined
     - install_client_gdm_gui_setup.extensions.git is defined
+    - install_client_gdm_gui_setup.extensions.install is defined
     - install_client_gdm_gui_setup.extensions.install | bool
+    - item.install is defined
+    - item.install | bool
   tags:
     - install_client
     - ubuntu
@@ -136,7 +142,10 @@
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.extensions is defined
     - install_client_gdm_gui_setup.extensions.git is defined
+    - install_client_gdm_gui_setup.extensions.install is defined
     - install_client_gdm_gui_setup.extensions.install | bool
+    - item.install is defined
+    - item.install | bool
   tags:
     - install_client
     - ubuntu
@@ -162,7 +171,7 @@
 - name: "CLIENT | gnome gui | activate extensions - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
-  ansible.builtin.command: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item }}"
+  ansible.builtin.command: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item.name }}"
   # ignore_errors: true
   loop: "{{ install_client_gdm_gui_setup.extensions.activate | flatten(levels=1) }}"
   when:
@@ -170,6 +179,8 @@
     - install_client_gdm_gui_setup.extensions is defined
     - install_client_gdm_gui_setup.extensions.command is defined
     - install_client_gdm_gui_setup.extensions.install | bool
+    - item.install is defined
+    - item.install | bool
   tags:
     - install_client
     - ubuntu
