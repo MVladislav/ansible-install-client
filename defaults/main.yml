@@ -472,7 +472,7 @@ install_client_apt:
   - name: pulseaudio-dlna
     install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
   # --------------------------------
-  - name: snap
+  - name: snapd
     install: "{{ install_client_config.apt_snap | default('no') | bool }}"
   - name: flatpak
     install: "{{ install_client_config.apt_flatpak | default('no') | bool }}"
