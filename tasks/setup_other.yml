@@ -49,6 +49,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "CLIENT | setup other | change Connectivity Checking to off - check if file exists"
+  become: true
   ansible.builtin.stat:
     path: /var/lib/NetworkManager/NetworkManager-intern.conf
   register: file_stat_network_manager_intern_conf

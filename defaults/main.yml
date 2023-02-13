@@ -579,6 +579,17 @@ install_client_distribution_key:
     version: contrib
     apt:
       - virtualbox-6.1
+  # https://developer.1password.com/docs/cli/get-started/#install
+  - install: "{{ install_client_config.distribution_key_1password_cli | default('no') | bool }}"
+    pgp:
+      - id: ""
+        url: https://downloads.1password.com/linux/keys/1password.asc
+        name: 1password-archive-keyring.gpg
+    repo: https://downloads.1password.com/linux/debian/amd64
+    distribution: stable
+    version: main
+    apt:
+      - 1password-cli
 
 # ------------------------------------------------------------------------------
 # APP IMAGE
@@ -762,6 +773,15 @@ install_client_snap:
 
 # ------------------------------------------------------------------------------
 # FLATPAK
+install_client_flatpak_remotes:
+  - name: flathub
+    url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: system
+    install: true
+  - name: flathub-beta
+    url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+    method: system
+    install: true
 # install_client_config.flatpak_...
 install_client_flatpak:
   # HELPER
@@ -787,7 +807,7 @@ install_client_flatpak:
     remote: flathub
     install: "{{ install_client_config.flatpak_onlyoffice | default('no') | bool }}"
   - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
-    remote: TODO
+    remote: ""
     install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
   - name: org.keepassxc.KeePassXC
     remote: flathub

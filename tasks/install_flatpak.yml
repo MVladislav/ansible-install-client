@@ -40,20 +40,13 @@
     state: present
     flatpakrepo_url: "{{ item.url }}"
     method: "{{ item.method }}"
-  loop:
-    - name: flathub
-      install: true
-      url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      method: system
-    - name: flathub-beta
-      install: true
-      url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-      method: system
+  loop: "{{ install_client_flatpak_remotes | flatten(levels=1) }}"
   register: is_flatpak_remote_added
   when:
+    - install_client_flatpak_remotes is defined
+    - install_client_flatpak is defined
     - item.install is defined
     - item.install | bool
-    - install_client_flatpak is defined
     - is_flatpak_exist.rc is defined
     - is_flatpak_exist.rc == 0
   tags:
