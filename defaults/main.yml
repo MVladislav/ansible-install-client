@@ -110,6 +110,7 @@ install_client_config:
   flatpak_spotify: false
   flatpak_ferdi: false
   flatpak_vlc: false
+  flatpak_amberol: false
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
@@ -448,6 +449,8 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   # --------------------------------
   - name: ffmpeg
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: mpv
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libavcodec-extra
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
@@ -844,6 +847,9 @@ install_client_flatpak:
   - name: org.videolan.VLC
     remote: flathub
     install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
+  - name: io.bassi.Amberol
+    remote: flathub
+    install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
   # DESIGN
   - name: org.inkscape.Inkscape
     remote: flathub
