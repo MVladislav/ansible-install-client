@@ -60,6 +60,7 @@ install_client_config:
   snap_spotify: false
   snap_libreoffice: false
   snap_onlyoffice_desktopeditors: false
+  snap_fbreader: false
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
@@ -647,6 +648,10 @@ install_client_snap:
     beta: false
   - name: onlyoffice-desktopeditors
     install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: fbreader
+    install: "{{ install_client_config.snap_fbreader | default('no') | bool }}"
     classic: false
     beta: false
   - name: inkscape
