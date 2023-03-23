@@ -114,6 +114,7 @@ install_client_config:
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
+  flatpak_conjure: false
   flatpak_krita: false
   flatpak_studio: false
   flatpak_blender: false
@@ -860,6 +861,9 @@ install_client_flatpak:
   - name: org.gimp.GIMP
     remote: flathub
     install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
+  - name: io.github.nate_xyz.Conjure
+    remote: flathub
+    install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
   - name: org.kde.krita
     remote: flathub
     install: "{{ install_client_config.flatpak_krita | default('no') | bool }}"
