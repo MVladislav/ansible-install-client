@@ -34,6 +34,7 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
+  # NOTE: not need in new ubuntu, switched to pipewire
   apt_base_sound_pulseaudio: false
   apt_snap: false
   apt_flatpak: false
@@ -102,6 +103,7 @@ install_client_config:
   flatpak_onlyoffice: false
   flatpak_1password: false
   flatpak_keepassxc: false
+  flatpak_cryptomator: false
   flatpak_easy_effects: false
   flatpak_signal: false
   flatpak_telegram: false
@@ -113,6 +115,7 @@ install_client_config:
   flatpak_ferdi: false
   flatpak_vlc: false
   flatpak_amberol: false
+  flatpak_haruna: false
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
@@ -825,6 +828,9 @@ install_client_flatpak:
   - name: org.keepassxc.KeePassXC
     remote: flathub
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
+  - name: org.cryptomator.Cryptomator
+    remote: flathub
+    install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
   - name: com.github.wwmm.easyeffects
     # https://github.com/JackHack96/EasyEffects-Presets
     remote: flathub
@@ -860,6 +866,9 @@ install_client_flatpak:
   - name: io.bassi.Amberol
     remote: flathub
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
+  - name: flathub org.kde.haruna
+    remote: flathub
+    install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
   # DESIGN
   - name: org.inkscape.Inkscape
     remote: flathub
