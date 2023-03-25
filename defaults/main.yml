@@ -866,7 +866,7 @@ install_client_flatpak:
   - name: io.bassi.Amberol
     remote: flathub
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
-  - name: flathub org.kde.haruna
+  - name: org.kde.haruna
     remote: flathub
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
   # DESIGN
