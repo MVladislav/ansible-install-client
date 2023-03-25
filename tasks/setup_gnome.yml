@@ -218,8 +218,10 @@
 - name: "CLIENT | gnome terminal | get default profile - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
-  ansible.builtin.command: >
-    gsettings get org.gnome.Terminal.ProfilesList default | tr -d \'
+  ansible.builtin.shell: >
+    set -o pipefail && gsettings get org.gnome.Terminal.ProfilesList default | tr -d \'
+  args:
+    executable: /bin/bash
   register: gnome_setup_terminal_overlay_profile
   changed_when: true
   when:
@@ -238,7 +240,10 @@
 - name: "CLIENT | gnome terminal | setup overlay - {{ outer_item.name }}"
   become: true
   become_user: "{{ outer_item.name }}"
-  ansible.builtin.command: '{{ install_client_gdm_gui_setup.terminal_style.command }} {{ item.source }}{{ gnome_setup_terminal_overlay_profile.stdout_lines[0] }}/ {{ item.key }} "{{ item.value | string }}"'
+  ansible.builtin.command: >
+    {{ install_client_gdm_gui_setup.terminal_style.command }}
+    {{ item.source }}{{ gnome_setup_terminal_overlay_profile.stdout }}/
+    {{ item.key }} "{{ item.value | string }}"
   loop: "{{ install_client_gdm_gui_setup.terminal_style.configs | flatten(levels=1) }}"
   register: gnome_setup_terminal_overlay
   # NOTE: we ignore error's here, because we only interested setup gnome, for what we have to change anyway if it fails
@@ -246,8 +251,7 @@
   changed_when: true
   when:
     - gnome_setup_terminal_overlay_profile is defined
-    - gnome_setup_terminal_overlay_profile.stdout_lines is defined
-    - gnome_setup_terminal_overlay_profile.stdout_lines[0] is defined
+    - gnome_setup_terminal_overlay_profile.stdout is defined
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.terminal_style is defined
     - install_client_gdm_gui_setup.terminal_style.command is defined
