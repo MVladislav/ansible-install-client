@@ -38,7 +38,8 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
-  apt_base2: false
+  # NOTE: not need in new ubuntu, switched to pipewire
+  apt_base_sound_pulseaudio: false
   apt_snap: false
   apt_flatpak: false
   apt_vpn: false
@@ -58,12 +59,13 @@ install_client_config:
   snap_firefox: false
   snap_chromium: false
   snap_thunderbird: false
-  snap_signal_desktop: false
+  # snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false
   snap_spotify: false
   snap_libreoffice: false
   snap_onlyoffice_desktopeditors: false
+  snap_fbreader: false
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
@@ -95,14 +97,18 @@ install_client_config:
   snap_cornyjokes: false
   snap_steam: false
   # FLATPAK -------------------------------
+  flatpak_flatseal: false
   flatpak_firefox: false
   flatpak_chromium: false
   flatpak_thunderbird: false
+  flatpak_newsflash: false
   flatpak_extension_manager: false
   flatpak_flameshot: false
   flatpak_onlyoffice: false
   flatpak_1password: false
   flatpak_keepassxc: false
+  flatpak_cryptomator: false
+  flatpak_easy_effects: false
   flatpak_signal: false
   flatpak_telegram: false
   flatpak_threemaqt: false
@@ -112,13 +118,19 @@ install_client_config:
   flatpak_spotify: false
   flatpak_ferdi: false
   flatpak_vlc: false
+  flatpak_amberol: false
+  flatpak_haruna: false
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
+  flatpak_conjure: false
   flatpak_krita: false
   flatpak_studio: false
   flatpak_blender: false
   flatpak_peek: false
+  flatpak_video_trimmer: false
+  flatpak_tube_converter: false
+  flatpak_girens: false
   flatpak_code: false
   flatpak_remmina: false
   flatpak_sublimetext: false
