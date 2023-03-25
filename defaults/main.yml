@@ -30,6 +30,7 @@ install_client_config:
   gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
+  gnome_terminal_setup_overlay: false
   # cleanup_remove_snap: false
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
@@ -397,27 +398,116 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop','chromium_chromium.desktop','1password_1password.desktop','org.keepassxc.KeePassXC.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','org.signal.Signal.desktop','telegram-desktop_telegram-desktop.desktop','zoom-client_zoom-client.desktop','spotify_spotify.desktop','obs-studio_obs-studio.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','gimp_gimp.desktop','darktable_darktable.desktop','Upscayl.desktop','com.uploadedlobster.peek.desktop','blender.desktop','code_code.desktop','LogSeq.desktop','insomnia_insomnia.desktop','postman_postman.desktop','mongodb-compass.desktop','sqldeveloper.desktop','dbeaver-ce_dbeaver-ce.desktop','beekeeper-studio_beekeeper-studio.desktop','org.wireshark.Wireshark.desktop','veracrypt.desktop','virtualbox.desktop','org.gnome.Nautilus.desktop','gnome-system-monitor.desktop']
-      # - source: org.gnome.desktop.interface
-      #   key: gtk-theme
-      #   value: >-
-      #     Yaru-dark
-      # - source: org.gnome.desktop.interface
-      #   key: cursor-theme
-      #   value: >-
-      #     Yaru
-      # - source: org.gnome.desktop.interface
-      #   key: icon-theme
-      #   value: >-
-      #     Yaru-prussiangreen
-      # - source: org.gnome.desktop.wm.preferences
-      #   key: theme
-      #   value: >-
-      #     Yaru-prussiangreen-dark
-      # - source: org.gnome.Terminal.Legacy.Settings
-      #   key: theme-variant
-      #   value: >-
-      #     dark
+          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'org.gnome.Nautilus.desktop', 'gnome-system-monitor.desktop']
+  terminal_style:
+    setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
+    command: dbus-launch --exit-with-session gsettings set
+    configs:
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: font
+        value: >-
+          Source Code Pro for Powerline 12
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: default-size-columns
+        value: >-
+          130
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: default-size-rows
+        value: >-
+          32
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: use-transparent-background
+        value: >-
+          true
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: background-transparency-percent
+        value: >-
+          50
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: audible-bell
+        value: >-
+          false
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: use-system-font
+        value: >-
+          false
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: use-theme-colors
+        value: >-
+          false
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: foreground-color
+        value: >-
+          rgb(170,170,170)
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: background-color
+        value: >-
+          rgb(0,0,0)
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: bold-color
+        value: >-
+          rgb(3,195,203)
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: bold-is-bright
+        value: >-
+          true
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: highlight-background-color
+        value: >-
+          rgb(3,195,203)
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: highlight-colors-set
+        value: >-
+          true
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: highlight-foreground-color
+        value: >-
+          #ffffff
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: use-theme-transparency
+        value: >-
+          false
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: visible-name
+        value: >-
+          groot
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: bold-color-same-as-fg
+        value: >-
+          false
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: cursor-background-color
+        value: >-
+          rgb(3,195,203)
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: cursor-colors-set
+        value: >-
+          true
+      - source: >-
+          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+        key: cursor-foreground-color
+        value: >-
+          #ffffff
 
 # ------------------------------------------------------------------------------
 # APT
