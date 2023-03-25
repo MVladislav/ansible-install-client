@@ -55,7 +55,7 @@ install_client_config:
   snap_firefox: false
   snap_chromium: false
   snap_thunderbird: false
-  # snap_signal_desktop: false
+  snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_zoom_client: false
   snap_spotify: false
@@ -630,10 +630,10 @@ install_client_snap:
     install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
     classic: false
     beta: false
-  # - name: signal-desktop
-  #   install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
-  #   classic: false
-  #   beta: false
+  - name: signal-desktop
+    install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
   - name: telegram-desktop
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
     classic: false
