@@ -398,7 +398,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'org.gnome.Nautilus.desktop', 'gnome-system-monitor.desktop']
+          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'com.gitlab.newsflash.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'veracrypt.desktop', 'org.gnome.Nautilus.desktop', 'nm-connection-editor.desktop']
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
     command: dbus-launch --exit-with-session gsettings set
