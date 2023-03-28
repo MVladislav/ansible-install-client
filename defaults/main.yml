@@ -28,6 +28,7 @@ install_client_config:
   gnome_gui_setup_extensions_git_burn_window: false
   gnome_gui_setup_extensions_git_dash_to_panel: false
   gnome_gui_setup_extensions_git_ui_tune: false
+  gnome_gui_setup_extensions_git_pop_shell: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
   gnome_terminal_setup_overlay: false
@@ -274,6 +275,12 @@ install_client_gdm_gui_setup:
         name: gnome-ui-tune
         target: schemas
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
+      # NOTE: sudo npm install -g typescript
+      - repo: https://github.com/pop-os/shell.git
+        branch: master_jammy
+        name: pop-shell
+        target: local-install
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_pop_shell | default('no') | bool }}"
     activate:
       - name: caffeine@patapon.info
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
