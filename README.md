@@ -61,6 +61,7 @@ install_client_config:
   snap_thunderbird: false
   # snap_signal_desktop: false
   snap_telegram_desktop: false
+  snap_discord: false
   snap_zoom_client: false
   snap_spotify: false
   snap_libreoffice: false

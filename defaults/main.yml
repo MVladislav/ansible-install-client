@@ -59,6 +59,7 @@ install_client_config:
   snap_thunderbird: false
   snap_signal_desktop: false
   snap_telegram_desktop: false
+  snap_discord: false
   snap_zoom_client: false
   snap_spotify: false
   snap_libreoffice: false
@@ -733,6 +734,10 @@ install_client_snap:
     beta: false
   - name: telegram-desktop
     install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: discord
+    install: "{{ install_client_config.snap_discord | default('no') | bool }}"
     classic: false
     beta: false
   - name: zoom-client
