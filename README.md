@@ -91,10 +91,7 @@ install_client_config:
   snap_zaproxy: false
   snap_nmap: false
   snap_john_the_ripper: false
-  snap_microk8s: false
   snap_rpi_imager: false
-  snap_multipass: false
-  snap_maas: false
   snap_cornyjokes: false
   snap_steam: false
   # FLATPAK -------------------------------

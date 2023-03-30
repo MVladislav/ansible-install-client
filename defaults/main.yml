@@ -89,10 +89,7 @@ install_client_config:
   snap_zaproxy: false
   snap_nmap: false
   snap_john_the_ripper: false
-  snap_microk8s: false
   snap_rpi_imager: false
-  snap_multipass: false
-  snap_maas: false
   snap_cornyjokes: false
   snap_steam: false
   # FLATPAK -------------------------------
@@ -859,20 +856,8 @@ install_client_snap:
     classic: false
     beta: false
   # other
-  - name: microk8s
-    install: "{{ install_client_config.snap_microk8s | default('no') | bool }}"
-    classic: true
-    beta: false
   - name: rpi-imager
     install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: multipass
-    install: "{{ install_client_config.snap_multipass | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: maas
-    install: "{{ install_client_config.snap_maas | default('no') | bool }}"
     classic: false
     beta: false
   # other
