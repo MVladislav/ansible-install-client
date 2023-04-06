@@ -47,6 +47,7 @@ install_client_config:
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
+  apt_logitech_unifying_solaar: false
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
