@@ -17,6 +17,11 @@
   ansible.builtin.include_tasks: install_dpkg.yml
 
 # ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY APPIMAGE
+- name: "CLIENT | dpkg | install AppImage services"
+  ansible.builtin.include_tasks: install_app_image.yml
+
+# ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DISTRIBUTION KEY
 - name: "CLIENT | dist_apt | install distribution services"
   ansible.builtin.include_tasks: install_extra_distribution_key.yml
