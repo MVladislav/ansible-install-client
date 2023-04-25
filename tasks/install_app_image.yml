@@ -12,24 +12,24 @@
     - install_client
     - apt
 
-- name: "CLIENT | AppImage | get the image"
+- name: "CLIENT | AppImage | get AppImage"
   become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.app_image }}"
     dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.AppImage"
-    mode: "0665"
-    # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+    mode: "0755"
+    # checksum: sha256:...
   tags:
     - install_client
     - apt
 
-- name: "CLIENT | AppImage | get the image"
+- name: "CLIENT | AppImage | get image (png)"
   become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.png }}"
     dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.png"
-    mode: "0664"
-    # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+    mode: "0644"
+    # checksum: sha256:...
   tags:
     - install_client
     - apt
