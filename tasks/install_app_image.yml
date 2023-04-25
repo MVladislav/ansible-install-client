@@ -2,36 +2,42 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | AppImage | install AppImage"
-  when:
-    - install_client_app_image is defined
-    - item.install
+- name: "CLIENT | AppImage | create folder"
+  ansible.builtin.file:
+    path: "/opt/{{ outer_item.name }}/"
+    state: directory
+    mode: "1755"
   tags:
     - install_client
     - apt
-  loop: "{{ install_client_app_image | flatten(levels=1) }}"
-  block:
-    - name: "CLIENT | AppImage | create folder"
-      ansible.builtin.file:
-        path: "/opt/{{ item.name }}/"
-        state: directory
-        mode: "1755"
-    - name: "CLIENT | AppImage | get the image"
-      ansible.builtin.get_url:
-        url: "{{ item.app_image }}"
-        dest: "/opt/{{ item.name }}/{{ item.name }}.AppImage"
-        mode: "0665"
-        # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
-    - name: "CLIENT | AppImage | get the image"
-      ansible.builtin.get_url:
-        url: "{{ item.png }}"
-        dest: "/opt/{{ item.name }}/{{ item.name }}.png"
-        mode: "0664"
-        # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
-    - name: "CLIENT | AppImage | create file .desktop"
-      ansible.builtin.template:
-        src: template.desktop.j2
-        dest: "/usr/share/applications/{{ item.name }}.desktop"
-        owner: root
-        group: root
-        mode: "0644"
+
+- name: "CLIENT | AppImage | get the image"
+  ansible.builtin.get_url:
+    url: "{{ outer_item.app_image }}"
+    dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.AppImage"
+    mode: "0665"
+    # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+  tags:
+    - install_client
+    - apt
+
+- name: "CLIENT | AppImage | get the image"
+  ansible.builtin.get_url:
+    url: "{{ outer_item.png }}"
+    dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.png"
+    mode: "0664"
+    # checksum: sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+  tags:
+    - install_client
+    - apt
+
+- name: "CLIENT | AppImage | create file .desktop"
+  ansible.builtin.template:
+    src: template.desktop.j2
+    dest: "/usr/share/applications/{{ outer_item.name }}.desktop"
+    owner: root
+    group: root
+    mode: "0644"
+  tags:
+    - install_client
+    - apt
