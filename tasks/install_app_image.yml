@@ -3,6 +3,7 @@
 
 # ------------------------------------------------------------------------------
 - name: "CLIENT | AppImage | create folder"
+  become: true
   ansible.builtin.file:
     path: "/opt/{{ outer_item.name }}/"
     state: directory
@@ -12,6 +13,7 @@
     - apt
 
 - name: "CLIENT | AppImage | get the image"
+  become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.app_image }}"
     dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.AppImage"
@@ -22,6 +24,7 @@
     - apt
 
 - name: "CLIENT | AppImage | get the image"
+  become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.png }}"
     dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.png"
@@ -32,6 +35,7 @@
     - apt
 
 - name: "CLIENT | AppImage | create file .desktop"
+  become: true
   ansible.builtin.template:
     src: template.desktop.j2
     dest: "/usr/share/applications/{{ outer_item.name }}.desktop"
