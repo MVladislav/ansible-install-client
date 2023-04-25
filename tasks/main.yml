@@ -19,6 +19,7 @@
 # ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY APPIMAGE
 - name: "CLIENT | AppImage | install AppImage services"
+  become: true
   ansible.builtin.include_tasks: install_app_image.yml
   loop: "{{ install_client_app_image | flatten(levels=1) }}"
   loop_control:
