@@ -38,12 +38,17 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
+  apt_base_ubuntu: false
+  apt_base_archive: false
+  apt_base_codec: false
+  apt_base_gnome: false
   # NOTE: not need in new ubuntu, switched to pipewire
   apt_base_sound_pulseaudio: false
   apt_snap: false
   apt_flatpak: false
   apt_vpn: false
   apt_gnome_boxes: false
+  apt_texmaker: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
@@ -56,6 +61,9 @@ install_client_config:
   dpkg_portmaster: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
+  # APPIMAGE ------------------------------
+  app_image_logseq: false
+  app_image_upscayl: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
