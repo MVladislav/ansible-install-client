@@ -26,6 +26,7 @@ install_client_config:
   gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
+  gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
   gnome_gui_setup_extensions_git_sound: false
   gnome_gui_setup_extensions_git_blur_shell: false

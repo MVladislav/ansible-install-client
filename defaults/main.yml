@@ -22,6 +22,7 @@ install_client_config:
   gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
+  gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
   gnome_gui_setup_extensions_git_sound: false
   gnome_gui_setup_extensions_git_blur_shell: false
@@ -242,7 +243,9 @@ install_client_gdm_gui_setup:
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
     command: dbus-launch --exit-with-session gnome-extensions enable
-    apt: []
+    apt:
+      - name: gnome-shell-extension-ubuntu-tiling-assistant
+        install: "{{ install_client_config.gnome_gui_setup_extensions_apt_ubuntu_tiling | default('no') | bool }}"
     git:
       - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
         branch: master
@@ -274,7 +277,7 @@ install_client_gdm_gui_setup:
         name: gnome-ui-tune
         target: schemas
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
-      # NOTE: sudo npm install -g typescript
+      # NOTE:/TODO: sudo npm install -g typescript
       - repo: https://github.com/pop-os/shell.git
         branch: master_jammy
         name: pop-shell
@@ -291,8 +294,6 @@ install_client_gdm_gui_setup:
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_burn_window | default('no') | bool }}"
       # - name: dash-to-panel@jderose9.github.com
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
-      # - name: user-theme@gnome-shell-extensions.gcampax.github.com
-      #   install: false
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-launch --exit-with-session gsettings set
