@@ -17,6 +17,18 @@
   ansible.builtin.include_tasks: install_dpkg.yml
 
 # ------------------------------------------------------------------------------
+# INSTALL SPECIFIC SERVICES - BY APPIMAGE
+- name: "CLIENT | AppImage | install AppImage services"
+  ansible.builtin.include_tasks: install_app_image.yml
+  loop: "{{ install_client_app_image | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when:
+    - install_client_app_image is defined
+    - outer_item.install is defined
+    - outer_item.install | bool
+
+# ------------------------------------------------------------------------------
 # INSTALL SPECIFIC SERVICES - BY DISTRIBUTION KEY
 - name: "CLIENT | dist_apt | install distribution services"
   ansible.builtin.include_tasks: install_extra_distribution_key.yml

@@ -37,12 +37,17 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
+  apt_base_ubuntu: false
+  apt_base_archive: false
+  apt_base_codec: false
+  apt_base_gnome: false
   # NOTE: not need in new ubuntu, switched to pipewire
   apt_base_sound_pulseaudio: false
   apt_snap: false
   apt_flatpak: false
   apt_vpn: false
   apt_gnome_boxes: false
+  apt_texmaker: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
@@ -55,6 +60,9 @@ install_client_config:
   dpkg_portmaster: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
+  # APPIMAGE ------------------------------
+  app_image_logseq: false
+  app_image_upscayl: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
@@ -537,33 +545,34 @@ install_client_apt:
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: libfido2-dev
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  # --------------------------------
   - name: ubuntu-restricted-extras
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_ubuntu | default('no') | bool }}"
   # --------------------------------
   - name: rar
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
   - name: unrar
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
   - name: zip
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
   - name: p7zip-full
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
   - name: xz-utils
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
   # --------------------------------
   - name: ffmpeg
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
   - name: mpv
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
   - name: libavcodec-extra
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
   - name: libvpx-dev
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
   # --------------------------------
   - name: gnome-tweaks
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_gnome | default('no') | bool }}"
   - name: chrome-gnome-shell
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_base_gnome | default('no') | bool }}"
   # --------------------------------
   - name: libinput-tools
     install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
@@ -588,6 +597,8 @@ install_client_apt:
   # - name: laptop-mode-tools
   #   install: false
   # --------------------------------
+  - name: python3-debian
+    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: resolvconf
     install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: wireguard
@@ -617,6 +628,9 @@ install_client_apt:
     # ln -s [where you moved it] ~/.local/share/gnome-boxes/images/
     install: "{{ install_client_config.apt_gnome_boxes | default('no') | bool }}"
   # --------------------------------
+  - name: texmaker
+    install: "{{ install_client_config.apt_texmaker | default('no') | bool }}"
+  # --------------------------------
   - name: texlive-science
     install: false
   - name: texlive-full
@@ -626,8 +640,6 @@ install_client_apt:
   - name: texlive
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: texlive-latex-extra
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: texmaker
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: latexmk
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"

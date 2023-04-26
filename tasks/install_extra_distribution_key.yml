@@ -8,6 +8,8 @@
   args:
     executable: /bin/bash
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
+  changed_when: false
+  failed_when: false
   when:
     - outer_item.install is defined
     - outer_item.install | bool
@@ -19,6 +21,8 @@
 - name: "CLIENT | dist-apt | get OS distribution"
   ansible.builtin.command: lsb_release -sc
   register: os_distribution
+  changed_when: false
+  failed_when: false
   when:
     - outer_item.install is defined
     - outer_item.install | bool
@@ -29,6 +33,8 @@
 - name: "CLIENT | dist-apt | get OS architecture"
   ansible.builtin.command: dpkg --print-architecture
   register: os_architecture
+  changed_when: false
+  failed_when: false
   when:
     - outer_item.install is defined
     - outer_item.install | bool

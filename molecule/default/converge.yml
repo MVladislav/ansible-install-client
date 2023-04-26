@@ -38,11 +38,16 @@
       # cleanup_remove_flatpak: false
       # APT -----------------------------------
       apt_base: true
+      apt_base_ubuntu: true
+      apt_base_archive: true
+      apt_base_codec: true
+      apt_base_gnome: true
       # apt_base_sound_pulseaudio: false
       apt_snap: true
       apt_flatpak: true
       apt_vpn: true
       # apt_gnome_boxes: false
+      # apt_texmaker: false
       # apt_latex: false
       # apt_pandoc: false
       # apt_virt_viewer: false

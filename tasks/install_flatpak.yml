@@ -25,8 +25,8 @@
   # become_user: "{{ outer_item.name }}"
   ansible.builtin.command: which flatpak
   register: is_flatpak_exist
-  changed_when: is_flatpak_exist.rc not in [0, 1]
-  failed_when: is_flatpak_exist.rc not in [0, 1]
+  changed_when: false
+  failed_when: false
   tags:
     - install_client
     - flatpak
