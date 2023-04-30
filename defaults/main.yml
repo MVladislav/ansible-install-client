@@ -442,7 +442,7 @@ install_client_gdm_gui_setup:
           org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
         key: background-transparency-percent
         value: >-
-          50
+          20
       - source: >-
           org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
         key: audible-bell
