@@ -723,11 +723,11 @@ install_client_distribution_key:
 # install_client_config.app_image_...
 install_client_app_image:
   - install: "{{ install_client_config.app_image_logseq | default('no') | bool }}"
-    app_image: "{{ install_client_links_to_check_update.logseq | default('no') | bool }}"
+    app_image: "{{ install_client_links_to_check_update.logseq }}"
     png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
     name: Logseq
   - install: "{{ install_client_config.app_image_upscayl | default('no') | bool }}"
-    app_image: "{{ install_client_links_to_check_update.upscayl | default('no') | bool }}"
+    app_image: "{{ install_client_links_to_check_update.upscayl }}"
     png: https://github.com/upscayl/upscayl/raw/6a27ff37a4a8af52f48403fa31f710b51fd12549/main/build/icon.png
     name: Upscayl
 
