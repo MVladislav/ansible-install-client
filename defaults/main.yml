@@ -6,10 +6,13 @@
 install_client_links_to_check_update:
   virtualbox: https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb
   veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-22.04-amd64.deb
+  veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-22.04-amd64.deb
   parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
   # curl -s https://api.github.com/repos/brimdata/brim/releases/latest | grep "http.*\.deb" | cut -d : -f 2,3 | tr -d \"
   brim: https://github.com/brimdata/brim/releases/download/v0.31.0/Brim-0.31.0.deb
   portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
+  logseq: https://github.com/logseq/logseq/releases/download/0.9.4/Logseq-linux-x64-0.9.4.AppImage
+  upscayl: https://github.com/upscayl/upscayl/releases/download/v2.5.0/upscayl-2.5.0-linux.AppImage
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -55,6 +58,7 @@ install_client_config:
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
+  dpkg_veracrypt_cli: false
   dpkg_parsec: false
   dpkg_brim: false
   dpkg_portmaster: false
@@ -676,6 +680,8 @@ install_client_dpkg:
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
+  - url: "{{ install_client_links_to_check_update.veracrypt_cli }}"
+    install: "{{ install_client_config.dpkg_veracrypt_cli | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.parsec }}"
     install: "{{ install_client_config.dpkg_parsec | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update.brim }}"
@@ -715,14 +721,13 @@ install_client_distribution_key:
 # ------------------------------------------------------------------------------
 # APP IMAGE
 # install_client_config.app_image_...
-# TODO: write process for install, current not working
 install_client_app_image:
   - install: "{{ install_client_config.app_image_logseq | default('no') | bool }}"
-    app_image: https://github.com/logseq/logseq/releases/download/0.8.8/Logseq-linux-x64-0.8.8.AppImage
+    app_image: "{{ install_client_links_to_check_update.logseq | default('no') | bool }}"
     png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
     name: Logseq
   - install: "{{ install_client_config.app_image_upscayl | default('no') | bool }}"
-    app_image: https://github.com/upscayl/upscayl/releases/download/v1.5.5/Upscayl-1.5.5.AppImage
+    app_image: "{{ install_client_links_to_check_update.upscayl | default('no') | bool }}"
     png: https://github.com/upscayl/upscayl/raw/6a27ff37a4a8af52f48403fa31f710b51fd12549/main/build/icon.png
     name: Upscayl
 

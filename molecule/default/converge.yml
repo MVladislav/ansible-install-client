@@ -53,12 +53,16 @@
       # apt_virt_viewer: false
       # DPKG ----------------------------------
       # dpkg_virtualbox: false # TODO: not working download
-      dpkg_veracrypt: true
+      # dpkg_veracrypt: false
+      dpkg_veracrypt_cli: true
       # dpkg_parsec: false # TODO: not installable because of missing libavcodec58
       dpkg_brim: true
       dpkg_portmaster: true
       # DIST KEY ------------------------------
       # distribution_key_virtualbox: false
+      # APPIMAGE ------------------------------
+      app_image_logseq: true
+      app_image_upscayl: true
       # SNAP ----------------------------------
       # snap_firefox: false
       # snap_chromium: false

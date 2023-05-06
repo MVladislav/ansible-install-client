@@ -57,6 +57,7 @@ install_client_config:
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
+  dpkg_veracrypt_cli: false
   dpkg_parsec: false
   dpkg_brim: false
   dpkg_portmaster: false
