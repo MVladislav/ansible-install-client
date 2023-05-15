@@ -65,7 +65,6 @@ install_client_config:
   distribution_key_virtualbox: false
   # APPIMAGE ------------------------------
   app_image_logseq: false
-  app_image_upscayl: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
@@ -83,6 +82,7 @@ install_client_config:
   snap_gimp: false
   snap_darktable: false
   snap_pixelfx: false
+  snap_upscayl: false
   snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false

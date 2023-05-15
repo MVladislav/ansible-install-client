@@ -12,7 +12,6 @@ install_client_links_to_check_update:
   brim: https://github.com/brimdata/brim/releases/download/v0.31.0/Brim-0.31.0.deb
   portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
   logseq: https://github.com/logseq/logseq/releases/download/0.9.4/Logseq-linux-x64-0.9.4.AppImage
-  upscayl: https://github.com/upscayl/upscayl/releases/download/v2.5.0/upscayl-2.5.0-linux.AppImage
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -66,7 +65,6 @@ install_client_config:
   distribution_key_virtualbox: false
   # APPIMAGE ------------------------------
   app_image_logseq: false
-  app_image_upscayl: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
@@ -84,6 +82,7 @@ install_client_config:
   snap_gimp: false
   snap_darktable: false
   snap_pixelfx: false
+  snap_upscayl: false
   snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
@@ -726,10 +725,6 @@ install_client_app_image:
     app_image: "{{ install_client_links_to_check_update.logseq }}"
     png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
     name: Logseq
-  - install: "{{ install_client_config.app_image_upscayl | default('no') | bool }}"
-    app_image: "{{ install_client_links_to_check_update.upscayl }}"
-    png: https://github.com/upscayl/upscayl/raw/6a27ff37a4a8af52f48403fa31f710b51fd12549/main/build/icon.png
-    name: Upscayl
 
 # ------------------------------------------------------------------------------
 # SNAP
@@ -797,6 +792,10 @@ install_client_snap:
     beta: false
   - name: pixelfx
     install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: upscayl
+    install: "{{ install_client_config.snap_upscayl | default('no') | bool }}"
     classic: false
     beta: false
   - name: lunacy

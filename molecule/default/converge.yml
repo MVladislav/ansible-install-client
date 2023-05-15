@@ -62,7 +62,6 @@
       # distribution_key_virtualbox: false
       # APPIMAGE ------------------------------
       app_image_logseq: true
-      app_image_upscayl: true
       # SNAP ----------------------------------
       # snap_firefox: false
       # snap_chromium: false
@@ -78,6 +77,7 @@
       # snap_gimp: false
       # snap_darktable: false
       # snap_pixelfx: false
+      snap_upscayl: true
       # snap_lunacy: false
       # snap_vlc: false
       # snap_obs_studio: false
