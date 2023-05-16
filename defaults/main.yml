@@ -83,6 +83,7 @@ install_client_config:
   snap_darktable: false
   snap_pixelfx: false
   snap_upscayl: false
+  snap_krita: false
   snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
@@ -796,6 +797,10 @@ install_client_snap:
     beta: false
   - name: upscayl
     install: "{{ install_client_config.snap_upscayl | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: krita
+    install: "{{ install_client_config.snap_krita | default('no') | bool }}"
     classic: false
     beta: false
   - name: lunacy

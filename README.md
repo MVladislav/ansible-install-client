@@ -83,6 +83,7 @@ install_client_config:
   snap_darktable: false
   snap_pixelfx: false
   snap_upscayl: false
+  snap_krita: false
   snap_lunacy: false
   snap_vlc: false
   snap_obs_studio: false
