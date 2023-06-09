@@ -35,6 +35,7 @@ install_client_config:
   gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
+  gnome_terminal_setup_overlay: false
   # cleanup_remove_snap: false
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
@@ -69,7 +70,7 @@ install_client_config:
   snap_firefox: false
   snap_chromium: false
   snap_thunderbird: false
-  # snap_signal_desktop: false
+  snap_signal_desktop: false
   snap_telegram_desktop: false
   snap_discord: false
   snap_zoom_client: false
