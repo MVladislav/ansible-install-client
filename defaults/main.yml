@@ -252,7 +252,7 @@ install_client_gdm_gui_setup:
         path: ~/.local/share/icons/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
-    command: dbus-launch --exit-with-session gnome-extensions enable
+    command: dbus-run-session -- gnome-extensions enable
     apt:
       - name: gnome-shell-extension-ubuntu-tiling-assistant
         install: "{{ install_client_config.gnome_gui_setup_extensions_apt_ubuntu_tiling | default('no') | bool }}"
@@ -300,7 +300,7 @@ install_client_gdm_gui_setup:
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
-    command: dbus-launch --exit-with-session gsettings set
+    command: dbus-run-session -- gsettings set
     configs:
       # --- ADD Flameshot ---
       - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
@@ -320,7 +320,7 @@ install_client_gdm_gui_setup:
           ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
   overlay:
     setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
-    command: dbus-launch --exit-with-session gsettings set
+    command: dbus-run-session -- gsettings set
     configs:
       - source: org.gnome.desktop.interface
         key: font-name
@@ -412,7 +412,7 @@ install_client_gdm_gui_setup:
           ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'com.gitlab.newsflash.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'veracrypt.desktop', 'org.gnome.Nautilus.desktop', 'nm-connection-editor.desktop']
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
-    command: dbus-launch --exit-with-session gsettings set
+    command: dbus-run-session -- gsettings set
     configs:
       - source: >-
           org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
