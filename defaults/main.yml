@@ -130,6 +130,7 @@ install_client_config:
   flatpak_vlc: false
   flatpak_amberol: false
   flatpak_haruna: false
+  flatpak_warp: false
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
@@ -974,6 +975,9 @@ install_client_flatpak:
   - name: org.kde.haruna
     remote: flathub
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
+  - name: app.drey.Warp
+    remote: flathub
+    install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
   # DESIGN
   - name: org.inkscape.Inkscape
     remote: flathub

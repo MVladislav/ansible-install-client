@@ -131,6 +131,7 @@ install_client_config:
   flatpak_vlc: false
   flatpak_amberol: false
   flatpak_haruna: false
+  flatpak_warp: false
   flatpak_inkscape: false
   flatpak_drawio: false
   flatpak_gimp: false
