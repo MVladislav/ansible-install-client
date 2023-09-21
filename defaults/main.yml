@@ -18,6 +18,7 @@ install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/re
 install_client_links_to_check_update_logseq_checksum: fb6067556d2a59227f3c8637ce5d5cf6acdc3fd0d9569e84f41ec023a2ea89b1
 # NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux-modern.*\.AppImage\"" | cut -d '"' -f 4
 install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.4.0/UltiMaker-Cura-5.4.0-linux-modern.AppImage
+install_client_links_tp_check_update_ultimaker_checksum: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -673,7 +674,7 @@ install_client_app_image:
     name: Logseq
   - install: "{{ install_client_config.app_image_ultimaker | default('no') | bool }}"
     app_image: "{{ install_client_links_tp_check_update_ultimaker }}"
-    checksum:
+    checksum: "{{ install_client_links_tp_check_update_ultimaker_checksum }}"
     png: https://raw.githubusercontent.com/Ultimaker/Cura/main/packaging/icons/cura-128.png
     name: UltiMaker
 
