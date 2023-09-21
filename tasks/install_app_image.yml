@@ -18,7 +18,7 @@
     url: "{{ outer_item.app_image }}"
     dest: "/opt/{{ outer_item.name }}/{{ outer_item.name }}.AppImage"
     mode: "0755"
-    # checksum: sha256:...
+    checksum: "sha256:{{ outer_item.checksum }}"
   tags:
     - install_client
     - apt

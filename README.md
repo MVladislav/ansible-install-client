@@ -17,13 +17,29 @@ clients:
     dev: yes
     updateOrCreate: false
     setup: true # if client should be setup with additional tools and gui (default true)
+
+# ------------------------------------------------------------------------------
+# application download from source, which needs to be updated manually
+# also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
+# NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
+install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.10/virtualbox-7.0_7.0.10-158379~Ubuntu~jammy_amd64.deb
+# NOTE: https://www.veracrypt.fr/en/Downloads.html
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
+# NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
+install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.2.0/zui_1.2.0_amd64.deb
+install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
+# NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.9.18/Logseq-linux-x64-0.9.18.AppImage
+install_client_links_to_check_update_logseq_checksum: fb6067556d2a59227f3c8637ce5d5cf6acdc3fd0d9569e84f41ec023a2ea89b1
+
 install_client_config:
   # GENERAL -------------------------------
   dev: false
-  fonts: false
+  fonts_install: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-  gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
@@ -40,21 +56,25 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
-  apt_base_ubuntu: false
-  apt_base_archive: false
-  apt_base_codec: false
-  apt_base_gnome: false
-  # NOTE: not need in new ubuntu, switched to pipewire
-  apt_base_sound_pulseaudio: false
+  apt_auth_priv: false
+  apt_ubuntu: false
+  apt_archive: false
+  apt_codec: false
+  apt_gnome: false
   apt_snap: false
   apt_flatpak: false
-  apt_vpn: false
+  apt_vpn_resolvconf: false
+  apt_vpn_wireguard: false
+  apt_vpn_openvpn: false
+  apt_vpn_openconnect: false
+  apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
+  apt_mpv: false
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
@@ -64,8 +84,10 @@ install_client_config:
   dpkg_portmaster: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
+  distribution_key_1password_cli: false
   # APPIMAGE ------------------------------
   app_image_logseq: false
+  app_image_ultimaker: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
@@ -91,6 +113,7 @@ install_client_config:
   snap_flameshot: false
   snap_1password: false
   snap_okular: false
+  snap_xournalpp: false
   snap_yubioath_desktop: false
   snap_code: false
   snap_remmina: false
@@ -163,8 +186,6 @@ install_client_config:
   flatpak_betaflightconfigurator: false
   # OTHER --------------------------------
   vs_code_ext: false
-  java: false
-  java_ant: false
 ```
 
 ## Dependencies
@@ -179,11 +200,11 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: clients
   roles:
     - role: install_client
-      install_client_config: []
       clients:
         - name: "{{ ansible_user }}"
           dev: yes
           updateOrCreate: false
+      install_client_config: [] # see list above for example
 ```
 
 ## License

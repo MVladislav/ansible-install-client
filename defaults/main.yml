@@ -4,25 +4,29 @@
 # ------------------------------------------------------------------------------
 # application download from source, which needs to be updated manually
 # also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
-install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb
+# NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
+install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.10/virtualbox-7.0_7.0.10-158379~Ubuntu~jammy_amd64.deb
+# NOTE: https://www.veracrypt.fr/en/Downloads.html
 install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-23.04-amd64.deb
 install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb
 install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
-install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.1.0/zui_1.1.0_amd64.deb
+install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.2.0/zui_1.2.0_amd64.deb
 install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
 # NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
-install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.9.8/Logseq-linux-x64-0.9.8.AppImage
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.9.18/Logseq-linux-x64-0.9.18.AppImage
+install_client_links_to_check_update_logseq_checksum: fb6067556d2a59227f3c8637ce5d5cf6acdc3fd0d9569e84f41ec023a2ea89b1
+# NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux-modern.*\.AppImage\"" | cut -d '"' -f 4
+install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.4.0/UltiMaker-Cura-5.4.0-linux-modern.AppImage
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
 install_client_config:
   # GENERAL -------------------------------
   dev: false
-  fonts: false
+  fonts_install: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-  gnome_gui_setup_theme: false
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
@@ -39,21 +43,25 @@ install_client_config:
   # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
-  apt_base_ubuntu: false
-  apt_base_archive: false
-  apt_base_codec: false
-  apt_base_gnome: false
-  # NOTE: not need in new ubuntu, switched to pipewire
-  apt_base_sound_pulseaudio: false
+  apt_auth_priv: false
+  apt_ubuntu: false
+  apt_archive: false
+  apt_codec: false
+  apt_gnome: false
   apt_snap: false
   apt_flatpak: false
-  apt_vpn: false
+  apt_vpn_resolvconf: false
+  apt_vpn_wireguard: false
+  apt_vpn_openvpn: false
+  apt_vpn_openconnect: false
+  apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
   apt_latex: false
   apt_pandoc: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
+  apt_mpv: false
   # DPKG ----------------------------------
   dpkg_virtualbox: false
   dpkg_veracrypt: false
@@ -63,8 +71,10 @@ install_client_config:
   dpkg_portmaster: false
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
+  distribution_key_1password_cli: false
   # APPIMAGE ------------------------------
   app_image_logseq: false
+  app_image_ultimaker: false
   # SNAP ----------------------------------
   snap_firefox: false
   snap_chromium: false
@@ -90,6 +100,7 @@ install_client_config:
   snap_flameshot: false
   snap_1password: false
   snap_okular: false
+  snap_xournalpp: false
   snap_yubioath_desktop: false
   snap_code: false
   snap_remmina: false
@@ -162,15 +173,13 @@ install_client_config:
   flatpak_betaflightconfigurator: false
   # OTHER --------------------------------
   vs_code_ext: false
-  java: false
-  java_ant: false
 
 # ------------------------------------------------------------------------------
 # CLIENTS for adding specific packages to clients (ex. ...)
 clients: []
 # - name: "{{ ansible_user }}"
 # - name: "root"
-#   setup: false
+#   setup: false # control if for some use specific tasks will run for install, mainly used when multi user used with root user not need everything to be installed
 
 # ------------------------------------------------------------------------------
 # FONTS
@@ -185,6 +194,13 @@ install_client_fonts:
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
+  dependency:
+    - libsass1
+    - sassc
+    - gettext
+    - lm-sensors
+    - libcanberra-gtk-module
+    - libcanberra-gtk3-module
   dependency2:
     # to build packages
     - make
@@ -194,63 +210,8 @@ install_client_gdm_gui_setup:
     - dbus-x11
     # for https://github.com/home-sweet-gnome/dash-to-panel.git
     - gettext
-    # for https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
-    - gir1.2-gtop-2.0
-    - gir1.2-nm-1.0
-    - gir1.2-clutter-1.0
-    - gnome-system-monitor
     # for https://github.com/Schneegans/Burn-My-Windows.git
     - libglib2.0-dev
-  dependency:
-    - libsass1
-    - sassc
-    - gettext
-    - lm-sensors
-    - libcanberra-gtk-module
-    - libcanberra-gtk3-module
-  theme:
-    install: "{{ install_client_config.gnome_gui_setup_theme | default('no') | bool }}"
-    git:
-      - url: https://github.com/vinceliuice/Orchis-theme.git
-        branch: master
-        name: Orchis-theme
-        path: /tmp/$USER
-        file: install.sh
-        extra: "-n Orchis"
-      - url: https://github.com/vinceliuice/vimix-gtk-themes.git
-        branch: master
-        name: vimix-gtk-themes
-        path: /tmp/$USER
-        file: install.sh
-        extra: "-c dark"
-      - url: https://github.com/vinceliuice/Tela-circle-icon-theme.git
-        branch: master
-        name: Tela-circle-icon-theme
-        path: /tmp/$USER
-        file: install.sh
-        extra: "-c blue"
-      - url: https://github.com/vinceliuice/Vimix-cursors.git
-        branch: master
-        name: Vimix-cursors
-        path: /tmp/$USER
-        file: install.sh
-        extra: ""
-      - url: https://github.com/EliverLara/Juno.git
-        branch: ocean # palenight | ocean | mirage |
-        name: Juno-dark
-        path: ~/.themes/
-      - url: https://github.com/EliverLara/Juno.git
-        branch: palenight # palenight | ocean | mirage |
-        name: Juno-light
-        path: ~/.themes/
-      - url: https://github.com/EliverLara/Juno.git
-        branch: mirage # palenight | ocean | mirage |
-        name: Juno
-        path: ~/.themes/
-      - url: https://github.com/EliverLara/Juno.git
-        branch: ocean-standard-buttons
-        name: Juno-icons
-        path: ~/.local/share/icons/
   extensions:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
     command: dbus-run-session -- gnome-extensions enable
@@ -299,6 +260,8 @@ install_client_gdm_gui_setup:
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_burn_window | default('no') | bool }}"
       # - name: dash-to-panel@jderose9.github.com
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
+      - name: tiling-assistant@ubuntu.com
+        install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
@@ -526,63 +489,51 @@ install_client_gdm_gui_setup:
 # install_client_config.apt_...
 install_client_apt:
   # --------------------------------
-  - name: dirmngr
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: curl
+    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  - name: rsync
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: git
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  - name: git-flow
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
   - name: vim
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
-  - name: libfuse2
+  - name: nano
     install: "{{ install_client_config.apt_base | default('no') | bool }}"
+  # --------------------------------
+  - name: dirmngr
+    install: "{{ install_client_config.apt_auth_priv | default('no') | bool }}"
+  - name: gnupg
+    install: "{{ install_client_config.apt_auth_priv | default('no') | bool }}"
   - name: libpam-u2f
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_auth_priv | default('no') | bool }}"
   - name: libfido2-dev
-    install: "{{ install_client_config.apt_base | default('no') | bool }}"
+    install: "{{ install_client_config.apt_auth_priv | default('no') | bool }}"
   # --------------------------------
   - name: ubuntu-restricted-extras
-    install: "{{ install_client_config.apt_base_ubuntu | default('no') | bool }}"
+    install: "{{ install_client_config.apt_ubuntu | default('no') | bool }}"
   # --------------------------------
   - name: rar
-    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
+    install: "{{ install_client_config.apt_archive | default('no') | bool }}"
   - name: unrar
-    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
+    install: "{{ install_client_config.apt_archive | default('no') | bool }}"
   - name: zip
-    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
+    install: "{{ install_client_config.apt_archive | default('no') | bool }}"
   - name: p7zip-full
-    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
+    install: "{{ install_client_config.apt_archive | default('no') | bool }}"
   - name: xz-utils
-    install: "{{ install_client_config.apt_base_archive | default('no') | bool }}"
+    install: "{{ install_client_config.apt_archive | default('no') | bool }}"
   # --------------------------------
   - name: ffmpeg
-    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
-  - name: mpv
-    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
+    install: "{{ install_client_config.apt_codec | default('no') | bool }}"
   - name: libavcodec-extra
-    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
+    install: "{{ install_client_config.apt_codec | default('no') | bool }}"
   - name: libvpx-dev
-    install: "{{ install_client_config.apt_base_codec | default('no') | bool }}"
+    install: "{{ install_client_config.apt_codec | default('no') | bool }}"
   # --------------------------------
   - name: gnome-tweaks
-    install: "{{ install_client_config.apt_base_gnome | default('no') | bool }}"
+    install: "{{ install_client_config.apt_gnome | default('no') | bool }}"
   - name: chrome-gnome-shell
-    install: "{{ install_client_config.apt_base_gnome | default('no') | bool }}"
-  # --------------------------------
-  - name: libinput-tools
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
-  - name: pulseaudio-module-bluetooth
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
-  - name: libasound2-plugins-extra
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
-  - name: paprefs
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
-  - name: pavumeter
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
-  - name: pulseaudio-dlna
-    install: "{{ install_client_config.apt_base_sound_pulseaudio | default('no') | bool }}"
+    install: "{{ install_client_config.apt_gnome | default('no') | bool }}"
   # --------------------------------
   - name: snapd
     install: "{{ install_client_config.apt_snap | default('no') | bool }}"
@@ -594,32 +545,32 @@ install_client_apt:
   # - name: laptop-mode-tools
   #   install: false
   # --------------------------------
-  - name: python3-debian
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
   - name: resolvconf
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_resolvconf | default('no') | bool }}"
   - name: wireguard
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_wireguard | default('no') | bool }}"
   - name: openvpn
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openvpn | default('no') | bool }}"
   - name: network-manager-openvpn
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openvpn | default('no') | bool }}"
   - name: network-manager-openvpn-gnome
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openvpn | default('no') | bool }}"
   - name: openconnect
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
+  - name: python3-debian
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
   - name: python3-pyqt5 # for openconnect-sso
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
   - name: python3-pyqt5.qtwebengine # for openconnect-sso
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
   - name: network-manager-openconnect
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
   - name: network-manager-openconnect-gnome
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_openconnect | default('no') | bool }}"
   - name: network-manager-l2tp
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_l2tp | default('no') | bool }}"
   - name: network-manager-l2tp-gnome
-    install: "{{ install_client_config.apt_vpn | default('no') | bool }}"
+    install: "{{ install_client_config.apt_vpn_l2tp | default('no') | bool }}"
   # --------------------------------
   - name: gnome-boxes
     # ln -s [where you moved it] ~/.local/share/gnome-boxes/images/
@@ -628,8 +579,6 @@ install_client_apt:
   - name: texmaker
     install: "{{ install_client_config.apt_texmaker | default('no') | bool }}"
   # --------------------------------
-  - name: texlive-science
-    install: false
   - name: texlive-full
     install: "{{ install_client_config.apt_latex | default('no') | bool }}"
   - name: texlive-lang-german
@@ -664,6 +613,8 @@ install_client_apt:
   # --------------------------------
   - name: solaar-gnome3
     install: "{{ install_client_config.apt_logitech_unifying_solaar | default('no') | bool }}"
+  - name: mpv
+    install: "{{ install_client_config.apt_mpv | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # DPKG
@@ -717,8 +668,14 @@ install_client_distribution_key:
 install_client_app_image:
   - install: "{{ install_client_config.app_image_logseq | default('no') | bool }}"
     app_image: "{{ install_client_links_to_check_update_logseq }}"
+    checksum: "{{ install_client_links_to_check_update_logseq_checksum }}"
     png: https://github.com/logseq/logseq/raw/bc568f6d5b9c8cfdae49f97de79ab98e9544d99b/resources/icons/logseq.png
     name: Logseq
+  - install: "{{ install_client_config.app_image_ultimaker | default('no') | bool }}"
+    app_image: "{{ install_client_links_tp_check_update_ultimaker }}"
+    checksum:
+    png: https://raw.githubusercontent.com/Ultimaker/Cura/main/packaging/icons/cura-128.png
+    name: UltiMaker
 
 # ------------------------------------------------------------------------------
 # SNAP
@@ -818,6 +775,10 @@ install_client_snap:
     beta: false
   - name: okular
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
+    classic: false
+    beta: false
+  - name: xournalpp
+    install: "{{ install_client_config.snap_xournalpp | default('no') | bool }}"
     classic: false
     beta: false
   - name: yubioath-desktop
@@ -1091,68 +1052,53 @@ install_client_flatpak:
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
+  - adpyke.codesnap
   - adpyke.vscode-sql-formatter
   - analytic-signal.preview-pdf
   - benjaminkott.typo3-typoscript
   - bibhasdn.unique-lines
   - bierner.markdown-emoji
-  - bierner.markdown-mermaid
-  - christian-kohler.npm-intellisense
+  - bierner.markdown-preview-github-styles
+  - charliermarsh.ruff
+  - ChrisChinchilla.vscode-pandoc
   - christian-kohler.path-intellisense
   - crazywolf.smali
   - DavidAnson.vscode-markdownlint
-  - dbaeumer.jshint
   - dbaeumer.vscode-eslint
   - DotJoshJohnson.xml
-  - DougFinke.vscode-pandoc
   - eamodio.gitlens
   - esbenp.prettier-vscode
   - febley.typo3-fluid-snippets
-  - formulahendry.auto-rename-tag
-  - formulahendry.code-runner
   - foxundermoon.shell-format
-  - geeksharp.openssl-configuration-file
-  - GitHub.github-vscode-theme
-  - GitHub.remotehub
-  - glenn2223.live-sass
   - golang.go
-  - Gruntfuggly.todo-tree
-  - GuidoTapia2.unicode-math-vscode
   - hashicorp.terraform
-  - HookyQR.minify
-  - hoovercj.vscode-power-mode
   - James-Yu.latex-workshop
   - koehlma.markdown-math
-  - max-SS.Cyberpunk
   - mechatroner.rainbow-csv
   - mhutchie.git-graph
   - mikestead.dotenv
   - ms-azuretools.vscode-docker
   - ms-kubernetes-tools.vscode-kubernetes-tools
+  - ms-python.isort
   - ms-python.python
   - ms-python.vscode-pylance
   - ms-vscode-remote.remote-containers
   - ms-vscode-remote.remote-ssh
   - ms-vscode-remote.remote-ssh-edit
-  - ms-vscode.cpptools
   - ms-vscode.hexeditor
-  - ms-vscode.remote-repositories
-  - ms-vscode.wordcount
+  - ms-vscode.remote-explorer
   - mushan.vscode-paste-image
-  - naumovs.color-highlight
-  - octref.vetur
   - PKief.material-icon-theme
-  - pranaygp.vscode-css-peek
-  - quicktype.quicktype
+  - Postman.postman-for-vscode
   - ralffreit.typo3snippets
   - rangav.vscode-thunder-client
   - RapidAPI.vscode-rapidapi-client
+  - rapidapi.vscode-services
   - redhat.ansible
   - redhat.java
   - redhat.vscode-xml
   - redhat.vscode-yaml
-  - ritwickdey.LiveServer
-  - RobbOwen.synthwave-vscode
+  - rome.rome
   - scala-lang.scala
   - secsamdev.grok
   - silofy.hackthebox
@@ -1166,20 +1112,5 @@ install_client_vs_code_ext:
   - VisualStudioExptTeam.vscodeintellicode
   - wayou.vscode-todo-highlight
   - wholroyd.jinja
-  - xabikos.JavaScriptSnippets
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
-
-# ------------------------------------------------------------------------------
-# JAVA
-# install_client_config.java
-install_client_java_version: 11
-install_client_java:
-  apt:
-    - name: "openjdk-{{ install_client_java_version }}-jdk"
-      install: "{{ install_client_config.java | default('no') | bool }}"
-    - name: ant
-      install: "{{ install_client_config.java_ant | default('no') | bool }}"
-  os_env:
-    - variable: JAVA_HOME
-      path: "/usr/lib/jvm/java-{{ install_client_java_version }}-openjdk-amd64"

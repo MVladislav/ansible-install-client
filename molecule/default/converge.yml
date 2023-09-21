@@ -3,7 +3,7 @@
   hosts: all
   tasks:
     - name: "Include ansible-install-client"
-      include_role:
+      ansible.builtin.include_role:
         name: "ansible-install-client"
   vars:
     # --- in inventory ---
@@ -13,16 +13,27 @@
         updateOrCreate: false
         setup: true # if client should be setup with additional tools and gui (default true)
     # --- in playbook ---
-    # if you install java, by default as version is set 11, change below if you need
-    # version is as input for openjdk java version
-    install_client_java_version: 11
+    # ------------------------------------------------------------------------------
+    # application download from source, which needs to be updated manually
+    # also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
+    # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
+    install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.10/virtualbox-7.0_7.0.10-158379~Ubuntu~jammy_amd64.deb
+    # NOTE: https://www.veracrypt.fr/en/Downloads.html
+    install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-23.04-amd64.deb
+    install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb
+    install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
+    # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
+    install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.2.0/zui_1.2.0_amd64.deb
+    install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
+    # NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
+    install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.9.18/Logseq-linux-x64-0.9.18.AppImage
+    install_client_links_to_check_update_logseq_checksum: fb6067556d2a59227f3c8637ce5d5cf6acdc3fd0d9569e84f41ec023a2ea89b1
     install_client_config:
       # GENERAL -------------------------------
       dev: true
-      fonts: true
+      fonts_install: true
       # GNOME ---------------------------------
       gnome_gui_setup: true # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-      # gnome_gui_setup_theme: false
       # gnome_gui_setup_dependencies: false
       gnome_gui_setup_extensions: true
       # gnome_gui_setup_extensions_apt_ubuntu_tiling: false
@@ -31,47 +42,58 @@
       gnome_gui_setup_extensions_git_blur_shell: true
       gnome_gui_setup_extensions_git_burn_window: true
       gnome_gui_setup_extensions_git_dash_to_panel: true
-      # gnome_gui_setup_extensions_git_ui_tune: false
+      gnome_gui_setup_extensions_git_ui_tune: true
       # gnome_gui_setup_keybinding: false
       gnome_gui_setup_overlay: true
-      # cleanup_remove_snap: false
-      # cleanup_remove_flatpak: false
+      gnome_terminal_setup_overlay: true
+      cleanup_remove_snap: false
+      cleanup_remove_flatpak: false
       # APT -----------------------------------
       apt_base: true
-      apt_base_ubuntu: true
-      apt_base_archive: true
-      apt_base_codec: true
-      apt_base_gnome: true
-      # apt_base_sound_pulseaudio: false
+      apt_auth_priv: true
+      apt_ubuntu: true
+      apt_archive: true
+      apt_codec: true
+      apt_gnome: true
       apt_snap: true
       apt_flatpak: true
-      apt_vpn: true
+      apt_vpn_resolvconf: true
+      apt_vpn_wireguard: true
+      apt_vpn_openvpn: true
+      apt_vpn_openconnect: true
+      apt_vpn_l2tp: true
       # apt_gnome_boxes: false
       # apt_texmaker: false
       # apt_latex: false
       # apt_pandoc: false
       # apt_virt_viewer: false
+      # apt_logitech_unifying_solaar: false
+      # apt_mpv: false
       # DPKG ----------------------------------
-      # dpkg_virtualbox: false # TODO: not working download
+      # dpkg_virtualbox: false
       # dpkg_veracrypt: false
       dpkg_veracrypt_cli: true
-      # dpkg_parsec: false # TODO: not installable because of missing libavcodec58
+      # dpkg_parsec: false
       dpkg_brim: true
       dpkg_portmaster: true
       # DIST KEY ------------------------------
       # distribution_key_virtualbox: false
+      distribution_key_1password_cli: true
       # APPIMAGE ------------------------------
       app_image_logseq: true
+      app_image_ultimaker: true
       # SNAP ----------------------------------
       # snap_firefox: false
       # snap_chromium: false
       # snap_thunderbird: false
-      # snap_signal_desktop: false
-      # snap_telegram_desktop: false
+      snap_signal_desktop: true
+      snap_telegram_desktop: true
+      # snap_discord: false
       # snap_zoom_client: false
       # snap_spotify: false
       # snap_libreoffice: false
       # snap_onlyoffice_desktopeditors: false
+      # snap_fbreader: false
       # snap_inkscape: false
       # snap_drawio: false
       # snap_gimp: false
@@ -85,6 +107,7 @@
       # snap_flameshot: false
       # snap_1password: false
       # snap_okular: false
+      # snap_xournalpp: false
       # snap_yubioath_desktop: false
       # snap_code: false
       # snap_remmina: false
@@ -97,11 +120,8 @@
       # snap_mqtt_explorer: false
       # snap_zaproxy: false
       snap_nmap: true
-      # snap_john_the_ripper: false
-      # snap_microk8s: false
+      snap_john_the_ripper: true
       # snap_rpi_imager: false
-      # snap_multipass: false
-      # snap_maas: false
       # snap_cornyjokes: false
       # snap_steam: false
       # FLATPAK -------------------------------
@@ -109,13 +129,15 @@
       # flatpak_firefox: false
       # flatpak_chromium: false
       # flatpak_thunderbird: false
+      # flatpak_newsflash: false
       # flatpak_extension_manager: false
       # flatpak_flameshot: false
       # flatpak_onlyoffice: false
       # flatpak_1password: false
       # flatpak_keepassxc: false
+      # flatpak_cryptomator: false
       flatpak_easy_effects: true
-      flatpak_signal: true
+      # flatpak_signal: false
       # flatpak_telegram: false
       # flatpak_threemaqt: false
       # flatpak_zoom: false
@@ -124,9 +146,13 @@
       # flatpak_spotify: false
       # flatpak_ferdi: false
       # flatpak_vlc: false
+      # flatpak_amberol: false
+      # flatpak_haruna: false
+      # flatpak_warp: false
       # flatpak_inkscape: false
       # flatpak_drawio: false
       # flatpak_gimp: false
+      # flatpak_conjure: false
       # flatpak_krita: false
       # flatpak_studio: false
       # flatpak_blender: false
@@ -154,5 +180,3 @@
       # flatpak_betaflightconfigurator: false
       # OTHER --------------------------------
       # vs_code_ext: false
-      # java: false
-      # java_ant: false

@@ -47,46 +47,6 @@
     - gnome
 
 # ------------------------------------------------------------------------------
-# THEME
-- name: "CLIENT | gnome gui | theme git clone - {{ outer_item.name }}"
-  become: true
-  become_user: "{{ outer_item.name }}"
-  ansible.builtin.git:
-    repo: "{{ item.url }}"
-    dest: "{{ item.path }}/{{ item.name }}"
-    version: "{{ item.branch }}"
-    force: true
-    update: false
-    recursive: true
-  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
-  when:
-    - install_client_gdm_gui_setup is defined
-    - install_client_gdm_gui_setup.theme is defined
-    - install_client_gdm_gui_setup.theme.git is defined
-    - install_client_gdm_gui_setup.theme.install | bool
-  tags:
-    - install_client
-    - ubuntu
-    - gnome
-
-- name: "CLIENT | gnome gui | theme execute install - {{ outer_item.name }}"
-  become: true
-  become_user: "{{ outer_item.name }}"
-  ansible.builtin.command: "{{ item.path }}/{{ item.name }}/{{ item.file }} {{ item.extra }}"
-  loop: "{{ install_client_gdm_gui_setup.theme.git | flatten(levels=1) }}"
-  changed_when: true
-  when:
-    - install_client_gdm_gui_setup is defined
-    - install_client_gdm_gui_setup.theme is defined
-    - install_client_gdm_gui_setup.theme.git is defined
-    - install_client_gdm_gui_setup.theme.install | bool
-    - item.file is defined
-  tags:
-    - install_client
-    - ubuntu
-    - gnome
-
-# ------------------------------------------------------------------------------
 # APT extensions
 - name: CLIENT | gnome gui | install extensions by apt services
   become: true
