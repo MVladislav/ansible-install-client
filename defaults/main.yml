@@ -721,7 +721,7 @@ install_client_distribution_key:
       - virtualbox-6.1
   # https://developer.1password.com/docs/cli/get-started/#install
   - install: "{{ install_client_config.distribution_key_1password_cli | default('no') | bool }}"
-    pgp:
+    gpg:
       - id: ""
         url: https://downloads.1password.com/linux/keys/1password.asc
         name: 1password-archive-keyring.gpg
