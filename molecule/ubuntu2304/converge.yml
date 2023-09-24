@@ -45,7 +45,7 @@
       gnome_gui_setup_extensions_git_ui_tune: true
       # gnome_gui_setup_keybinding: false
       gnome_gui_setup_overlay: true
-      gnome_terminal_setup_overlay: true
+      # gnome_terminal_setup_overlay: false
       cleanup_remove_snap: false
       cleanup_remove_flatpak: false
       # APT -----------------------------------
