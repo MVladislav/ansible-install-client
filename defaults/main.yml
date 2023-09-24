@@ -262,7 +262,7 @@ install_client_gdm_gui_setup:
       # - name: dash-to-panel@jderose9.github.com
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
       - name: tiling-assistant@ubuntu.com
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
+        install: "{{ install_client_config.gnome_gui_setup_extensions_apt_ubuntu_tiling | default('no') | bool }}"
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
@@ -287,20 +287,84 @@ install_client_gdm_gui_setup:
     setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
     configs:
+      - source: org.gnome.desktop.calendar
+        key: show-weekdate
+        value: >-
+          true
+      - source: org.gnome.desktop.interface
+        key: clock-show-date
+        value: >-
+          true
+      - source: org.gnome.desktop.interface
+        key: clock-show-seconds
+        value: >-
+          true
+      - source: org.gnome.desktop.interface
+        key: clock-show-weekday
+        value: >-
+          true
+      - source: org.gnome.desktop.interface
+        key: document-font-name
+        value: >-
+          Roboto 10
+      - source: org.gnome.desktop.interface
+        key: enable-hot-corners
+        value: >-
+          true
       - source: org.gnome.desktop.interface
         key: font-name
         value: >-
           Roboto 10
       - source: org.gnome.desktop.interface
-        key: document-font-name
+        key: gtk-theme
         value: >-
-          Roboto 10
+          Yaru-purple-dark
+      - source: org.gnome.desktop.interface
+        key: icon-theme
+        value: >-
+          Yaru-purple
       - source: org.gnome.desktop.interface
         key: monospace-font-name
         value: >-
           Roboto Mono 10
       - source: org.gnome.desktop.interface
         key: show-battery-percentage
+        value: >-
+          true
+      - source: org.gnome.desktop.wm.preferences
+        key: titlebar-font
+        value: >-
+          Roboto Bold 11
+      - source: org.gnome.shell.app-switcher
+        key: current-workspace-only
+        value: >-
+          false
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: background-color
+        value: >-
+          #ffffff
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: background-opacity
+        value: >-
+          0.10000000000000001
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: click-action
+        value: >-
+          focus-or-previews
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: custom-theme-shrink
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: customize-alphas
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: dash-max-icon-size
+        value: >-
+          32
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: dock-fixed
         value: >-
           true
       - source: org.gnome.shell.extensions.dash-to-dock
@@ -312,69 +376,73 @@ install_client_gdm_gui_setup:
         value: >-
           true
       - source: org.gnome.shell.extensions.dash-to-dock
-        key: background-opacity
+        key: isolate-monitors
         value: >-
-          0.10000000000000001
+          false
       - source: org.gnome.shell.extensions.dash-to-dock
-        key: customize-alphas
+        key: isolate-workspaces
         value: >-
-          true
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: min-alpha
-        value: >-
-          0
+          false
       - source: org.gnome.shell.extensions.dash-to-dock
         key: max-alpha
         value: >-
           0
       - source: org.gnome.shell.extensions.dash-to-dock
-        key: background-color
+        key: min-alpha
         value: >-
-          #ffffff
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: unity-backlit-items
-        value: >-
-          false
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: dash-max-icon-size
-        value: >-
-          32
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: dock-fixed
-        value: >-
-          true
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: click-action
-        value: >-
-          focus-or-previews
-      - source: org.gnome.shell.extensions.dash-to-dock
-        key: custom-theme-shrink
-        value: >-
-          true
+          0
       - source: org.gnome.shell.extensions.dash-to-dock
         key: running-indicator-style
         value: >-
           DOTS
       - source: org.gnome.shell.extensions.dash-to-dock
-        key: transparency-mode
+        key: show-mounts
         value: >-
-          DYNAMIC
+          false
       - source: org.gnome.shell.extensions.dash-to-dock
         key: show-show-apps-button
         value: >-
           true
       - source: org.gnome.shell.extensions.dash-to-dock
-        key: show-mounts
-        value: >-
-          false
-      - source: org.gnome.shell.extensions.dash-to-dock
         key: show-trash
         value: >-
           false
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: transparency-mode
+        value: >-
+          DYNAMIC
+      - source: org.gnome.shell.extensions.dash-to-dock
+        key: unity-backlit-items
+        value: >-
+          false
+      - source: org.gnome.shell.extensions.ding
+        key: icon-size
+        value: >-
+          standard
+      - source: org.gnome.shell.extensions.ding
+        key: show-home
+        value: >-
+          false
+      - source: org.gnome.shell.extensions.ding
+        key: start-corner
+        value: >-
+          top-left
+      - source: org.gnome.shell.extensions.tiling-assistant
+        key: disable-tile-groups
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.tiling-assistant
+        key: enable-tiling-popup
+        value: >-
+          true
+      - source: org.gnome.shell.extensions.tiling-assistant
+        key: tiling-popup-all-workspace
+        value: >-
+          true
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'com.gitlab.newsflash.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'veracrypt.desktop', 'org.gnome.Nautilus.desktop', 'nm-connection-editor.desktop']
+          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'io.bit3.ThreemaQT.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'Logseq.desktop', 'veracrypt.desktop', 'org.gnome.Nautilus.desktop']
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
