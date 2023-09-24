@@ -86,8 +86,8 @@
       # snap_firefox: false
       # snap_chromium: false
       # snap_thunderbird: false
-      snap_signal_desktop: true
-      snap_telegram_desktop: true
+      # snap_signal_desktop: false
+      # snap_telegram_desktop: false
       # snap_discord: false
       # snap_zoom_client: false
       # snap_spotify: false
@@ -99,7 +99,7 @@
       # snap_gimp: false
       # snap_darktable: false
       # snap_pixelfx: false
-      snap_upscayl: true
+      # snap_upscayl: false
       # snap_krita: false
       # snap_lunacy: false
       # snap_vlc: false
