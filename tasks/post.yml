@@ -1,0 +1,18 @@
+---
+# tasks file for install_client
+
+# ------------------------------------------------------------------------------
+# DISABLE SERVICE TO NOT RUN IN BACKGROUND
+- name: "CLIENT | snap | systemd stop snap.remmina.ssh-agent"
+  become: true
+  ansible.builtin.systemd:
+    name: snap.remmina.ssh-agent.service
+    state: stopped
+    enabled: false
+  when:
+    - install_client_config is defined
+    - install_client_config.snap_remmina is defined
+    - install_client_config.snap_remmina | bool
+  tags:
+    - install_client
+    - snap

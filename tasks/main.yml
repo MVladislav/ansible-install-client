@@ -94,3 +94,8 @@
 # OTHER SETUPS
 - name: "CLIENT | other | setup other settings"
   ansible.builtin.include_tasks: setup_other.yml
+
+# ------------------------------------------------------------------------------
+# POST
+- name: "CLIENT | post | post setups"
+  ansible.builtin.include_tasks: post.yml
