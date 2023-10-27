@@ -165,6 +165,7 @@ install_client_config:
   flatpak_mongodb_compass: false
   flatpak_filezilla: false
   flatpak_jdownloader: false
+  flatpak_missioncenter: false
   flatpak_wireshark: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
@@ -1076,6 +1077,9 @@ install_client_flatpak:
   - name: org.jdownloader.JDownloader
     remote: flathub
     install: "{{ install_client_config.flatpak_jdownloader | default('no') | bool }}"
+  - name: io.missioncenter.MissionCenter
+    remote: flathub
+    install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
   # SEC
   - name: org.wireshark.Wireshark
     remote: flathub

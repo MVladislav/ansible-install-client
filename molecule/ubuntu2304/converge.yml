@@ -171,6 +171,7 @@
       # flatpak_mongodb_compass: false
       # flatpak_filezilla: false
       # flatpak_jdownloader: false
+      flatpak_missioncenter: true
       # flatpak_wireshark: false
       # flatpak_ghidra: false
       # flatpak_zaproxy: false

@@ -177,6 +177,7 @@ install_client_config:
   flatpak_mongodb_compass: false
   flatpak_filezilla: false
   flatpak_jdownloader: false
+  flatpak_missioncenter: false
   flatpak_wireshark: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
