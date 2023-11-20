@@ -97,9 +97,11 @@ install_client_config:
   snap_discord: false
   snap_zoom_client: false
   snap_spotify: false
+  snap_moosync: false
   snap_libreoffice: false
   snap_onlyoffice_desktopeditors: false
   snap_fbreader: false
+  snap_foliate: false
   snap_inkscape: false
   snap_drawio: false
   snap_gimp: false
