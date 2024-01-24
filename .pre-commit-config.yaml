@@ -64,13 +64,13 @@ repos:
         exclude_types:
           - python
 
-  # # Scan for passwords
-  # - repo: https://github.com/Yelp/detect-secrets
-  #   rev: v1.4.0
-  #   hooks:
-  #     - id: detect-secrets
-  #       args:
-  #         - --exclude-files=tests/*
+  # Scan for passwords
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args:
+          - --exclude-files=tests/*
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.0

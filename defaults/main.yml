@@ -5,20 +5,22 @@
 # application download from source, which needs to be updated manually
 # also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
-install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.10/virtualbox-7.0_7.0.10-158379~Ubuntu~jammy_amd64.deb
+install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
-install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-1.25.9-Ubuntu-23.04-amd64.deb
-install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
+# NOTE: link should be latest version
 install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
-install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.2.0/zui_1.2.0_amd64.deb
+install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
+# NOTE: link should be latest version
 install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
 # NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
-install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.9.18/Logseq-linux-x64-0.9.18.AppImage
-install_client_links_to_check_update_logseq_checksum: fb6067556d2a59227f3c8637ce5d5cf6acdc3fd0d9569e84f41ec023a2ea89b1
-# NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux-modern.*\.AppImage\"" | cut -d '"' -f 4
-install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.4.0/UltiMaker-Cura-5.4.0-linux-modern.AppImage
-install_client_links_tp_check_update_ultimaker_checksum: 415bfb5a47e8d3cd8f1fa9faae9b01efdb2ddb12b6f8da7d8af060fcf61977be
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.5/Logseq-linux-x64-0.10.5.AppImage
+install_client_links_to_check_update_logseq_checksum: 17761baa0bcbd383f49d76885642650aaff3f21504d0cd14bad901b36a26b811 # pragma: allowlist secret
+# NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux.*\.AppImage\"" | cut -d '"' -f 4
+install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
+install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
@@ -77,104 +79,127 @@ install_client_config:
   app_image_logseq: false
   app_image_ultimaker: false
   # SNAP ----------------------------------
-  snap_firefox: false
+  snap_1password: false
+  snap_keepassxc: false
+  snap_yubioath: false
   snap_chromium: false
-  snap_thunderbird: false
-  snap_signal_desktop: false
-  snap_telegram_desktop: false
-  snap_discord: false
-  snap_zoom_client: false
-  snap_spotify: false
-  snap_moosync: false
-  snap_libreoffice: false
-  snap_onlyoffice_desktopeditors: false
-  snap_fbreader: false
+  snap_denaro: false
+  snap_firefox: false
+  snap_flameshot: false
   snap_foliate: false
-  snap_inkscape: false
+  snap_libreoffice: false
+  snap_newsflash: false
+  snap_okular: false
+  snap_onlyoffice: false
+  snap_thunderbird: false
+  snap_xournalpp: false
+  snap_zoom: false
+  snap_discord: false
+  snap_jdownloader: false
+  snap_signal: false
+  snap_telegram: false
+  snap_blender: false
+  snap_darktable: false
   snap_drawio: false
   snap_gimp: false
-  snap_darktable: false
-  snap_pixelfx: false
-  snap_upscayl: false
+  snap_inkscape: false
   snap_krita: false
   snap_lunacy: false
+  snap_upscayl: false
+  snap_amberol: false
+  snap_haruna: false
+  snap_obs: false
+  snap_parabolic: false
+  snap_video_trimmer: false
   snap_vlc: false
-  snap_obs_studio: false
-  snap_flameshot: false
-  snap_1password: false
-  snap_okular: false
-  snap_xournalpp: false
-  snap_yubioath_desktop: false
-  snap_code: false
-  snap_remmina: false
+  snap_moosync: false
+  snap_spotify: false
+  snap_steam: false
   snap_android_studio: false
-  snap_UBports: false
+  snap_beekeeper_studio: false
+  snap_code: false
+  snap_dbeaver: false
   snap_insomnia: false
   snap_postman: false
-  snap_dbeaver_ce: false
-  snap_beekeeper_studio: false
-  snap_mqtt_explorer: false
-  snap_zaproxy: false
-  snap_nmap: false
-  snap_john_the_ripper: false
+  snap_remmina: false
   snap_rpi_imager: false
-  snap_cornyjokes: false
-  snap_steam: false
+  snap_ghidra: false
+  snap_john_the_ripper: false
+  snap_nmap: false
+  snap_zaproxy: false
+  snap_mqtt_explorer: false
+  snap_UBports: false
+  snap_fbreader: false
+  snap_pixelfx: false
   # FLATPAK -------------------------------
-  flatpak_flatseal: false
-  flatpak_firefox: false
-  flatpak_chromium: false
-  flatpak_thunderbird: false
-  flatpak_newsflash: false
-  flatpak_extension_manager: false
-  flatpak_flameshot: false
-  flatpak_onlyoffice: false
   flatpak_1password: false
   flatpak_keepassxc: false
-  flatpak_cryptomator: false
-  flatpak_easy_effects: false
+  flatpak_yubioath: false
+  flatpak_chromium: false
+  flatpak_denaro: false
+  flatpak_firefox: false
+  flatpak_flameshot: false
+  flatpak_foliate: false
+  flatpak_libreoffice: false
+  flatpak_newsflash: false
+  flatpak_okular: false
+  flatpak_onlyoffice: false
+  flatpak_thunderbird: false
+  flatpak_xournalpp: false
+  flatpak_zoom: false
+  flatpak_discord: false
+  flatpak_jdownloader: false
   flatpak_signal: false
   flatpak_telegram: false
-  flatpak_threemaqt: false
-  flatpak_zoom: false
-  flatpak_teams: false
-  flatpak_discord: false
-  flatpak_spotify: false
-  flatpak_ferdi: false
-  flatpak_vlc: false
-  flatpak_amberol: false
-  flatpak_haruna: false
-  flatpak_warp: false
-  flatpak_inkscape: false
+  flatpak_blender: false
+  flatpak_darktable: false
   flatpak_drawio: false
   flatpak_gimp: false
-  flatpak_conjure: false
+  flatpak_inkscape: false
   flatpak_krita: false
-  flatpak_studio: false
-  flatpak_blender: false
-  flatpak_peek: false
+  flatpak_lunacy: false
+  flatpak_upscayl: false
+  flatpak_amberol: false
+  flatpak_haruna: false
+  flatpak_obs: false
+  flatpak_parabolic: false
   flatpak_video_trimmer: false
-  flatpak_tube_converter: false
-  flatpak_girens: false
+  flatpak_vlc: false
+  flatpak_moosync: false
+  flatpak_spotify: false
+  flatpak_steam: false
+  flatpak_android_studio: false
+  flatpak_beekeeper_studio: false
   flatpak_code: false
-  flatpak_remmina: false
-  flatpak_sublimetext: false
-  flatpak_arduinoide: false
-  flatpak_fritzing: false
+  flatpak_dbeaver: false
   flatpak_insomnia: false
   flatpak_postman: false
-  flatpak_dbeavercommunity: false
-  flatpak_mongodb_compass: false
-  flatpak_filezilla: false
-  flatpak_jdownloader: false
-  flatpak_missioncenter: false
-  flatpak_wireshark: false
+  flatpak_remmina: false
+  flatpak_rpi_imager: false
   flatpak_ghidra: false
+  flatpak_john_the_ripper: false
+  flatpak_nmap: false
   flatpak_zaproxy: false
-  flatpak_steam: false
-  flatpak_lutris: false
+  flatpak_cryptomator: false
+  flatpak_flatseal: false
   flatpak_ausweisapp2: false
+  flatpak_easy_effects: false
+  flatpak_extension_manager: false
+  flatpak_filezilla: false
+  flatpak_missioncenter: false
+  flatpak_planify: false
+  flatpak_warp: false
+  flatpak_threemaqt: false
+  flatpak_conjure: false
+  flatpak_peek: false
+  flatpak_girens: false
+  flatpak_lutris: false
+  flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
+  flatpak_fritzing: false
+  flatpak_mongodb_compass: false
+  flatpak_sublimetext: false
+  flatpak_wireshark: false
   # OTHER --------------------------------
   vs_code_ext: false
 
@@ -753,183 +778,116 @@ install_client_app_image:
 # SNAP
 # install_client_config.snap_...
 install_client_snap:
-  - name: firefox
-    install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: chromium
-    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: thunderbird
-    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: signal-desktop
-    install: "{{ install_client_config.snap_signal_desktop | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: telegram-desktop
-    install: "{{ install_client_config.snap_telegram_desktop | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: discord
-    install: "{{ install_client_config.snap_discord | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: zoom-client
-    install: "{{ install_client_config.snap_zoom_client | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: spotify
-    install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: moosync
-    install: "{{ install_client_config.snap_moosync | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: libreoffice
-    install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: onlyoffice-desktopeditors
-    install: "{{ install_client_config.snap_onlyoffice_desktopeditors | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: fbreader
-    install: "{{ install_client_config.snap_fbreader | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: foliate
-    install: "{{ install_client_config.snap_foliate | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: inkscape
-    install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: drawio
-    install: "{{ install_client_config.snap_drawio | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: gimp
-    install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: darktable
-    install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: pixelfx
-    install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: upscayl
-    install: "{{ install_client_config.snap_upscayl | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: krita
-    install: "{{ install_client_config.snap_krita | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: lunacy
-    install: "{{ install_client_config.snap_lunacy | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: vlc
-    install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: obs-studio
-    install: "{{ install_client_config.snap_obs_studio | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: flameshot
-    install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
-    classic: false
-    beta: false
   - name: 1password
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
-    classic: false
-    beta: false
+  - name: keepassxc
+    install: "{{ install_client_config.snap_keepassxc | default('no') | bool }}"
+  - name: yubioath-desktop
+    install: "{{ install_client_config.snap_yubioath | default('no') | bool }}"
+  - name: chromium
+    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
+  - name: denaro
+    install: "{{ install_client_config.snap_denaro | default('no') | bool }}"
+  - name: firefox
+    install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
+  - name: flameshot
+    install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
+  - name: foliate
+    install: "{{ install_client_config.snap_foliate | default('no') | bool }}"
+  - name: libreoffice
+    install: "{{ install_client_config.snap_libreoffice | default('no') | bool }}"
+  - name: newsflash
+    install: "{{ install_client_config.snap_newsflash | default('no') | bool }}"
   - name: okular
     install: "{{ install_client_config.snap_okular | default('no') | bool }}"
-    classic: false
-    beta: false
+  - name: onlyoffice-desktopeditors
+    install: "{{ install_client_config.snap_onlyoffice | default('no') | bool }}"
+  - name: thunderbird
+    install: "{{ install_client_config.snap_thunderbird | default('no') | bool }}"
   - name: xournalpp
     install: "{{ install_client_config.snap_xournalpp | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: yubioath-desktop
-    install: "{{ install_client_config.snap_yubioath_desktop | default('no') | bool }}"
-    classic: false
-    beta: false
-  # dev
-  - name: code
-    install: "{{ install_client_config.snap_code | default('no') | bool }}"
+  - name: zoom-client
+    install: "{{ install_client_config.snap_zoom_client | default('no') | bool }}"
+  - name: discord
+    install: "{{ install_client_config.snap_discord | default('no') | bool }}"
+  - name: jdownloader2
+    install: "{{ install_client_config.snap_jdownloader | default('no') | bool }}"
+  - name: signal-desktop
+    install: "{{ install_client_config.snap_signal | default('no') | bool }}"
+  - name: telegram-desktop
+    install: "{{ install_client_config.snap_telegram | default('no') | bool }}"
+  - name: blender
+    install: "{{ install_client_config.snap_blender | default('no') | bool }}"
     classic: true
-    beta: false
-  - name: remmina
-    install: "{{ install_client_config.snap_remmina | default('no') | bool }}"
-    classic: true
-    beta: false
+  - name: darktable
+    install: "{{ install_client_config.snap_darktable | default('no') | bool }}"
+  - name: drawio
+    install: "{{ install_client_config.snap_drawio | default('no') | bool }}"
+  - name: gimp
+    install: "{{ install_client_config.snap_gimp | default('no') | bool }}"
+  - name: inkscape
+    install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
+  - name: krita
+    install: "{{ install_client_config.snap_krita | default('no') | bool }}"
+  - name: lunacy
+    install: "{{ install_client_config.snap_lunacy | default('no') | bool }}"
+  - name: upscayl
+    install: "{{ install_client_config.snap_upscayl | default('no') | bool }}"
+  - name: amberol
+    install: "{{ install_client_config.snap_amberol | default('no') | bool }}"
+  - name: haruna
+    install: "{{ install_client_config.snap_haruna | default('no') | bool }}"
+  - name: obs-studio
+    install: "{{ install_client_config.snap_obs | default('no') | bool }}"
+  - name: tube-converter
+    install: "{{ install_client_config.snap_parabolic | default('no') | bool }}"
+  - name: video-trimmer
+    install: "{{ install_client_config.snap_video_trimmer | default('no') | bool }}"
+  - name: vlc
+    install: "{{ install_client_config.snap_vlc | default('no') | bool }}"
+  - name: moosync
+    install: "{{ install_client_config.snap_moosync | default('no') | bool }}"
+  - name: spotify
+    install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
+  - name: steam
+    install: "{{ install_client_config.snap_steam | default('no') | bool }}"
+    beta: true
   - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
     classic: true
-    beta: false
-  - name: ubports-installer
-    install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: insomnia
-    install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: postman
-    install: "{{ install_client_config.snap_postman | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: dbeaver-ce
-    install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
-    classic: false
-    beta: false
   - name: beekeeper-studio
     install: "{{ install_client_config.snap_beekeeper_studio | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: mqtt-explorer
-    install: "{{ install_client_config.snap_mqtt_explorer | default('no') | bool }}"
-    classic: false
-    beta: false
-  # sec
+  - name: code
+    install: "{{ install_client_config.snap_code | default('no') | bool }}"
+    classic: true
+  - name: dbeaver-ce
+    install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
+  - name: insomnia
+    install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
+  - name: postman
+    install: "{{ install_client_config.snap_postman | default('no') | bool }}"
+  - name: remmina
+    install: "{{ install_client_config.snap_remmina | default('no') | bool }}"
+    classic: true
+  - name: rpi-imager
+    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
+  - name: ghidra
+    install: "{{ install_client_config.snap_ghidra | default('no') | bool }}"
+  - name: john-the-ripper
+    install: "{{ install_client_config.snap_john_the_ripper | default('no') | bool }}"
+  - name: nmap
+    install: "{{ install_client_config.snap_nmap | default('no') | bool }}"
   - name: zaproxy
     install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
     classic: true
-    beta: false
-  - name: nmap
-    install: "{{ install_client_config.snap_nmap | default('no') | bool }}"
-    classic: false
-    beta: false
-  - name: john-the-ripper
-    install: "{{ install_client_config.snap_john_the_ripper | default('no') | bool }}"
-    classic: false
-    beta: false
-  # other
-  - name: rpi-imager
-    install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
-    classic: false
-    beta: false
-  # other
-  - name: cornyjokes
-    install: "{{ install_client_config.snap_cornyjokes | default('no') | bool }}"
-    classic: false
-    beta: false
-  # game
-  - name: steam
-    install: "{{ install_client_config.snap_steam | default('no') | bool }}"
-    classic: false
-    beta: true
+  - name: mqtt-explorer
+    install: "{{ install_client_config.snap_mqtt_explorer | default('no') | bool }}"
+  - name: ubports-installer
+    install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
+  - name: fbreader
+    install: "{{ install_client_config.snap_fbreader | default('no') | bool }}"
+  - name: pixelfx
+    install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # FLATPAK
@@ -944,191 +902,154 @@ install_client_flatpak_remotes:
     install: true
 # install_client_config.flatpak_...
 install_client_flatpak:
-  # HELPER
-  - name: com.github.tchx84.Flatseal
-    remote: flathub
-    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
-  - name: org.mozilla.firefox
-    remote: flathub
-    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
-  - name: org.chromium.Chromium
-    remote: flathub
-    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
-  - name: org.mozilla.Thunderbird
-    remote: flathub
-    install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
-  - name: com.gitlab.newsflash
-    remote: flathub
-    install: "{{ install_client_config.flatpak_newsflash | default('no') | bool }}"
-  - name: com.mattjakeman.ExtensionManager
-    remote: flathub
-    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
-  - name: org.flameshot.Flameshot
-    remote: flathub
-    install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
-  - name: org.onlyoffice.desktopeditors
-    remote: flathub
-    install: "{{ install_client_config.flatpak_onlyoffice | default('no') | bool }}"
   - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
     remote: ""
     install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
   - name: org.keepassxc.KeePassXC
-    remote: flathub
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
-  - name: org.cryptomator.Cryptomator
-    remote: flathub
-    install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
-  - name: com.github.wwmm.easyeffects
-    # https://github.com/JackHack96/EasyEffects-Presets
-    remote: flathub
-    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
-  # SOCIAL
+  - name: com.yubico.yubioath
+    install: "{{ install_client_config.flatpak_yubioath | default('no') | bool }}"
+  - name: org.chromium.Chromium
+    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
+  - name: org.nickvision.money
+    install: "{{ install_client_config.flatpak_denaro | default('no') | bool }}"
+  - name: org.mozilla.firefox
+    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
+  - name: org.flameshot.Flameshot
+    install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
+  - name: com.github.johnfactotum.Foliate
+    install: "{{ install_client_config.flatpak_foliate | default('no') | bool }}"
+  - name: org.libreoffice.LibreOffice
+    install: "{{ install_client_config.flatpak_libreoffice | default('no') | bool }}"
+  - name: com.gitlab.newsflash
+    install: "{{ install_client_config.flatpak_newsflash | default('no') | bool }}"
+  - name: org.kde.okular
+    install: "{{ install_client_config.flatpak_okular | default('no') | bool }}"
+  - name: org.onlyoffice.desktopeditors
+    install: "{{ install_client_config.flatpak_onlyoffice | default('no') | bool }}"
+  - name: org.mozilla.Thunderbird
+    install: "{{ install_client_config.flatpak_thunderbird | default('no') | bool }}"
+  - name: com.github.xournalpp.xournalpp
+    install: "{{ install_client_config.flatpak_xournalpp | default('no') | bool }}"
+  - name: us.zoom.Zoom
+    install: "{{ install_client_config.flatpak_zoom | default('no') | bool }}"
+  - name: com.discordapp.Discord
+    install: "{{ install_client_config.flatpak_discord | default('no') | bool }}"
+  - name: org.jdownloader.JDownloader
+    install: "{{ install_client_config.flatpak_jdownloader | default('no') | bool }}"
   - name: org.signal.Signal
-    remote: flathub
     install: "{{ install_client_config.flatpak_signal | default('no') | bool }}"
   - name: org.telegram.desktop
-    remote: flathub
     install: "{{ install_client_config.flatpak_telegram | default('no') | bool }}"
-  - name: io.bit3.ThreemaQT
-    remote: flathub
-    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
-  - name: us.zoom.Zoom
-    remote: flathub
-    install: "{{ install_client_config.flatpak_zoom | default('no') | bool }}"
-  - name: com.microsoft.Teams
-    remote: flathub
-    install: "{{ install_client_config.flatpak_teams | default('no') | bool }}"
-  - name: com.discordapp.Discord
-    remote: flathub
-    install: "{{ install_client_config.flatpak_discord | default('no') | bool }}"
-  - name: com.spotify.Client
-    remote: flathub
-    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
-  - name: com.getferdi.Ferdi
-    remote: flathub
-    install: "{{ install_client_config.flatpak_ferdi | default('no') | bool }}"
-  - name: org.videolan.VLC
-    remote: flathub
-    install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
-  - name: io.bassi.Amberol
-    remote: flathub
-    install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
-  - name: org.kde.haruna
-    remote: flathub
-    install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
-  - name: app.drey.Warp
-    remote: flathub
-    install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
-  # DESIGN
-  - name: org.inkscape.Inkscape
-    remote: flathub
-    install: "{{ install_client_config.flatpak_inkscape | default('no') | bool }}"
+  - name: org.blender.Blender
+    install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
+  - name: org.darktable.Darktable
+    install: "{{ install_client_config.flatpak_darktable | default('no') | bool }}"
   - name: com.jgraph.drawio.desktop
-    remote: flathub
     install: "{{ install_client_config.flatpak_drawio | default('no') | bool }}"
   - name: org.gimp.GIMP
-    remote: flathub
     install: "{{ install_client_config.flatpak_gimp | default('no') | bool }}"
-  - name: io.github.nate_xyz.Conjure
-    remote: flathub
-    install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
+  - name: org.inkscape.Inkscape
+    install: "{{ install_client_config.flatpak_inkscape | default('no') | bool }}"
   - name: org.kde.krita
-    remote: flathub
     install: "{{ install_client_config.flatpak_krita | default('no') | bool }}"
+  - name: com.icons8.Lunacy
+    install: "{{ install_client_config.flatpak_lunacy | default('no') | bool }}"
+  - name: org.upscayl.Upscayl
+    install: "{{ install_client_config.flatpak_upscayl | default('no') | bool }}"
+  - name: io.bassi.Amberol
+    install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
+  - name: org.kde.haruna
+    install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
   - name: com.obsproject.Studio
-    remote: flathub
-    install: "{{ install_client_config.flatpak_studio | default('no') | bool }}"
-  - name: org.blender.Blender
-    remote: flathub
-    install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
-  - name: com.uploadedlobster.peek
-    remote: flathub
-    install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
-  - name: org.gnome.gitlab.YaLTeR.VideoTrimmer
-    remote: flathub
-    install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
+    install: "{{ install_client_config.flatpak_obs | default('no') | bool }}"
   - name: org.nickvision.tubeconverter
-    remote: flathub
-    install: "{{ install_client_config.flatpak_tube_converter | default('no') | bool }}"
-  - name: nl.g4d.Girens
-    remote: flathub
-    install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
-  # DEV
+    install: "{{ install_client_config.flatpak_parabolic | default('no') | bool }}"
+  - name: org.gnome.gitlab.YaLTeR.VideoTrimmer
+    install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
+  - name: org.videolan.VLC
+    install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
+  - name: app.moosync.moosync
+    install: "{{ install_client_config.flatpak_moosync | default('no') | bool }}"
+  - name: com.spotify.Client
+    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
+  - name: com.valvesoftware.Steam
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: com.google.AndroidStudio
+    install: "{{ install_client_config.flatpak_android_studio | default('no') | bool }}"
+  - name: io.beekeeperstudio.Studio
+    install: "{{ install_client_config.flatpak_beekeeper_studio | default('no') | bool }}"
   - name: com.visualstudio.code
-    remote: flathub
     install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
-  - name: org.remmina.Remmina
-    remote: flathub
-    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
-  - name: com.sublimetext.three
-    remote: flathub
-    install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
-  - name: cc.arduino.arduinoide
-    remote: flathub
-    install: "{{ install_client_config.flatpak_arduinoide | default('no') | bool }}"
-  - name: org.fritzing.Fritzing
-    remote: flathub
-    install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
+  - name: io.dbeaver.DBeaverCommunity
+    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
   - name: rest.insomnia.Insomnia
-    remote: flathub
     install: "{{ install_client_config.flatpak_insomnia | default('no') | bool }}"
   - name: com.getpostman.Postman
-    remote: flathub
     install: "{{ install_client_config.flatpak_postman | default('no') | bool }}"
-  - name: io.dbeaver.DBeaverCommunity
-    remote: flathub
-    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
-  - name: com.mongodb.Compass
-    remote: flathub
-    install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
-  - name: org.filezillaproject.Filezilla
-    remote: flathub
-    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
-  - name: org.jdownloader.JDownloader
-    remote: flathub
-    install: "{{ install_client_config.flatpak_jdownloader | default('no') | bool }}"
-  - name: io.missioncenter.MissionCenter
-    remote: flathub
-    install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
-  # SEC
-  - name: org.wireshark.Wireshark
-    remote: flathub
-    install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
+  - name: org.remmina.Remmina
+    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
+  - name: org.raspberrypi.rpi-imager
+    install: "{{ install_client_config.flatpak_rpi_imager | default('no') | bool }}"
   - name: org.ghidra_sre.Ghidra
-    remote: flathub
     install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
+  - name: com.openwall.John
+    install: "{{ install_client_config.flatpak_john_the_ripper | default('no') | bool }}"
+  - name: org.nmap.Zenmap
+    install: "{{ install_client_config.flatpak_nmap | default('no') | bool }}"
   - name: org.zaproxy.ZAP
-    remote: flathub
     install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
-  # GAME
-  - name: com.valvesoftware.Steam
-    remote: flathub
-    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: org.cryptomator.Cryptomator
+    install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
+  - name: com.github.tchx84.Flatseal
+    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
+  - name: de.bund.ausweisapp.ausweisapp2
+    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
+  - name: com.github.wwmm.easyeffects
+    # https://github.com/JackHack96/EasyEffects-Presets
+    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
+  - name: com.mattjakeman.ExtensionManager
+    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
+  - name: org.filezillaproject.Filezilla
+    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
+  - name: io.missioncenter.MissionCenter
+    install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
+  - name: io.github.alainm23.planify
+    install: "{{ install_client_config.flatpak_planify | default('no') | bool }}"
+  - name: app.drey.Warp
+    install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
+  - name: io.bit3.ThreemaQT
+    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
+  - name: io.github.nate_xyz.Conjure
+    install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
+  - name: com.uploadedlobster.peek
+    install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
+  - name: nl.g4d.Girens
+    install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
   - name: net.lutris.Lutris//beta
-    remote: flathub-beta
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
-  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
-    remote: flathub
-    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
   - name: net.davidotek.pupgui2
-    remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.gnome.Platform.Compat.i386/x86_64/42
-    remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.freedesktop.Platform.GL32.default/x86_64/21.08
-    remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.freedesktop.Platform.GL.default
-    remote: flathub
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
-  # OTHER
-  - name: de.bund.ausweisapp.ausweisapp2
-    remote: flathub
-    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
+  - name: cc.arduino.arduinoide
+    install: "{{ install_client_config.flatpak_arduinoide | default('no') | bool }}"
   - name: io.github.betaflight.BetaflightConfigurator
-    remote: flathub
     install: "{{ install_client_config.flatpak_betaflightconfigurator | default('no') | bool }}"
+  - name: org.fritzing.Fritzing
+    install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
+  - name: com.mongodb.Compass
+    install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
+  - name: com.sublimetext.three
+    install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
+  - name: org.wireshark.Wireshark
+    install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
 
 # VS-CODE ----------------------------------------------------------------------
 # EXTENSIONS

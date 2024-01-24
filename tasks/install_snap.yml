@@ -39,7 +39,8 @@
   become: true
   community.general.snap:
     name: "{{ item.name }}"
-    classic: "{{ item.classic | bool }}"
+    classic: "{{ item.classic | default('no') | bool }}"
+    # beta: "{{ item.beta | default('no') | bool }}"
   loop: "{{ install_client_snap | flatten(levels=1) }}"
   when:
     - install_client_snap is defined

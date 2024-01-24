@@ -22,7 +22,7 @@
 #     createhome: "{{ item.createhome | default('yes') | bool }}"
 #     # sudo apt install whois && mkpasswd --method=sha-512
 #     password: "{{ item.password }}"
-#     #update_password: on_create
+#     #update_password: on_create  # pragma: allowlist secret
 #   loop: "{{ clients | flatten(levels=1) }}"
 #   when: item.updateOrCreate is defined and item.updateOrCreate | bool
 #   tags:
