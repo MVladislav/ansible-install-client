@@ -82,8 +82,6 @@ install_client_config:
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
-  apt_latex: false
-  apt_pandoc: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
   apt_mpv: false
@@ -146,8 +144,6 @@ install_client_config:
   snap_remmina: false
   snap_rpi_imager: false
   snap_ghidra: false
-  snap_john_the_ripper: false
-  snap_nmap: false
   snap_zaproxy: false
   snap_mqtt_explorer: false
   snap_UBports: false
@@ -199,8 +195,6 @@ install_client_config:
   flatpak_remmina: false
   flatpak_rpi_imager: false
   flatpak_ghidra: false
-  flatpak_john_the_ripper: false
-  flatpak_nmap: false
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
@@ -238,9 +232,7 @@ install_client_config:
 | gnome\*                  |      |         |      |          |           |  x   | system |
 | snap                     |      |         |      |          |           |  x   | system |
 | flatpak\*                |      |         |      |          |           |  x   | system |
-| latex\*                  |      |         |      |          |           |  x   | office |
 | texmaker                 |      |  TODO   |      |          |           |  x   | office |
-| pandoc\*                 |      |         |      |          |           |  x   | office |
 | logitech_unifying_solaar |      |  TODO   |      |          |           |  x   | office |
 | mpv                      |      |  TODO   |      |          |           |  x   | video  |
 | vpn_resolvconf           |      |         |      |          |           |  x   | vpn    |
@@ -304,8 +296,6 @@ install_client_config:
 | remmina                  |  xx  |   xx    |      |          |           |      | dev    |
 | rpi_imager               |  x   |    x    |      |          |           |      | dev    |
 | ghidra                   |  x   |   xx    |      |          |           |      | pen    |
-| john_the_ripper          |  x   |   xx    |      |          |           |      | pen    |
-| nmap                     |  x   |   xx    |      |          |           | TODO | pen    |
 | zaproxy                  |  x   |   xx    |      |          |           |      | pen    |
 | mqtt_explorer            |  x   |         |      |          |           |      | dev    |
 | UBports                  |  x   |         |      |          |           |      | dev    |

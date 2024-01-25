@@ -60,8 +60,6 @@ install_client_config:
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
-  apt_latex: false
-  apt_pandoc: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
   apt_mpv: false
@@ -124,8 +122,6 @@ install_client_config:
   snap_remmina: false
   snap_rpi_imager: false
   snap_ghidra: false
-  snap_john_the_ripper: false
-  snap_nmap: false
   snap_zaproxy: false
   snap_mqtt_explorer: false
   snap_UBports: false
@@ -177,8 +173,6 @@ install_client_config:
   flatpak_remmina: false
   flatpak_rpi_imager: false
   flatpak_ghidra: false
-  flatpak_john_the_ripper: false
-  flatpak_nmap: false
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
@@ -692,35 +686,6 @@ install_client_apt:
   - name: texmaker
     install: "{{ install_client_config.apt_texmaker | default('no') | bool }}"
   # --------------------------------
-  - name: texlive-full
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: texlive-lang-german
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: texlive
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: texlive-latex-extra
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: latexmk
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  - name: biber
-    install: "{{ install_client_config.apt_latex | default('no') | bool }}"
-  # --------------------------------
-  # https://github.com/Wandmalfarbe/pandoc-latex-template
-  - name: pandoc
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-latex-base
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-fonts-recommended
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-extra-utils
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-latex-extra
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-fonts-extra
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  - name: texlive-xetex
-    install: "{{ install_client_config.apt_pandoc | default('no') | bool }}"
-  # --------------------------------
   - name: virt-viewer
     install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
   # --------------------------------
@@ -889,10 +854,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
   - name: ghidra
     install: "{{ install_client_config.snap_ghidra | default('no') | bool }}"
-  - name: john-the-ripper
-    install: "{{ install_client_config.snap_john_the_ripper | default('no') | bool }}"
-  - name: nmap
-    install: "{{ install_client_config.snap_nmap | default('no') | bool }}"
   - name: zaproxy
     install: "{{ install_client_config.snap_zaproxy | default('no') | bool }}"
     classic: true
@@ -1011,10 +972,6 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_rpi_imager | default('no') | bool }}"
   - name: org.ghidra_sre.Ghidra
     install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
-  - name: com.openwall.John
-    install: "{{ install_client_config.flatpak_john_the_ripper | default('no') | bool }}"
-  - name: org.nmap.Zenmap
-    install: "{{ install_client_config.flatpak_nmap | default('no') | bool }}"
   - name: org.zaproxy.ZAP
     install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
   - name: org.cryptomator.Cryptomator

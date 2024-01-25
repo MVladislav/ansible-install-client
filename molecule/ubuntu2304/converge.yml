@@ -61,8 +61,6 @@
       apt_vpn_l2tp: true
       # apt_gnome_boxes: false
       # apt_texmaker: false
-      # apt_latex: false
-      # apt_pandoc: false
       # apt_virt_viewer: false
       # apt_logitech_unifying_solaar: false
       # apt_mpv: false
@@ -79,9 +77,6 @@
       # APPIMAGE ------------------------------
       app_image_logseq: true
       app_image_ultimaker: true
-      # SNAP ----------------------------------
-      snap_nmap: true
-      snap_john_the_ripper: true
       # FLATPAK -------------------------------
       flatpak_easy_effects: true
       flatpak_missioncenter: true
