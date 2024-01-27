@@ -1,0 +1,136 @@
+---
+# tasks file for install_client
+
+# --------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | check if vs firefox is installed"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.shell: set -o pipefail && command -v firefox >/dev/null 2>&1
+  args:
+    executable: /bin/bash
+  register: is_firefox_installed
+  changed_when: false
+  check_mode: false
+  failed_when: false
+  tags:
+    - install_client
+    - firefox
+
+# --------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | check if default Firefox profile exists"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.shell: |
+    firefox_profiles=($(ls -d {{ ansible_env.HOME }}/{{ install_client_firefox_path }}/*.default 2>/dev/null))
+    if [[ "${firefox_profiles[0]}" == "" ]]; then
+      echo "profile_not_found"
+    else
+      echo "${firefox_profiles[0]}"
+    fi
+  args:
+    executable: /bin/bash
+  register: firefox_profile_output
+  changed_when: false
+  failed_when: firefox_profile_output.rc == 1
+  tags:
+    - install_client
+    - firefox
+
+- name: "CLIENT | firefox setup | save profile name"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.set_fact:
+    install_client_firefox_profile_name: "{{ firefox_profile_output.stdout | basename }}"
+  when: firefox_profile_output.stdout != "profile_not_found"
+  tags:
+    - install_client
+    - firefox
+
+# --------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | create new Firefox profile"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: |
+    firefox --headless --createprofile {{ install_client_firefox_profile_name }}
+  changed_when: false
+  failed_when: false
+  when: firefox_profile_output.stdout == "profile_not_found"
+  tags:
+    - install_client
+    - firefox
+
+- name: "CLIENT | firefox setup | check if new created Firefox profile exists"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.shell: |
+    firefox_profiles=($(ls -d {{ ansible_env.HOME }}/{{ install_client_firefox_path }}/*.{{ install_client_firefox_profile_name }} 2>/dev/null))
+    if [[ "${firefox_profiles[0]}" == "" ]]; then
+      echo "profile_not_found"
+    else
+      echo "${firefox_profiles[0]}"
+    fi
+  args:
+    executable: /bin/bash
+  register: firefox_profile_ansible_profile_output
+  changed_when: false
+  failed_when: firefox_profile_ansible_profile_output.rc == 1
+  when: firefox_profile_output.stdout == "profile_not_found"
+  tags:
+    - install_client
+    - firefox
+
+- name: "CLIENT | firefox setup | save profile name"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.set_fact:
+    install_client_firefox_profile_name: "{{ firefox_profile_ansible_profile_output.stdout | basename }}"
+  when: firefox_profile_ansible_profile_output.stdout != "profile_not_found"
+  tags:
+    - install_client
+    - firefox
+
+# --------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | ensure directory exists | profile {{ install_client_firefox_profile_name }}"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/"
+    state: directory
+    mode: "0755"
+  when:
+    - is_firefox_installed.rc is defined
+    - is_firefox_installed.rc == 0
+  tags:
+    - install_client
+    - firefox
+
+# --------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | download and install extensions | profile {{ install_client_firefox_profile_name }}"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/{{ item.id }}.xpi"
+    mode: "0644"
+  loop: "{{ install_client_firefox_ext | flatten(levels=1) }}"
+  when:
+    - is_firefox_installed.rc is defined
+    - is_firefox_installed.rc == 0
+  tags:
+    - install_client
+    - firefox
+
+# ------------------------------------------------------------------------------
+- name: "CLIENT | firefox setup | copy user.js | profile {{ install_client_firefox_profile_name }}"
+  become: true
+  become_user: "{{ outer_item }}"
+  ansible.builtin.template:
+    src: "user.js.j2"
+    dest: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
+    mode: "0640"
+  when:
+    - is_firefox_installed.rc is defined
+    - is_firefox_installed.rc == 0
+  tags:
+    - install_client
+    - firefox

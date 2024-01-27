@@ -196,6 +196,7 @@ install_client_config:
   flatpak_wireshark: false
   # OTHER --------------------------------
   vs_code_ext: false
+  firefox_setup: false
 
 # ------------------------------------------------------------------------------
 # CLIENTS for adding specific packages to clients (ex. ...)
@@ -1091,3 +1092,16 @@ install_client_vs_code_ext:
   - wholroyd.jinja
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
+
+# FIREFOX SETUP-----------------------------------------------------------------
+# install_client_config.firefox_setup
+install_client_firefox_profile_name: ansible_profile
+# NOTE: is current define for snap install, change folder if not snap installed
+install_client_firefox_path: snap/firefox/common/.mozilla/firefox
+install_client_firefox_ext:
+  # - id: addon@darkreader.org
+  #   url: https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi
+  - id: uBlock0@raymondhill.net.xpi
+    url: https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi
+  - id: CookieAutoDelete@kennydo.com.xpi
+    url: https://addons.mozilla.org/firefox/downloads/latest/cookie-autodelete/latest.xpi

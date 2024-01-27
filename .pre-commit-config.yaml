@@ -16,6 +16,7 @@ repos:
         args:
           - --ignore-words-list=ihs,ro,fo,bund
           - --skip="./.*,*.csv,*.json"
+          - --exclude-file=./templates/firefox/user.js.j2
           - --quiet-level=2
         exclude_types:
           - csv

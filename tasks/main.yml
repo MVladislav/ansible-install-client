@@ -94,6 +94,15 @@
 # OTHER SETUPS
 - name: "CLIENT | other | setup other settings"
   ansible.builtin.include_tasks: setup_other.yml
+- name: "CLIENT | other | setup firefox ext and profile (per user)"
+  ansible.builtin.include_tasks: setup_firefox.yml
+  loop: "{{ clients | flatten(levels=1) }}"
+  loop_control:
+    loop_var: outer_item
+  when:
+    - install_client_config.firefox_setup is defined
+    - install_client_config.firefox_setup | bool
+    - (outer_item.setup is not defined or outer_item.setup | bool)
 
 # ------------------------------------------------------------------------------
 # POST

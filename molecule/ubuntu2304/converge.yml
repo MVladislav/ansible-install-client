@@ -12,6 +12,7 @@
         dev: true
         updateOrCreate: false
         setup: true # if client should be setup with additional tools and gui (default true)
+
     # --- in playbook ---
     # ------------------------------------------------------------------------------
     install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
@@ -30,21 +31,15 @@
       dev: true
       fonts_install: true
       # GNOME ---------------------------------
-      gnome_gui_setup: true # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-      # gnome_gui_setup_dependencies: false
+      gnome_gui_setup: true
       gnome_gui_setup_extensions: true
-      # gnome_gui_setup_extensions_apt_ubuntu_tiling: false
-      # gnome_gui_setup_extensions_git_caffeine: false
-      # gnome_gui_setup_extensions_git_sound: false
       gnome_gui_setup_extensions_git_blur_shell: true
       gnome_gui_setup_extensions_git_burn_window: true
       gnome_gui_setup_extensions_git_dash_to_panel: true
       gnome_gui_setup_extensions_git_ui_tune: true
-      # gnome_gui_setup_keybinding: false
       gnome_gui_setup_overlay: true
-      # gnome_terminal_setup_overlay: false
-      cleanup_remove_snap: false
-      cleanup_remove_flatpak: false
+      # cleanup_remove_snap: false
+      # cleanup_remove_flatpak: false
       # APT -----------------------------------
       apt_base: true
       apt_auth_priv: true
@@ -59,26 +54,14 @@
       apt_vpn_openvpn: true
       apt_vpn_openconnect: true
       apt_vpn_l2tp: true
-      # apt_gnome_boxes: false
-      # apt_texmaker: false
-      # apt_virt_viewer: false
-      # apt_logitech_unifying_solaar: false
-      # apt_mpv: false
       # DPKG ----------------------------------
-      # dpkg_virtualbox: false
-      # dpkg_veracrypt: false
       dpkg_veracrypt_cli: true
-      # dpkg_parsec: false
       dpkg_brim: true
       dpkg_portmaster: true
       # DIST KEY ------------------------------
-      # distribution_key_virtualbox: false
       distribution_key_1password_cli: true
       # APPIMAGE ------------------------------
       app_image_logseq: true
       app_image_ultimaker: true
-      # FLATPAK -------------------------------
-      flatpak_easy_effects: true
-      flatpak_missioncenter: true
       # OTHER --------------------------------
-      # vs_code_ext: false
+      firefox_setup: true

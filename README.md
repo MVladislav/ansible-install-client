@@ -11,6 +11,7 @@
   - [Dependencies](#dependencies)
   - [Example Playbook](#example-playbook)
   - [License](#license)
+  - [Resources](#resources)
 
 ---
 
@@ -21,7 +22,7 @@ You can checkout [MVladislav - ansible-env-setup - playbooks](https://github.com
 ```yml
 clients:
   - name: "{{ ansible_user }}"
-    dev: yes
+    dev: true
     updateOrCreate: false
     setup: true # if client should be setup with additional tools and gui (default true)
 
@@ -218,6 +219,7 @@ install_client_config:
   flatpak_wireshark: false
   # OTHER --------------------------------
   vs_code_ext: false
+  firefox_setup: false # will add arkenfox user.js, check it when you not want the default from git
 ```
 
 ## App list for possible install
@@ -336,7 +338,7 @@ Including an example of how to use your role (for instance, with variables passe
     - role: install_client
       clients:
         - name: "{{ ansible_user }}"
-          dev: yes
+          dev: true
           updateOrCreate: false
       install_client_config: [] # see list above for example
 ```
@@ -344,3 +346,7 @@ Including an example of how to use your role (for instance, with variables passe
 ## License
 
 MIT
+
+## Resources
+
+- <https://github.com/arkenfox/user.js>
