@@ -7,7 +7,7 @@
   ansible.builtin.file:
     path: "/opt/{{ outer_item.name }}/"
     state: directory
-    mode: "1755"
+    mode: "0755"
   tags:
     - install_client
     - apt

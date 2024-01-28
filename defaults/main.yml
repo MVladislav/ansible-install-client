@@ -453,7 +453,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell.extensions.tiling-assistant
         key: disable-tile-groups
         value: >-
-          true
+          false
       - source: org.gnome.shell.extensions.tiling-assistant
         key: enable-tiling-popup
         value: >-
