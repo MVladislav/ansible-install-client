@@ -176,6 +176,7 @@ install_client_config:
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
+  flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
   flatpak_extension_manager: false
@@ -979,6 +980,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
   - name: com.github.tchx84.Flatseal
     install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
+  - name: com.anydesk.Anydesk
+    install: "{{ install_client_config.flatpak_anydesk | default('no') | bool }}"
   - name: de.bund.ausweisapp.ausweisapp2
     install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
   - name: com.github.wwmm.easyeffects

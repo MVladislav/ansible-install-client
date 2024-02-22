@@ -1,7 +1,5 @@
 # Install Client
 
----
-
 [![Ansible Lint](https://github.com/MVladislav/ansible-install-client/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/MVladislav/ansible-install-client/actions/workflows/ansible-lint.yml)
 [![Ansible Molecule Test](https://github.com/MVladislav/ansible-install-client/actions/workflows/ci.yml/badge.svg)](https://github.com/MVladislav/ansible-install-client/actions/workflows/ci.yml)
 
@@ -16,6 +14,10 @@
 ---
 
 You can checkout [MVladislav - ansible-env-setup - playbooks](https://github.com/MVladislav/ansible-env-setup/tree/main/playbooks) for how i use it in general.
+
+Tested with:
+
+- Ubuntu 23.04
 
 ## Role Variables
 
@@ -199,6 +201,7 @@ install_client_config:
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
+  flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
   flatpak_extension_manager: false
@@ -305,6 +308,7 @@ install_client_config:
 | pixelfx                  |  x   |         |      |          |           |      | design |
 | cryptomator              |      |    x    |      |          |           |      | secure |
 | flatseal                 |      |    x    |      |          |           |      | secure |
+| anydesk                  |      |    x    |      |          |           |      | office |
 | ausweisapp2              |      |    x    |      |          |           |      | office |
 | easy_effects             |      |    x    |      |          |           |      | office |
 | extension_manager        |      |    x    |      |          |           |      | office |
@@ -329,8 +333,6 @@ install_client_config:
 Developed and testes with Ansible 2.14.4
 
 ## Example Playbook
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
 ```yml
 - hosts: clients
