@@ -176,6 +176,7 @@ install_client_config:
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
+  flatpak_pika_backup: false
   flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
@@ -980,6 +981,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
   - name: com.github.tchx84.Flatseal
     install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
+  - name: org.gnome.World.PikaBackup
+    install: "{{ install_client_config.flatpak_pika_backup | default('no') | bool }}"
   - name: com.anydesk.Anydesk
     install: "{{ install_client_config.flatpak_anydesk | default('no') | bool }}"
   - name: de.bund.ausweisapp.ausweisapp2

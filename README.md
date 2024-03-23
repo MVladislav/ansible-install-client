@@ -201,6 +201,7 @@ install_client_config:
   flatpak_zaproxy: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
+  flatpak_pika_backup: false
   flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
@@ -308,6 +309,7 @@ install_client_config:
 | pixelfx                  |  x   |         |      |          |           |      | design |
 | cryptomator              |      |    x    |      |          |           |      | secure |
 | flatseal                 |      |    x    |      |          |           |      | secure |
+| pika_backup              |      |    x    |      |          |           |      | secure |
 | anydesk                  |      |    x    |      |          |           |      | office |
 | ausweisapp2              |      |    x    |      |          |           |      | office |
 | easy_effects             |      |    x    |      |          |           |      | office |
