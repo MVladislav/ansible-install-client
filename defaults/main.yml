@@ -15,11 +15,13 @@ install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/pac
 install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
 # NOTE: link should be latest version
 install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
-# NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
-install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.5/Logseq-linux-x64-0.10.5.AppImage
-install_client_links_to_check_update_logseq_checksum: 17761baa0bcbd383f49d76885642650aaff3f21504d0cd14bad901b36a26b811 # pragma: allowlist secret
-# NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux.*\.AppImage\"" | cut -d '"' -f 4
+# NOTE: `curl -s https://api.github.com/repos/logseq/logseq/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url'`
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.8/Logseq-linux-x64-0.10.8.AppImage
+# NOTE: `curl -s https://api.github.com/repos/logseq/logseq/releases/latest | jq '.assets[] | select(.name | contains("SHA256SUMS")) | .browser_download_url' | xargs -I {} curl -sL {} | grep AppImage | cut -d' ' -f1`
+install_client_links_to_check_update_logseq_checksum: 9159d0df7828ceb2fa04e590c547e2332a6221939f7de4f670c54c1c87ec6968 # pragma: allowlist secret
+# NOTE: `curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url'`
 install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
+# NOTE: `curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url' | xargs -I {} curl -L {} | sha256sum`
 install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
 
 # ------------------------------------------------------------------------------
