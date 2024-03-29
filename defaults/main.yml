@@ -184,6 +184,7 @@ install_client_config:
   flatpak_filezilla: false
   flatpak_missioncenter: false
   flatpak_planify: false
+  flatpak_solaar: false
   flatpak_warp: false
   flatpak_threemaqt: false
   flatpak_conjure: false
@@ -998,6 +999,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
   - name: io.github.alainm23.planify
     install: "{{ install_client_config.flatpak_planify | default('no') | bool }}"
+  - name: io.github.pwr_solaar.solaar
+    install: "{{ install_client_config.flatpak_solaar | default('no') | bool }}"
   - name: app.drey.Warp
     install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
   - name: io.bit3.ThreemaQT
