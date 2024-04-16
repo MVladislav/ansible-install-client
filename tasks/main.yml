@@ -58,15 +58,15 @@
 
 # ------------------------------------------------------------------------------
 # INSTALL EXTRAS PER USER
-- name: "CLIENT | user - fonts | install fonts (per user)"
-  ansible.builtin.include_tasks: install_per_user_fonts.yml
-  loop: "{{ clients | flatten(levels=1) }}"
-  loop_control:
-    loop_var: outer_item
-  when:
-    - install_client_config.fonts_install is defined
-    - install_client_config.fonts_install | bool
-    - (outer_item.setup is not defined or outer_item.setup | bool)
+# - name: "CLIENT | user - fonts | install fonts (per user)"
+#   ansible.builtin.include_tasks: install_per_user_fonts.yml
+#   loop: "{{ clients | flatten(levels=1) }}"
+#   loop_control:
+#     loop_var: outer_item
+#   when:
+#     - install_client_config.fonts_install is defined
+#     - install_client_config.fonts_install | bool
+#     - (outer_item.setup is not defined or outer_item.setup | bool)
 
 - name: "CLIENT | user - vscode | install code extras (per user)"
   ansible.builtin.include_tasks: install_per_user_code_extra.yml

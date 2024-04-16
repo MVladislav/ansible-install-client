@@ -30,7 +30,7 @@ clients:
 
 # ------------------------------------------------------------------------------
 # application download from source, which needs to be updated manually
-# also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
+# also check section under "install_client_gdm_gui_setup" for manual update
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
 install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
@@ -52,7 +52,6 @@ install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad
 install_client_config:
   # GENERAL -------------------------------
   dev: false
-  fonts_install: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
   gnome_gui_setup_dependencies: false

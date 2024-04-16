@@ -123,9 +123,9 @@
 # ------------------------------------------------------------------------------
 - name: "CLIENT | firefox setup | copy user.js | profile {{ install_client_firefox_profile_name }}"
   become: true
-  become_user: "{{ outer_item }}"
+  become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
-    src: "user.js.j2"
+    src: "firefox/user.js.j2"
     dest: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
     mode: "0640"
   when:

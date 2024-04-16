@@ -29,7 +29,6 @@
     install_client_config:
       # GENERAL -------------------------------
       dev: true
-      fonts_install: true
       # GNOME ---------------------------------
       gnome_gui_setup: true
       gnome_gui_setup_extensions: true

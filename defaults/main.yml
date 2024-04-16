@@ -3,7 +3,7 @@
 
 # ------------------------------------------------------------------------------
 # application download from source, which needs to be updated manually
-# also check "install_client_fonts" and "install_client_gdm_gui_setup" for manual update
+# also check section under "install_client_gdm_gui_setup" for manual update
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
 install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
@@ -29,7 +29,6 @@ install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad
 install_client_config:
   # GENERAL -------------------------------
   dev: false
-  fonts_install: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
   gnome_gui_setup_dependencies: false
@@ -211,15 +210,6 @@ clients: []
 #   setup: false # control if for some use specific tasks will run for install, mainly used when multi user used with root user not need everything to be installed
 
 # ------------------------------------------------------------------------------
-# FONTS
-install_client_fonts:
-  path: ~/.local/share/fonts/
-  url:
-    - https://fonts.google.com/download?family=Fira%20Code
-    - https://fonts.google.com/download?family=Roboto
-    - https://fonts.google.com/download?family=Roboto%20Mono
-
-# ------------------------------------------------------------------------------
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
@@ -334,7 +324,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.interface
         key: document-font-name
         value: >-
-          Roboto 10
+          FiraCode Nerd Font 10
       - source: org.gnome.desktop.interface
         key: enable-hot-corners
         value: >-
@@ -342,7 +332,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.interface
         key: font-name
         value: >-
-          Roboto 10
+          FiraCode Nerd Font 10
       - source: org.gnome.desktop.interface
         key: gtk-theme
         value: >-
@@ -354,7 +344,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.interface
         key: monospace-font-name
         value: >-
-          Roboto Mono 10
+          FiraCode Nerd Font Mono 10
       - source: org.gnome.desktop.interface
         key: show-battery-percentage
         value: >-
@@ -362,7 +352,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.wm.preferences
         key: titlebar-font
         value: >-
-          Roboto Bold 11
+          FiraCode Nerd Font Bold 11
       - source: org.gnome.shell.app-switcher
         key: current-workspace-only
         value: >-
@@ -479,7 +469,7 @@ install_client_gdm_gui_setup:
           org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
         key: font
         value: >-
-          Source Code Pro for Powerline 12
+          FiraCode Nerd Font 12
       - source: >-
           org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
         key: default-size-columns

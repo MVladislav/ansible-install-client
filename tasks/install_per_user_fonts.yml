@@ -2,27 +2,4 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | fonts | create a directory for fonts - {{ outer_item.name }}"
-  become: true
-  become_user: "{{ outer_item.name }}"
-  ansible.builtin.file:
-    path: "{{ install_client_fonts.path }}"
-    state: directory
-    mode: "0754"
-  tags:
-    - install_client
-    - fonts
-
-# ------------------------------------------------------------------------------
-- name: "CLIENT | fonts | download and unarchive fonts - {{ outer_item.name }}"
-  become: true
-  become_user: "{{ outer_item.name }}"
-  ansible.builtin.unarchive:
-    src: "{{ item }}"
-    dest: "{{ install_client_fonts.path }}"
-    remote_src: true
-  loop: "{{ install_client_fonts.url | flatten(levels=1) }}"
-  tags:
-    - molecule-idempotence-notest
-    - install_client
-    - fonts
+# NOTE: removed section, current available in server installer, will maybe moved later here
