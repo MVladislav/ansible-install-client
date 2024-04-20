@@ -94,6 +94,7 @@
 # OTHER SETUPS
 - name: "CLIENT | other | setup other settings"
   ansible.builtin.include_tasks: setup_other.yml
+
 - name: "CLIENT | other | setup firefox ext and profile (per user)"
   ansible.builtin.include_tasks: setup_firefox.yml
   loop: "{{ clients | flatten(levels=1) }}"

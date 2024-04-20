@@ -21,7 +21,7 @@
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: |
-    firefox_profiles=($(ls -d {{ ansible_env.HOME }}/{{ install_client_firefox_path }}/*.default 2>/dev/null))
+    firefox_profiles=($(ls -d ~/{{ install_client_firefox_path }}/*.default 2>/dev/null))
     if [[ "${firefox_profiles[0]}" == "" ]]; then
       echo "profile_not_found"
     else
@@ -63,7 +63,7 @@
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: |
-    firefox_profiles=($(ls -d {{ ansible_env.HOME }}/{{ install_client_firefox_path }}/*.{{ install_client_firefox_profile_name }} 2>/dev/null))
+    firefox_profiles=($(ls -d ~/{{ install_client_firefox_path }}/*.{{ install_client_firefox_profile_name }} 2>/dev/null))
     if [[ "${firefox_profiles[0]}" == "" ]]; then
       echo "profile_not_found"
     else
@@ -94,7 +94,7 @@
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/"
+    path: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/"
     state: directory
     mode: "0755"
   when:
@@ -110,7 +110,7 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.get_url:
     url: "{{ item.url }}"
-    dest: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/{{ item.id }}.xpi"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/{{ item.id }}.xpi"
     mode: "0644"
   loop: "{{ install_client_firefox_ext | flatten(levels=1) }}"
   when:
@@ -126,7 +126,7 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
     src: "firefox/user.js.j2"
-    dest: "{{ ansible_env.HOME }}/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
     mode: "0640"
   when:
     - is_firefox_installed.rc is defined
