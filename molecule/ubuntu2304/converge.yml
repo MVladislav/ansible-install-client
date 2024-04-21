@@ -9,8 +9,6 @@
     # --- in inventory ---
     clients:
       - name: "ubuntu"
-        dev: true
-        updateOrCreate: false
         setup: true # if client should be setup with additional tools and gui (default true)
 
     # --- in playbook ---

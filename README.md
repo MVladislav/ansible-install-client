@@ -24,8 +24,6 @@ Tested with:
 ```yml
 clients:
   - name: "{{ ansible_user }}"
-    dev: true
-    updateOrCreate: false
     setup: true # if client should be setup with additional tools and gui (default true)
 
 # ------------------------------------------------------------------------------
@@ -342,8 +340,7 @@ Developed and testes with Ansible 2.14.4
     - role: install_client
       clients:
         - name: "{{ ansible_user }}"
-          dev: true
-          updateOrCreate: false
+          setup: true # if client should be setup with additional tools and gui (default true)
       install_client_config: [] # see list above for example
 ```
 
