@@ -204,6 +204,7 @@ install_client_config:
   flatpak_easy_effects: false
   flatpak_extension_manager: false
   flatpak_filezilla: false
+  flatpak_logseq: false
   flatpak_missioncenter: false
   flatpak_planify: false
   flatpak_solaar: false
@@ -252,7 +253,6 @@ install_client_config:
 | portmaster             |      |         |  x   |          |           |      | secure |
 | parsec                 |      |  TODO   |  x   |          |           |      | video  |
 | brim                   |      |         |  x   |          |           |      | pen    |
-| logseq                 | TODO |  TODO   |      |          |     x     |      | office |
 | ultimaker              | TODO |  TODO   |      |          |     x     |      | design |
 | 1password              |  xx  |    x    |      |          |           |      | secure |
 | keepassxc              |  x   |   xx    |      |          |           |      | secure |
@@ -312,6 +312,7 @@ install_client_config:
 | easy_effects           |      |    x    |      |          |           |      | office |
 | extension_manager      |      |    x    |      |          |           |      | office |
 | filezilla              |      |    x    |      |          |           |      | office |
+| logseq                 |      |    x    |      |          |     x     |      | office |
 | missioncenter          |      |    x    |      |          |           |      | office |
 | planify                |      |    x    |      |          |           |      | office |
 | solaar (logi)          |      |    x    |      |          |           |  x   | office |

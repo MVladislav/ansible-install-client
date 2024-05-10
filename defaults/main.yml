@@ -183,6 +183,7 @@ install_client_config:
   flatpak_easy_effects: false
   flatpak_extension_manager: false
   flatpak_filezilla: false
+  flatpak_logseq: false
   flatpak_missioncenter: false
   flatpak_planify: false
   flatpak_solaar: false
@@ -299,7 +300,7 @@ install_client_gdm_gui_setup:
       # --- UNIQUE LIST ---
       - source: org.gnome.settings-daemon.plugins.media-keys
         key: custom-keybindings
-        value: >-
+        value: >
           ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
   overlay:
     setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
@@ -309,6 +310,34 @@ install_client_gdm_gui_setup:
         key: show-weekdate
         value: >-
           true
+      - source: org.gnome.shell.app-switcher
+        key: current-workspace-only
+        value: >-
+          false
+      - source: org.gnome.desktop.input-sources
+        key: show-all-sources
+        value: >-
+          true
+      - source: org.gnome.mutter
+        key: center-new-windows
+        value: >-
+          true
+      - source: org.gnome.desktop.wm.preferences
+        key: titlebar-font
+        value: >-
+          RobotoMono Nerd Font Bold 11
+      - source: org.gnome.desktop.interface
+        key: font-name
+        value: >-
+          RobotoMono Nerd Font 10
+      - source: org.gnome.desktop.interface
+        key: document-font-name
+        value: >-
+          RobotoMono Nerd Font 10
+      - source: org.gnome.desktop.interface
+        key: monospace-font-name
+        value: >-
+          RobotoMono Nerd Font Mono 10
       - source: org.gnome.desktop.interface
         key: clock-show-date
         value: >-
@@ -322,17 +351,9 @@ install_client_gdm_gui_setup:
         value: >-
           true
       - source: org.gnome.desktop.interface
-        key: document-font-name
-        value: >-
-          FiraCode Nerd Font 10
-      - source: org.gnome.desktop.interface
         key: enable-hot-corners
         value: >-
           true
-      - source: org.gnome.desktop.interface
-        key: font-name
-        value: >-
-          FiraCode Nerd Font 10
       - source: org.gnome.desktop.interface
         key: gtk-theme
         value: >-
@@ -342,21 +363,9 @@ install_client_gdm_gui_setup:
         value: >-
           Yaru-purple
       - source: org.gnome.desktop.interface
-        key: monospace-font-name
-        value: >-
-          FiraCode Nerd Font Mono 10
-      - source: org.gnome.desktop.interface
         key: show-battery-percentage
         value: >-
           true
-      - source: org.gnome.desktop.wm.preferences
-        key: titlebar-font
-        value: >-
-          FiraCode Nerd Font Bold 11
-      - source: org.gnome.shell.app-switcher
-        key: current-workspace-only
-        value: >-
-          false
       - source: org.gnome.shell.extensions.dash-to-dock
         key: background-color
         value: >-
@@ -460,115 +469,114 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop', 'chromium_chromium.desktop', '1password_1password.desktop', 'thunderbird_thunderbird.desktop', 'remmina_remmina.desktop', 'onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop', 'signal-desktop_signal-desktop.desktop', 'telegram-desktop_telegram-desktop.desktop', 'io.bit3.ThreemaQT.desktop', 'spotify_spotify.desktop', 'inkscape_inkscape.desktop', 'drawio_drawio.desktop', 'code_code.desktop', 'Logseq.desktop', 'veracrypt.desktop', 'org.gnome.Nautilus.desktop']
+          ['firefox_firefox.desktop','chromium_chromium.desktop','1password_1password.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','spotify_spotify.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','code_code.desktop','Logseq.desktop','veracrypt.desktop','org.gnome.Nautilus.desktop']
+      - source: org.gnome.shell
+        key: app-picker-layout
+        value: >-
+          [{'Updater': <{'position': <0>}>,'org.gnome.Terminal.desktop': <{'position': <1>}>,'org.gnome.Settings.desktop': <{'position': <2>}>,'Utilities': <{'position': <3>}>}]
+      - source: org.gnome.desktop.app-folders
+        key: folder-children
+        value: >-
+          ['Utilities','Updater']
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
+        key: apps
+        value: >-
+          ['org.gnome.clocks.desktop','org.gnome.Calculator.desktop','org.gnome.seahorse.Application.desktop','org.gnome.baobab.desktop','org.gnome.DiskUtility.desktop','gnome-system-monitor.desktop','nm-connection-editor.desktop','org.gnome.Logs.desktop','gnome-session-properties.desktop','remote-viewer.desktop','org.gnome.Evince.desktop','org.gnome.eog.desktop','org.gnome.TextEditor.desktop','vim.desktop','nvim_nvim.desktop','org.gnome.PowerStats.desktop','htop.desktop','nvtop.desktop','gnome-language-selector.desktop','yelp.desktop','org.gnome.Characters.desktop','org.gnome.font-viewer.desktop','debian-xterm.desktop','debian-uxterm.desktop','vprerex.desktop','display-im6.q16.desktop','prerex.desktop','info.desktop','texdoctk.desktop']
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
+        key: name
+        value: >-
+          Updater
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
+        key: apps
+        value: >-
+          ['snap-store_snap-store.desktop','org.gnome.Software.desktop','com.github.tchx84.Flatseal.desktop','org.gnome.Extensions.desktop','update-manager.desktop','software-properties-gtk.desktop','software-properties-drivers.desktop','firmware-updater_firmware-updater.desktop']
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
     configs:
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: font
-        value: >-
+        value: >
           FiraCode Nerd Font 12
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: default-size-columns
-        value: >-
+        value: >
           130
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: default-size-rows
-        value: >-
+        value: >
           32
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-transparent-background
-        value: >-
+        value: >
           true
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: background-transparency-percent
-        value: >-
+        value: >
           20
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: audible-bell
-        value: >-
+        value: >
           false
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-system-font
-        value: >-
+        value: >
           false
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-theme-colors
-        value: >-
+        value: >
           false
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: foreground-color
-        value: >-
+        value: >
           rgb(170,170,170)
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: background-color
-        value: >-
+        value: >
           rgb(0,0,0)
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-color
-        value: >-
+        value: >
           rgb(3,195,203)
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-is-bright
-        value: >-
+        value: >
           true
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-background-color
-        value: >-
+        value: >
           rgb(3,195,203)
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-colors-set
-        value: >-
+        value: >
           true
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-foreground-color
-        value: >-
+        value: >
           #ffffff
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-theme-transparency
-        value: >-
+        value: >
           false
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: visible-name
-        value: >-
+        value: >
           groot
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-color-same-as-fg
-        value: >-
+        value: >
           false
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-background-color
-        value: >-
+        value: >
           rgb(3,195,203)
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-colors-set
-        value: >-
+        value: >
           true
-      - source: >-
-          org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:
+      - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-foreground-color
-        value: >-
+        value: >
           #ffffff
 
 # ------------------------------------------------------------------------------
@@ -631,6 +639,10 @@ install_client_apt:
   # - name: gstreamer1.0-alsa
   #   install: "{{ install_client_config.apt_codec | default('no') | bool }}"
   # - name: gstreamer1.0-libav
+  #   install: "{{ install_client_config.apt_codec | default('no') | bool }}"
+  # - name: libva-glx2
+  #   install: "{{ install_client_config.apt_codec | default('no') | bool }}"
+  # - name: libva-drm2
   #   install: "{{ install_client_config.apt_codec | default('no') | bool }}"
   # --------------------------------
   - name: gnome-tweaks
@@ -987,6 +999,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
   - name: org.filezillaproject.Filezilla
     install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
+  - name: com.logseq.Logseq
+    install: "{{ install_client_config.flatpak_logseq | default('no') | bool }}"
   - name: io.missioncenter.MissionCenter
     install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
   - name: io.github.alainm23.planify
