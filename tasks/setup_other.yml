@@ -2,52 +2,6 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | setup other | disable audio auto switch in pulseaudio"
-  become: true
-  ansible.builtin.replace:
-    path: /etc/pulse/default.pa
-    regexp: "^load-module module-switch-on-port-available"
-    replace: "# load-module module-switch-on-port-available"
-  register: change_pulseaudio
-  when: install_client_config.apt_base_sound_pulseaudio | default('no') | bool
-  tags:
-    - install_client
-    - other
-    - audio
-    - pulseaudio
-
-- name: "CLIENT | setup other | disable audio auto switch in pulseaudio"
-  become: true
-  ansible.builtin.replace:
-    path: /etc/pulse/default.pa
-    regexp: "^load-module module-switch-on-connect"
-    replace: "# load-module module-switch-on-connect"
-  register: change_pulseaudio
-  when: install_client_config.apt_base_sound_pulseaudio | default('no') | bool
-  tags:
-    - install_client
-    - other
-    - audio
-    - pulseaudio
-
-- name: "CLIENT | setup other | restart pulseaudio"
-  become: true
-  ansible.builtin.command: "pulseaudio -k"
-  register: restart_pulseaudio
-  changed_when: restart_pulseaudio.rc != 0
-  failed_when: restart_pulseaudio.rc == 2
-  when:
-    - install_client_config.apt_base_sound_pulseaudio | default('no') | bool
-    - change_pulseaudio is defined
-    - change_pulseaudio.changed is defined
-    - change_pulseaudio.changed | bool
-  tags:
-    - install_client
-    - other
-    - audio
-    - pulseaudio
-
-# ------------------------------------------------------------------------------
 - name: "CLIENT | setup other | change Connectivity Checking to off - check if file exists"
   become: true
   ansible.builtin.stat:
