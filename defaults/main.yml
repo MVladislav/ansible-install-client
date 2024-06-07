@@ -192,6 +192,9 @@ install_client_config:
   flatpak_conjure: false
   flatpak_peek: false
   flatpak_girens: false
+  flatpak_coppwr: false
+  flatpak_helvum: false
+  flatpak_jamesdsp: false
   flatpak_lutris: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
@@ -1017,6 +1020,12 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
   - name: nl.g4d.Girens
     install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
+  - name: io.github.dimtpap.coppwr
+    install: "{{ install_client_config.flatpak_coppwr | default('no') | bool }}"
+  - name: org.pipewire.Helvum
+    install: "{{ install_client_config.flatpak_helvum | default('no') | bool }}"
+  - name: me.timschneeberger.jdsp4linux
+    install: "{{ install_client_config.flatpak_jamesdsp | default('no') | bool }}"
   - name: net.lutris.Lutris//beta
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: net.davidotek.pupgui2

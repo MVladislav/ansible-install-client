@@ -213,6 +213,9 @@ install_client_config:
   flatpak_conjure: false
   flatpak_peek: false
   flatpak_girens: false
+  flatpak_coppwr: false
+  flatpak_helvum: false
+  flatpak_jamesdsp: false
   flatpak_lutris: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
@@ -321,6 +324,9 @@ install_client_config:
 | conjure                |      |    x    |      |          |           |      | design |
 | peek                   |      |    x    |      |          |           |      | design |
 | girens                 |      |    x    |      |          |           |      | video  |
+| coppwr                 |      |    x    |      |          |           |      | music  |
+| helvum                 |      |    x    |      |          |           |      | music  |
+| jamesdsp               |      |    x    |      |          |           |      | music  |
 | lutris                 |      |    x    |      |          |           |      | game   |
 | arduinoide             |      |    x    |      |          |           |      | dev    |
 | betaflightconfigurator |      |    x    |      |          |           |      | dev    |
