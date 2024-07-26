@@ -3,16 +3,49 @@
 
 # ------------------------------------------------------------------------------
 # DISABLE SERVICE TO NOT RUN IN BACKGROUND
-- name: "CLIENT | snap | systemd stop snap.remmina.ssh-agent"
+- name: "CLIENT | post | check for 'snap.remmina.ssh-agent' service"
+  ansible.builtin.shell: >
+    set -o pipefail &&
+    systemctl show snap.remmina.ssh-agent | grep -E "LoadState|ActiveState" | cut -d = -f 2 | tr -d '\n'
+  args:
+    executable: "{{ cis_ubuntu2204_shell_executable }}"
+  register: service_status_snap_remmina_ssh_agent
+  changed_when: false
+  check_mode: false
+
+- name: "CLIENT | post | systemd stop snap.remmina.ssh-agent"
   become: true
   ansible.builtin.systemd:
     name: snap.remmina.ssh-agent.service
     state: stopped
     enabled: false
   when:
-    - install_client_config is defined
-    - install_client_config.snap_remmina is defined
-    - install_client_config.snap_remmina | bool
+    - service_status_snap_remmina_ssh_agent.stdout in ('loadedactive')
   tags:
     - install_client
-    - snap
+    - post
+
+# ------------------------------------------------------------------------------
+# DISABLE SERVICE TO NOT RUN IN BACKGROUND
+- name: "CLIENT | post | check for 'rsync' service"
+  ansible.builtin.shell: >
+    set -o pipefail &&
+    systemctl show rsync | grep -E "LoadState|ActiveState" | cut -d = -f 2 | tr -d '\n'
+  args:
+    executable: "{{ cis_ubuntu2204_shell_executable }}"
+  register: service_status_rsync
+  changed_when: false
+  check_mode: false
+
+- name: "CLIENT | post | systemd stop rsync"
+  become: true
+  ansible.builtin.systemd:
+    name: rsync.service
+    state: stopped
+    masked: true
+    enabled: false
+  when:
+    - service_status_rsync.stdout in ('loadedactive','loadedinactive')
+  tags:
+    - install_client
+    - post

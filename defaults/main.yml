@@ -2,6 +2,13 @@
 # defaults file for ./roles/install_client
 
 # ------------------------------------------------------------------------------
+# CLIENTS for adding specific packages to clients (ex. ...)
+clients: []
+# - name: "{{ ansible_user }}"
+# - name: "root"
+#   setup: false # control if for some use specific tasks will run for install, mainly used when multi user used with root user not need everything to be installed
+
+# ------------------------------------------------------------------------------
 # application download from source, which needs to be updated manually
 # also check section under "install_client_gdm_gui_setup" for manual update
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
@@ -27,24 +34,18 @@ install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL
 install_client_config:
-  # GENERAL -------------------------------
-  dev: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
-  gnome_gui_setup_extensions_git_sound: false
   gnome_gui_setup_extensions_git_blur_shell: false
   gnome_gui_setup_extensions_git_burn_window: false
   gnome_gui_setup_extensions_git_dash_to_panel: false
-  gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
   gnome_terminal_setup_overlay: false
-  # cleanup_remove_snap: false
-  # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
   apt_auth_priv: false
@@ -84,7 +85,6 @@ install_client_config:
   snap_chromium: false
   snap_denaro: false
   snap_firefox: false
-  snap_flameshot: false
   snap_foliate: false
   snap_libreoffice: false
   snap_newsflash: false
@@ -207,13 +207,6 @@ install_client_config:
   firefox_setup: false
 
 # ------------------------------------------------------------------------------
-# CLIENTS for adding specific packages to clients (ex. ...)
-clients: []
-# - name: "{{ ansible_user }}"
-# - name: "root"
-#   setup: false # control if for some use specific tasks will run for install, mainly used when multi user used with root user not need everything to be installed
-
-# ------------------------------------------------------------------------------
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
@@ -247,11 +240,6 @@ install_client_gdm_gui_setup:
         name: gnome-shell-extension-caffeine
         target: all
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
-      - repo: https://github.com/kgshank/gse-sound-output-device-chooser.git
-        branch: master
-        name: gse-sound-output-device-chooser
-        target: install
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_sound | default('no') | bool }}"
       - repo: https://github.com/aunetx/blur-my-shell.git
         branch: master
         name: blur-my-shell
@@ -267,16 +255,9 @@ install_client_gdm_gui_setup:
         name: dash-to-panel
         target: install
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
-      - repo: https://github.com/axxapy/gnome-ui-tune.git
-        branch: master
-        name: gnome-ui-tune
-        target: schemas
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_ui_tune | default('no') | bool }}"
     activate:
       - name: caffeine@patapon.info
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
-      - name: sound-output-device-chooser@kgshank.net
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_sound | default('no') | bool }}"
       - name: blur-my-shell@aunetx
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_blur_shell | default('no') | bool }}"
       # - name: burn-my-windows@schneegans.github.com
@@ -289,22 +270,23 @@ install_client_gdm_gui_setup:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
     configs:
-      # --- ADD Flameshot ---
-      - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
-        key: name
-        value: "Flameshot"
-      - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
-        key: command
-        value: "/snap/bin/flameshot gui"
-      - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
-        key: binding
-        value: "<Shift><Super>s"
-      # --- ADD <next here> [TODO: add unique name-path in list below] ---
-      # --- UNIQUE LIST ---
-      - source: org.gnome.settings-daemon.plugins.media-keys
-        key: custom-keybindings
-        value: >
-          ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
+      []
+      # # --- ADD Flameshot ---
+      # - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
+      #   key: name
+      #   value: "Flameshot"
+      # - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
+      #   key: command
+      #   value: "/snap/bin/flameshot gui"
+      # - source: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/
+      #   key: binding
+      #   value: "<Shift><Super>s"
+      # # --- ADD <next here> [TODO: add unique name-path in list below] ---
+      # # --- UNIQUE LIST ---
+      # - source: org.gnome.settings-daemon.plugins.media-keys
+      #   key: custom-keybindings
+      #   value: >
+      #     ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']
   overlay:
     setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
@@ -709,7 +691,7 @@ install_client_apt:
 # DPKG
 # install_client_config.dpkg_...
 install_client_dpkg:
-  - url: "{{ install_client_links_to_check_update_virtualbox | default('no') | bool }}"
+  - url: "{{ install_client_links_to_check_update_virtualbox }}"
     install: "{{ install_client_config.dpkg_virtualbox | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update_veracrypt }}"
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
@@ -782,8 +764,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_denaro | default('no') | bool }}"
   - name: firefox
     install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
-  - name: flameshot
-    install: "{{ install_client_config.snap_flameshot | default('no') | bool }}"
   - name: foliate
     install: "{{ install_client_config.snap_foliate | default('no') | bool }}"
   - name: libreoffice

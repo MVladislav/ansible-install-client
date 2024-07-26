@@ -32,40 +32,34 @@ clients:
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
 install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
-install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
-install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-24.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-24.04-amd64.deb
 # NOTE: link should be latest version
 install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
-install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
+install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.17.0/zui_1.17.0_amd64.deb
 # NOTE: link should be latest version
 install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
 # NOTE: curl -s https://api.github.com/repos/logseq/logseq/releases/latest | grep "http.*\.AppImage" | cut -d '"' -f 4
-install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.5/Logseq-linux-x64-0.10.5.AppImage
-install_client_links_to_check_update_logseq_checksum: 17761baa0bcbd383f49d76885642650aaff3f21504d0cd14bad901b36a26b811
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.9/Logseq-linux-x64-0.10.9.AppImage
+install_client_links_to_check_update_logseq_checksum: 5d13ae6364652a71af2b554dbf36ae1ee2c98af79754aac860fa69a33f1f0a67
 # NOTE: curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | grep "http.*linux.*\.AppImage\"" | cut -d '"' -f 4
-install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
-install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440
+install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage
+install_client_links_tp_check_update_ultimaker_checksum: 5e54dc0a622a71f4e0f1fc4cd8a0e293aeaa8c82a4b567adfbde25148256a296
 
 install_client_config:
-  # GENERAL -------------------------------
-  dev: false
   # GNOME ---------------------------------
   gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
   gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
-  gnome_gui_setup_extensions_git_sound: false
   gnome_gui_setup_extensions_git_blur_shell: false
   gnome_gui_setup_extensions_git_burn_window: false
   gnome_gui_setup_extensions_git_dash_to_panel: false
-  gnome_gui_setup_extensions_git_ui_tune: false
   gnome_gui_setup_keybinding: false
   gnome_gui_setup_overlay: false
   gnome_terminal_setup_overlay: false
-  # cleanup_remove_snap: false
-  # cleanup_remove_flatpak: false
   # APT -----------------------------------
   apt_base: false
   apt_auth_priv: false
@@ -105,7 +99,6 @@ install_client_config:
   snap_chromium: false
   snap_denaro: false
   snap_firefox: false
-  snap_flameshot: false
   snap_foliate: false
   snap_libreoffice: false
   snap_newsflash: false
@@ -263,7 +256,7 @@ install_client_config:
 | chromium               |  xx  |    x    |      |          |           |      | office |
 | denaro                 |  xx  |   xx    |      |          |           |      | office |
 | firefox                |  xx  |    x    |      |          |           |      | office |
-| flameshot              |  x   |   xx    |      |          |           |      | office |
+| flameshot              |      |   xx    |      |          |           |      | office |
 | foliate                |  xx  |   xx    |      |          |           |      | office |
 | libreoffice            |  xx  |    x    |      |          |           |      | office |
 | newsflash              |  x   |   xx    |      |          |           |      | office |

@@ -2,7 +2,7 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | AppImage | create folder | for {{ outer_item.name }}"
+- name: "CLIENT | AppImage | create folder"
   become: true
   ansible.builtin.file:
     path: "/opt/{{ outer_item.name }}/"
@@ -12,7 +12,7 @@
     - install_client
     - apt
 
-- name: "CLIENT | AppImage | get AppImage | for {{ outer_item.name }}"
+- name: "CLIENT | AppImage | get AppImage"
   become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.app_image }}"
@@ -23,7 +23,7 @@
     - install_client
     - apt
 
-- name: "CLIENT | AppImage | get image (png) | for {{ outer_item.name }}"
+- name: "CLIENT | AppImage | get image (png)"
   become: true
   ansible.builtin.get_url:
     url: "{{ outer_item.png }}"
@@ -34,7 +34,7 @@
     - install_client
     - apt
 
-- name: "CLIENT | AppImage | create file .desktop | for {{ outer_item.name }}"
+- name: "CLIENT | AppImage | create file .desktop"
   become: true
   ansible.builtin.template:
     src: template.desktop.j2

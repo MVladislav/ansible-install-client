@@ -70,7 +70,7 @@
 
 # ------------------------------------------------------------------------------
 # GIT extensions
-- name: "CLIENT | gnome gui | clone extensions by git - {{ outer_item.name }}"
+- name: "CLIENT | gnome gui | clone extensions by git"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.git:
@@ -94,7 +94,7 @@
     - ubuntu
     - gnome
 
-- name: "CLIENT | gnome gui | install extensions from git clones - {{ outer_item.name }}"
+- name: "CLIENT | gnome gui | install extensions from git clones"
   become: true
   become_user: "{{ outer_item.name }}"
   community.general.make:
@@ -133,7 +133,7 @@
 
 # ------------------------------------------------------------------------------
 # ACTIVATE extensions
-- name: "CLIENT | gnome gui | activate extensions - {{ outer_item.name }}"
+- name: "CLIENT | gnome gui | activate extensions"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item.name }}"
@@ -155,7 +155,7 @@
 
 # ------------------------------------------------------------------------------
 # SETUP OVERLAY
-- name: "CLIENT | gnome gui | setup overlay - {{ outer_item.name }}"
+- name: "CLIENT | gnome gui | setup overlay"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: '{{ install_client_gdm_gui_setup.overlay.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
@@ -177,7 +177,7 @@
     - ubuntu
     - gnome
 # SETUP TERMINAL OVERLAY
-- name: "CLIENT | gnome terminal | get default profile - {{ outer_item.name }}"
+- name: "CLIENT | gnome terminal | get default profile"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.shell: >
@@ -199,7 +199,7 @@
     - ubuntu
     - gnome
 
-- name: "CLIENT | gnome terminal | setup overlay - {{ outer_item.name }}"
+- name: "CLIENT | gnome terminal | setup overlay"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: >
@@ -228,7 +228,7 @@
 
 # ------------------------------------------------------------------------------
 # SETUP KEYBINDS
-- name: "CLIENT | gnome gui | setup keybinding - {{ outer_item.name }}"
+- name: "CLIENT | gnome gui | setup keybinding"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: '{{ install_client_gdm_gui_setup.keybindings.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
