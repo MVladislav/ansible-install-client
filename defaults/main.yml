@@ -682,7 +682,7 @@ install_client_apt:
   - name: virt-viewer
     install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
   # --------------------------------
-  - name: solaar-gnome3
+  - name: solaar
     install: "{{ install_client_config.apt_logitech_unifying_solaar | default('no') | bool }}"
   - name: mpv
     install: "{{ install_client_config.apt_mpv | default('no') | bool }}"
