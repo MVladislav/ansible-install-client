@@ -2,45 +2,64 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | gnome gui | install dependencies - 01"
+# - name: "CLIENT | gnome gui | install dependencies - 01"
+#   become: true
+#   ansible.builtin.apt:
+#     pkg: "{{ item }}"
+#     state: present
+#     force_apt_get: true # apt-get instead of aptitude
+#   loop: "{{ install_client_gdm_gui_setup.dependency | flatten(levels=1) }}"
+#   when:
+#     - install_client_config is defined
+#     - install_client_config.gnome_gui_setup_dependencies is defined
+#     - install_client_config.gnome_gui_setup_dependencies | bool
+#     - install_client_gdm_gui_setup is defined
+#     - install_client_gdm_gui_setup.dependency is defined
+#   tags:
+#     - install_client
+#     - ubuntu
+#     - gnome
+
+- name: "CLIENT | gnome gui | install dependencies - gsettings"
   become: true
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
     force_apt_get: true # apt-get instead of aptitude
-  loop: "{{ install_client_gdm_gui_setup.dependency | flatten(levels=1) }}"
+  loop: "{{ install_client_gdm_gui_setup.dependency_overlay_terminal_style | flatten(levels=1) }}"
   when:
-    - install_client_gdm_gui_setup is defined
-    - install_client_gdm_gui_setup.dependency is defined
     - install_client_config is defined
-    - install_client_config.gnome_gui_setup_dependencies is defined
-    - install_client_config.gnome_gui_setup_dependencies | bool
+    - >
+      (
+        (install_client_config.gnome_gui_setup_keybinding is defined
+        and install_client_config.gnome_gui_setup_keybinding | bool)
+        or
+        (install_client_config.gnome_gui_setup_overlay is defined
+        and install_client_config.gnome_gui_setup_overlay | bool)
+        or
+        (install_client_config.gnome_terminal_setup_overlay is defined
+        and install_client_config.gnome_terminal_setup_overlay | bool)
+      )
+    - install_client_gdm_gui_setup is defined
+    - install_client_gdm_gui_setup.dependency_overlay_terminal_style is defined
   tags:
     - install_client
     - ubuntu
     - gnome
 
-# ------------------------------------------------------------------------------
-- name: "CLIENT | gnome gui | install dependencies - 02"
+- name: "CLIENT | gnome gui | install dependencies - extension"
   become: true
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
     force_apt_get: true # apt-get instead of aptitude
-  loop: "{{ install_client_gdm_gui_setup.dependency2 | flatten(levels=1) }}"
+  loop: "{{ install_client_gdm_gui_setup.dependency_extensions | flatten(levels=1) }}"
   when:
+    - install_client_config is defined
+    - install_client_config.gnome_gui_setup_extensions is defined
+    - install_client_config.gnome_gui_setup_extensions | bool
     - install_client_gdm_gui_setup is defined
-    - install_client_gdm_gui_setup.dependency2 is defined
-    - >
-      (
-        (install_client_gdm_gui_setup.overlay is defined
-        and install_client_gdm_gui_setup.overlay.setup is defined
-        and install_client_gdm_gui_setup.overlay.setup | bool)
-        or
-        (install_client_gdm_gui_setup.keybindings is defined
-        and install_client_gdm_gui_setup.keybindings.install is defined
-        and install_client_gdm_gui_setup.keybindings.install | bool)
-      )
+    - install_client_gdm_gui_setup.dependency_extensions is defined
   tags:
     - install_client
     - ubuntu

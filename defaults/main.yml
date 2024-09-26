@@ -35,8 +35,8 @@ install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad
 # WHAT TO INSTALL
 install_client_config:
   # GNOME ---------------------------------
-  gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-  gnome_gui_setup_dependencies: false
+  gnome_gui_setup: false # NOTE: activates gui setup below. depends on clients[...].setup
+  # gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
@@ -203,27 +203,28 @@ install_client_config:
   flatpak_sublimetext: false
   flatpak_wireshark: false
   # OTHER --------------------------------
-  vs_code_ext: false
-  firefox_setup: false
+  vs_code_ext: false # NOTE: depends on clients[...].setup
+  firefox_setup: false # NOTE: depends on clients[...].setup
 
 # ------------------------------------------------------------------------------
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
-  dependency:
-    - libsass1
-    - sassc
-    - gettext
-    - lm-sensors
-    - libcanberra-gtk-module
-    - libcanberra-gtk3-module
-  dependency2:
+  # dependency:
+  #   - libsass1
+  #   - sassc
+  #   - gettext
+  #   - lm-sensors
+  #   - libcanberra-gtk-module
+  #   - libcanberra-gtk3-module
+  dependency_overlay_terminal_style:
+    # for gsettings in terminal run
+    - dbus-x11
+  dependency_extensions:
     # to build packages
     - make
     # config extensions
     - gnome-shell-extension-prefs
-    # for gsettings in terminal run
-    - dbus-x11
     # for https://github.com/home-sweet-gnome/dash-to-panel.git
     - gettext
     # for https://github.com/Schneegans/Burn-My-Windows.git
@@ -340,6 +341,10 @@ install_client_gdm_gui_setup:
         value: >-
           true
       - source: org.gnome.desktop.interface
+        key: color-scheme
+        value: >-
+          prefer-dark
+      - source: org.gnome.desktop.interface
         key: gtk-theme
         value: >-
           Yaru-purple-dark
@@ -362,7 +367,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell.extensions.dash-to-dock
         key: click-action
         value: >-
-          focus-or-previews
+          minimize-or-previews
       - source: org.gnome.shell.extensions.dash-to-dock
         key: custom-theme-shrink
         value: >-
@@ -481,87 +486,87 @@ install_client_gdm_gui_setup:
     configs:
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: font
-        value: >
+        value: >-
           FiraCode Nerd Font 12
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: default-size-columns
-        value: >
+        value: >-
           130
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: default-size-rows
-        value: >
+        value: >-
           32
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-transparent-background
-        value: >
+        value: >-
           true
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: background-transparency-percent
-        value: >
+        value: >-
           20
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: audible-bell
-        value: >
+        value: >-
           false
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-system-font
-        value: >
+        value: >-
           false
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-theme-colors
-        value: >
+        value: >-
           false
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: foreground-color
-        value: >
+        value: >-
           rgb(170,170,170)
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: background-color
-        value: >
+        value: >-
           rgb(0,0,0)
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-color
-        value: >
+        value: >-
           rgb(3,195,203)
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-is-bright
-        value: >
+        value: >-
           true
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-background-color
-        value: >
+        value: >-
           rgb(3,195,203)
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-colors-set
-        value: >
+        value: >-
           true
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: highlight-foreground-color
-        value: >
+        value: >-
           #ffffff
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: use-theme-transparency
-        value: >
+        value: >-
           false
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: visible-name
-        value: >
+        value: >-
           groot
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: bold-color-same-as-fg
-        value: >
+        value: >-
           false
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-background-color
-        value: >
+        value: >-
           rgb(3,195,203)
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-colors-set
-        value: >
+        value: >-
           true
       - source: "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:"
         key: cursor-foreground-color
-        value: >
+        value: >-
           #ffffff
 
 # ------------------------------------------------------------------------------
@@ -1048,66 +1053,46 @@ install_client_flatpak:
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
-  - adpyke.codesnap
+  # - adpyke.codesnap
   - adpyke.vscode-sql-formatter
   - analytic-signal.preview-pdf
-  - benjaminkott.typo3-typoscript
+  # - aykutsarac.jsoncrack-vscode
+  # - benjaminkott.typo3-typoscript
   - bibhasdn.unique-lines
-  - bierner.markdown-emoji
   - bierner.markdown-preview-github-styles
   - charliermarsh.ruff
-  - ChrisChinchilla.vscode-pandoc
-  - christian-kohler.path-intellisense
-  - crazywolf.smali
-  - DavidAnson.vscode-markdownlint
-  - dbaeumer.vscode-eslint
-  - DotJoshJohnson.xml
+  # - chrischinchilla.vscode-pandoc
+  # - davidanson.vscode-markdownlint
+  - donjayamanne.githistory
   - eamodio.gitlens
   - esbenp.prettier-vscode
-  - febley.typo3-fluid-snippets
+  # - febley.typo3-fluid-snippets
   - foxundermoon.shell-format
-  - golang.go
-  - hashicorp.terraform
-  - James-Yu.latex-workshop
-  - koehlma.markdown-math
-  - mechatroner.rainbow-csv
-  - mhutchie.git-graph
-  - mikestead.dotenv
-  - ms-azuretools.vscode-docker
-  - ms-kubernetes-tools.vscode-kubernetes-tools
-  - ms-python.isort
+  # - gruntfuggly.todo-tree
+  # - james-yu.latex-workshop
+  # - mechatroner.rainbow-csv
   - ms-python.python
-  - ms-python.vscode-pylance
-  - ms-vscode-remote.remote-containers
-  - ms-vscode-remote.remote-ssh
-  - ms-vscode-remote.remote-ssh-edit
-  - ms-vscode.hexeditor
-  - ms-vscode.remote-explorer
+  # - ms-python.vscode-pylance
+  # - ms-vscode.live-server
   - mushan.vscode-paste-image
-  - PKief.material-icon-theme
-  - Postman.postman-for-vscode
-  - ralffreit.typo3snippets
-  - rangav.vscode-thunder-client
-  - RapidAPI.vscode-rapidapi-client
-  - rapidapi.vscode-services
+  - pkief.material-icon-theme
+  # - ralffreit.typo3snippets
+  # - rangav.vscode-thunder-client
   - redhat.ansible
-  - redhat.java
+  # - redhat.java
   - redhat.vscode-xml
   - redhat.vscode-yaml
-  - rome.rome
-  - scala-lang.scala
-  - secsamdev.grok
+  # - ryanluker.vscode-coverage-gutters
+  - samuelcolvin.jinjahtml
   - silofy.hackthebox
-  - SimonSiefke.svg-preview
-  - snyk-security.snyk-vulnerability-scanner
+  # - simonsiefke.svg-preview
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-german
+  # - sumneko.lua
   - tamasfe.even-better-toml
   - timonwong.shellcheck
-  - VisualStudioExptTeam.intellicode-api-usage-examples
-  - VisualStudioExptTeam.vscodeintellicode
   - wayou.vscode-todo-highlight
-  - wholroyd.jinja
+  # - wholroyd.jinja
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
 

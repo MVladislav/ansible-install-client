@@ -105,3 +105,17 @@
   tags:
     - install_client
     - firefox
+
+- name: "CLIENT | firefox setup | copy user-overrides.jsjs for profile {{ install_client_firefox_profile_name }}"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.template:
+    src: "firefox/user-overrides.js.j2"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user-overrides.js"
+    mode: "0640"
+  when:
+    - is_firefox_installed.rc is defined
+    - is_firefox_installed.rc == 0
+  tags:
+    - install_client
+    - firefox

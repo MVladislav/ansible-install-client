@@ -49,8 +49,8 @@ install_client_links_tp_check_update_ultimaker_checksum: 5e54dc0a622a71f4e0f1fc4
 
 install_client_config:
   # GNOME ---------------------------------
-  gnome_gui_setup: false # general of gnome setup should be triggered, below specific what (dependencies will than general installed)
-  gnome_gui_setup_dependencies: false
+  gnome_gui_setup: false # NOTE: activates gui setup below. depends on clients[...].setup
+  # gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
   gnome_gui_setup_extensions_apt_ubuntu_tiling: false
   gnome_gui_setup_extensions_git_caffeine: false
@@ -217,8 +217,8 @@ install_client_config:
   flatpak_sublimetext: false
   flatpak_wireshark: false
   # OTHER --------------------------------
-  vs_code_ext: false
-  firefox_setup: false # will add arkenfox user.js, check it when you not want the default from git
+  vs_code_ext: false # NOTE: depends on clients[...].setup
+  firefox_setup: false # NOTE: will add arkenfox user.js, check it when you not want the default from git. depends on clients[...].setup
 ```
 
 ## App list for possible install
