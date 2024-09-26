@@ -5,12 +5,10 @@
 - name: "CLIENT | dist-apt | add apt signing key, will not download if present"
   ansible.builtin.apt_key:
     url: "{{ item.url }}"
-    keyring: "/etc/apt/trusted.gpg.d/{{ item.name }}"
+    keyring: "{{ install_client_distribution_key_keyring_path }}/{{ item.name }}"
     state: present
+    id: "{{ item.id | default(omit) }}"
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
-  when:
-    - outer_item.install is defined
-    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key
@@ -18,24 +16,16 @@
 # ------------------------------------------------------------------------------
 - name: "CLIENT | dist-apt | get OS distribution"
   ansible.builtin.command: lsb_release -sc
-  register: os_distribution
   changed_when: false
-  failed_when: false
-  when:
-    - outer_item.install is defined
-    - outer_item.install | bool
+  register: os_distribution
   tags:
     - install_client
     - distribution_key
 
 - name: "CLIENT | dist-apt | get OS architecture"
   ansible.builtin.command: dpkg --print-architecture
-  register: os_architecture
   changed_when: false
-  failed_when: false
-  when:
-    - outer_item.install is defined
-    - outer_item.install | bool
+  register: os_architecture
   tags:
     - install_client
     - distribution_key
@@ -44,12 +34,9 @@
   become: true
   ansible.builtin.apt_repository:
     repo: >
-      deb [arch={{ os_architecture.stdout }}] {{ outer_item.repo }} {{ outer_item.distribution | default(os_distribution.stdout) }} {{ outer_item.version }}
+      deb [arch={{ os_architecture.stdout }} signed-by={{ install_client_distribution_key_keyring_path }}/{{ item.name }}] {{ outer_item.repo }} {{ outer_item.distribution | default(os_distribution.stdout) }} {{ outer_item.version }}
     state: present
-  # ignore_errors: yes
-  when:
-    - outer_item.install is defined
-    - outer_item.install | bool
+  loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   tags:
     - install_client
     - distribution_key
@@ -61,11 +48,8 @@
     pkg: "{{ item }}"
     state: present
     force_apt_get: true # apt-get instead of aptitude
+    update_cache: true
   loop: "{{ outer_item.apt | flatten(levels=1) }}"
-  # ignore_errors: yes
-  when:
-    - outer_item.install is defined
-    - outer_item.install | bool
   tags:
     - install_client
     - distribution_key

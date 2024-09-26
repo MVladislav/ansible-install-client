@@ -707,6 +707,7 @@ install_client_dpkg:
 # ------------------------------------------------------------------------------
 # DISTRIBUTION KEY
 # install_client_config.distribution_key_...
+install_client_distribution_key_keyring_path: /etc/apt/trusted.gpg.d
 install_client_distribution_key:
   - install: "{{ install_client_config.distribution_key_virtualbox | default('no') | bool }}"
     gpg:
@@ -717,7 +718,7 @@ install_client_distribution_key:
         url: https://www.virtualbox.org/download/oracle_vbox.asc
         name: oracle_vbox.gpg
     repo: https://download.virtualbox.org/virtualbox/debian
-    distribution: focal
+    distribution: focal # will auto gathered, if you need other define it here
     version: contrib
     apt:
       - virtualbox-6.1
@@ -732,6 +733,19 @@ install_client_distribution_key:
     version: main
     apt:
       - 1password-cli
+  # https://www.tuxedocomputers.com/en/Add-TUXEDO-software-package-sources.tuxedo
+  - install: "{{ install_client_config.distribution_key_tuxedo | default('no') | bool }}"
+    gpg:
+      - id: ""
+        url: https://deb.tuxedocomputers.com/ubuntu/0x54840598.pub.asc
+        name: tuxedo.gpg
+    repo: https://deb.tuxedocomputers.com/ubuntu
+    # distribution: noble # will auto gathered, if you need other define it here
+    version: main
+    apt:
+      - tuxedo-control-center
+      - tuxedo-drivers
+      # - tuxedo-tomte
 
 # ------------------------------------------------------------------------------
 # APP IMAGE
