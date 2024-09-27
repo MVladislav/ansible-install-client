@@ -5,12 +5,11 @@
 - name: "CLIENT | vscode | check if vs code is installed"
   become: true
   become_user: "{{ outer_item.name }}"
-  ansible.builtin.shell: set -o pipefail && command -v code >/dev/null 2>&1
-  args:
-    executable: /bin/bash
+  ansible.builtin.command: which code
   register: is_code_exist
-  changed_when: is_code_exist.rc != 0
-  # ignore_errors: true
+  changed_when: false
+  failed_when: false
+  check_mode: false
   tags:
     - install_client
     - vs_code
@@ -23,9 +22,12 @@
   # command: "code --list-extensions | grep {{ item }} -q || code --install-extension {{ item }} && true"
   ansible.builtin.command: "code --install-extension {{ item }}"
   loop: "{{ install_client_vs_code_ext | flatten(levels=1) }}"
-  changed_when: false
-  failed_when: false
-  when: install_client_vs_code_ext is defined and (is_code_exist.rc is defined and is_code_exist.rc == 0)
+  register: code_install_ext
+  changed_when: code_install_ext.rc == 0
+  when:
+    - install_client_vs_code_ext is defined
+    - is_code_exist.rc is defined
+    - is_code_exist.rc == 0
   tags:
     - install_client
     - vs_code
@@ -38,7 +40,9 @@
     src: vs-settings.json.j2
     dest: "~/.config/Code/User/settings.json"
     mode: "0664"
-  when: (is_code_exist.rc is defined and is_code_exist.rc == 0)
+  when:
+    - is_code_exist.rc is defined
+    - is_code_exist.rc == 0
   tags:
     - install_client
     - vs_code
@@ -50,7 +54,9 @@
     src: vs-keybindings.json.j2
     dest: "~/.config/Code/User/keybindings.json"
     mode: "0664"
-  when: (is_code_exist.rc is defined and is_code_exist.rc == 0)
+  when:
+    - is_code_exist.rc is defined
+    - is_code_exist.rc == 0
   tags:
     - install_client
     - vs_code

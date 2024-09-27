@@ -89,6 +89,7 @@ install_client_config:
   # DIST KEY ------------------------------
   distribution_key_virtualbox: false
   distribution_key_1password_cli: false
+  distribution_key_tuxedo: false
   # APPIMAGE ------------------------------
   app_image_logseq: false
   app_image_ultimaker: false
@@ -246,6 +247,7 @@ install_client_config:
 | veracrypt_cli          |      |         |  x   |          |           |      | secure |
 | virtualbox             |      |         |  x   |    x     |           |      | dev    |
 | 1password_cli          |      |         |      |    x     |           |      | secure |
+| tuxedo                 |      |         |      |    x     |           |      | sys    |
 | portmaster             |      |         |  x   |          |           |      | secure |
 | parsec                 |      |  TODO   |  x   |          |           |      | video  |
 | brim                   |      |         |  x   |          |           |      | pen    |

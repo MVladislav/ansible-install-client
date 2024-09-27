@@ -156,9 +156,9 @@
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: "{{ install_client_gdm_gui_setup.extensions.command }} {{ item.name }}"
-  # ignore_errors: true
   loop: "{{ install_client_gdm_gui_setup.extensions.activate | flatten(levels=1) }}"
-  changed_when: true
+  register: gnome_activate_extension
+  changed_when: gnome_activate_extension.rc == 0
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.extensions is defined
@@ -180,9 +180,7 @@
   ansible.builtin.command: '{{ install_client_gdm_gui_setup.overlay.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
   register: gnome_setup_overlay
-  # NOTE: we ignore error's here, because we only interested setup gnome, for what we have to change anyway if it fails
-  failed_when: gnome_setup_overlay.rc not in [0,1]
-  changed_when: true
+  changed_when: gnome_setup_overlay.rc == 0
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.overlay is defined
@@ -204,7 +202,7 @@
   args:
     executable: /bin/bash
   register: gnome_setup_terminal_overlay_profile
-  changed_when: true
+  changed_when: false
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.terminal_style is defined
@@ -227,9 +225,7 @@
     {{ item.key }} "{{ item.value | string }}"
   loop: "{{ install_client_gdm_gui_setup.terminal_style.configs | flatten(levels=1) }}"
   register: gnome_setup_terminal_overlay
-  # NOTE: we ignore error's here, because we only interested setup gnome, for what we have to change anyway if it fails
-  failed_when: gnome_setup_terminal_overlay.rc not in [0,1]
-  changed_when: true
+  changed_when: gnome_setup_terminal_overlay.rc == 0
   when:
     - gnome_setup_terminal_overlay_profile is defined
     - gnome_setup_terminal_overlay_profile.stdout is defined
@@ -252,7 +248,8 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: '{{ install_client_gdm_gui_setup.keybindings.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
-  changed_when: true
+  register: gnome_setup_keybinding
+  changed_when: gnome_setup_keybinding.rc == 0
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.keybindings is defined
