@@ -181,6 +181,7 @@
   loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
   register: gnome_setup_overlay
   changed_when: gnome_setup_overlay.rc == 0
+  failed_when: false
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.overlay is defined
@@ -226,6 +227,7 @@
   loop: "{{ install_client_gdm_gui_setup.terminal_style.configs | flatten(levels=1) }}"
   register: gnome_setup_terminal_overlay
   changed_when: gnome_setup_terminal_overlay.rc == 0
+  failed_when: false
   when:
     - gnome_setup_terminal_overlay_profile is defined
     - gnome_setup_terminal_overlay_profile.stdout is defined
@@ -250,6 +252,7 @@
   loop: "{{ install_client_gdm_gui_setup.keybindings.configs | flatten(levels=1) }}"
   register: gnome_setup_keybinding
   changed_when: gnome_setup_keybinding.rc == 0
+  failed_when: false
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.keybindings is defined
