@@ -56,4 +56,4 @@
       app_image_logseq: true
       app_image_ultimaker: true
       # OTHER --------------------------------
-      firefox_setup: true
+      # firefox_setup: true
