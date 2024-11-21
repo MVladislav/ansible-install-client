@@ -292,6 +292,7 @@ install_client_gdm_gui_setup:
   overlay:
     setup: "{{ install_client_config.gnome_gui_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
+    # NOTE: gsettings list-recursively > gsettings-backup-$(date +%Y%m%d%H%M%S).txt
     configs:
       - source: org.gnome.desktop.calendar
         key: show-weekdate
@@ -352,7 +353,11 @@ install_client_gdm_gui_setup:
       - source: org.gnome.desktop.interface
         key: icon-theme
         value: >-
-          Yaru-purple
+          Yaru-purple-dark
+      - source: org.gnome.desktop.interface
+        key: accent-color
+        value: >-
+          purple
       - source: org.gnome.desktop.interface
         key: show-battery-percentage
         value: >-
@@ -457,6 +462,18 @@ install_client_gdm_gui_setup:
         key: tiling-popup-all-workspace
         value: >-
           true
+      - source: org.gnome.nautilus.preferences
+        key: default-folder-viewer
+        value: >-
+          list-view
+      - source: org.gtk.gtk4.Settings.FileChooser
+        key: show-hidden
+        value: >-
+          true
+      - source: org.gnome.desktop.notifications
+        key: show-in-lock-screen
+        value: >-
+          false
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
