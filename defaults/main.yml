@@ -159,6 +159,7 @@ install_client_config:
   flatpak_upscayl: false
   flatpak_amberol: false
   flatpak_haruna: false
+  flatpak_totem: false
   flatpak_obs: false
   flatpak_parabolic: false
   flatpak_video_trimmer: false
@@ -966,6 +967,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
   - name: org.kde.haruna
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
+  - name: flathub org.gnome.Totem
+    install: "{{ install_client_config.flatpak_totem | default('no') | bool }}"
   - name: com.obsproject.Studio
     install: "{{ install_client_config.flatpak_obs | default('no') | bool }}"
   - name: org.nickvision.tubeconverter

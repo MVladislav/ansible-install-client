@@ -173,6 +173,7 @@ install_client_config:
   flatpak_upscayl: false
   flatpak_amberol: false
   flatpak_haruna: false
+  flatpak_totem: false
   flatpak_obs: false
   flatpak_parabolic: false
   flatpak_video_trimmer: false
@@ -319,6 +320,7 @@ install_client_config:
 | conjure                |      |    x    |      |          |           |      | design |
 | peek                   |      |    x    |      |          |           |      | design |
 | girens                 |      |    x    |      |          |           |      | video  |
+| totem                  |      |    x    |      |          |           |      | video  |
 | coppwr                 |      |    x    |      |          |           |      | music  |
 | helvum                 |      |    x    |      |          |           |      | music  |
 | jamesdsp               |      |    x    |      |          |           |      | music  |
