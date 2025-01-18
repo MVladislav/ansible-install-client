@@ -971,7 +971,7 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
   - name: org.kde.haruna
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
-  - name: flathub org.gnome.Totem
+  - name: org.gnome.Totem
     install: "{{ install_client_config.flatpak_totem | default('no') | bool }}"
   - name: com.obsproject.Studio
     install: "{{ install_client_config.flatpak_obs | default('no') | bool }}"
@@ -1082,7 +1082,7 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
   - name: com.sublimetext.three
     install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
-  - name: flathub dev.zed.Zed
+  - name: dev.zed.Zed
     install: "{{ install_client_config.flatpak_zed | default('no') | bool }}"
   - name: org.virt_manager.virt-viewer
     install: "{{ install_client_config.flatpak_virt_viewer | default('no') | bool }}"
