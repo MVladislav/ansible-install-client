@@ -16,8 +16,6 @@ install_client_links_to_check_update_virtualbox: https://download.virtualbox.org
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
 install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
 install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
-# NOTE: link should be latest version
-install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
 install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
 # NOTE: link should be latest version
@@ -69,7 +67,6 @@ install_client_config:
   dpkg_virtualbox: false
   dpkg_veracrypt: false
   dpkg_veracrypt_cli: false
-  dpkg_parsec: false
   dpkg_brim: false
   dpkg_portmaster: false
   # DIST KEY ------------------------------
@@ -119,6 +116,7 @@ install_client_config:
   snap_beekeeper_studio: false
   snap_code: false
   snap_dbeaver: false
+  snap_gnome_boxes: false
   snap_insomnia: false
   snap_postman: false
   snap_remmina: false
@@ -128,7 +126,6 @@ install_client_config:
   snap_mqtt_explorer: false
   snap_UBports: false
   snap_fbreader: false
-  snap_pixelfx: false
   # FLATPAK -------------------------------
   flatpak_1password: false
   flatpak_keepassxc: false
@@ -192,17 +189,26 @@ install_client_config:
   flatpak_warp: false
   flatpak_threemaqt: false
   flatpak_conjure: false
+  flatpak_loupe: false
   flatpak_peek: false
+  flatpak_ultimaker: false
   flatpak_girens: false
+  flatpak_mpv: false
+  flatpak_parsec: false
   flatpak_coppwr: false
   flatpak_helvum: false
   flatpak_jamesdsp: false
+  flatpak_proton_up: false
+  flatpak_heroic: false
   flatpak_lutris: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
   flatpak_fritzing: false
+  flatpak_gnome_boxes: false
   flatpak_mongodb_compass: false
   flatpak_sublimetext: false
+  flatpak_zed: false
+  flatpak_virt_viewer: false
   flatpak_wireshark: false
   # OTHER --------------------------------
   vs_code_ext: false # NOTE: depends on clients[...].setup
@@ -721,8 +727,6 @@ install_client_dpkg:
     install: "{{ install_client_config.dpkg_veracrypt | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update_veracrypt_cli }}"
     install: "{{ install_client_config.dpkg_veracrypt_cli | default('no') | bool }}"
-  - url: "{{ install_client_links_to_check_update_parsec }}"
-    install: "{{ install_client_config.dpkg_parsec | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update_brim }}"
     install: "{{ install_client_config.dpkg_brim | default('no') | bool }}"
   - url: "{{ install_client_links_to_check_update_portmaster }}"
@@ -872,6 +876,8 @@ install_client_snap:
     classic: true
   - name: dbeaver-ce
     install: "{{ install_client_config.snap_dbeaver_ce | default('no') | bool }}"
+  - name: gnome-boxes
+    install: "{{ install_client_config.snap_gnome_boxes | default('no') | bool }}"
   - name: insomnia
     install: "{{ install_client_config.snap_insomnia | default('no') | bool }}"
   - name: postman
@@ -892,8 +898,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_UBports | default('no') | bool }}"
   - name: fbreader
     install: "{{ install_client_config.snap_fbreader | default('no') | bool }}"
-  - name: pixelfx
-    install: "{{ install_client_config.snap_pixelfx | default('no') | bool }}"
 
 # ------------------------------------------------------------------------------
 # FLATPAK
@@ -1036,19 +1040,29 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
   - name: io.github.nate_xyz.Conjure
     install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
+  - name: org.gnome.Loupe
+    install: "{{ install_client_config.flatpak_loupe | default('no') | bool }}"
   - name: com.uploadedlobster.peek
     install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
+  - name: com.ultimaker.cura
+    install: "{{ install_client_config.flatpak_ultimaker | default('no') | bool }}"
   - name: nl.g4d.Girens
     install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
+  - name: io.mpv.Mpv
+    install: "{{ install_client_config.flatpak_mpv | default('no') | bool }}"
+  - name: com.parsecgaming.parsec
+    install: "{{ install_client_config.flatpak_parsec | default('no') | bool }}"
   - name: io.github.dimtpap.coppwr
     install: "{{ install_client_config.flatpak_coppwr | default('no') | bool }}"
   - name: org.pipewire.Helvum
     install: "{{ install_client_config.flatpak_helvum | default('no') | bool }}"
   - name: me.timschneeberger.jdsp4linux
     install: "{{ install_client_config.flatpak_jamesdsp | default('no') | bool }}"
-  - name: net.lutris.Lutris//beta
-    install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: net.davidotek.pupgui2
+    install: "{{ install_client_config.flatpak_proton_up | default('no') | bool }}"
+  - name: com.heroicgameslauncher.hgl
+    install: "{{ install_client_config.flatpak_heroic | default('no') | bool }}"
+  - name: net.lutris.Lutris
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.gnome.Platform.Compat.i386/x86_64/42
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
@@ -1062,10 +1076,16 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_betaflightconfigurator | default('no') | bool }}"
   - name: org.fritzing.Fritzing
     install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
+  - name: org.gnome.Boxes
+    install: "{{ install_client_config.flatpak_gnome_boxes | default('no') | bool }}"
   - name: com.mongodb.Compass
     install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
   - name: com.sublimetext.three
     install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
+  - name: flathub dev.zed.Zed
+    install: "{{ install_client_config.flatpak_zed | default('no') | bool }}"
+  - name: org.virt_manager.virt-viewer
+    install: "{{ install_client_config.flatpak_virt_viewer | default('no') | bool }}"
   - name: org.wireshark.Wireshark
     install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
 

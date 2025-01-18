@@ -34,8 +34,6 @@ install_client_links_to_check_update_virtualbox: https://download.virtualbox.org
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
 install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-24.04-amd64.deb
 install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-24.04-amd64.deb
-# NOTE: link should be latest version
-install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
 install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.17.0/zui_1.17.0_amd64.deb
 # NOTE: link should be latest version
@@ -83,7 +81,6 @@ install_client_config:
   dpkg_virtualbox: false
   dpkg_veracrypt: false
   dpkg_veracrypt_cli: false
-  dpkg_parsec: false
   dpkg_brim: false
   dpkg_portmaster: false
   # DIST KEY ------------------------------
@@ -133,6 +130,7 @@ install_client_config:
   snap_beekeeper_studio: false
   snap_code: false
   snap_dbeaver: false
+  snap_gnome_boxes: false
   snap_insomnia: false
   snap_postman: false
   snap_remmina: false
@@ -142,7 +140,6 @@ install_client_config:
   snap_mqtt_explorer: false
   snap_UBports: false
   snap_fbreader: false
-  snap_pixelfx: false
   # FLATPAK -------------------------------
   flatpak_1password: false
   flatpak_keepassxc: false
@@ -206,17 +203,26 @@ install_client_config:
   flatpak_warp: false
   flatpak_threemaqt: false
   flatpak_conjure: false
+  flatpak_loupe: false
   flatpak_peek: false
+  flatpak_ultimaker: false
   flatpak_girens: false
+  flatpak_mpv: false
+  flatpak_parsec: false
   flatpak_coppwr: false
   flatpak_helvum: false
   flatpak_jamesdsp: false
+  flatpak_proton_up: false
+  flatpak_heroic: false
   flatpak_lutris: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
   flatpak_fritzing: false
+  flatpak_gnome_boxes: false
   flatpak_mongodb_compass: false
   flatpak_sublimetext: false
+  flatpak_zed: false
+  flatpak_virt_viewer: false
   flatpak_wireshark: false
   # OTHER --------------------------------
   vs_code_ext: false # NOTE: depends on clients[...].setup
@@ -235,101 +241,104 @@ install_client_config:
 | gnome\*                |      |         |      |          |           |  x   | system |
 | snap                   |      |         |      |          |           |  x   | system |
 | flatpak\*              |      |         |      |          |           |  x   | system |
-| texmaker               |      |  TODO   |      |          |           |  x   | office |
-| mpv                    |      |  TODO   |      |          |           |  x   | video  |
+| texmaker               |      |         |      |          |           |  x   | office |
 | vpn_resolvconf         |      |         |      |          |           |  x   | vpn    |
 | vpn_l2tp\*             |      |         |      |          |           |  x   | vpn    |
 | vpn_openvpn\*          |      |         |      |          |           |  x   | vpn    |
 | vpn_openconnect\*      |      |         |      |          |           |  x   | vpn    |
 | vpn_wireguard          |      |         |      |          |           |  x   | vpn    |
-| gnome_boxes            | TODO |  TODO   |      |          |           |  x   | dev    |
-| virt_viewer            |      |         |      |          |           |  x   | dev    |
 | veracrypt              |      |         |  x   |          |           |      | secure |
 | veracrypt_cli          |      |         |  x   |          |           |      | secure |
 | virtualbox             |      |         |  x   |    x     |           |      | dev    |
 | 1password_cli          |      |         |      |    x     |           |      | secure |
 | tuxedo                 |      |         |      |    x     |           |      | sys    |
 | portmaster             |      |         |  x   |          |           |      | secure |
-| parsec                 |      |  TODO   |  x   |          |           |      | video  |
 | brim                   |      |         |  x   |          |           |      | pen    |
-| ultimaker              | TODO |  TODO   |      |          |     x     |      | design |
-| 1password              |  xx  |    x    |      |          |           |      | secure |
-| keepassxc              |  x   |   xx    |      |          |           |      | secure |
+| 1password              |  x   |    x    |      |          |           |      | secure |
+| keepassxc              |  x   |    x    |      |          |           |      | secure |
 | yubioath               |  x   |    x    |      |          |           |      | secure |
-| chromium               |  xx  |    x    |      |          |           |      | office |
-| denaro                 |  xx  |   xx    |      |          |           |      | office |
-| firefox                |  xx  |    x    |      |          |           |      | office |
-| flameshot              |      |   xx    |      |          |           |      | office |
-| foliate                |  xx  |   xx    |      |          |           |      | office |
-| libreoffice            |  xx  |    x    |      |          |           |      | office |
-| newsflash              |  x   |   xx    |      |          |           |      | office |
-| okular                 |  xx  |   xx    |      |          |           |      | office |
-| onlyoffice             |  xx  |    x    |      |          |           |      | office |
-| thunderbird            |  xx  |   xx    |      |          |           |      | office |
+| chromium               |  x   |    x    |      |          |           |      | office |
+| denaro                 |  x   |    x    |      |          |           |      | office |
+| firefox                |  x   |    x    |      |          |           |      | office |
+| flameshot              |      |    x    |      |          |           |      | office |
+| foliate                |  x   |    x    |      |          |           |      | office |
+| libreoffice            |  x   |    x    |      |          |           |      | office |
+| newsflash              |  x   |    x    |      |          |           |      | office |
+| okular                 |  x   |    x    |      |          |           |      | office |
+| onlyoffice             |  x   |    x    |      |          |           |      | office |
+| thunderbird            |  x   |    x    |      |          |           |      | office |
 | xournalpp              |  x   |    x    |      |          |           |      | office |
-| zoom                   |  x   |   xx    |      |          |           |      | office |
+| zoom                   |  x   |    x    |      |          |           |      | office |
 | discord                |  x   |    x    |      |          |           |      | social |
-| jdownloader            |  x   |   xx    |      |          |           |      | social |
+| jdownloader            |  x   |    x    |      |          |           |      | social |
 | signal                 |  x   |    x    |      |          |           |      | social |
 | telegram               |  x   |    x    |      |          |           |      | social |
-| blender                |  xx  |    x    |      |          |           |      | design |
-| darktable              |  xx  |    x    |      |          |           |      | design |
-| drawio                 |  xx  |    x    |      |          |           |      | design |
-| gimp                   |  xx  |    x    |      |          |           |      | design |
-| inkscape               |  xx  |    x    |      |          |           |      | design |
-| krita                  |  x   |   xx    |      |          |           |      | design |
-| lunacy                 |  xx  |    x    |      |          |           |      | design |
+| blender                |  x   |    x    |      |          |           |      | design |
+| darktable              |  x   |    x    |      |          |           |      | design |
+| drawio                 |  x   |    x    |      |          |           |      | design |
+| gimp                   |  x   |    x    |      |          |           |      | design |
+| inkscape               |  x   |    x    |      |          |           |      | design |
+| krita                  |  x   |    x    |      |          |           |      | design |
+| lunacy                 |  x   |    x    |      |          |           |      | design |
 | upscayl                |  x   |   xx    |      |          |           |      | design |
-| amberol                |  x   |   xx    |      |          |           |      | video  |
-| haruna                 |  xx  |    x    |      |          |           |      | video  |
+| amberol                |  x   |    x    |      |          |           |      | video  |
+| haruna                 |  x   |    x    |      |          |           |      | video  |
 | obs                    |  x   |   xx    |      |          |           |      | video  |
-| parabolic              |  x   |   xx    |      |          |           |      | video  |
-| video_trimmer          |  x   |   xx    |      |          |           |      | video  |
+| parabolic              |  x   |    x    |      |          |           |      | video  |
+| video_trimmer          |  x   |    x    |      |          |           |      | video  |
 | vlc                    |  x   |    x    |      |          |           |      | video  |
-| moosync                |  xx  |    x    |      |          |           |      | music  |
-| spotify                |  xx  |   xx    |      |          |           |      | music  |
-| steam                  |  x   |   xx    |      |          |           |      | game   |
-| android_studio         |  xx  |    x    |      |          |           |      | dev    |
-| beekeeper_studio       |  xx  |    x    |      |          |           |      | dev    |
-| code                   |  xx  |    x    |      |          |           |      | dev    |
-| dbeaver                |  xx  |    x    |      |          |           |      | dev    |
-| insomnia               |  xx  |    x    |      |          |           |      | dev    |
-| postman                |  xx  |   xx    |      |          |           |      | dev    |
-| remmina                |  xx  |   xx    |      |          |           |      | dev    |
+| moosync                |  x   |    x    |      |          |           |      | music  |
+| spotify                |  x   |    x    |      |          |           |      | music  |
+| steam                  |  x   |    x    |      |          |           |      | game   |
+| android_studio         |  x   |    x    |      |          |           |      | dev    |
+| beekeeper_studio       |  x   |    x    |      |          |           |      | dev    |
+| code                   |  x   |    x    |      |          |           |      | dev    |
+| dbeaver                |  x   |    x    |      |          |           |      | dev    |
+| gnome_boxes            |  x   |    x    |      |          |           |  x   | dev    |
+| insomnia               |  x   |    x    |      |          |           |      | dev    |
+| postman                |  x   |    x    |      |          |           |      | dev    |
+| remmina                |  x   |   xx    |      |          |           |      | dev    |
 | rpi_imager             |  x   |    x    |      |          |           |      | dev    |
 | ghidra                 |  x   |   xx    |      |          |           |      | pen    |
-| zaproxy                |  x   |   xx    |      |          |           |      | pen    |
+| zaproxy                |  x   |    x    |      |          |           |      | pen    |
 | mqtt_explorer          |  x   |         |      |          |           |      | dev    |
 | UBports                |  x   |         |      |          |           |      | dev    |
 | fbreader               |  x   |         |      |          |           |      | office |
-| pixelfx                |  x   |         |      |          |           |      | design |
 | cryptomator            |      |    x    |      |          |           |      | secure |
-| flatseal               |      |    x    |      |          |           |      | secure |
+| flatseal               |      |   xx    |      |          |           |      | secure |
 | pika_backup            |      |    x    |      |          |           |      | secure |
 | anydesk                |      |    x    |      |          |           |      | office |
 | ausweisapp2            |      |    x    |      |          |           |      | office |
 | easy_effects           |      |    x    |      |          |           |      | office |
-| extension_manager      |      |    x    |      |          |           |      | office |
+| extension_manager      |      |   xx    |      |          |           |      | office |
 | filezilla              |      |    x    |      |          |           |      | office |
-| logseq                 |      |    x    |      |          |     x     |      | office |
+| logseq                 |      |   xx    |      |          |     x     |      | office |
 | missioncenter          |      |    x    |      |          |           |      | office |
 | planify                |      |    x    |      |          |           |      | office |
 | solaar (logi)          |      |    x    |      |          |           |  x   | office |
 | warp                   |      |    x    |      |          |           |      | office |
 | threemaqt              |      |    x    |      |          |           |      | social |
 | conjure                |      |    x    |      |          |           |      | design |
+| loupe                  |      |   xx    |      |          |           |      | design |
 | peek                   |      |    x    |      |          |           |      | design |
+| ultimaker              |      |   xx    |      |          |     x     |      | design |
 | girens                 |      |    x    |      |          |           |      | video  |
-| totem                  |      |    x    |      |          |           |      | video  |
+| mpv                    |      |    x    |      |          |           |  x   | video  |
+| parsec                 |      |    x    |      |          |           |      | video  |
+| totem                  |      |   xx    |      |          |           |      | video  |
 | coppwr                 |      |    x    |      |          |           |      | music  |
 | helvum                 |      |    x    |      |          |           |      | music  |
 | jamesdsp               |      |    x    |      |          |           |      | music  |
+| proton_up              |      |    x    |      |          |           |      | game   |
+| heroic                 |      |    x    |      |          |           |      | game   |
 | lutris                 |      |    x    |      |          |           |      | game   |
 | arduinoide             |      |    x    |      |          |           |      | dev    |
 | betaflightconfigurator |      |    x    |      |          |           |      | dev    |
 | fritzing               |      |    x    |      |          |           |      | dev    |
 | mongodb_compass        |      |    x    |      |          |           |      | dev    |
 | sublimetext            |      |    x    |      |          |           |      | dev    |
+| zed                    |      |    x    |      |          |           |      | dev    |
+| virt_viewer            |      |    x    |      |          |           |  x   | dev    |
 | wireshark              |      |    x    |      |          |           | TODO | pen    |
 
 ## Dependencies
