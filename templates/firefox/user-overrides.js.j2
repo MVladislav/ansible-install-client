@@ -22,8 +22,20 @@ user_pref("browser.urlbar.suggest.recentsearches", false);
 // user_pref("browser.urlbar.suggest.bookmark", false);
 /** Address Bar :: Open tabs ***/
 // user_pref("browser.urlbar.suggest.openpage", false);
+/** Address Bar :: Shortcuts ***/
+user_pref("browser.urlbar.suggest.topsites", false);
+/** Address Bar :: Search engines ***/
+user_pref("browser.urlbar.suggest.engines", false);
 
-/** Save and fill addresses ***/
+/** Website Privacy Preferences :: Tell websites not to sell or share my data ***/
+user_pref("privacy.globalprivacycontrol.enabled", true);
+/** Website Privacy Preferences :: Send websites a "Do Not Track" request ***/
+user_pref("privacy.donottrackheader.enabled", true);
+
+/** Passwords :: Ask to save passwords ***/
+user_pref("signon.rememberSignons", false);
+
+/** Autofill :: Save and fill addresses ***/
 user_pref("extensions.formautofill.addresses.enabled", false);
-/** Save and fill payment methods ***/
+/** Autofill :: Save and fill payment methods ***/
 user_pref("extensions.formautofill.creditCards.enabled", false);
