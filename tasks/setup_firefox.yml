@@ -114,7 +114,7 @@
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
-    src: "firefox/user.js.j2"
+    src: "firefox/user-combined.js.j2"
     dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
     mode: "0640"
   when:
@@ -124,12 +124,12 @@
     - install_client
     - firefox
 
-- name: "CLIENT | firefox setup | copy user-overrides.js for profile {{ install_client_firefox_profile_name }}"
+- name: "CLIENT | firefox setup | copy containers.json for profile {{ install_client_firefox_profile_name }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
-    src: "firefox/user-overrides.js.j2"
-    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user-overrides.js"
+    src: "firefox/containers.json"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/containers.json"
     mode: "0640"
   when:
     - is_firefox_installed.rc is defined

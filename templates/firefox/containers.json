@@ -1,64 +1,65 @@
 {
-  "version": 5,
-  "lastUserContextId": 8,
+  "version": 1,
+  "lastUserContextId": 7,
   "identities": [
-    {
-      "icon": "fingerprint",
-      "color": "blue",
-      "l10nId": "user-context-personal",
-      "public": true,
-      "userContextId": 1
-    },
-    {
-      "icon": "briefcase",
-      "color": "orange",
-      "l10nId": "user-context-work",
-      "public": true,
-      "userContextId": 2
-    },
-    {
-      "icon": "dollar",
-      "color": "green",
-      "l10nId": "user-context-banking",
-      "public": true,
-      "userContextId": 3
-    },
-    {
-      "icon": "cart",
-      "color": "pink",
-      "l10nId": "user-context-shopping",
-      "public": true,
-      "userContextId": 4
-    },
     {
       "public": false,
       "icon": "",
       "color": "",
       "name": "userContextIdInternal.thumbnail",
       "accessKey": "",
-      "userContextId": 5
+      "userContextId": 1
     },
     {
-      "userContextId": 4294967295,
       "public": false,
       "icon": "",
       "color": "",
       "name": "userContextIdInternal.webextStorageLocal",
-      "accessKey": ""
+      "accessKey": "",
+      "userContextId": 4294967295
     },
     {
-      "userContextId": 6,
+      "icon": "fingerprint",
+      "color": "blue",
+      "public": true,
+      "userContextId": 2,
+      "name": "Personal",
+      "l10nId": "user-context-personal"
+    },
+    {
+      "icon": "briefcase",
+      "color": "pink",
+      "public": true,
+      "userContextId": 3,
+      "name": "Work"
+    },
+    {
+      "icon": "dollar",
+      "color": "red",
+      "public": true,
+      "userContextId": 4,
+      "name": "Banking"
+    },
+    {
       "public": true,
       "icon": "circle",
       "color": "orange",
-      "name": "Media"
+      "name": "Media",
+      "userContextId": 5
     },
     {
-      "userContextId": 7,
       "public": true,
       "icon": "circle",
       "color": "purple",
-      "name": "YT-TW"
+      "name": "YT-TW",
+      "userContextId": 6
+    },
+    {
+      "public": true,
+      "icon": "chill",
+      "color": "turquoise",
+      "name": "Dev",
+      "userContextId": 7
     }
   ]
 }
