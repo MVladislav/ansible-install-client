@@ -865,7 +865,7 @@ install_client_snap:
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
   - name: steam
     install: "{{ install_client_config.snap_steam | default('no') | bool }}"
-    beta: true
+    # beta: true
   - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
     classic: true
@@ -909,7 +909,7 @@ install_client_flatpak_remotes:
   - name: flathub-beta
     url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
     method: system
-    install: true
+    install: false
 # install_client_config.flatpak_...
 install_client_flatpak:
   - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
