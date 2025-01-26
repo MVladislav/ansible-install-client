@@ -3,11 +3,12 @@
 
 # ------------------------------------------------------------------------------
 - name: "CLIENT | dist-apt | add apt signing key, will not download if present"
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ item.url }}"
-    keyring: "{{ install_client_distribution_key_keyring_path }}/{{ item.name }}"
-    state: present
-    id: "{{ item.id | default(omit) }}"
+    dest: "{{ install_client_distribution_key_keyring_path }}/{{ item.name }}"
+    mode: "0644"
+    force: true
+    # id: "{{ item.id | default(omit) }}"
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   tags:
     - install_client
