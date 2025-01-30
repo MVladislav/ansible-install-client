@@ -83,6 +83,7 @@ install_client_config:
   snap_chromium: false
   snap_denaro: false
   snap_firefox: false
+  snap_brave: false
   snap_foliate: false
   snap_libreoffice: false
   snap_newsflash: false
@@ -133,6 +134,7 @@ install_client_config:
   flatpak_chromium: false
   flatpak_denaro: false
   flatpak_firefox: false
+  flatpak_brave: false
   flatpak_flameshot: false
   flatpak_foliate: false
   flatpak_libreoffice: false
@@ -806,6 +808,8 @@ install_client_snap:
     install: "{{ install_client_config.snap_denaro | default('no') | bool }}"
   - name: firefox
     install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
+  - name: brave
+    install: "{{ install_client_config.snap_brave | default('no') | bool }}"
   - name: foliate
     install: "{{ install_client_config.snap_foliate | default('no') | bool }}"
   - name: libreoffice
@@ -925,6 +929,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_denaro | default('no') | bool }}"
   - name: org.mozilla.firefox
     install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
+  - name: com.brave.Browser
+    install: "{{ install_client_config.flatpak_brave | default('no') | bool }}"
   - name: org.flameshot.Flameshot
     install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
   - name: com.github.johnfactotum.Foliate

@@ -97,6 +97,7 @@ install_client_config:
   snap_chromium: false
   snap_denaro: false
   snap_firefox: false
+  snap_brave: false
   snap_foliate: false
   snap_libreoffice: false
   snap_newsflash: false
@@ -260,6 +261,7 @@ install_client_config:
 | chromium               |  x   |    x    |      |          |           |      | office |
 | denaro                 |  x   |    x    |      |          |           |      | office |
 | firefox                |  x   |    x    |      |          |           |      | office |
+| brave                  |  x   |    x    |      |          |           |      | office |
 | flameshot              |      |    x    |      |          |           |      | office |
 | foliate                |  x   |    x    |      |          |           |      | office |
 | libreoffice            |  x   |    x    |      |          |           |      | office |
