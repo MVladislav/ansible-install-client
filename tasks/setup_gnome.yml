@@ -74,6 +74,8 @@
     state: present
     force_apt_get: true # apt-get instead of aptitude
   loop: "{{ install_client_gdm_gui_setup.extensions.apt | flatten(levels=1) }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.extensions is defined

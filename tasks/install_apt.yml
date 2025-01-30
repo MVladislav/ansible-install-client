@@ -10,6 +10,8 @@
     force_apt_get: true # apt-get instead of aptitude
     update_cache: true
   loop: "{{ install_client_apt | flatten(levels=1) }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - install_client_apt is defined
     - item.install is defined

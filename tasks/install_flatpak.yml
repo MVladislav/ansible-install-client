@@ -13,7 +13,6 @@
     - install_client_config is defined
     - install_client_config.apt_flatpak is defined
     - install_client_config.apt_flatpak | bool
-    - install_client_flatpak is defined
   tags:
     - install_client
     - flatpak
@@ -41,10 +40,11 @@
     flatpakrepo_url: "{{ item.url }}"
     method: "{{ item.method }}"
   loop: "{{ install_client_flatpak_remotes | flatten(levels=1) }}"
+  loop_control:
+    label: "{{ item.name }}"
   register: is_flatpak_remote_added
   when:
     - install_client_flatpak_remotes is defined
-    - install_client_flatpak is defined
     - item.install is defined
     - item.install | bool
     - is_flatpak_exist.rc is defined
@@ -55,19 +55,44 @@
 
 # ------------------------------------------------------------------------------
 # INSTALL
-- name: "CLIENT | flatpak | install services"
+- name: "CLIENT | flatpak | generate list of packages to install"
+  ansible.builtin.set_fact:
+    install_client_flatpak_packages_to_install: >-
+      {{
+        install_client_flatpak
+        | selectattr('install', 'eq', true)
+        | map(attribute='name')
+        | list
+      }}
+  when:
+    - install_client_flatpak is defined
+    - is_flatpak_exist.rc is defined
+    - is_flatpak_exist.rc == 0
+  tags:
+    - install_client
+    - flatpak
+
+- name: "CLIENT | flatpak | applications to install"
+  ansible.builtin.debug:
+    msg: "{{ install_client_flatpak_packages_to_install }}"
+  when:
+    - install_client_flatpak_packages_to_install is defined
+    - is_flatpak_exist.rc is defined
+    - is_flatpak_exist.rc == 0
+  tags:
+    - install_client
+    - flatpak
+
+- name: "CLIENT | flatpak | install applications"
   become: true
   # become_user: "{{ outer_item.name }}"
   community.general.flatpak:
-    name: "{{ item.name }}"
-    remote: "{{ item.remote | default('flathub') }}"
+    name: "{{ install_client_flatpak_packages_to_install }}"
+    remote: flathub
     state: present
     method: system
-  loop: "{{ install_client_flatpak | flatten(levels=1) }}"
   when:
-    - install_client_flatpak is defined
-    - item.install is defined
-    - item.install | bool
+    - install_client_flatpak_packages_to_install is defined
     - is_flatpak_exist.rc is defined
     - is_flatpak_exist.rc == 0
   tags:
