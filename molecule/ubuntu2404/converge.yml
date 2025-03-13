@@ -1,0 +1,59 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Run role"
+      ansible.builtin.include_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+  vars:
+    # --- in inventory ---
+    clients:
+      - name: "ubuntu"
+        setup: true # if client should be setup with additional tools and gui (default true)
+
+    # --- in playbook ---
+    # ------------------------------------------------------------------------------
+    install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
+    install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
+    install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
+    install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
+    install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
+    install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
+    install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.8/Logseq-linux-x64-0.10.8.AppImage
+    install_client_links_to_check_update_logseq_checksum: 9159d0df7828ceb2fa04e590c547e2332a6221939f7de4f670c54c1c87ec6968 # pragma: allowlist secret
+    install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
+    install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
+
+    install_client_config:
+      # GNOME ---------------------------------
+      gnome_gui_setup: true
+      gnome_gui_setup_extensions: true
+      gnome_gui_setup_extensions_git_blur_shell: true
+      gnome_gui_setup_extensions_git_burn_window: true
+      gnome_gui_setup_extensions_git_dash_to_panel: true
+      gnome_gui_setup_overlay: true
+      # APT -----------------------------------
+      apt_base: true
+      apt_auth_priv: true
+      apt_ubuntu: true
+      apt_archive: true
+      apt_codec: true
+      apt_gnome: true
+      apt_snap: true
+      apt_flatpak: true
+      apt_vpn_resolvconf: true
+      apt_vpn_wireguard: true
+      apt_vpn_openvpn: true
+      apt_vpn_openconnect: true
+      apt_vpn_l2tp: true
+      # DPKG ----------------------------------
+      dpkg_veracrypt_cli: true
+      dpkg_brim: true
+      dpkg_portmaster: true
+      # DIST KEY ------------------------------
+      distribution_key_1password_cli: true
+      # APPIMAGE ------------------------------
+      app_image_logseq: true
+      app_image_ultimaker: true
+      # OTHER --------------------------------
+      # firefox_setup: true
