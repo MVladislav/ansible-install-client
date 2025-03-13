@@ -77,13 +77,13 @@ install_client_config:
   app_image_logseq: false
   app_image_ultimaker: false
   # SNAP ----------------------------------
+  snap_brave: false
+  snap_chromium: false
+  snap_firefox: false
   snap_1password: false
   snap_keepassxc: false
   snap_yubioath: false
-  snap_chromium: false
   snap_denaro: false
-  snap_firefox: false
-  snap_brave: false
   snap_foliate: false
   snap_libreoffice: false
   snap_newsflash: false
@@ -102,6 +102,7 @@ install_client_config:
   snap_gimp: false
   snap_inkscape: false
   snap_krita: false
+  snap_loupe: false
   snap_lunacy: false
   snap_upscayl: false
   snap_amberol: false
@@ -128,13 +129,14 @@ install_client_config:
   snap_UBports: false
   snap_fbreader: false
   # FLATPAK -------------------------------
+  flatpak_brave: false
+  flatpak_chromium: false
+  flatpak_firefox: false
+  flatpak_librewolf: false
   flatpak_1password: false
   flatpak_keepassxc: false
   flatpak_yubioath: false
-  flatpak_chromium: false
   flatpak_denaro: false
-  flatpak_firefox: false
-  flatpak_brave: false
   flatpak_flameshot: false
   flatpak_foliate: false
   flatpak_libreoffice: false
@@ -154,10 +156,12 @@ install_client_config:
   flatpak_gimp: false
   flatpak_inkscape: false
   flatpak_krita: false
+  flatpak_loupe: false
   flatpak_lunacy: false
   flatpak_upscayl: false
   flatpak_amberol: false
   flatpak_haruna: false
+  flatpak_showtime: false
   flatpak_totem: false
   flatpak_obs: false
   flatpak_parabolic: false
@@ -186,12 +190,12 @@ install_client_config:
   flatpak_filezilla: false
   flatpak_logseq: false
   flatpak_missioncenter: false
+  flatpak_papers: false
   flatpak_planify: false
   flatpak_solaar: false
   flatpak_warp: false
   flatpak_threemaqt: false
   flatpak_conjure: false
-  flatpak_loupe: false
   flatpak_peek: false
   flatpak_ultimaker: false
   flatpak_girens: false
@@ -486,19 +490,23 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell
         key: favorite-apps
         value: >-
-          ['firefox_firefox.desktop','chromium_chromium.desktop','1password_1password.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','spotify_spotify.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','code_code.desktop','Logseq.desktop','veracrypt.desktop','org.gnome.Nautilus.desktop']
+          ['firefox_firefox.desktop','io.gitlab.librewolf-community.desktop','brave_brave.desktop','chromium_chromium.desktop','1password_1password.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','spotify_spotify.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','dev.zed.Zed.desktop','code_code.desktop','com.logseq.Logseq.desktop','veracrypt.desktop','org.gnome.Nautilus.desktop']
       - source: org.gnome.shell
         key: app-picker-layout
         value: >-
-          [{'Updater': <{'position': <0>}>,'org.gnome.Terminal.desktop': <{'position': <1>}>,'org.gnome.Settings.desktop': <{'position': <2>}>,'Utilities': <{'position': <3>}>}]
+          [{'Updater': <{'position': <0>}>, 'Utilities': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'desktop-security-center_desktop-security-center.desktop': <{'position': <3>}>, 'org.gnome.Settings.desktop': <{'position': <4>}>}]
       - source: org.gnome.desktop.app-folders
         key: folder-children
         value: >-
           ['Utilities','Updater']
+      # - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
+      #   key: name
+      #   value: >-
+      #     X-GNOME-Shell-Utilities.directory
       - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
         key: apps
         value: >-
-          ['org.gnome.clocks.desktop','org.gnome.Calculator.desktop','org.gnome.seahorse.Application.desktop','org.gnome.baobab.desktop','org.gnome.DiskUtility.desktop','gnome-system-monitor.desktop','nm-connection-editor.desktop','org.gnome.Logs.desktop','gnome-session-properties.desktop','remote-viewer.desktop','org.gnome.Evince.desktop','org.gnome.eog.desktop','org.gnome.TextEditor.desktop','vim.desktop','nvim_nvim.desktop','org.gnome.PowerStats.desktop','htop.desktop','nvtop.desktop','gnome-language-selector.desktop','yelp.desktop','org.gnome.Characters.desktop','org.gnome.font-viewer.desktop','debian-xterm.desktop','debian-uxterm.desktop','vprerex.desktop','display-im6.q16.desktop','prerex.desktop','info.desktop','texdoctk.desktop']
+          ['org.gnome.clocks.desktop','org.gnome.Calculator.desktop','org.gnome.seahorse.Application.desktop','org.gnome.baobab.desktop','org.gnome.DiskUtility.desktop','gnome-system-monitor.desktop','nm-connection-editor.desktop','org.gnome.Logs.desktop','gnome-session-properties.desktop','remote-viewer.desktop','org.gnome.Evince.desktop','org.gnome.eog.desktop','org.gnome.TextEditor.desktop','vim.desktop','nvim_nvim.desktop','org.gnome.PowerStats.desktop','htop.desktop','nvtop.desktop','gnome-language-selector.desktop','yelp.desktop','org.gnome.Characters.desktop','org.gnome.font-viewer.desktop','debian-xterm.desktop','debian-uxterm.desktop','vprerex.desktop','display-im6.q16.desktop','prerex.desktop','info.desktop','texdoctk.desktop','org.gnome.Showtime.desktop','org.gnome.Sysprof.desktop','org.gnome.Papers.desktop','loupe_loupe.desktop','org.gnome.SystemMonitor.desktop']
       - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
         key: name
         value: >-
@@ -507,6 +515,38 @@ install_client_gdm_gui_setup:
         key: apps
         value: >-
           ['snap-store_snap-store.desktop','org.gnome.Software.desktop','com.github.tchx84.Flatseal.desktop','org.gnome.Extensions.desktop','update-manager.desktop','software-properties-gtk.desktop','software-properties-drivers.desktop','firmware-updater_firmware-updater.desktop']
+      - source: org.gnome.desktop.calendar
+        key: show-weekdate
+        value: >-
+          true
+      - source: org.gnome.desktop.break-reminders
+        key: selected-breaks
+        value: >-
+          ['eyesight', 'movement']
+      - source: org.gnome.desktop.privacy
+        key: old-files-age
+        value: >-
+          uint32 7
+      - source: org.gnome.desktop.privacy
+        key: recent-files-max-age
+        value: >-
+          7
+      - source: org.gnome.desktop.privacy
+        key: remove-old-temp-files
+        value: >-
+          true
+      - source: org.gnome.desktop.privacy
+        key: remove-old-trash-files
+        value: >-
+          true
+      - source: org.gnome.desktop.screen-time-limits
+        key: daily-limit-enabled
+        value: >-
+          true
+      - source: org.gnome.desktop.screen-time-limits
+        key: grayscale
+        value: >-
+          false
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
@@ -796,20 +836,20 @@ install_client_app_image:
 # SNAP
 # install_client_config.snap_...
 install_client_snap:
+  - name: brave
+    install: "{{ install_client_config.snap_brave | default('no') | bool }}"
+  - name: chromium
+    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
+  - name: firefox
+    install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
   - name: 1password
     install: "{{ install_client_config.snap_1password | default('no') | bool }}"
   - name: keepassxc
     install: "{{ install_client_config.snap_keepassxc | default('no') | bool }}"
   - name: yubioath-desktop
     install: "{{ install_client_config.snap_yubioath | default('no') | bool }}"
-  - name: chromium
-    install: "{{ install_client_config.snap_chromium | default('no') | bool }}"
   - name: denaro
     install: "{{ install_client_config.snap_denaro | default('no') | bool }}"
-  - name: firefox
-    install: "{{ install_client_config.snap_firefox | default('no') | bool }}"
-  - name: brave
-    install: "{{ install_client_config.snap_brave | default('no') | bool }}"
   - name: foliate
     install: "{{ install_client_config.snap_foliate | default('no') | bool }}"
   - name: libreoffice
@@ -847,6 +887,8 @@ install_client_snap:
     install: "{{ install_client_config.snap_inkscape | default('no') | bool }}"
   - name: krita
     install: "{{ install_client_config.snap_krita | default('no') | bool }}"
+  - name: loupe
+    install: "{{ install_client_config.snap_loupe | default('no') | bool }}"
   - name: lunacy
     install: "{{ install_client_config.snap_lunacy | default('no') | bool }}"
   - name: upscayl
@@ -888,7 +930,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_postman | default('no') | bool }}"
   - name: remmina
     install: "{{ install_client_config.snap_remmina | default('no') | bool }}"
-    classic: true
   - name: rpi-imager
     install: "{{ install_client_config.snap_rpi_imager | default('no') | bool }}"
   - name: ghidra
@@ -916,6 +957,14 @@ install_client_flatpak_remotes:
     install: false
 # install_client_config.flatpak_...
 install_client_flatpak:
+  - name: com.brave.Browser
+    install: "{{ install_client_config.flatpak_brave | default('no') | bool }}"
+  - name: org.chromium.Chromium
+    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
+  - name: org.mozilla.firefox
+    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
+  - name: io.gitlab.librewolf-community
+    install: "{{ install_client_config.flatpak_librewolf | default('no') | bool }}"
   - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
     remote: ""
     install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
@@ -923,14 +972,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
   - name: com.yubico.yubioath
     install: "{{ install_client_config.flatpak_yubioath | default('no') | bool }}"
-  - name: org.chromium.Chromium
-    install: "{{ install_client_config.flatpak_chromium | default('no') | bool }}"
   - name: org.nickvision.money
     install: "{{ install_client_config.flatpak_denaro | default('no') | bool }}"
-  - name: org.mozilla.firefox
-    install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
-  - name: com.brave.Browser
-    install: "{{ install_client_config.flatpak_brave | default('no') | bool }}"
   - name: org.flameshot.Flameshot
     install: "{{ install_client_config.flatpak_flameshot | default('no') | bool }}"
   - name: com.github.johnfactotum.Foliate
@@ -969,6 +1012,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_inkscape | default('no') | bool }}"
   - name: org.kde.krita
     install: "{{ install_client_config.flatpak_krita | default('no') | bool }}"
+  - name: org.gnome.Loupe
+    install: "{{ install_client_config.flatpak_loupe | default('no') | bool }}"
   - name: com.icons8.Lunacy
     install: "{{ install_client_config.flatpak_lunacy | default('no') | bool }}"
   - name: org.upscayl.Upscayl
@@ -977,6 +1022,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
   - name: org.kde.haruna
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
+  - name: org.gnome.Showtime
+    install: "{{ install_client_config.flatpak_showtime | default('no') | bool }}"
   - name: org.gnome.Totem
     install: "{{ install_client_config.flatpak_totem | default('no') | bool }}"
   - name: com.obsproject.Studio
@@ -1036,6 +1083,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_logseq | default('no') | bool }}"
   - name: io.missioncenter.MissionCenter
     install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
+  - name: org.gnome.Papers
+    install: "{{ install_client_config.flatpak_papers | default('no') | bool }}"
   - name: io.github.alainm23.planify
     install: "{{ install_client_config.flatpak_planify | default('no') | bool }}"
   - name: io.github.pwr_solaar.solaar
@@ -1046,8 +1095,6 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
   - name: io.github.nate_xyz.Conjure
     install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
-  - name: org.gnome.Loupe
-    install: "{{ install_client_config.flatpak_loupe | default('no') | bool }}"
   - name: com.uploadedlobster.peek
     install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
   - name: com.ultimaker.cura
