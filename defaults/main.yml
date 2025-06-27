@@ -14,8 +14,8 @@ clients: []
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
 install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
-install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
-install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.20/+download/veracrypt-1.26.20-Ubuntu-24.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.20/+download/veracrypt-console-1.26.20-Ubuntu-24.04-amd64.deb
 # NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
 install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
 # NOTE: link should be latest version
@@ -180,6 +180,7 @@ install_client_config:
   flatpak_rpi_imager: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
+  flatpak_lact: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
   flatpak_pika_backup: false
@@ -307,6 +308,10 @@ install_client_gdm_gui_setup:
     command: dbus-run-session -- gsettings set
     # NOTE: gsettings list-recursively > gsettings-backup-$(date +%Y%m%d%H%M%S).txt
     configs:
+      # - source: org.gnome.mutter
+      #   key: experimental-features
+      #   value: >-
+      #     ['scale-monitor-framebuffer', 'variable-refresh-rate', 'xwayland-native-scaling', 'autoclose-xwayland']
       - source: org.gnome.desktop.calendar
         key: show-weekdate
         value: >-
@@ -1062,6 +1067,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
   - name: org.zaproxy.ZAP
     install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
+  - name: io.github.ilya_zlobintsev.LACT
+    install: "{{ install_client_config.flatpak_lact | default('no') | bool }}"
   - name: org.cryptomator.Cryptomator
     install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
   - name: com.github.tchx84.Flatseal

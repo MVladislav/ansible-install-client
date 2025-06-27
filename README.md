@@ -196,6 +196,7 @@ install_client_config:
   flatpak_rpi_imager: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
+  flatpak_lact: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
   flatpak_pika_backup: false
@@ -315,6 +316,7 @@ install_client_config:
 | mqtt_explorer          |  x   |         |      |          |           |      | dev     |
 | UBports                |  x   |         |      |          |           |      | dev     |
 | fbreader               |  x   |         |      |          |           |      | office  |
+| lact                   |      |    x    |      |          |           |      | system  |
 | cryptomator            |      |    x    |      |          |           |      | secure  |
 | flatseal               |      |   xx    |      |          |           |      | secure  |
 | pika_backup            |      |    x    |      |          |           |      | secure  |
