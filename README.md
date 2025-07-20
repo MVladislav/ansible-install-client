@@ -129,7 +129,6 @@ install_client_config:
   snap_vlc: false
   snap_moosync: false
   snap_spotify: false
-  snap_steam: false
   snap_android_studio: false
   snap_beekeeper_studio: false
   snap_code: false
@@ -185,7 +184,6 @@ install_client_config:
   flatpak_vlc: false
   flatpak_moosync: false
   flatpak_spotify: false
-  flatpak_steam: false
   flatpak_android_studio: false
   flatpak_beekeeper_studio: false
   flatpak_code: false
@@ -196,17 +194,17 @@ install_client_config:
   flatpak_rpi_imager: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
+  flatpak_extension_manager: false
   flatpak_lact: false
+  flatpak_missioncenter: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
   flatpak_pika_backup: false
   flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
-  flatpak_extension_manager: false
   flatpak_filezilla: false
   flatpak_logseq: false
-  flatpak_missioncenter: false
   flatpak_papers: false
   flatpak_planify: false
   flatpak_solaar: false
@@ -221,9 +219,11 @@ install_client_config:
   flatpak_coppwr: false
   flatpak_helvum: false
   flatpak_jamesdsp: false
-  flatpak_proton_up: false
   flatpak_heroic: false
   flatpak_lutris: false
+  flatpak_proton_up: false
+  flatpak_protonplus: false
+  flatpak_steam: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
   flatpak_fritzing: false
@@ -301,7 +301,6 @@ install_client_config:
 | vlc                    |  x   |    x    |      |          |           |      | video   |
 | moosync                |  x   |    x    |      |          |           |      | music   |
 | spotify                |  x   |    x    |      |          |           |      | music   |
-| steam                  |  x   |    x    |      |          |           |      | game    |
 | android_studio         |  x   |    x    |      |          |           |      | dev     |
 | beekeeper_studio       |  x   |    x    |      |          |           |      | dev     |
 | code                   |  x   |    x    |      |          |           |      | dev     |
@@ -316,17 +315,17 @@ install_client_config:
 | mqtt_explorer          |  x   |         |      |          |           |      | dev     |
 | UBports                |  x   |         |      |          |           |      | dev     |
 | fbreader               |  x   |         |      |          |           |      | office  |
+| extension_manager      |      |   xx    |      |          |           |      | system  |
 | lact                   |      |    x    |      |          |           |      | system  |
+| missioncenter          |      |    x    |      |          |           |      | system  |
 | cryptomator            |      |    x    |      |          |           |      | secure  |
 | flatseal               |      |   xx    |      |          |           |      | secure  |
 | pika_backup            |      |    x    |      |          |           |      | secure  |
 | anydesk                |      |    x    |      |          |           |      | office  |
 | ausweisapp2            |      |    x    |      |          |           |      | office  |
 | easy_effects           |      |    x    |      |          |           |      | office  |
-| extension_manager      |      |   xx    |      |          |           |      | office  |
 | filezilla              |      |    x    |      |          |           |      | office  |
 | logseq                 |      |   xx    |      |          |     x     |      | office  |
-| missioncenter          |      |    x    |      |          |           |      | office  |
 | papers                 |      |    x    |      |          |           |      | office  |
 | planify                |      |    x    |      |          |           |      | office  |
 | solaar (logi)          |      |    x    |      |          |           |  x   | office  |
@@ -343,9 +342,11 @@ install_client_config:
 | coppwr                 |      |    x    |      |          |           |      | music   |
 | helvum                 |      |    x    |      |          |           |      | music   |
 | jamesdsp               |      |    x    |      |          |           |      | music   |
-| proton_up              |      |    x    |      |          |           |      | game    |
 | heroic                 |      |    x    |      |          |           |      | game    |
 | lutris                 |      |    x    |      |          |           |      | game    |
+| proton_up              |      |    x    |      |          |           |      | game    |
+| protonplus             |      |    x    |      |          |           |      | game    |
+| steam                  |      |    x    |      |          |           |      | game    |
 | arduinoide             |      |    x    |      |          |           |      | dev     |
 | betaflightconfigurator |      |    x    |      |          |           |      | dev     |
 | fritzing               |      |    x    |      |          |           |      | dev     |

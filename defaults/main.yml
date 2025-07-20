@@ -113,7 +113,6 @@ install_client_config:
   snap_vlc: false
   snap_moosync: false
   snap_spotify: false
-  snap_steam: false
   snap_android_studio: false
   snap_beekeeper_studio: false
   snap_code: false
@@ -169,7 +168,6 @@ install_client_config:
   flatpak_vlc: false
   flatpak_moosync: false
   flatpak_spotify: false
-  flatpak_steam: false
   flatpak_android_studio: false
   flatpak_beekeeper_studio: false
   flatpak_code: false
@@ -180,17 +178,17 @@ install_client_config:
   flatpak_rpi_imager: false
   flatpak_ghidra: false
   flatpak_zaproxy: false
+  flatpak_extension_manager: false
   flatpak_lact: false
+  flatpak_missioncenter: false
   flatpak_cryptomator: false
   flatpak_flatseal: false
   flatpak_pika_backup: false
   flatpak_anydesk: false
   flatpak_ausweisapp2: false
   flatpak_easy_effects: false
-  flatpak_extension_manager: false
   flatpak_filezilla: false
   flatpak_logseq: false
-  flatpak_missioncenter: false
   flatpak_papers: false
   flatpak_planify: false
   flatpak_solaar: false
@@ -205,9 +203,11 @@ install_client_config:
   flatpak_coppwr: false
   flatpak_helvum: false
   flatpak_jamesdsp: false
-  flatpak_proton_up: false
   flatpak_heroic: false
   flatpak_lutris: false
+  flatpak_proton_up: false
+  flatpak_protonplus: false
+  flatpak_steam: false
   flatpak_arduinoide: false
   flatpak_betaflightconfigurator: false
   flatpak_fritzing: false
@@ -914,9 +914,6 @@ install_client_snap:
     install: "{{ install_client_config.snap_moosync | default('no') | bool }}"
   - name: spotify
     install: "{{ install_client_config.snap_spotify | default('no') | bool }}"
-  - name: steam
-    install: "{{ install_client_config.snap_steam | default('no') | bool }}"
-    # beta: true
   - name: android-studio
     install: "{{ install_client_config.snap_android_studio | default('no') | bool }}"
     classic: true
@@ -962,6 +959,7 @@ install_client_flatpak_remotes:
     install: false
 # install_client_config.flatpak_...
 install_client_flatpak:
+  # browser
   - name: com.brave.Browser
     install: "{{ install_client_config.flatpak_brave | default('no') | bool }}"
   - name: org.chromium.Chromium
@@ -970,6 +968,14 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_firefox | default('no') | bool }}"
   - name: io.gitlab.librewolf-community
     install: "{{ install_client_config.flatpak_librewolf | default('no') | bool }}"
+  # system
+  - name: com.mattjakeman.ExtensionManager
+    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
+  - name: io.github.ilya_zlobintsev.LACT
+    install: "{{ install_client_config.flatpak_lact | default('no') | bool }}"
+  - name: io.missioncenter.MissionCenter
+    install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
+  # secure
   - name: https://downloads.1password.com/linux/flatpak/1Password.flatpakref
     remote: ""
     install: "{{ install_client_config.flatpak_1password | default('no') | bool }}"
@@ -977,6 +983,13 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_keepassxc | default('no') | bool }}"
   - name: com.yubico.yubioath
     install: "{{ install_client_config.flatpak_yubioath | default('no') | bool }}"
+  - name: org.cryptomator.Cryptomator
+    install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
+  - name: com.github.tchx84.Flatseal
+    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
+  - name: org.gnome.World.PikaBackup
+    install: "{{ install_client_config.flatpak_pika_backup | default('no') | bool }}"
+  # office
   - name: org.nickvision.money
     install: "{{ install_client_config.flatpak_denaro | default('no') | bool }}"
   - name: org.flameshot.Flameshot
@@ -997,6 +1010,26 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_xournalpp | default('no') | bool }}"
   - name: us.zoom.Zoom
     install: "{{ install_client_config.flatpak_zoom | default('no') | bool }}"
+  - name: com.anydesk.Anydesk
+    install: "{{ install_client_config.flatpak_anydesk | default('no') | bool }}"
+  - name: de.bund.ausweisapp.ausweisapp2
+    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
+  - name: com.github.wwmm.easyeffects
+    # https://github.com/JackHack96/EasyEffects-Presets
+    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
+  - name: org.filezillaproject.Filezilla
+    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
+  - name: com.logseq.Logseq
+    install: "{{ install_client_config.flatpak_logseq | default('no') | bool }}"
+  - name: org.gnome.Papers
+    install: "{{ install_client_config.flatpak_papers | default('no') | bool }}"
+  - name: io.github.alainm23.planify
+    install: "{{ install_client_config.flatpak_planify | default('no') | bool }}"
+  - name: io.github.pwr_solaar.solaar
+    install: "{{ install_client_config.flatpak_solaar | default('no') | bool }}"
+  - name: app.drey.Warp
+    install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
+  # social
   - name: com.discordapp.Discord
     install: "{{ install_client_config.flatpak_discord | default('no') | bool }}"
   - name: org.jdownloader.JDownloader
@@ -1005,6 +1038,9 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_signal | default('no') | bool }}"
   - name: org.telegram.desktop
     install: "{{ install_client_config.flatpak_telegram | default('no') | bool }}"
+  - name: io.bit3.ThreemaQT
+    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
+  # design
   - name: org.blender.Blender
     install: "{{ install_client_config.flatpak_blender | default('no') | bool }}"
   - name: org.darktable.Darktable
@@ -1023,14 +1059,17 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_lunacy | default('no') | bool }}"
   - name: org.upscayl.Upscayl
     install: "{{ install_client_config.flatpak_upscayl | default('no') | bool }}"
+  - name: io.github.nate_xyz.Conjure
+    install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
+  - name: com.uploadedlobster.peek
+    install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
+  - name: com.ultimaker.cura
+    install: "{{ install_client_config.flatpak_ultimaker | default('no') | bool }}"
+  # video
   - name: io.bassi.Amberol
     install: "{{ install_client_config.flatpak_amberol | default('no') | bool }}"
   - name: org.kde.haruna
     install: "{{ install_client_config.flatpak_haruna | default('no') | bool }}"
-  - name: org.gnome.Showtime
-    install: "{{ install_client_config.flatpak_showtime | default('no') | bool }}"
-  - name: org.gnome.Totem
-    install: "{{ install_client_config.flatpak_totem | default('no') | bool }}"
   - name: com.obsproject.Studio
     install: "{{ install_client_config.flatpak_obs | default('no') | bool }}"
   - name: org.nickvision.tubeconverter
@@ -1039,87 +1078,28 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
   - name: org.videolan.VLC
     install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
-  - name: app.moosync.moosync
-    install: "{{ install_client_config.flatpak_moosync | default('no') | bool }}"
-  - name: com.spotify.Client
-    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
-  - name: com.valvesoftware.Steam
-    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
-  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
-    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
-  - name: com.google.AndroidStudio
-    install: "{{ install_client_config.flatpak_android_studio | default('no') | bool }}"
-  - name: io.beekeeperstudio.Studio
-    install: "{{ install_client_config.flatpak_beekeeper_studio | default('no') | bool }}"
-  - name: com.visualstudio.code
-    install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
-  - name: io.dbeaver.DBeaverCommunity
-    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
-  - name: rest.insomnia.Insomnia
-    install: "{{ install_client_config.flatpak_insomnia | default('no') | bool }}"
-  - name: com.getpostman.Postman
-    install: "{{ install_client_config.flatpak_postman | default('no') | bool }}"
-  - name: org.remmina.Remmina
-    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
-  - name: org.raspberrypi.rpi-imager
-    install: "{{ install_client_config.flatpak_rpi_imager | default('no') | bool }}"
-  - name: org.ghidra_sre.Ghidra
-    install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
-  - name: org.zaproxy.ZAP
-    install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
-  - name: io.github.ilya_zlobintsev.LACT
-    install: "{{ install_client_config.flatpak_lact | default('no') | bool }}"
-  - name: org.cryptomator.Cryptomator
-    install: "{{ install_client_config.flatpak_cryptomator | default('no') | bool }}"
-  - name: com.github.tchx84.Flatseal
-    install: "{{ install_client_config.flatpak_flatseal | default('no') | bool }}"
-  - name: org.gnome.World.PikaBackup
-    install: "{{ install_client_config.flatpak_pika_backup | default('no') | bool }}"
-  - name: com.anydesk.Anydesk
-    install: "{{ install_client_config.flatpak_anydesk | default('no') | bool }}"
-  - name: de.bund.ausweisapp.ausweisapp2
-    install: "{{ install_client_config.flatpak_ausweisapp2 | default('no') | bool }}"
-  - name: com.github.wwmm.easyeffects
-    # https://github.com/JackHack96/EasyEffects-Presets
-    install: "{{ install_client_config.flatpak_easy_effects | default('no') | bool }}"
-  - name: com.mattjakeman.ExtensionManager
-    install: "{{ install_client_config.flatpak_extension_manager | default('no') | bool }}"
-  - name: org.filezillaproject.Filezilla
-    install: "{{ install_client_config.flatpak_filezilla | default('no') | bool }}"
-  - name: com.logseq.Logseq
-    install: "{{ install_client_config.flatpak_logseq | default('no') | bool }}"
-  - name: io.missioncenter.MissionCenter
-    install: "{{ install_client_config.flatpak_missioncenter | default('no') | bool }}"
-  - name: org.gnome.Papers
-    install: "{{ install_client_config.flatpak_papers | default('no') | bool }}"
-  - name: io.github.alainm23.planify
-    install: "{{ install_client_config.flatpak_planify | default('no') | bool }}"
-  - name: io.github.pwr_solaar.solaar
-    install: "{{ install_client_config.flatpak_solaar | default('no') | bool }}"
-  - name: app.drey.Warp
-    install: "{{ install_client_config.flatpak_warp | default('no') | bool }}"
-  - name: io.bit3.ThreemaQT
-    install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
-  - name: io.github.nate_xyz.Conjure
-    install: "{{ install_client_config.flatpak_conjure | default('no') | bool }}"
-  - name: com.uploadedlobster.peek
-    install: "{{ install_client_config.flatpak_peek | default('no') | bool }}"
-  - name: com.ultimaker.cura
-    install: "{{ install_client_config.flatpak_ultimaker | default('no') | bool }}"
   - name: nl.g4d.Girens
     install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
   - name: io.mpv.Mpv
     install: "{{ install_client_config.flatpak_mpv | default('no') | bool }}"
   - name: com.parsecgaming.parsec
     install: "{{ install_client_config.flatpak_parsec | default('no') | bool }}"
+  - name: org.gnome.Showtime
+    install: "{{ install_client_config.flatpak_showtime | default('no') | bool }}"
+  - name: org.gnome.Totem
+    install: "{{ install_client_config.flatpak_totem | default('no') | bool }}"
+  # music
+  - name: app.moosync.moosync
+    install: "{{ install_client_config.flatpak_moosync | default('no') | bool }}"
+  - name: com.spotify.Client
+    install: "{{ install_client_config.flatpak_spotify | default('no') | bool }}"
   - name: io.github.dimtpap.coppwr
     install: "{{ install_client_config.flatpak_coppwr | default('no') | bool }}"
   - name: org.pipewire.Helvum
     install: "{{ install_client_config.flatpak_helvum | default('no') | bool }}"
   - name: me.timschneeberger.jdsp4linux
     install: "{{ install_client_config.flatpak_jamesdsp | default('no') | bool }}"
-  - name: net.davidotek.pupgui2
-    install: "{{ install_client_config.flatpak_proton_up | default('no') | bool }}"
+  # game
   - name: com.heroicgameslauncher.hgl
     install: "{{ install_client_config.flatpak_heroic | default('no') | bool }}"
   - name: net.lutris.Lutris
@@ -1130,14 +1110,43 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
   - name: org.freedesktop.Platform.GL.default
     install: "{{ install_client_config.flatpak_lutris | default('no') | bool }}"
+  - name: net.davidotek.pupgui2
+    install: "{{ install_client_config.flatpak_proton_up | default('no') | bool }}"
+  - name: com.vysp3r.ProtonPlus
+    install: "{{ install_client_config.flatpak_protonplus | default('no') | bool }}"
+  - name: com.valvesoftware.Steam
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: org.freedesktop.Platform.GL.default
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  - name: org.freedesktop.Platform.VulkanLayer.MangoHud
+    install: "{{ install_client_config.flatpak_steam | default('no') | bool }}"
+  # dev
+  - name: com.google.AndroidStudio
+    install: "{{ install_client_config.flatpak_android_studio | default('no') | bool }}"
+  - name: io.beekeeperstudio.Studio
+    install: "{{ install_client_config.flatpak_beekeeper_studio | default('no') | bool }}"
+  - name: com.visualstudio.code
+    install: "{{ install_client_config.flatpak_code | default('no') | bool }}"
+  - name: io.dbeaver.DBeaverCommunity
+    install: "{{ install_client_config.flatpak_dbeavercommunity | default('no') | bool }}"
+  - name: org.gnome.Boxes
+    install: "{{ install_client_config.flatpak_gnome_boxes | default('no') | bool }}"
+  - name: rest.insomnia.Insomnia
+    install: "{{ install_client_config.flatpak_insomnia | default('no') | bool }}"
+  - name: com.getpostman.Postman
+    install: "{{ install_client_config.flatpak_postman | default('no') | bool }}"
+  - name: org.remmina.Remmina
+    install: "{{ install_client_config.flatpak_remmina | default('no') | bool }}"
+  - name: org.raspberrypi.rpi-imager
+    install: "{{ install_client_config.flatpak_rpi_imager | default('no') | bool }}"
   - name: cc.arduino.arduinoide
     install: "{{ install_client_config.flatpak_arduinoide | default('no') | bool }}"
   - name: io.github.betaflight.BetaflightConfigurator
     install: "{{ install_client_config.flatpak_betaflightconfigurator | default('no') | bool }}"
   - name: org.fritzing.Fritzing
     install: "{{ install_client_config.flatpak_fritzing | default('no') | bool }}"
-  - name: org.gnome.Boxes
-    install: "{{ install_client_config.flatpak_gnome_boxes | default('no') | bool }}"
   - name: com.mongodb.Compass
     install: "{{ install_client_config.flatpak_mongodb_compass | default('no') | bool }}"
   - name: com.sublimetext.three
@@ -1146,6 +1155,11 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_zed | default('no') | bool }}"
   - name: org.virt_manager.virt-viewer
     install: "{{ install_client_config.flatpak_virt_viewer | default('no') | bool }}"
+  # pen
+  - name: org.ghidra_sre.Ghidra
+    install: "{{ install_client_config.flatpak_ghidra | default('no') | bool }}"
+  - name: org.zaproxy.ZAP
+    install: "{{ install_client_config.flatpak_zaproxy | default('no') | bool }}"
   - name: org.wireshark.Wireshark
     install: "{{ install_client_config.flatpak_wireshark | default('no') | bool }}"
 
