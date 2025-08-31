@@ -1,3 +1,14 @@
+/** Cookie Policy :: Automatically remove cookies after N days (but keep exceptions)
+ *  0 = Accept normally
+ *  1 = Prompt for each cookie (obsolete)
+ *  2 = Accept for session only
+ *  3 = Accept for N days (see network.cookie.lifetime.days)
+ *  NOTE: Sites in the Exceptions list (Allow) are NOT affected.
+ ***/
+user_pref("network.cookie.lifetimePolicy", 3);
+/** Cookie Policy :: Expire cookies after 1 day (unless exception is set) ***/
+user_pref("network.cookie.lifetime.days", 1);
+
 /** Colors :: Manage Colors... :: Use system colors ***/
 user_pref("browser.display.use_system_colors", true);
 
