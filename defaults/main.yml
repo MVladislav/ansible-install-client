@@ -193,6 +193,7 @@ install_client_config:
   flatpak_planify: false
   flatpak_solaar: false
   flatpak_warp: false
+  flatpak_session: false
   flatpak_threemaqt: false
   flatpak_conjure: false
   flatpak_peek: false
@@ -1038,6 +1039,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_signal | default('no') | bool }}"
   - name: org.telegram.desktop
     install: "{{ install_client_config.flatpak_telegram | default('no') | bool }}"
+  - name: network.loki.Session
+    install: "{{ install_client_config.flatpak_session | default('no') | bool }}"
   - name: io.bit3.ThreemaQT
     install: "{{ install_client_config.flatpak_threemaqt | default('no') | bool }}"
   # design

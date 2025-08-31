@@ -209,6 +209,7 @@ install_client_config:
   flatpak_planify: false
   flatpak_solaar: false
   flatpak_warp: false
+  flatpak_session: false
   flatpak_threemaqt: false
   flatpak_conjure: false
   flatpak_peek: false
@@ -330,6 +331,7 @@ install_client_config:
 | planify                |      |    x    |      |          |           |      | office  |
 | solaar (logi)          |      |    x    |      |          |           |  x   | office  |
 | warp                   |      |    x    |      |          |           |      | office  |
+| session                |      |    x    |      |          |           |      | social  |
 | threemaqt              |      |    x    |      |          |           |      | social  |
 | conjure                |      |    x    |      |          |           |      | design  |
 | peek                   |      |    x    |      |          |           |      | design  |
