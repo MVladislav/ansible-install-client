@@ -23,7 +23,7 @@ repos:
           - json
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # Safety
       - id: detect-private-key
@@ -80,7 +80,7 @@ repos:
 
   # ANSIBLE --------------------------------------------------------------------
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v25.6.1
+    rev: v25.8.2
     hooks:
       - id: ansible-lint
         name: Ansible-lint
