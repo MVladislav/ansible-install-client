@@ -76,6 +76,7 @@ install_client_config:
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
+  apt_connections: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
   apt_mpv: false
@@ -232,6 +233,7 @@ install_client_config:
   flatpak_mongodb_compass: false
   flatpak_sublimetext: false
   flatpak_zed: false
+  flatpak_connections: false
   flatpak_virt_viewer: false
   flatpak_wireshark: false
   # OTHER --------------------------------
@@ -355,6 +357,7 @@ install_client_config:
 | mongodb_compass        |      |    x    |      |          |           |      | dev     |
 | sublimetext            |      |    x    |      |          |           |      | dev     |
 | zed                    |      |    x    |      |          |           |      | dev     |
+| connections            |      |    x    |      |          |           |  x   | dev     |
 | virt_viewer            |      |    x    |      |          |           |  x   | dev     |
 | wireshark              |      |    x    |      |          |           | TODO | pen     |
 

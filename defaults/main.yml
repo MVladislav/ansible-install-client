@@ -60,6 +60,7 @@ install_client_config:
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
   apt_texmaker: false
+  apt_connections: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
   apt_mpv: false
@@ -216,6 +217,7 @@ install_client_config:
   flatpak_mongodb_compass: false
   flatpak_sublimetext: false
   flatpak_zed: false
+  flatpak_connections: false
   flatpak_virt_viewer: false
   flatpak_wireshark: false
   # OTHER --------------------------------
@@ -757,6 +759,8 @@ install_client_apt:
   - name: texmaker
     install: "{{ install_client_config.apt_texmaker | default('no') | bool }}"
   # --------------------------------
+  - name: gnome-connections
+    install: "{{ install_client_config.apt_connections | default('no') | bool }}"
   - name: virt-viewer
     install: "{{ install_client_config.apt_virt_viewer | default('no') | bool }}"
   # --------------------------------
@@ -1156,6 +1160,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_sublimetext | default('no') | bool }}"
   - name: dev.zed.Zed
     install: "{{ install_client_config.flatpak_zed | default('no') | bool }}"
+  - name: org.gnome.Connections
+    install: "{{ install_client_config.flatpak_connections | default('no') | bool }}"
   - name: org.virt_manager.virt-viewer
     install: "{{ install_client_config.flatpak_virt_viewer | default('no') | bool }}"
   # pen
