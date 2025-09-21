@@ -12,22 +12,22 @@ clients: []
 # application download from source, which needs to be updated manually
 # also check section under "install_client_gdm_gui_setup" for manual update
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
-install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
+install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.2.2/virtualbox-7.2_7.2.2-170484~Ubuntu~noble_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
-install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.20/+download/veracrypt-1.26.20-Ubuntu-24.04-amd64.deb
-install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.20/+download/veracrypt-console-1.26.20-Ubuntu-24.04-amd64.deb
-# NOTE: curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4
-install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-25.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-25.04-amd64.deb
+# NOTE: `curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4`
+install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.18.0/zui_1.18.0_amd64.deb
 # NOTE: link should be latest version
 install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
 # NOTE: `curl -s https://api.github.com/repos/logseq/logseq/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url'`
-install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.8/Logseq-linux-x64-0.10.8.AppImage
+install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.14/Logseq-linux-x64-0.10.14.AppImage
 # NOTE: `curl -s https://api.github.com/repos/logseq/logseq/releases/latest | jq '.assets[] | select(.name | contains("SHA256SUMS")) | .browser_download_url' | xargs -I {} curl -sL {} | grep AppImage | cut -d' ' -f1`
-install_client_links_to_check_update_logseq_checksum: 9159d0df7828ceb2fa04e590c547e2332a6221939f7de4f670c54c1c87ec6968 # pragma: allowlist secret
+install_client_links_to_check_update_logseq_checksum: 0f973851f52718648d9c8b4e4054a450d259c1465c0932e18d36e11bf2b9f8d8 # pragma: allowlist secret
 # NOTE: `curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url'`
-install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
-# NOTE: `curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url' | xargs -I {} curl -L {} | sha256sum`
-install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
+install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.10.2/UltiMaker-Cura-5.10.2-linux-X64.AppImage
+# NOTE: `curl -s https://api.github.com/repos/Ultimaker/Cura/releases/latest | jq '.assets[] | select(.name | endswith("AppImage")) | .browser_download_url' | xargs -I {} curl -sL {} | sha256sum`
+install_client_links_tp_check_update_ultimaker_checksum: f77d23ae335d504d2fc6e32c95035b91d9b678b005052b151719538b9e9af178 # pragma: allowlist secret
 
 # ------------------------------------------------------------------------------
 # WHAT TO INSTALL

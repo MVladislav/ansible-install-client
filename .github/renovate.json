@@ -8,5 +8,11 @@
     "enabled": true
   },
   "extends": ["config:recommended"],
-  "rebaseWhen": "behind-base-branch"
+  "rebaseWhen": "behind-base-branch",
+  "packageRules": [
+    {
+      "matchManagers": ["ansible-galaxy"],
+      "enabled": true
+    }
+  ]
 }
