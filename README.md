@@ -73,7 +73,9 @@ install_client_config:
   apt_vpn_openconnect: false
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
+  apt_papers: false
   apt_texmaker: false
+  apt_loupe: false
   apt_connections: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
@@ -291,7 +293,7 @@ install_client_config:
 | gimp                   |  x   |    x    |      |          |           |      | design  |
 | inkscape               |  x   |    x    |      |          |           |      | design  |
 | krita                  |  x   |    x    |      |          |           |      | design  |
-| loupe                  |  xx  |    x    |      |          |           |      | design  |
+| loupe                  |  x   |    x    |      |          |           |  xx  | design  |
 | lunacy                 |  x   |    x    |      |          |           |      | design  |
 | upscayl                |  x   |   xx    |      |          |           |      | design  |
 | amberol                |  x   |    x    |      |          |           |      | video   |
@@ -327,7 +329,7 @@ install_client_config:
 | easy_effects           |      |    x    |      |          |           |      | office  |
 | filezilla              |      |    x    |      |          |           |      | office  |
 | logseq                 |      |   xx    |      |          |     x     |      | office  |
-| papers                 |      |    x    |      |          |           |      | office  |
+| papers                 |      |    x    |      |          |           |  xx  | office  |
 | planify                |      |    x    |      |          |           |      | office  |
 | solaar (logi)          |      |    x    |      |          |           |  x   | office  |
 | warp                   |      |    x    |      |          |           |      | office  |

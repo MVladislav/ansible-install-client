@@ -57,7 +57,9 @@ install_client_config:
   apt_vpn_openconnect: false
   apt_vpn_l2tp: false
   apt_gnome_boxes: false
+  apt_papers: false
   apt_texmaker: false
+  apt_loupe: false
   apt_connections: false
   apt_virt_viewer: false
   apt_logitech_unifying_solaar: false
@@ -739,8 +741,12 @@ install_client_apt:
     # ln -s [where you moved it] ~/.local/share/gnome-boxes/images/
     install: "{{ install_client_config.apt_gnome_boxes | default('no') | bool }}"
   # --------------------------------
+  - name: papers
+    install: "{{ install_client_config.apt_papers | default('no') | bool }}"
   - name: texmaker
     install: "{{ install_client_config.apt_texmaker | default('no') | bool }}"
+  - name: loupe
+    install: "{{ install_client_config.apt_loupe | default('no') | bool }}"
   # --------------------------------
   - name: gnome-connections
     install: "{{ install_client_config.apt_connections | default('no') | bool }}"
