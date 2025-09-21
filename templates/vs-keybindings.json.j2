@@ -5,6 +5,14 @@
     "command": "workbench.action.terminal.newInActiveWorkspace"
   },
   {
+    "key": "ctrl+m ctrl+[Backslash]",
+    "command": "editor.action.insertSnippet",
+    "args": {
+      "snippet": "```sh\n$0\n```"
+    },
+    "when": "editorTextFocus && editorLangId == markdown"
+  },
+  {
     "key": "ctrl+[Backslash]",
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
@@ -32,63 +40,73 @@
     "command": "-workbench.action.files.openFolder"
   },
   {
-    "key": "ctrl+k ctrl+0",
-    "command": "-editor.foldAll",
+    "key": "ctrl+k ctrl+l",
+    "command": "editor.toggleFold",
     "when": "editorTextFocus && foldingEnabled"
   },
+  // {
+  //   "key": "ctrl+k ctrl+j",
+  //   "command": "editor.unfoldAll",
+  //   "when": "editorTextFocus && foldingEnabled"
+  // },
+  // {
+  //   "key": "ctrl+k ctrl+0",
+  //   "command": "-editor.foldAll",
+  //   "when": "editorTextFocus && foldingEnabled"
+  // },
   {
     "key": "ctrl+k ctrl+shift+7",
-    "command": "-editor.foldAllBlockComments",
+    "command": "editor.foldAllBlockComments",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+8",
-    "command": "-editor.foldAllMarkerRegions",
+    "command": "editor.foldAllMarkerRegions",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
-    "key": "ctrl+k ctrl+8",
-    "command": "-editor.foldAllMarkerRegions",
+    "key": "ctrl+k ctrl+9",
+    "command": "editor.unfoldAllMarkerRegions",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+k ctrl+0",
+    "command": "editor.unfoldAll",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+1",
-    "command": "-editor.foldLevel1",
-    "when": "editorTextFocus && foldingEnabled"
-  },
-  {
-    "key": "ctrl+k ctrl+1",
-    "command": "-editor.foldLevel1",
+    "command": "editor.foldLevel1",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+2",
-    "command": "-editor.foldLevel2",
+    "command": "editor.foldLevel2",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+3",
-    "command": "-editor.foldLevel3",
+    "command": "editor.foldLevel3",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+4",
-    "command": "-editor.foldLevel4",
+    "command": "editor.foldLevel4",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+5",
-    "command": "-editor.foldLevel5",
+    "command": "editor.foldLevel5",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+6",
-    "command": "-editor.foldLevel6",
+    "command": "editor.foldLevel6",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+7",
-    "command": "-editor.foldLevel7",
+    "command": "editor.foldLevel7",
     "when": "editorTextFocus && foldingEnabled"
   },
   {
@@ -229,16 +247,6 @@
     "command": "-workbench.action.closeUnmodifiedEditors"
   },
   {
-    "key": "ctrl+k ctrl+j",
-    "command": "-editor.unfoldAll",
-    "when": "editorTextFocus && foldingEnabled"
-  },
-  {
-    "key": "ctrl+k ctrl+9",
-    "command": "-editor.unfoldAllMarkerRegions",
-    "when": "editorTextFocus && foldingEnabled"
-  },
-  {
     "key": "ctrl+k ctrl+shift+w",
     "command": "-workbench.action.closeAllGroups"
   },
@@ -254,11 +262,6 @@
     "key": "ctrl+k ctrl+x",
     "command": "-editor.action.trimTrailingWhitespace",
     "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+k ctrl+l",
-    "command": "-editor.toggleFold",
-    "when": "editorTextFocus && foldingEnabled"
   },
   {
     "key": "ctrl+k ctrl+i",
@@ -285,36 +288,8 @@
     "when": "editorTextFocus && !editorReadonly && editorLangId == 'jsonc'"
   },
   {
-    "key": "ctrl+k ctrl+1",
-    "command": "editor.foldLevel1"
-  },
-  {
-    "key": "ctrl+k ctrl+2",
-    "command": "editor.foldLevel2"
-  },
-  {
-    "key": "ctrl+k ctrl+3",
-    "command": "editor.foldLevel3"
-  },
-  {
     "key": "ctrl+shift+[Comma]",
     "command": "workbench.action.openWorkspaceSettingsFile"
-  },
-  {
-    "key": "ctrl+k ctrl+4",
-    "command": "editor.foldLevel4"
-  },
-  {
-    "key": "ctrl+k ctrl+5",
-    "command": "editor.foldLevel5"
-  },
-  {
-    "key": "ctrl+k ctrl+6",
-    "command": "editor.foldLevel6"
-  },
-  {
-    "key": "ctrl+k ctrl+7",
-    "command": "editor.foldLevel7"
   },
   {
     "key": "ctrl+shift+[Period]",
@@ -358,5 +333,13 @@
     "key": "ctrl+shift+alt+up",
     "command": "-editor.action.copyLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+alt+[Comma]",
+    "command": "workbench.action.openGlobalKeybindingsFile"
+  },
+  {
+    "key": "ctrl+shift+alt+d",
+    "command": "workbench.action.editor.changeLanguageMode"
   }
 ]

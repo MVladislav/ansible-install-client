@@ -2,24 +2,6 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-# - name: "CLIENT | gnome gui | install dependencies - 01"
-#   become: true
-#   ansible.builtin.apt:
-#     pkg: "{{ item }}"
-#     state: present
-#     force_apt_get: true # apt-get instead of aptitude
-#   loop: "{{ install_client_gdm_gui_setup.dependency | flatten(levels=1) }}"
-#   when:
-#     - install_client_config is defined
-#     - install_client_config.gnome_gui_setup_dependencies is defined
-#     - install_client_config.gnome_gui_setup_dependencies | bool
-#     - install_client_gdm_gui_setup is defined
-#     - install_client_gdm_gui_setup.dependency is defined
-#   tags:
-#     - install_client
-#     - ubuntu
-#     - gnome
-
 - name: "CLIENT | gnome gui | install dependencies - gsettings"
   become: true
   ansible.builtin.apt:
@@ -196,6 +178,7 @@
     - install_client
     - ubuntu
     - gnome
+
 # SETUP TERMINAL OVERLAY
 - name: "CLIENT | gnome terminal | get default profile"
   become: true

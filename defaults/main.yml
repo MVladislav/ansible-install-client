@@ -36,8 +36,6 @@ install_client_config:
   gnome_gui_setup: false # NOTE: activates gui setup below. depends on clients[...].setup
   # gnome_gui_setup_dependencies: false
   gnome_gui_setup_extensions: false
-  gnome_gui_setup_extensions_apt_ubuntu_tiling: false
-  gnome_gui_setup_extensions_git_caffeine: false
   gnome_gui_setup_extensions_git_blur_shell: false
   gnome_gui_setup_extensions_git_burn_window: false
   gnome_gui_setup_extensions_git_dash_to_panel: false
@@ -228,13 +226,6 @@ install_client_config:
 # GNOME DOCK
 # install_client_config.gnome_gui_setup
 install_client_gdm_gui_setup:
-  # dependency:
-  #   - libsass1
-  #   - sassc
-  #   - gettext
-  #   - lm-sensors
-  #   - libcanberra-gtk-module
-  #   - libcanberra-gtk3-module
   dependency_overlay_terminal_style:
     # for gsettings in terminal run
     - dbus-x11
@@ -251,14 +242,10 @@ install_client_gdm_gui_setup:
     install: "{{ install_client_config.gnome_gui_setup_extensions | default('no') | bool }}"
     command: dbus-run-session -- gnome-extensions enable
     apt:
-      - name: gnome-shell-extension-ubuntu-tiling-assistant
-        install: "{{ install_client_config.gnome_gui_setup_extensions_apt_ubuntu_tiling | default('no') | bool }}"
+      []
+      # - name: TEMPLATE
+      #   install: "{{ install_client_config.TEMPLATE | default('no') | bool }}"
     git:
-      - repo: https://github.com/eonpatapon/gnome-shell-extension-caffeine.git
-        branch: master
-        name: gnome-shell-extension-caffeine
-        target: all
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
       - repo: https://github.com/aunetx/blur-my-shell.git
         branch: master
         name: blur-my-shell
@@ -275,16 +262,12 @@ install_client_gdm_gui_setup:
         target: install
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
     activate:
-      - name: caffeine@patapon.info
-        install: "{{ install_client_config.gnome_gui_setup_extensions_git_caffeine | default('no') | bool }}"
       - name: blur-my-shell@aunetx
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_blur_shell | default('no') | bool }}"
       # - name: burn-my-windows@schneegans.github.com
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_burn_window | default('no') | bool }}"
       # - name: dash-to-panel@jderose9.github.com
       #   install: "{{ install_client_config.gnome_gui_setup_extensions_git_dash_to_panel | default('no') | bool }}"
-      - name: tiling-assistant@ubuntu.com
-        install: "{{ install_client_config.gnome_gui_setup_extensions_apt_ubuntu_tiling | default('no') | bool }}"
   keybindings:
     install: "{{ install_client_config.gnome_gui_setup_keybinding | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
@@ -798,7 +781,7 @@ install_client_distribution_key:
         url: https://www.virtualbox.org/download/oracle_vbox.asc
         name: oracle_vbox.asc
     repo: https://download.virtualbox.org/virtualbox/debian
-    distribution: focal # will auto gathered, if you need other define it here
+    # distribution: focal # will auto gathered, if you need other define it here
     version: contrib
     apt:
       - virtualbox-6.1
@@ -1177,46 +1160,28 @@ install_client_flatpak:
 # install_client_config.vs_code_ext
 install_client_vs_code_ext:
   - aaron-bond.better-comments
-  # - adpyke.codesnap
   - adpyke.vscode-sql-formatter
   - analytic-signal.preview-pdf
-  # - aykutsarac.jsoncrack-vscode
-  # - benjaminkott.typo3-typoscript
   - bibhasdn.unique-lines
   - bierner.markdown-preview-github-styles
   - charliermarsh.ruff
-  # - chrischinchilla.vscode-pandoc
-  # - davidanson.vscode-markdownlint
   - donjayamanne.githistory
   - eamodio.gitlens
   - esbenp.prettier-vscode
-  # - febley.typo3-fluid-snippets
   - foxundermoon.shell-format
-  # - gruntfuggly.todo-tree
-  # - james-yu.latex-workshop
-  # - mechatroner.rainbow-csv
   - ms-python.python
-  # - ms-python.vscode-pylance
-  # - ms-vscode.live-server
   - mushan.vscode-paste-image
   - pkief.material-icon-theme
-  # - ralffreit.typo3snippets
-  # - rangav.vscode-thunder-client
   - redhat.ansible
-  # - redhat.java
   - redhat.vscode-xml
   - redhat.vscode-yaml
-  # - ryanluker.vscode-coverage-gutters
   - samuelcolvin.jinjahtml
   - silofy.hackthebox
-  # - simonsiefke.svg-preview
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-german
-  # - sumneko.lua
   - tamasfe.even-better-toml
   - timonwong.shellcheck
   - wayou.vscode-todo-highlight
-  # - wholroyd.jinja
   - yzane.markdown-pdf
   - yzhang.markdown-all-in-one
 
