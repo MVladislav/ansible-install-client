@@ -2,7 +2,37 @@
 # tasks file for install_client
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | dist-apt | add apt signing key, will not download if present"
+- name: "CLIENT | dist-apt | compute filename (sanitised, hyphenated)"
+  ansible.builtin.set_fact:
+    install_client_apt_filename: >-
+      {{ (
+           (outer_item.name | default('') | trim())
+           if (outer_item.name is defined and (outer_item.name | trim()) != '')
+           else (
+             (outer_item.repo | default(''))
+             | regex_replace('^https?://', '')
+             | regex_replace('[^A-Za-z0-9]+', '-')
+             | regex_replace('-{2,}', '-')
+             | regex_replace('(^-+|-+$)', '')
+           )
+         )
+         | lower
+      }}
+  tags:
+    - install_client
+    - distribution_key
+
+- name: "CLIENT | dist-apt | ensure fallback filename when computed name is empty"
+  ansible.builtin.set_fact:
+    install_client_apt_filename: "{{ 'apt-' + (outer_item.repo | default('') | hash('sha1'))[0:8] }}"
+  when: install_client_apt_filename is not defined or (install_client_apt_filename | length) == 0
+  tags:
+    - install_client
+    - distribution_key
+
+# ------------------------------------------------------------------------------
+- name: "CLIENT | dist-apt | add apt signing key(s) (download)"
+  become: true
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "{{ install_client_distribution_key_keyring_path }}/{{ item.name }}"
@@ -15,35 +45,116 @@
     - distribution_key
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | dist-apt | get OS distribution"
-  ansible.builtin.command: lsb_release -sc
-  changed_when: false
-  register: os_distribution
-  tags:
-    - install_client
-    - distribution_key
-
 - name: "CLIENT | dist-apt | get OS architecture"
   ansible.builtin.command: dpkg --print-architecture
   changed_when: false
-  register: os_architecture
+  register: install_client_os_architecture
   tags:
     - install_client
     - distribution_key
 
+# ------------------------------------------------------------------------------
+- name: "CLIENT | dist-apt | compute candidate distro"
+  ansible.builtin.set_fact:
+    install_client_os_distribution: "{{ (outer_item.distribution | default(ansible_lsb.codename | default(ansible_distribution_release | default('')))) | lower }}"
+  tags:
+    - install_client
+    - distribution_key
+
+- name: "CLIENT | dist-apt | check if repo has dists/{{ install_client_os_distribution }}"
+  ansible.builtin.uri:
+    url: "{{ outer_item.repo | trim('/') }}/dists/{{ install_client_os_distribution }}/"
+    method: HEAD
+    return_content: false
+    status_code: 200
+    timeout: 10
+  register: install_client_repo_check
+  failed_when: false
+  changed_when: false
+  tags:
+    - install_client
+    - distribution_key
+
+- name: "CLIENT | dist-apt | choose fallback distribution if repo dists/<codename> not available"
+  ansible.builtin.set_fact:
+    install_client_os_distribution: "{{ outer_item.distribution_fallback }}"
+  when:
+    - outer_item.distribution_fallback is defined
+    - install_client_repo_check is defined
+    - >
+      (install_client_repo_check.status is not defined) or
+      (install_client_repo_check.status != 200)
+  tags:
+    - install_client
+    - distribution_key
+
+# ------------------------------------------------------------------------------
 - name: "CLIENT | dist-apt | add repository into sources list"
   become: true
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch={{ os_architecture.stdout }} signed-by={{ install_client_distribution_key_keyring_path }}/{{ item.name }}] {{ outer_item.repo }} {{ outer_item.distribution | default(os_distribution.stdout) }} {{ outer_item.version }}
+    repo: >-
+      deb [arch={{ install_client_os_architecture.stdout }}
+      signed-by={{ install_client_distribution_key_keyring_path }}/{{ item.name }}]
+      {{ outer_item.repo }} {{ install_client_os_distribution }} {{ outer_item.version }}
     state: present
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   tags:
     - install_client
     - distribution_key
 
+# - name: "CLIENT | dist-apt | add .sources file to '/etc/apt/sources.list.d'"
+#   become: true
+#   ansible.builtin.template:
+#     src: apt-sources.j2
+#     dest: "/etc/apt/sources.list.d/{{ install_client_apt_filename }}.sources"
+#     owner: root
+#     group: root
+#     mode: "0644"
+#   loop:
+#     - "{{ outer_item }}"
+#   loop_control:
+#     index_var: loop_index
+#   when:
+#     - outer_item.repo is defined
+#     - (outer_item.repo | length) > 0
+#   tags:
+#     - install_client
+#     - distribution_key
+
 # ------------------------------------------------------------------------------
-- name: "CLIENT | dist-apt | install apt services"
+- name: "CLIENT | dist-apt | ensure '/etc/apt/preferences.d' exists"
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/preferences.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  tags:
+    - install_client
+    - distribution_key
+
+- name: "CLIENT | dist-apt | add preferences into '/etc/apt/preferences.d'"
+  become: true
+  ansible.builtin.template:
+    src: apt-preferences.j2
+    dest: "/etc/apt/preferences.d/{{ install_client_apt_filename }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - "{{ outer_item }}"
+  loop_control:
+    index_var: loop_index
+  when:
+    - outer_item.preferences is defined
+    - (outer_item.preferences | length) > 0
+  tags:
+    - install_client
+    - distribution_key
+
+# ------------------------------------------------------------------------------
+- name: "CLIENT | dist-apt | install apt packages"
   become: true
   ansible.builtin.apt:
     pkg: "{{ item }}"

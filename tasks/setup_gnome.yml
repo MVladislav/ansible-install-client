@@ -163,8 +163,8 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: '{{ install_client_gdm_gui_setup.overlay.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
   loop: "{{ install_client_gdm_gui_setup.overlay.configs | flatten(levels=1) }}"
-  register: gnome_setup_overlay
-  changed_when: gnome_setup_overlay.rc == 0
+  register: install_client_gnome_setup_overlay
+  changed_when: install_client_gnome_setup_overlay.rc == 0
   failed_when: false
   when:
     - install_client_gdm_gui_setup is defined
@@ -187,8 +187,9 @@
     set -o pipefail && gsettings get org.gnome.Terminal.ProfilesList default | tr -d \'
   args:
     executable: /bin/bash
-  register: gnome_setup_terminal_overlay_profile
+  register: install_client_gnome_setup_terminal_overlay_profile
   changed_when: false
+  failed_when: false
   when:
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.terminal_style is defined
@@ -207,21 +208,43 @@
   become_user: "{{ outer_item.name }}"
   ansible.builtin.command: >
     {{ install_client_gdm_gui_setup.terminal_style.command }}
-    {{ item.source }}{{ gnome_setup_terminal_overlay_profile.stdout }}/
+    {{ item.source }}{{ install_client_gnome_setup_terminal_overlay_profile.stdout }}/
     {{ item.key }} "{{ item.value | string }}"
   loop: "{{ install_client_gdm_gui_setup.terminal_style.configs | flatten(levels=1) }}"
-  register: gnome_setup_terminal_overlay
-  changed_when: gnome_setup_terminal_overlay.rc == 0
+  register: install_client_gnome_setup_terminal_overlay
+  changed_when: install_client_gnome_setup_terminal_overlay.rc == 0
   failed_when: false
   when:
-    - gnome_setup_terminal_overlay_profile is defined
-    - gnome_setup_terminal_overlay_profile.stdout is defined
+    - install_client_gnome_setup_terminal_overlay_profile is defined
+    - install_client_gnome_setup_terminal_overlay_profile.rc == 0
+    - install_client_gnome_setup_terminal_overlay_profile.stdout is defined
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.terminal_style is defined
     - install_client_gdm_gui_setup.terminal_style.command is defined
     - install_client_gdm_gui_setup.terminal_style.configs is defined
     - install_client_gdm_gui_setup.terminal_style.setup is defined
     - install_client_gdm_gui_setup.terminal_style.setup | bool
+  tags:
+    - molecule-idempotence-notest
+    - install_client
+    - ubuntu
+    - gnome
+
+- name: "CLIENT | ptyxis terminal | setup overlay"
+  become: true
+  become_user: "{{ outer_item.name }}"
+  ansible.builtin.command: '{{ install_client_gdm_gui_setup.terminal_style_ptyxis.command }} {{ item.source }} {{ item.key }} "{{ item.value | string }}"'
+  loop: "{{ install_client_gdm_gui_setup.terminal_style_ptyxis.configs | flatten(levels=1) }}"
+  register: install_client_ptyxis_setup_terminal_overlay
+  changed_when: install_client_ptyxis_setup_terminal_overlay.rc == 0
+  failed_when: false
+  when:
+    - install_client_gdm_gui_setup is defined
+    - install_client_gdm_gui_setup.terminal_style_ptyxis is defined
+    - install_client_gdm_gui_setup.terminal_style_ptyxis.command is defined
+    - install_client_gdm_gui_setup.terminal_style_ptyxis.configs is defined
+    - install_client_gdm_gui_setup.terminal_style_ptyxis.setup is defined
+    - install_client_gdm_gui_setup.terminal_style_ptyxis.setup | bool
   tags:
     - molecule-idempotence-notest
     - install_client

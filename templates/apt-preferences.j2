@@ -1,0 +1,9 @@
+{# templates/apt-preferences.j2 - produces one or more stanzas #}
+{% for pref in item.preferences %}
+Package: {{ pref.package }}
+Pin: {{ pref.pin }}
+Pin-Priority: {{ pref.pin_prio }}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}

@@ -1,0 +1,15 @@
+{# templates/apt-sources.j2 - modern Debian .sources format #}
+{% for gpg in item.gpg %}
+Types: deb
+{% set uri = (outer_item.repo | trim('/') ) + '/' %}
+URIs: {{ uri }}
+Suites: {{ install_client_os_distribution }}
+Components: {{ outer_item.version }}
+Signed-By: {{ install_client_distribution_key_keyring_path }}/{{ gpg.name }}
+{% if install_client_os_architecture is defined and install_client_os_architecture.stdout is defined %}
+Architectures: {{ install_client_os_architecture.stdout }}
+{% endif %}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}
