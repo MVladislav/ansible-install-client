@@ -38,6 +38,15 @@ user_pref("browser.urlbar.suggest.topsites", false);
 /** Address Bar :: Search engines ***/
 user_pref("browser.urlbar.suggest.engines", false);
 
+/** Permissions :: Location: Block new requests ***/
+user_pref("permissions.default.geo", 2);
+/** Permissions :: Autoplay: Block audio and video ***/
+user_pref("media.autoplay.default", 5);
+/** Permissions :: Prevent muted exceptions for autoplay ***/
+user_pref("media.autoplay.allow-muted", false);
+/** Permissions :: Virtual Reality devices: Block new requests ***/
+user_pref("dom.vr.enabled", false);
+
 /** Website Privacy Preferences :: Tell websites not to sell or share my data ***/
 user_pref("privacy.globalprivacycontrol.enabled", true);
 /** Website Privacy Preferences :: Send websites a "Do Not Track" request ***/
@@ -50,3 +59,6 @@ user_pref("signon.rememberSignons", false);
 user_pref("extensions.formautofill.addresses.enabled", false);
 /** Autofill :: Save and fill payment methods ***/
 user_pref("extensions.formautofill.creditCards.enabled", false);
+
+/** Firefox Data Collection and Use :: Send daily usage ping to Mozilla ***/
+user_pref("datareporting.usage.uploadEnabled", false);
