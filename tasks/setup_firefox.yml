@@ -18,7 +18,6 @@
 - name: "CLIENT | firefox setup | check if default Firefox profile exists"
   become: true
   become_user: "{{ outer_item.name }}"
-
   ansible.builtin.find:
     paths: "~/{{ install_client_firefox_path }}"
     recurse: false
@@ -43,7 +42,12 @@
 - name: "CLIENT | firefox setup | create new Firefox profile"
   become: true
   become_user: "{{ outer_item.name }}"
-  ansible.builtin.command: "firefox --headless --createprofile {{ install_client_firefox_profile_name }}"
+  ansible.builtin.shell: |
+    set -o pipefail
+    loginctl enable-linger {{ outer_item.name }}
+    firefox --headless --createprofile {{ install_client_firefox_profile_name }}
+  args:
+    executable: /bin/bash
   register: create_new_profile
   changed_when: create_new_profile.rc == 0
   when: not install_client_firefox_default_profile_name_tmp.matched > 0
