@@ -215,6 +215,7 @@ install_client_config:
   flatpak_conjure: false
   flatpak_peek: false
   flatpak_ultimaker: false
+  flatpak_constrict: false
   flatpak_girens: false
   flatpak_mpv: false
   flatpak_parsec: false
@@ -338,6 +339,7 @@ install_client_config:
 | conjure                |      |    x    |      |          |           |      | design  |
 | peek                   |      |    x    |      |          |           |      | design  |
 | ultimaker              |      |   xx    |      |          |     x     |      | design  |
+| constrict              |      |    x    |      |          |           |      | video   |
 | girens                 |      |    x    |      |          |           |      | video   |
 | mpv                    |      |    x    |      |          |           |  x   | video   |
 | parsec                 |      |    x    |      |          |           |      | video   |

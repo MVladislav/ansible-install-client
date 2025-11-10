@@ -199,6 +199,7 @@ install_client_config:
   flatpak_conjure: false
   flatpak_peek: false
   flatpak_ultimaker: false
+  flatpak_constrict: false
   flatpak_girens: false
   flatpak_mpv: false
   flatpak_parsec: false
@@ -1105,6 +1106,8 @@ install_client_flatpak:
     install: "{{ install_client_config.flatpak_video_trimmer | default('no') | bool }}"
   - name: org.videolan.VLC
     install: "{{ install_client_config.flatpak_vlc | default('no') | bool }}"
+  - name: io.github.wartybix.Constrict
+    install: "{{ install_client_config.flatpak_constrict | default('no') | bool }}"
   - name: nl.g4d.Girens
     install: "{{ install_client_config.flatpak_girens | default('no') | bool }}"
   - name: io.mpv.Mpv
