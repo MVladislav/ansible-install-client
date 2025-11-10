@@ -797,6 +797,7 @@ install_client_dpkg:
 # DISTRIBUTION KEY
 # install_client_config.distribution_key_...
 install_client_distribution_key_keyring_path: /etc/apt/trusted.gpg.d
+install_client_distribution_key_use_modern_sources: false
 install_client_distribution_key:
   - install: "{{ install_client_config.distribution_key_virtualbox | default('no') | bool }}"
     apt:

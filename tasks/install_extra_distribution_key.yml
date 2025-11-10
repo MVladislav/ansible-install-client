@@ -89,6 +89,7 @@
     - distribution_key
 
 # ------------------------------------------------------------------------------
+# old style
 - name: "CLIENT | dist-apt | add repository into sources list"
   become: true
   ansible.builtin.apt_repository:
@@ -98,28 +99,28 @@
       {{ outer_item.repo }} {{ install_client_os_distribution }} {{ outer_item.version }}
     state: present
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
+  when: not install_client_distribution_key_use_modern_sources
   tags:
     - install_client
     - distribution_key
 
-# - name: "CLIENT | dist-apt | add .sources file to '/etc/apt/sources.list.d'"
-#   become: true
-#   ansible.builtin.template:
-#     src: apt-sources.j2
-#     dest: "/etc/apt/sources.list.d/{{ install_client_apt_filename }}.sources"
-#     owner: root
-#     group: root
-#     mode: "0644"
-#   loop:
-#     - "{{ outer_item }}"
-#   loop_control:
-#     index_var: loop_index
-#   when:
-#     - outer_item.repo is defined
-#     - (outer_item.repo | length) > 0
-#   tags:
-#     - install_client
-#     - distribution_key
+# modern style
+- name: "CLIENT | dist-apt | add .sources file to '/etc/apt/sources.list.d'"
+  become: true
+  ansible.builtin.template:
+    src: apt-sources.j2
+    dest: "/etc/apt/sources.list.d/{{ install_client_apt_filename }}.sources"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - "{{ outer_item }}"
+  loop_control:
+    index_var: loop_index
+  when: install_client_distribution_key_use_modern_sources
+  tags:
+    - install_client
+    - distribution_key
 
 # ------------------------------------------------------------------------------
 - name: "CLIENT | dist-apt | ensure '/etc/apt/preferences.d' exists"
