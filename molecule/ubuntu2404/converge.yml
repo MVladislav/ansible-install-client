@@ -13,16 +13,16 @@
 
     # --- in playbook ---
     # ------------------------------------------------------------------------------
-    install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
-    install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Ubuntu-23.04-amd64.deb
-    install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-console-1.26.7-Ubuntu-23.04-amd64.deb
-    install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
-    install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
-    install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
-    install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.8/Logseq-linux-x64-0.10.8.AppImage
-    install_client_links_to_check_update_logseq_checksum: 9159d0df7828ceb2fa04e590c547e2332a6221939f7de4f670c54c1c87ec6968 # pragma: allowlist secret
-    install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
-    install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
+    # install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
+    install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-24.04-amd64.deb
+    install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-24.04-amd64.deb
+    # install_client_links_to_check_update_parsec: https://builds.parsecgaming.com/package/parsec-linux.deb
+    # install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.5.0/zui_1.5.0_amd64.deb
+    # install_client_links_to_check_update_portmaster: https://updates.safing.io/latest/linux_amd64/packages/portmaster-installer.deb
+    # install_client_links_to_check_update_logseq: https://github.com/logseq/logseq/releases/download/0.10.8/Logseq-linux-x64-0.10.8.AppImage
+    # install_client_links_to_check_update_logseq_checksum: 9159d0df7828ceb2fa04e590c547e2332a6221939f7de4f670c54c1c87ec6968 # pragma: allowlist secret
+    # install_client_links_tp_check_update_ultimaker: https://github.com/Ultimaker/Cura/releases/download/5.6.0/UltiMaker-Cura-5.6.0-linux-X64.AppImage
+    # install_client_links_tp_check_update_ultimaker_checksum: 107896a0da4b2873f3bfaad9aed36012bef2fff89571161e57f4da0a7f10a440 # pragma: allowlist secret
 
     install_client_config:
       # GNOME ---------------------------------
