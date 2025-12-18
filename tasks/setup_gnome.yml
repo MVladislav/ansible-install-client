@@ -216,7 +216,7 @@
   failed_when: false
   when:
     - install_client_gnome_setup_terminal_overlay_profile is defined
-    - install_client_gnome_setup_terminal_overlay_profile.rc == 0
+    # - install_client_gnome_setup_terminal_overlay_profile.rc == 0
     - install_client_gnome_setup_terminal_overlay_profile.stdout is defined
     - install_client_gdm_gui_setup is defined
     - install_client_gdm_gui_setup.terminal_style is defined
