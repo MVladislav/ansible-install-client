@@ -69,8 +69,7 @@
     status_code: 200
     timeout: 10
   register: install_client_repo_check
-  failed_when: false
-  changed_when: false
+  ignore_errors: true
   tags:
     - install_client
     - distribution_key
@@ -98,6 +97,7 @@
       signed-by={{ install_client_distribution_key_keyring_path }}/{{ item.name }}]
       {{ outer_item.repo }} {{ install_client_os_distribution }} {{ outer_item.version }}
     state: present
+    mode: "0644"
   loop: "{{ outer_item.gpg | flatten(levels=1) }}"
   when: not install_client_distribution_key_use_modern_sources
   tags:

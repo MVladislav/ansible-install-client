@@ -50,6 +50,7 @@
     executable: /bin/bash
   register: create_new_profile
   changed_when: create_new_profile.rc == 0
+  ignore_errors: true
   when: not install_client_firefox_default_profile_name_tmp.matched > 0
   tags:
     - install_client
