@@ -1,3 +1,8 @@
+/** ### NOTES :: Search Engines ### ***/
+/** Startpage - https://www.startpage.com/search?query=%s - @startpage ***/
+/** ChatGPT - https://chatgpt.com?q=%s - @chatgpt ***/
+/** Mistral - https://chat.mistral.ai/chat?q=%s - @mistral ***/
+
 /** Cookie Policy :: Automatically remove cookies after N days (but keep exceptions)
  *  0 = Accept normally
  *  1 = Prompt for each cookie (obsolete)
@@ -12,6 +17,17 @@ user_pref("network.cookie.lifetime.days", 1);
 /** Colors :: Manage Colors... :: Use system colors ***/
 user_pref("browser.display.use_system_colors", true);
 
+/** ### General ### ***/
+/** Tabs :: Interaction :: Use AI to suggest tabs and a name for tab groups ***/
+user_pref("browser.tabs.groups.smart.userEnabled", false);
+/** Tabs :: Closing :: Ask before closing multiple tabs ***/
+user_pref("browser.tabs.warnOnClose", true);
+/** Tabs :: Browser Layout :: Show sidebar ***/
+user_pref("sidebar.revamp", false);
+/** Files and Applications :: Digital Rights Management (DRM) Content :: Play DRM-controlled content ***/
+user_pref("media.eme.enabled", true);
+
+/** ### Home ### ***/
 /** New Windows and Tabs :: Homepage and new windows ***/
 user_pref("browser.startup.homepage", "chrome://browser/content/blanktab.html");
 /** New Windows and Tabs :: New tabs ***/
@@ -21,6 +37,11 @@ user_pref("browser.newtabpage.activity-stream.showSearch", false);
 /** Firefox Home Content :: Shortcuts ***/
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 
+/** Firefox Home Content :: Support Firefox ***/
+user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+
+/** ### Search ### ***/
 /** Use this search engine in Private Windows ***/
 user_pref("browser.search.separatePrivateDefault", false);
 
@@ -37,6 +58,25 @@ user_pref("browser.urlbar.suggest.recentsearches", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 /** Address Bar :: Search engines ***/
 user_pref("browser.urlbar.suggest.engines", false);
+
+/** ### Privacy & Security ### ***/
+/** Browser Privacy :: Enhanced Tracking Protection :: Strict ***/
+user_pref("privacy.trackingprotection.allow_list.baseline.enabled", true);
+user_pref("privacy.trackingprotection.allow_list.convenience.enabled", false);
+/** Browser Privacy :: Cookies and Site Data :: Clear Data ***/
+user_pref("privacy.clearSiteData.historyFormDataAndDownloads", true);
+user_pref("privacy.clearSiteData.browsingHistoryAndDownloads", true);
+/** Browser Privacy :: History :: Custom Settings :: Clear History ***/
+user_pref("privacy.clearHistory.historyFormDataAndDownloads", true);
+user_pref("privacy.clearHistory.browsingHistoryAndDownloads", true);
+/** Browser Privacy :: History :: Custom Settings :: Settings ***/
+user_pref("privacy.clearOnShutdown_v2.browsingHistoryAndDownloads", true);
+user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", true);
+user_pref("privacy.clearOnShutdown_v2.cache", true);
+user_pref("privacy.clearOnShutdown_v2.formdata", true);
+user_pref("privacy.clearOnShutdown_v2.siteSettings", false);
+user_pref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", true);
+user_pref("privacy.clearOnShutdown_v2.downloads", true);
 
 /** Permissions :: Location: Block new requests ***/
 user_pref("permissions.default.geo", 2);
