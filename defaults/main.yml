@@ -300,23 +300,59 @@ install_client_gdm_gui_setup:
       # - source: org.gnome.mutter
       #   key: experimental-features
       #   value: >-
-      #     ['scale-monitor-framebuffer', 'variable-refresh-rate', 'xwayland-native-scaling', 'autoclose-xwayland']
-      - source: org.gnome.desktop.calendar
-        key: show-weekdate
-        value: >-
-          true
-      - source: org.gnome.shell.app-switcher
-        key: current-workspace-only
-        value: >-
-          false
-      - source: org.gnome.desktop.input-sources
-        key: show-all-sources
-        value: >-
-          true
+      #     ['scale-monitor-framebuffer','variable-refresh-rate','xwayland-native-scaling','autoclose-xwayland']
       - source: org.gnome.mutter
         key: center-new-windows
         value: >-
           true
+      - source: org.gnome.system.locale
+        key: region
+        value: >-
+          de_DE.UTF-8
+      - source: org.gnome.system.location
+        key: enabled
+        value: >-
+          false
+      - source: org.gnome.desktop.calendar
+        key: show-weekdate
+        value: >-
+          true
+      - source: org.gnome.desktop.calendar
+        key: week-start-day
+        value: >-
+          monday
+      - source: org.gnome.desktop.input-sources
+        key: show-all-sources
+        value: >-
+          true
+      - source: org.gnome.desktop.notifications
+        key: show-in-lock-screen
+        value: >-
+          false
+      - source: org.gnome.desktop.a11y
+        key: always-show-universal-access-status
+        value: >-
+          false
+      - source: org.gnome.desktop.a11y.magnifier
+        key: cross-hairs-length
+        value: >-
+          58
+      - source: org.gnome.desktop.background
+        key: primary-color
+        value: >-
+          '#2c001e'
+      - source: org.gnome.desktop.background
+        key: secondary-color
+        value: >-
+          '#2c001e'
+      - source: org.gnome.desktop.screensaver
+        key: primary-color
+        value: >-
+          '#2c001e'
+      - source: org.gnome.desktop.screensaver
+        key: secondary-color
+        value: >-
+          '#2c001e'
       - source: org.gnome.desktop.wm.preferences
         key: titlebar-font
         value: >-
@@ -369,6 +405,86 @@ install_client_gdm_gui_setup:
         key: show-battery-percentage
         value: >-
           true
+      - source: org.gnome.desktop.app-folders
+        key: folder-children
+        value: >-
+          ['System','Utilities','Updater','YaST','Pardus']
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/
+        key: name
+        value: >-
+          System
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/
+        key: apps
+        value: >-
+          ['desktop-security-center_desktop-security-center.desktop','org.gnome.Ptyxis.desktop','nm-connection-editor.desktop','org.gnome.DejaDup.desktop','org.gnome.baobab.desktop','org.gnome.DiskUtility.desktop','im-config.desktop','org.gnome.Logs.desktop','org.gnome.Sysprof.desktop','net.nokyan.Resources.desktop','org.gnome.Settings.desktop','org.gnome.seahorse.Application.desktop','usb-creator-gtk.desktop']
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
+        key: name
+        value: >-
+          Utilities
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
+        key: apps
+        value: >-
+          ['org.gnome.Papers.desktop','org.gnome.FileRoller.desktop','org.gnome.font-viewer.desktop','org.gnome.Loupe.desktop','gnome-language-selector.desktop','gparted.desktop','org.gnome.clocks.desktop','org.gnome.Calculator.desktop','org.gnome.Calendar.desktop','simple-scan.desktop','org.gnome.Snapshot.desktop','org.gnome.Characters.desktop','transmission-gtk.desktop','org.gnome.TextEditor.desktop','gnome-session-properties.desktop','org.gnome.PowerStats.desktop','remote-viewer.desktop','org.gnome.Evince.desktop','org.gnome.eog.desktop','org.gnome.Showtime.desktop','vim.desktop','nvim_nvim.desktop','htop.desktop','nvtop.desktop','debian-xterm.desktop','debian-uxterm.desktop','vprerex.desktop','display-im6.q16.desktop','prerex.desktop','info.desktop','texdoctk.desktop','org.remmina.Remmina.desktop','org.gnome.Shotwell.desktop','org.gnome.Totem.desktop','org.gnome.Yelp.desktop','org.gnome.Rhythmbox3.desktop']
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
+        key: name
+        value: >-
+          Updater
+      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
+        key: apps
+        value: >-
+          ['snap-store_snap-store.desktop','org.gnome.Software.desktop','com.github.tchx84.Flatseal.desktop','org.gnome.Extensions.desktop','update-manager.desktop','software-properties-gtk.desktop','software-properties-drivers.desktop','firmware-updater_firmware-updater.desktop']
+      - source: org.gnome.desktop.privacy
+        key: old-files-age
+        value: >-
+          uint32 7
+      - source: org.gnome.desktop.privacy
+        key: recent-files-max-age
+        value: >-
+          7
+      - source: org.gnome.desktop.privacy
+        key: remove-old-temp-files
+        value: >-
+          true
+      - source: org.gnome.desktop.privacy
+        key: remove-old-trash-files
+        value: >-
+          true
+      - source: org.gnome.desktop.privacy
+        key: disable-camera
+        value: >-
+          true
+      - source: org.gnome.desktop.screen-time-limits
+        key: daily-limit-enabled
+        value: >-
+          false
+      - source: org.gnome.desktop.screen-time-limits
+        key: history-enabled
+        value: >-
+          false
+      - source: org.gnome.desktop.screen-time-limits
+        key: grayscale
+        value: >-
+          false
+      - source: org.gnome.desktop.break-reminders
+        key: selected-breaks
+        value: >-
+          ['eyesight','movement']
+      - source: org.gnome.desktop.break-reminders.movement
+        key: duration-seconds
+        value: >-
+          uint32 180
+      - source: org.gnome.shell
+        key: favorite-apps
+        value: >-
+          ['firefox_firefox.desktop','io.gitlab.librewolf-community.desktop','brave_brave.desktop','chromium_chromium.desktop','1password_1password.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','spotify_spotify.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','dev.zed.Zed.desktop','code_code.desktop','veracrypt.desktop','org.gnome.Nautilus.desktop']
+      - source: org.gnome.shell
+        key: app-picker-layout
+        value: >-
+          [{'Updater': <{'position': <0>}>,'Utilities': <{'position': <1>}>,'System': <{'position': <2>}>}]
+      - source: org.gnome.shell.app-switcher
+        key: current-workspace-only
+        value: >-
+          false
       - source: org.gnome.shell.extensions.dash-to-dock
         key: background-color
         value: >-
@@ -392,7 +508,7 @@ install_client_gdm_gui_setup:
       - source: org.gnome.shell.extensions.dash-to-dock
         key: dash-max-icon-size
         value: >-
-          32
+          42
       - source: org.gnome.shell.extensions.dash-to-dock
         key: dock-fixed
         value: >-
@@ -469,78 +585,30 @@ install_client_gdm_gui_setup:
         key: tiling-popup-all-workspace
         value: >-
           true
+      - source: org.gnome.nautilus.list-view
+        key: default-column-order
+        value: >-
+          ['name','size','type','owner','group','permissions','date_modified','date_accessed','date_created','recency','detailed_type']
+      - source: org.gnome.nautilus.list-view
+        key: default-visible-columns
+        value: >-
+          ['name','size','date_modified','date_created']
+      - source: org.gnome.nautilus.preferences
+        key: date-time-format
+        value: >-
+          detailed
       - source: org.gnome.nautilus.preferences
         key: default-folder-viewer
         value: >-
           list-view
+      - source: org.gnome.nautilus.window-state
+        key: maximized
+        value: >-
+          true
       - source: org.gtk.gtk4.Settings.FileChooser
         key: show-hidden
         value: >-
           true
-      - source: org.gnome.desktop.notifications
-        key: show-in-lock-screen
-        value: >-
-          false
-      - source: org.gnome.shell
-        key: favorite-apps
-        value: >-
-          ['firefox_firefox.desktop','io.gitlab.librewolf-community.desktop','brave_brave.desktop','chromium_chromium.desktop','1password_1password.desktop','thunderbird_thunderbird.desktop','remmina_remmina.desktop','onlyoffice-desktopeditors_onlyoffice-desktopeditors.desktop','signal-desktop_signal-desktop.desktop','telegram-desktop_telegram-desktop.desktop','spotify_spotify.desktop','inkscape_inkscape.desktop','drawio_drawio.desktop','dev.zed.Zed.desktop','code_code.desktop','com.logseq.Logseq.desktop','veracrypt.desktop','org.gnome.Nautilus.desktop']
-      - source: org.gnome.shell
-        key: app-picker-layout
-        value: >-
-          [{'Updater': <{'position': <0>}>, 'Utilities': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'desktop-security-center_desktop-security-center.desktop': <{'position': <3>}>, 'org.gnome.Settings.desktop': <{'position': <4>}>}]
-      - source: org.gnome.desktop.app-folders
-        key: folder-children
-        value: >-
-          ['Utilities','Updater']
-      # - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
-      #   key: name
-      #   value: >-
-      #     X-GNOME-Shell-Utilities.directory
-      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/
-        key: apps
-        value: >-
-          ['org.gnome.clocks.desktop','org.gnome.Calculator.desktop','org.gnome.seahorse.Application.desktop','org.gnome.baobab.desktop','org.gnome.DiskUtility.desktop','gnome-system-monitor.desktop','nm-connection-editor.desktop','org.gnome.Logs.desktop','gnome-session-properties.desktop','remote-viewer.desktop','org.gnome.Evince.desktop','org.gnome.eog.desktop','org.gnome.TextEditor.desktop','vim.desktop','nvim_nvim.desktop','org.gnome.PowerStats.desktop','htop.desktop','nvtop.desktop','gnome-language-selector.desktop','yelp.desktop','org.gnome.Characters.desktop','org.gnome.font-viewer.desktop','debian-xterm.desktop','debian-uxterm.desktop','vprerex.desktop','display-im6.q16.desktop','prerex.desktop','info.desktop','texdoctk.desktop','org.gnome.Showtime.desktop','org.gnome.Sysprof.desktop','org.gnome.Papers.desktop','org.gnome.Loupe.desktop','loupe_loupe.desktop','org.gnome.SystemMonitor.desktop']
-      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
-        key: name
-        value: >-
-          Updater
-      - source: org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Updater/
-        key: apps
-        value: >-
-          ['snap-store_snap-store.desktop','org.gnome.Software.desktop','com.github.tchx84.Flatseal.desktop','org.gnome.Extensions.desktop','update-manager.desktop','software-properties-gtk.desktop','software-properties-drivers.desktop','firmware-updater_firmware-updater.desktop']
-      - source: org.gnome.desktop.calendar
-        key: show-weekdate
-        value: >-
-          true
-      - source: org.gnome.desktop.break-reminders
-        key: selected-breaks
-        value: >-
-          ['eyesight', 'movement']
-      - source: org.gnome.desktop.privacy
-        key: old-files-age
-        value: >-
-          uint32 7
-      - source: org.gnome.desktop.privacy
-        key: recent-files-max-age
-        value: >-
-          7
-      - source: org.gnome.desktop.privacy
-        key: remove-old-temp-files
-        value: >-
-          true
-      - source: org.gnome.desktop.privacy
-        key: remove-old-trash-files
-        value: >-
-          true
-      - source: org.gnome.desktop.screen-time-limits
-        key: daily-limit-enabled
-        value: >-
-          true
-      - source: org.gnome.desktop.screen-time-limits
-        key: grayscale
-        value: >-
-          false
   terminal_style:
     setup: "{{ install_client_config.gnome_terminal_setup_overlay | default('no') | bool }}"
     command: dbus-run-session -- gsettings set
