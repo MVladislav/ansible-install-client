@@ -1,7 +1,7 @@
 /******
 *    name: arkenfox user.js
-*    date: 30 January 2026
-* version: 147
+*    date: 20 March 2026
+* version: 144
 *    urls: https://github.com/arkenfox/user.js [repo]
 *        : https://arkenfox.github.io/gui/ [interactive]
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
@@ -417,7 +417,7 @@ user_pref("security.cert_pinning.enforcement_level", 2);
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1429800,1670985,1753071
  * [2] https://blog.mozilla.org/security/tag/crlite/
  * [3] https://hacks.mozilla.org/2025/08/crlite-fast-private-and-comprehensive-certificate-revocation-checking-in-firefox/ ***/
-user_pref("security.remote_settings.crlite_filters.enabled", true); // [DEFAULT: true FF137+]
+user_pref("security.remote_settings.crlite_filters.enabled", true); // [DEFAULT: true]
 user_pref("security.pki.crlite_mode", 2); // [DEFAULT: 2 FF142+]
 
 /** MIXED CONTENT ***/
@@ -754,10 +754,6 @@ user_pref("_user.js.parrot", "4000 syntax error: the parrot's bereft of life!");
       Modifier events suppressed are SHIFT and both ALT keys. Chrome is not affected.
    1459089 - disable OS locale in HTTP Accept-Language headers (ANDROID) (FF62)
    1479239 - return "no-preference" with prefers-reduced-motion (FF63)
-   1363508 & 1826051 & 1957658 - spoof/suppress Pointer Events, spoof maxTouchPoints (FF64, FF132, FF143, ESR140.2)
-       FF64: maxTouchPoints: 0 = desktop
-      FF132: maxTouchPoints: 0 = mac | 10 = windows, linux, mobile
-      FF143/140.2: maxTouchPoints: 0 = mac, linux | 10 = windows | 5 = mobile
    1492766 - spoof pointerEvent.pointerid (FF65)
    1485266 - disable exposure of system colors to CSS or canvas (FF67)
    1494034 - return "light" with prefers-color-scheme (FF67)
@@ -775,6 +771,11 @@ user_pref("_user.js.parrot", "4000 syntax error: the parrot's bereft of life!");
    1787790 - normalize system fonts (FF128)
    1835987 - spoof timezone as Atlantic/Reykjavik (previously FF55+ was UTC) (FF128)
    1656377 - spoof pointerEvents azimuthAngle and altitudeAngle (FF131)
+   1826051 & 1957658 & 2021715 - spoof/suppress Pointer Events, spoof maxTouchPoints (FF132, FF143/ESR140.2, FF150)
+      previously FF64+ (1363508) it always returned maxTouchPoints as 0
+      FF132: 0 = mac | 10 = windows, linux, mobile
+      FF143: 0 = mac, linux | 10 = windows | 5 = mobile | no longer spoof touch PointerEvents | backported to ESR140.2
+      FF150: 5 = linux
    1834307 - always use smooth scrolling (FF132)
    1918202 - spoof screen orientation based on spoofed screen size and platform (FF132)
       previously FF50+ it always returned landscape-primary and an angle of 0
@@ -1030,21 +1031,7 @@ user_pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
 /* 6012: enforce Quarantined Domains [FF115+]
  * [WHY] https://support.mozilla.org/kb/quarantined-domains ***/
 user_pref("extensions.quarantinedDomains.enabled", true); // [DEFAULT: true]
-/* 6050: prefsCleaner: reset previously active items removed from arkenfox FF128+ ***/
-   // user_pref("privacy.clearOnShutdown.cache", "");
-   // user_pref("privacy.clearOnShutdown.cookies", "");
-   // user_pref("privacy.clearOnShutdown.downloads", "");
-   // user_pref("privacy.clearOnShutdown.formdata", "");
-   // user_pref("privacy.clearOnShutdown.history", "");
-   // user_pref("privacy.clearOnShutdown.offlineApps", "");
-   // user_pref("privacy.clearOnShutdown.sessions", "");
-   // user_pref("privacy.cpd.cache", "");
-   // user_pref("privacy.cpd.cookies", "");
-   // user_pref("privacy.cpd.formdata", "");
-   // user_pref("privacy.cpd.history", "");
-   // user_pref("privacy.cpd.offlineApps", "");
-   // user_pref("privacy.cpd.sessions", "");
-/* 6051: prefsCleaner: reset previously active items removed from arkenfox FF140+ ***/
+/* 6050: prefsCleaner: reset previously active items removed from arkenfox FF140+ ***/
    // user_pref("browser.display.use_system_colors", "");
    // user_pref("browser.urlbar.fakespot.featureGate", "");
    // user_pref("security.OCSP.enabled", "");
@@ -1119,7 +1106,9 @@ user_pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies
    // user_pref("extensions.systemAddon.update.enabled", false); // [FF62+]
    // user_pref("extensions.systemAddon.update.url", ""); // [FF44+]
 /* 7015: enable the DNT (Do Not Track) HTTP header
- * [WHY] DNT is enforced with Tracking Protection which is used in ETP Strict (2701) ***/
+ * [WHY] Fingerprintable. In FF141+ DNT is never enabled. DNT is slated for deprecation [1]
+   [NOTE] In FF140, DNT is enforced with Tracking Protection which is used in ETP Strict (2701)
+   [1] https://bugzilla.mozilla.org/1967420 ***/
    // user_pref("privacy.donottrackheader.enabled", true);
 /* 7016: customize ETP settings
  * [NOTE] FPP (fingerprintingProtection) is ignored when RFP (4501) is enabled
@@ -1159,10 +1148,16 @@ user_pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies
  * [WHY] Passive and active fingerprinting. Mostly redundant with Tracking Protection
  * in ETP Strict (2701) and sanitizing on close (2800s) ***/
    // user_pref("privacy.globalprivacycontrol.enabled", true);
+/* 7022: bFPP (baselineFingerprintingProtection) [FF139+]
+ * [WHY] Arkenfox only supports ETP Strict (2701) which enables FPP browser-wide (normal and private
+ * browsing window contexts). If FPP is enabled in the same context as bFPP, FPP takes precedence.
+   // user_pref("privacy.baselineFingerprintingProtection", true);
+   // user_pref("privacy.baselineFingerprintingProtection.granularOverrides", "");
+   // user_pref("privacy.baselineFingerprintingProtection.overrides", "");
 
 /*** [SECTION 8000]: DON'T BOTHER: FINGERPRINTING
-   [WHY] They are insufficient to help anti-fingerprinting and do more harm than good
-   [WARNING] DO NOT USE with RFP. RFP already covers these and they can interfere
+   [WHY] They are insufficient for fingerprinting protection and do more harm than good
+   [WARNING] DO NOT USE: they can interfere with built-in solutions such as RFP and FPP
 ***/
 user_pref("_user.js.parrot", "8000 syntax error: the parrot's crossed the Jordan");
 /* 8001: prefsCleaner: reset items useless for anti-fingerprinting ***/
@@ -1260,22 +1255,6 @@ user_pref("_user.js.parrot", "9999 syntax error: the parrot's shuffled off 'is m
   // [-] https://bugzilla.mozilla.org/2006028
 user_pref("network.predictor.enabled", false); // [DEFAULT: false FF144+]
 user_pref("network.predictor.enable-prefetch", false); // [FF48+] [DEFAULT: false]
-// ***/
-
-/* ESR128.x still uses all the following prefs
-// [NOTE] replace the * with a slash in the line above to re-enable active ones
-// FF132
-// 2617: remove webchannel whitelist
-   // [-] https://bugzilla.mozilla.org/1275612
-   // user_pref("webchannel.allowObject.urlWhitelist", "");
-// FF140
-// 0323: disable shopping experience [FF116+]
-   // [-] https://bugzilla.mozilla.org/1964845
-   // [1] https://bugzilla.mozilla.org/show_bug.cgi?id=1840156#c0
-user_pref("browser.shopping.experience2023.enabled", false); // [DEFAULT: false]
-// 0806: disable urlbar suggestions
-   // [-] https://bugzilla.mozilla.org/1959497
-user_pref("browser.urlbar.pocket.featureGate", false); // [FF116+] [DEFAULT: false]
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/

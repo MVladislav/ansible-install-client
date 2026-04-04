@@ -12,6 +12,9 @@
   register: service_status_snap_remmina_ssh_agent
   changed_when: false
   check_mode: false
+  tags:
+    - install_client
+    - post
 
 - name: "CLIENT | post | systemd stop snap.remmina.ssh-agent"
   become: true
@@ -36,6 +39,9 @@
   register: service_status_rsync
   changed_when: false
   check_mode: false
+  tags:
+    - install_client
+    - post
 
 - name: "CLIENT | post | systemd stop rsync"
   become: true

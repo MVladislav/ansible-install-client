@@ -48,10 +48,12 @@
 
 - name: "CLIENT | setup other | restart NetworkManager for changed Connectivity Checking"
   become: true
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: NetworkManager
-    state: restarted
+    daemon_reload: true
     enabled: true
+    masked: false
+    state: restarted
   when: >
     (
       change_connectivity_checking_01 is defined

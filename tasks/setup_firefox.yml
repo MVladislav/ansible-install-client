@@ -40,22 +40,42 @@
 
 # --------------------------------------------------------------------------
 - name: "CLIENT | firefox setup | create new Firefox profile"
-  become: true
-  become_user: "{{ outer_item.name }}"
-  ansible.builtin.shell: |
-    set -o pipefail
-    loginctl enable-linger {{ outer_item.name }}
-    firefox --headless --createprofile {{ install_client_firefox_profile_name }}
-  args:
-    executable: /bin/bash
-  register: create_new_profile
-  changed_when: create_new_profile.rc == 0
-  ignore_errors: true
   when: not install_client_firefox_default_profile_name_tmp.matched > 0
   tags:
     - install_client
     - firefox
+  block:
+    - name: "CLIENT | firefox setup | create new Firefox profile | loginctl enable-linger"
+      become: true
+      ansible.builtin.shell: >
+        set -o pipefail &&
+        loginctl enable-linger {{ outer_item.name }}
+      args:
+        executable: /bin/bash
+      changed_when: false
+      check_mode: false
+    - name: "CLIENT | firefox setup | create new Firefox profile | new profile"
+      become: true
+      become_user: "{{ outer_item.name }}"
+      ansible.builtin.shell: >
+        set -o pipefail &&
+        firefox --headless --createprofile {{ install_client_firefox_profile_name }}
+      args:
+        executable: /bin/bash
+      register: create_new_profile
+      changed_when: create_new_profile.rc == 0
+      ignore_errors: true
+    - name: "CLIENT | firefox setup | create new Firefox profile | loginctl disable-linger"
+      become: true
+      ansible.builtin.shell: >
+        set -o pipefail &&
+        loginctl disable-linger {{ outer_item.name }}
+      args:
+        executable: /bin/bash
+      changed_when: false
+      check_mode: false
 
+# --------------------------------------------------------------------------
 - name: "CLIENT | firefox setup | save new created profile name"
   become: true
   become_user: "{{ outer_item.name }}"
@@ -73,14 +93,14 @@
       register: install_client_firefox_profile_name_tmp
     - name: "CLIENT | firefox setup | save new created profile name | save folder"
       ansible.builtin.set_fact:
-        install_client_firefox_profile_name: "{{ install_client_firefox_profile_name_tmp.files[0].path | basename }}"
+        install_client_firefox_profile_folder: "{{ install_client_firefox_profile_name_tmp.files[0].path | basename }}"
       when: install_client_firefox_profile_name_tmp.matched > 0
 
-- name: "CLIENT | firefox setup | ensure directory exists for profile {{ install_client_firefox_profile_name }}"
+- name: "CLIENT | firefox setup | ensure directory exists for profile {{ install_client_firefox_profile_folder }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.file:
-    path: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/"
+    path: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/extensions/"
     state: directory
     mode: "0750"
   when:
@@ -92,7 +112,7 @@
     - firefox
 
 # # --------------------------------------------------------------------------
-# - name: "CLIENT | firefox setup | download and install extensions for profile {{ install_client_firefox_profile_name }}"
+# - name: "CLIENT | firefox setup | download and install extensions for profile {{ install_client_firefox_profile_folder }}"
 #   become: true
 #   become_user: "{{ outer_item.name }}"
 #   when:
@@ -105,22 +125,22 @@
 #     - name: "CLIENT | firefox setup | download and install extensions | download"
 #       ansible.builtin.get_url:
 #         url: "{{ item.url }}"
-#         dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/{{ item.id }}.xpi"
+#         dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/extensions/{{ item.id }}.xpi"
 #         mode: "0640"
 #       loop: "{{ install_client_firefox_ext | flatten(levels=1) }}"
 #     - name: "CLIENT | firefox setup | download and install extensions | install"
-#       ansible.builtin.command: "firefox --headless ~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/extensions/{{ item.id }}.xpi"
+#       ansible.builtin.command: "firefox --headless ~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/extensions/{{ item.id }}.xpi"
 #       register: install_firefox_ext
 #       changed_when: install_firefox_ext.rc == 0
 #       loop: "{{ install_client_firefox_ext | flatten(levels=1) }}"
 
 # ------------------------------------------------------------------------------
-- name: "CLIENT | firefox setup | copy user.js for profile {{ install_client_firefox_profile_name }}"
+- name: "CLIENT | firefox setup | copy user.js for profile {{ install_client_firefox_profile_folder }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
     src: "firefox/user-combined.js.j2"
-    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/user.js"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/user.js"
     mode: "0640"
   when:
     - is_firefox_installed.rc is defined
@@ -129,12 +149,12 @@
     - install_client
     - firefox
 
-- name: "CLIENT | firefox setup | copy containers.json for profile {{ install_client_firefox_profile_name }}"
+- name: "CLIENT | firefox setup | copy containers.json for profile {{ install_client_firefox_profile_folder }}"
   become: true
   become_user: "{{ outer_item.name }}"
   ansible.builtin.template:
     src: "firefox/containers.json"
-    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_name }}/containers.json"
+    dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/containers.json"
     mode: "0640"
   when:
     - is_firefox_installed.rc is defined

@@ -18,13 +18,15 @@
 # ------------------------------------------------------------------------------
 - name: "CLIENT | snap | start udev and snapd"
   become: true
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: "{{ item }}"
-    state: started
+    daemon_reload: true
     enabled: true
-  with_items:
-    - udev
-    - snapd
+    masked: false
+    state: started
+  loop:
+    # - systemd-udevd.service
+    - snapd.service
   when:
     - install_client_snap is defined
     - is_snap_exist.rc is defined
