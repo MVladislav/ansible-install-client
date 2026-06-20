@@ -14,8 +14,8 @@ clients: []
 # NOTE: https://www.virtualbox.org/wiki/Linux_Downloads
 install_client_links_to_check_update_virtualbox: https://download.virtualbox.org/virtualbox/7.2.6/virtualbox-7.2_7.2.6-172322~Ubuntu~plucky_amd64.deb
 # NOTE: https://www.veracrypt.fr/en/Downloads.html
-install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-25.04-amd64.deb
-install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-25.04-amd64.deb
+install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-26.04-amd64.deb
+install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-26.04-amd64.deb
 # NOTE: `curl -s https://api.github.com/repos/brimdata/zui/releases/latest | grep "http.*\.deb" | cut -d '"' -f 4`
 install_client_links_to_check_update_brim: https://github.com/brimdata/zui/releases/download/v1.18.0/zui_1.18.0_amd64.deb
 # NOTE: link should be latest version
