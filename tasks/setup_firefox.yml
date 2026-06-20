@@ -59,7 +59,7 @@
       become_user: "{{ outer_item.name }}"
       ansible.builtin.shell: >
         set -o pipefail &&
-        firefox --headless --createprofile {{ install_client_firefox_profile_name }}
+        dbus-run-session -- firefox --headless --createprofile {{ install_client_firefox_profile_name }}
       args:
         executable: /bin/bash
       register: create_new_profile
@@ -104,6 +104,7 @@
     state: directory
     mode: "0750"
   when:
+    - install_client_firefox_profile_folder is defined
     - not install_client_firefox_default_profile_name_tmp.matched > 0
     - is_firefox_installed.rc is defined
     - is_firefox_installed.rc == 0
@@ -143,6 +144,7 @@
     dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/user.js"
     mode: "0640"
   when:
+    - install_client_firefox_profile_folder is defined
     - is_firefox_installed.rc is defined
     - is_firefox_installed.rc == 0
   tags:
@@ -157,6 +159,7 @@
     dest: "~/{{ install_client_firefox_path }}/{{ install_client_firefox_profile_folder }}/containers.json"
     mode: "0640"
   when:
+    - install_client_firefox_profile_folder is defined
     - is_firefox_installed.rc is defined
     - is_firefox_installed.rc == 0
   tags:

@@ -2,6 +2,7 @@
 /** Startpage - https://www.startpage.com/search?query=%s - @startpage ***/
 /** ChatGPT - https://chatgpt.com?q=%s - @chatgpt ***/
 /** Mistral - https://chat.mistral.ai/chat?q=%s - @mistral ***/
+/** Youtube - https://www.youtube.com/results?search_query=%s - @yt ***/
 
 /** Cookie Policy :: Automatically remove cookies after N days (but keep exceptions)
  *  0 = Accept normally
@@ -103,6 +104,14 @@ user_pref("extensions.formautofill.creditCards.enabled", false);
 /** Firefox Data Collection and Use :: Send daily usage ping to Mozilla ***/
 user_pref("datareporting.usage.uploadEnabled", false);
 
+/** DNS over HTTPS :: Enable DNS over HTTPS using ***/
+// https://www.cloudflare.com/ssl/encrypted-sni
+user_pref("network.trr.mode", 2);
+// user_pref("network.trr.uri", "https://mozilla.cloudflare-dns.com/dns-query");
+// user_pref("network.trr.custom_uri", "https://mozilla.cloudflare-dns.com/dns-query");
+user_pref("network.trr.uri", "https://dns.quad9.net/dns-query");
+user_pref("network.trr.custom_uri", "https://dns.quad9.net/dns-query");
+
 /** ### AI Controls ### ***/
 user_pref("browser.ai.control.default", "blocked"); // available
 user_pref("browser.ai.control.translations", "blocked"); // available
@@ -110,3 +119,10 @@ user_pref("browser.ai.control.pdfjsAltText", "blocked"); // available
 user_pref("browser.ai.control.smartTabGroups", "blocked"); // available
 user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked"); // available
 user_pref("browser.ai.control.sidebarChatbot", "blocked"); // available
+
+/** ########################## ***/
+/** uncomment below to fix some problems, especial with WebRTC ***/
+// user_pref("privacy.trackingprotection.allow_list.convenience.enabled", true);
+// user_pref("media.peerconnection.ice.default_address_only", false);
+/** [NOTE] especial if mDNS is not used/working ***/
+// user_pref("media.peerconnection.ice.obfuscate_host_addresses", false);
