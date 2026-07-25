@@ -1,0 +1,51 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Run role"
+      ansible.builtin.include_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+  vars:
+    # --- in inventory ---
+    clients:
+      - name: "ubuntu"
+        setup: true # if client should be setup with additional tools and gui (default true)
+
+    # --- in playbook ---
+    # ------------------------------------------------------------------------------
+    install_client_links_to_check_update_veracrypt: https://launchpad.net/veracrypt/trunk/1.26.29/+download/veracrypt-1.26.29-Ubuntu-26.04-amd64.deb
+    install_client_links_to_check_update_veracrypt_cli: https://launchpad.net/veracrypt/trunk/1.26.29/+download/veracrypt-console-1.26.29-Ubuntu-26.04-amd64.deb
+
+    install_client_config:
+      # GNOME ---------------------------------
+      gnome_gui_setup: true
+      gnome_gui_setup_extensions: true
+      gnome_gui_setup_extensions_git_blur_shell: true
+      gnome_gui_setup_extensions_git_burn_window: true
+      gnome_gui_setup_extensions_git_dash_to_panel: true
+      gnome_gui_setup_overlay: true
+      # APT -----------------------------------
+      apt_base: true
+      apt_auth_priv: true
+      apt_ubuntu: true
+      apt_archive: true
+      apt_codec: true
+      apt_gnome: true
+      apt_snap: true
+      apt_flatpak: true
+      apt_vpn_resolvconf: true
+      apt_vpn_wireguard: true
+      apt_vpn_openvpn: true
+      apt_vpn_openconnect: true
+      apt_vpn_l2tp: true
+      # DPKG ----------------------------------
+      dpkg_veracrypt_cli: true
+      dpkg_brim: true
+      dpkg_portmaster: true
+      # DIST KEY ------------------------------
+      distribution_key_1password_cli: true
+      # APPIMAGE ------------------------------
+      app_image_logseq: true
+      app_image_ultimaker: true
+      # OTHER --------------------------------
+      # firefox_setup: true
