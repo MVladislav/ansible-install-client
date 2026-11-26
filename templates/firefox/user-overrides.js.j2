@@ -4,6 +4,16 @@
 /** Mistral - https://chat.mistral.ai/chat?q=%s - @mistral ***/
 /** Youtube - https://www.youtube.com/results?search_query=%s - @yt ***/
 
+/** ### Web Compatibility :: Clipboard ### ***/
+/** Enable asynchronous clipboard operations to fix paste interactions
+ *  in web-based IDEs (e.g., code-server) when using Firefox.
+ *  Fixes unexpected browser paste popups instead of normal editor
+ *  pasting and context-menu interactions.
+ *  NOTE: This is a testing-related preference and may have security
+ *  implications. Keep enabled only if needed.
+ ***/
+// user_pref("dom.events.testing.asyncClipboard", true);
+
 /** Cookie Policy :: Automatically remove cookies after N days (but keep exceptions)
  *  0 = Accept normally
  *  1 = Prompt for each cookie (obsolete)
