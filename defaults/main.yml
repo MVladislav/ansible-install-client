@@ -252,7 +252,8 @@ install_client_gdm_gui_setup:
       - repo: https://github.com/aunetx/blur-my-shell.git
         branch: master
         name: blur-my-shell
-        target: install
+        # blur-my-shell renamed the per-user install target to `user-install`;
+        target: user-install
         install: "{{ install_client_config.gnome_gui_setup_extensions_git_blur_shell | default('no') | bool }}"
       - repo: https://github.com/Schneegans/Burn-My-Windows.git
         branch: main
